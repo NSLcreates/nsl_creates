@@ -5,6 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NSL Creates by Naman Lumbhani - Sketch Artist</title>
     <style>
+        /* Color Palette: Muted Blue-Greys and a Soft Green Accent */
+        :root {
+            --color-bg-light: #fefefe; /* Paper white */
+            --color-text-dark: #333; /* Pencil lead */
+            --color-header-footer: #546e7a; /* Muted blue-grey */
+            --color-primary-button: #78909c; /* Lighter blue-grey */
+            --color-highlight: #aed581; /* Soft green accent */
+            --color-border: #cfd8dc; /* Very light blue-grey */
+            --color-dark-grey: #444;
+            --color-medium-grey: #777;
+            --color-light-grey: #eee;
+        }
+
+
         /* Basic Reset */
         * {
             margin: 0;
@@ -15,8 +29,8 @@
         body {
             font-family: 'Arial', sans-serif;
             line-height: 1.6;
-            color: #333;
-            background-color: #f9f9f9;
+            color: var(--color-text-dark);
+            background-color: var(--color-bg-light);
         }
 
         .container {
@@ -29,26 +43,29 @@
 
         /* Header & Navigation */
         header {
-            background: #333;
+            background: var(--color-header-footer);
             color: #fff;
-            padding: 1rem 0;
+            padding: 0.8rem 0; /* Slightly less padding */
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15); /* Slightly stronger shadow */
+            transition: background-color 0.3s ease;
         }
 
-        header .container {
+         header .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        header h1 {
-            font-size: 1.8rem;
-            margin: 0;
-        }
+         header .logo img {
+            height: 40px; /* Adjust height as needed */
+            width: auto;
+            display: block;
+         }
+
 
         header a {
             color: #fff;
@@ -63,32 +80,43 @@
         }
 
         nav ul li {
-            margin-left: 20px;
+            margin-left: 25px; /* Slightly more space */
         }
 
         nav ul li a {
             color: #fff;
             text-decoration: none;
             font-weight: bold;
-            transition: color 0.3s ease;
+            padding: 5px 0; /* Add padding for click area */
+            transition: color 0.3s ease, border-bottom 0.3s ease;
         }
 
         nav ul li a:hover, nav ul li a.active {
-            color: #f0db4f; /* A highlight color */
+            color: var(--color-highlight);
+            border-bottom: 2px solid var(--color-highlight);
         }
 
         /* Mobile Menu (Basic) */
         .menu-toggle {
             display: none;
-            font-size: 1.5rem;
+            font-size: 1.8rem; /* Larger icon */
             cursor: pointer;
+            color: #fff;
         }
 
         /* Section Styling */
         section {
-            padding: 80px 0 60px; /* Added top padding for fixed header */
-            border-bottom: 1px solid #eee;
+            padding: 100px 0 80px; /* More top padding for fixed header, adjust as needed */
+            border-bottom: 1px solid var(--color-border);
+             opacity: 0; /* Start hidden for fade-in */
+             transform: translateY(20px); /* Start slightly below */
+             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
+         section.is-visible {
+             opacity: 1;
+             transform: translateY(0);
+         }
+
         section:last-of-type {
             border-bottom: none;
         }
@@ -96,101 +124,147 @@
         section h2 {
             text-align: center;
             margin-bottom: 40px;
-            font-size: 2.5rem;
-            color: #333;
+            font-size: 2.8rem; /* Slightly larger */
+            color: var(--color-dark-grey);
         }
 
         /* Hero Section */
         #hero {
-            background: #f4f4f4 url('https://via.placeholder.com/1500x700?text=Beautiful+Sketch+Banner') no-repeat center center/cover; /* Replace with your banner image */
-            color: #333; /* Change text color if your banner is dark */
-            height: 70vh;
+            background: var(--color-bg-light) url('https://via.placeholder.com/1500x700?text=Beautiful+Sketch+Banner') no-repeat center center/cover; /* Replace with your banner image */
+            color: var(--color-dark-grey);
+            height: 80vh; /* Taller hero */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding-top: 100px; /* Adjust if header height changes */
+            padding-top: 120px; /* Adjust for taller header/hero */
+             opacity: 1; /* Hero is visible initially */
+             transform: translateY(0);
+             transition: none; /* No fade-in animation on hero */
         }
 
         #hero h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
+            font-size: 3.5rem; /* Larger heading */
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1); /* Subtle text shadow */
         }
 
         #hero p {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            max-width: 700px; /* Limit width for readability */
         }
 
         .cta-button {
             display: inline-block;
-            background: #333;
+            background: var(--color-primary-button);
             color: #fff;
-            padding: 12px 25px;
+            padding: 14px 30px; /* Larger padding */
             text-decoration: none;
             border-radius: 5px;
-            font-size: 1rem;
-            transition: background-color 0.3s ease;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease; /* Added transform for press effect */
+            border: none; /* Remove default button border if used elsewhere */
+            cursor: pointer;
         }
 
         .cta-button:hover {
-            background: #555;
+            background: var(--color-header-footer); /* Darker on hover */
+            transform: translateY(-2px); /* Slight lift on hover */
+             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
+         .cta-button:active {
+             transform: translateY(0); /* Press effect */
+             box-shadow: none;
+         }
 
         /* Portfolio/Gallery Section - REMOVED */
+
 
         /* Services Section */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Slightly smaller min width */
             gap: 30px;
             margin-top: 20px;
         }
 
         .service-card {
             background: #fff;
-            padding: 25px;
+            padding: 30px; /* More padding */
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .service-card i { /* For icons, if you choose to use them e.g., Font Awesome */
-            font-size: 2.5rem;
-            color: #333;
-            margin-bottom: 15px;
+        .service-card:hover {
+            transform: translateY(-5px); /* Lift effect */
+            box-shadow: 0 8px 15px rgba(0,0,0,0.15); /* Enhanced shadow */
+        }
+
+
+        .service-card .icon { /* Use a class for icon div */
+            font-size: 3rem; /* Larger icons */
+            color: var(--color-highlight); /* Use accent color for icons */
+            margin-bottom: 20px;
+             display: block; /* Ensure icon is block for margin */
         }
 
         .service-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            color: #333;
+            font-size: 1.6rem; /* Slightly larger */
+            margin-bottom: 15px;
+            color: var(--color-dark-grey);
         }
 
         .service-card p {
             font-size: 1rem;
-            color: #555;
+            color: var(--color-medium-grey);
             margin-bottom: 15px;
         }
 
+         .service-process ol,
+         .service-process ul {
+            list-style-position: outside; /* Bullets/numbers outside */
+            padding-left: 20px;
+            margin-top: 15px;
+         }
+         .service-process li {
+            margin-bottom: 10px;
+            color: var(--color-medium-grey);
+         }
+         .service-process h3 {
+            color: var(--color-dark-grey);
+            margin-top: 25px;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+         }
+
+
         /* Pricing Section */
         #pricing {
-            background-color: #f0f0f0;
+            background-color: #f8f8f8; /* Slightly off-white background */
         }
         .pricing-info p {
             text-align: center;
             font-size: 1.1rem;
             margin-bottom: 20px;
+            color: var(--color-medium-grey);
         }
          .pricing-info ul {
-            list-style: none;
-            padding: 0;
-            text-align: center;
+            list-style: disc; /* Use discs for list items */
+            padding-left: 40px; /* Indent list */
+            text-align: left; /* Align list left */
             margin-bottom:20px;
+             max-width: 600px; /* Limit width */
+             margin-left: auto; /* Center list block */
+             margin-right: auto;
         }
          .pricing-info ul li {
-            margin-bottom: 10px; /* Add some space between list items */
+            margin-bottom: 10px;
+            color: var(--color-dark-grey);
          }
 
         /* About Section */
@@ -200,31 +274,33 @@
             align-items: center;
             text-align: center;
         }
-        /* Removed .profile-pic styling as image is removed */
+        /* Removed .profile-pic styling */
 
         #about p {
-            max-width: 700px;
-            margin-bottom: 15px;
+            max-width: 800px; /* Wider paragraph */
+            margin-bottom: 20px; /* More space */
             font-size: 1.1rem;
+            color: var(--color-medium-grey);
         }
 
         /* Contact Section */
         #contact {
-            background: #e9e9e9;
+            background: #f0f0f0; /* Light grey background */
         }
         .contact-form {
             max-width: 600px;
-            margin: 20px auto;
-            padding: 25px;
+            margin: 30px auto; /* More margin */
+            padding: 30px; /* More padding */
             background: #fff;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1); /* Slightly stronger shadow */
         }
 
         .contact-form label {
             display: block;
             margin-bottom: 8px;
             font-weight: bold;
+            color: var(--color-dark-grey);
         }
 
         .contact-form input[type="text"],
@@ -233,80 +309,96 @@
             width: 100%;
             padding: 12px;
             margin-bottom: 20px;
-            border: 1px solid #ddd;
+            border: 1px solid var(--color-border);
             border-radius: 4px;
             font-size: 1rem;
+            color: var(--color-dark-grey);
+            background-color: var(--color-bg-light);
         }
 
         .contact-form textarea {
-            min-height: 120px;
+            min-height: 150px; /* Taller textarea */
             resize: vertical;
         }
 
         /* Drag and Drop Area Styling */
         .drop-zone {
-            border: 2px dashed #ccc;
+            border: 2px dashed var(--color-border);
             border-radius: 5px;
-            padding: 25px;
+            padding: 30px; /* More padding */
             text-align: center;
             cursor: pointer;
             margin-bottom: 20px;
             transition: background-color 0.3s ease, border-color 0.3s ease;
+            background-color: #f9f9f9;
         }
 
         .drop-zone.dragover {
-            background-color: #e9e9e9;
-            border-color: #333;
+            background-color: #e8f5e9; /* Light green tint on drag over */
+            border-color: var(--color-highlight);
         }
 
          .drop-zone p {
              margin: 0;
              font-size: 1rem;
-             color: #555;
+             color: var(--color-medium-grey);
          }
 
          .file-info {
-             margin-top: 10px;
+             margin-top: 15px; /* More space */
              font-size: 0.9rem;
-             color: #555;
+             color: var(--color-medium-grey);
          }
          .file-info strong {
-            color: #333;
+            color: var(--color-dark-grey);
          }
 
+
         .contact-form button[type="submit"] {
-            background: #333;
+            background: var(--color-primary-button);
             color: #fff;
-            padding: 12px 20px;
+            padding: 14px 20px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.3s ease;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease, transform 0.2s ease;
             width: 100%;
+            font-weight: bold;
         }
 
         .contact-form button[type="submit"]:hover {
-            background: #555;
+            background: var(--color-header-footer);
+             transform: translateY(-2px);
+             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
+         .contact-form button[type="submit"]:active {
+             transform: translateY(0);
+             box-shadow: none;
+         }
+
 
         .contact-info p {
              text-align: center;
              font-size: 1.1rem;
              margin-top: 30px;
+             color: var(--color-medium-grey);
         }
          .contact-info p a {
-            color: #333;
+            color: var(--color-dark-grey);
             text-decoration: none;
             font-weight: bold;
+            transition: color 0.3s ease;
          }
          .contact-info p a:hover {
+            color: var(--color-primary-button);
             text-decoration: underline;
          }
 
+
         /* Footer */
         footer {
-            background: #333;
+            background: var(--color-header-footer);
             color: #fff;
             text-align: center;
             padding: 2rem 0;
@@ -314,28 +406,42 @@
 
         footer .social-links a {
             color: #fff;
-            margin: 0 10px;
-            font-size: 1.5rem;
+            margin: 0 15px; /* More space */
+            font-size: 1.8rem; /* Larger icons */
             text-decoration: none;
+             transition: color 0.3s ease;
         }
         footer .social-links a:hover {
-            color: #f0db4f;
+            color: var(--color-highlight);
         }
+         footer p {
+             color: rgba(255, 255, 255, 0.8); /* Slightly muted text */
+         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
             header .container {
                 flex-direction: column;
+                 align-items: flex-start; /* Align items to the start */
             }
+             header .logo img {
+                 height: 35px; /* Adjust logo size on mobile */
+             }
             header h1 {
-                margin-bottom: 10px;
-                text-align: center;
+                margin-bottom: 0; /* Remove margin */
+                 text-align: left;
             }
             nav ul {
                 flex-direction: column;
                 align-items: center;
                 width: 100%;
                 display: none; /* Hidden by default on mobile */
+                 background: var(--color-header-footer); /* Background for dropdown */
+                 position: absolute;
+                 top: 100%;
+                 left: 0;
+                 padding: 10px 0;
+                 box-shadow: 0 8px 16px rgba(0,0,0,0.2);
             }
             nav ul.active {
                 display: flex; /* Shown when active */
@@ -343,6 +449,14 @@
             nav ul li {
                 margin: 10px 0;
             }
+             nav ul li a {
+                 color: #fff; /* Ensure links are white in dropdown */
+                 border-bottom: none; /* Remove border from dropdown links */
+             }
+             nav ul li a:hover, nav ul li a.active {
+                 color: var(--color-highlight);
+                 border-bottom: none; /* Remove border from dropdown links */
+             }
             .menu-toggle {
                 display: block;
                 position: absolute;
@@ -355,19 +469,44 @@
                 padding: 120px 20px 60px; /* Adjust padding for mobile hero */
             }
             #hero h1 {
-                font-size: 2.2rem;
+                font-size: 2.8rem;
             }
             #hero p {
-                font-size: 1rem;
+                font-size: 1.1rem;
+            }
+
+            section {
+                 padding: 80px 20px 60px; /* Adjust section padding */
             }
 
             section h2 {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
             .services-grid {
                 grid-template-columns: 1fr; /* Stack service cards */
             }
+             .pricing-info ul {
+                 padding-left: 20px;
+             }
+             .contact-form {
+                 padding: 20px;
+             }
         }
+
+         /* Basic Fade-in Animation (can be enhanced with Intersection Observer) */
+         @keyframes fadeIn {
+             to {
+                 opacity: 1;
+                 transform: translateY(0);
+             }
+         }
+
+         .fade-in {
+             opacity: 0;
+             transform: translateY(20px);
+             animation: fadeIn 0.8s ease-out forwards;
+         }
+
 
     </style>
 </head>
@@ -375,9 +514,14 @@
 
     <header>
         <div class="container">
-            <a href="#hero"><h1>NSL Creates <span style="font-weight:normal; font-size: 0.7em;">by Naman Lumbhani</span></h1></a>
+            <div class="logo">
+                <a href="#hero">
+                    <img src="image.png" alt="NSL Creates Logo">
+                 </a>
+            </div>
             <div class="menu-toggle" id="mobile-menu">
-                &#9776; </div>
+                &#9776;
+            </div>
             <nav id="nav-menu">
                 <ul>
                     <li><a href="#hero" class="active">Home</a></li>
@@ -399,36 +543,36 @@
     <section id="services">
         <div class="container">
             <h2>Services & Commissions</h2>
-            <p style="text-align:center; margin-bottom: 30px;">I offer custom sketch artwork tailored to your needs. Here's what I specialize in and how the process works:</p>
+            <p style="text-align:center; margin-bottom: 30px; color: var(--color-medium-grey);">I offer custom sketch artwork tailored to your needs. Here's what I specialize in and how the process works:</p>
             <div class="services-grid">
                 <div class="service-card">
-                    <div style="font-size: 2.5rem; color: #333; margin-bottom: 15px;">✏️</div>
+                    <div class="icon">✏️</div>
                     <h3>Custom Portraits</h3>
                     <p>Capture the essence of a person or pet with a detailed and expressive sketch. Great for gifts or personal keepsakes.</p>
                 </div>
                 <div class="service-card">
-                    <div style="font-size: 2.5rem; color: #333; margin-bottom: 15px;">🎨</div>
+                    <div class="icon">🎨</div>
                     <h3>Character Sketches</h3>
                     <p>Bring your original characters (OCs), D&D characters, or fan art ideas to life with unique character sketches.</p>
                 </div>
                 <div class="service-card">
-                    <div style="font-size: 2.5rem; color: #333; margin-bottom: 15px;">💡</div>
+                    <div class="icon">💡</div>
                     <h3>Conceptual Sketches</h3>
                     <p>Visualize your ideas, concepts, or story moments through evocative and imaginative sketches.</p>
                 </div>
             </div>
-            <div style="margin-top: 40px; text-align:left;">
+            <div class="service-process" style="margin-top: 50px; text-align:left;">
                 <h3>Commission Process:</h3>
-                <ol style="list-style-position: inside; padding-left: 20px;">
-                    <li><strong>Inquiry:</strong> Contact me with your idea, reference photos (if any), desired style, and size.</li>
+                <ol>
+                    <li><strong>Inquiry:</strong> Contact me with your idea, reference photos, desired style, and size.</li>
                     <li><strong>Discussion & Quote:</strong> We'll discuss the details, and I'll provide you with a quote and estimated timeline.</li>
                     <li><strong>Deposit:</strong> A 50% non-refundable deposit is required to secure your commission slot.</li>
                     <li><strong>Creation:</strong> I'll get to work on your sketch! I can provide work-in-progress updates if requested.</li>
                     <li><strong>Review & Final Payment:</strong> Once the sketch is complete, I'll send you a watermarked preview for approval. After approval, the final 50% payment is due.</li>
                     <li><strong>Delivery:</strong> You'll receive the high-resolution digital file of your sketch (or physical artwork if arranged).</li>
                 </ol>
-                <h3 style="margin-top:20px;">What's Included:</h3>
-                <ul style="list-style-position: inside; padding-left: 20px;">
+                <h3>What's Included:</h3>
+                <ul>
                     <li>High-resolution digital file (e.g., JPG, PNG, PDF).</li>
                     <li>One round of minor revisions during the sketching phase.</li>
                     <li>Personal usage rights (commercial rights can be discussed).</li>
@@ -445,9 +589,9 @@
             <ul>
                 <li><strong>A5 Size Pencil Sketch:</strong> Starting from ₹199/- to ₹499/-</li>
             </ul>
-             <p style="text-align:center; margin-top: 10px; font-size: 1rem;"><em>Note: The final price depends on the complexity and level of detail required.</em></p>
+             <p style="text-align:center; margin-top: 10px; font-size: 1rem; color: var(--color-medium-grey);"><em>Note: The final price depends on the complexity and level of detail required.</em></p>
             <p>Factors that can influence the price also include: number of subjects, complex backgrounds, specific style requests, and whether physical artwork/shipping is involved.</p>
-            <div style="text-align:center; margin-top:30px;">
+            <div style="text-align:center; margin-top:40px;">
                 <a href="#contact" class="cta-button">Get a Custom Quote</a>
             </div>
         </div>
@@ -465,7 +609,7 @@
     <section id="contact">
         <div class="container">
             <h2>Get In Touch</h2>
-            <p style="text-align:center; margin-bottom:30px;">Have a question or want to discuss a commission? Fill out the form below or email me directly.</p>
+            <p style="text-align:center; margin-bottom:30px; color: var(--color-medium-grey);">Have a question or want to discuss a commission? Fill out the form below or email me directly.</p>
             <div class="contact-form">
                 <form action="https://formsubmit.co/nslcreatesofficial@gmail.com" method="post" enctype="multipart/form-data">
                     <div>
@@ -486,17 +630,16 @@
                     </div>
 
                     <div>
-                         <label for="file">Upload Reference Image (Optional):</label>
-                         <div class="drop-zone" id="dropZone">
+                         <label for="file">Upload Reference Image:</label> <div class="drop-zone" id="dropZone">
                             <p>Drag & Drop your image here, or click to select file</p>
                             <input type="file" id="file" name="image" accept="image/*" style="display: none;">
                             <div class="file-info" id="fileInfo"></div>
                          </div>
                     </div>
 
-                    <input type="text" name="_honey" style="display:none">
 
-                    <button type="submit">Send Message</button>
+                    <input type="text" name="_honey" style="display:none">
+                     <input type="hidden" name="_captcha" value="false"> <button type="submit">Send Message</button>
                 </form>
             </div>
             <div class="contact-info">
@@ -523,7 +666,16 @@
             menuToggle.addEventListener('click', () => {
                 navMenu.classList.toggle('active');
             });
+             // Close menu when a link is clicked (for mobile)
+            document.querySelectorAll('#nav-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navMenu.classList.contains('active')) {
+                        navMenu.classList.remove('active');
+                    }
+                });
+            });
         }
+
 
         // Smooth Scrolling & Active Nav Link
         document.querySelectorAll('nav a').forEach(anchor => {
@@ -544,12 +696,13 @@
                             behavior: 'smooth'
                         });
 
+
                         // Remove active class from all nav links
                         document.querySelectorAll('nav a').forEach(link => link.classList.remove('active'));
                         // Add active class to the clicked link
                         this.classList.add('active');
 
-                        // Close mobile menu if open
+                        // Close mobile menu if open (redundant with above, but safe)
                         if (navMenu && navMenu.classList.contains('active')) {
                             navMenu.classList.remove('active');
                         }
@@ -564,45 +717,87 @@
             currentYearSpan.textContent = new Date().getFullYear();
         }
 
-        // Optional: Change active nav link on scroll
+
+        // Change active nav link on scroll & Section Fade-in (using Intersection Observer)
         const sections = document.querySelectorAll('section');
         const navLi = document.querySelectorAll('nav ul li a');
-        const header = document.querySelector('header'); // Get the header to measure its height
+        const header = document.querySelector('header');
 
         // Filter out any non-section elements or sections you don't want in navigation logic
-        const visibleSections = Array.from(sections).filter(section => section.id && section.id !== 'portfolio');
+        const visibleSections = Array.from(sections).filter(section => section.id); // Keep all sections with IDs
 
         if (header && visibleSections.length > 0 && navLi.length > 0) {
-            window.addEventListener('scroll', () => {
+
+             // Intersection Observer for Section Fade-in
+             const observerOptions = {
+                 root: null, // viewport
+                 rootMargin: '0px',
+                 threshold: 0.1 // Trigger when 10% of the section is visible
+             };
+
+             const observer = new IntersectionObserver((entries, observer) => {
+                 entries.forEach(entry => {
+                     if (entry.isIntersecting) {
+                         entry.target.classList.add('is-visible');
+                         // Optional: Stop observing once visible
+                         // observer.unobserve(entry.target);
+                     } else {
+                         // Optional: Remove class if it scrolls out of view
+                          entry.target.classList.remove('is-visible');
+                     }
+                 });
+             }, observerOptions);
+
+             visibleSections.forEach(section => {
+                 // Don't observe the hero section if you want it visible from the start
+                 if (section.id !== 'hero') {
+                     observer.observe(section);
+                 } else {
+                     // Ensure hero is marked as visible immediately
+                     section.classList.add('is-visible');
+                 }
+             });
+
+
+             // Scroll logic for Active Nav Link
+             window.addEventListener('scroll', () => {
                 let current = '';
-                const headerHeight = header.offsetHeight; // Get current header height
-                 // Add a buffer (e.g., 100px) so the section becomes active slightly before it hits the very top
-                const scrollBuffer = 100;
+                const headerHeight = header.offsetHeight;
+                const scrollBuffer = 150; // Adjust buffer as needed
 
                 visibleSections.forEach(section => {
-                    // Calculate the position relative to the viewport top, accounting for scroll position and header height/buffer
                     const sectionTop = section.getBoundingClientRect().top + window.pageYOffset;
+                    const sectionHeight = section.offsetHeight; // Get section height
 
-                    if (pageYOffset >= sectionTop - headerHeight - scrollBuffer) {
+                    // Determine if the scroll position is within the section, considering header and buffer
+                    if (pageYOffset >= sectionTop - headerHeight - scrollBuffer && pageYOffset < sectionTop + sectionHeight - headerHeight) {
                          current = section.getAttribute('id');
                     }
                 });
 
                 navLi.forEach(a => {
                     a.classList.remove('active');
-                    if (a.getAttribute('href') === `#${current}`) {
+                    if (a.getAttribute('href') && a.getAttribute('href').substring(1) === current) { // Check href and match ID
                         a.classList.add('active');
                     }
                 });
-                // Ensure "Home" is active if scrolled to the very top or just below the hero section
-                 // Adjusted condition to check if scroll position is near the top or within the hero
-                if (pageYOffset < visibleSections[0].getBoundingClientRect().top + window.pageYOffset - headerHeight - scrollBuffer + 50) { // Add a small tolerance
-                     navLi.forEach(a => a.classList.remove('active'));
-                     const homeLink = document.querySelector('nav ul li a[href="#hero"]');
-                     if (homeLink) {
-                         homeLink.classList.add('active');
-                     }
-                }
+
+                 // Handle the case when scrolled to the very top or within the hero section
+                 // Check if scroll position is above the start of the first non-hero visible section
+                 if (visibleSections.length > 1 && pageYOffset < (visibleSections[1].getBoundingClientRect().top + window.pageYOffset - headerHeight - scrollBuffer + 50)) {
+                      navLi.forEach(a => a.classList.remove('active'));
+                      const homeLink = document.querySelector('nav ul li a[href="#hero"]');
+                      if (homeLink) {
+                          homeLink.classList.add('active');
+                      }
+                 } else if (visibleSections.length === 1 && visibleSections[0].id === 'hero' && pageYOffset < (visibleSections[0].offsetHeight - headerHeight)) {
+                      // Case for only a hero section or scrolled within hero
+                       navLi.forEach(a => a.classList.remove('active'));
+                      const homeLink = document.querySelector('nav ul li a[href="#hero"]');
+                      if (homeLink) {
+                          homeLink.classList.add('active');
+                      }
+                 }
             });
         }
 
@@ -624,7 +819,7 @@
             });
 
             ['dragleave', 'drop'].forEach(eventName => {
-                dropZone.addEventListener(eventName, unhighlight, false);
+                dropZone.classList.remove('dragover'); // Ensure unhighlight on dragleave
             });
 
              // Handle dropped files
@@ -632,7 +827,8 @@
 
             // Handle file selection via click
             fileInput.addEventListener('change', handleChange, false);
-            dropZone.addEventListener('click', () => fileInput.click());
+            dropZone.addEventListener('click', () => fileInput.click()); // Click dropZone to open file input
+
 
             function preventDefaults(e) {
                 e.preventDefault();
@@ -648,6 +844,7 @@
             }
 
             function handleDrop(e) {
+                unhighlight(e); // Remove highlight
                 const dt = e.dataTransfer;
                 const files = dt.files;
 
@@ -660,34 +857,32 @@
             }
 
             function handleFiles(files) {
-                 // Assuming only one file for simplicity based on "the image"
-                 const file = files[0];
+                 const file = files[0]; // Get the first file
 
                  if (file) {
-                     // Check if it's an image (optional but good practice)
                      if (file.type.startsWith('image/')) {
-                         // Assign the file to the file input
-                         // Need to create a new FileList for the input element
+                         // Create a DataTransfer object and add the file
                          const dataTransfer = new DataTransfer();
                          dataTransfer.items.add(file);
-                         fileInput.files = dataTransfer.files;
+                         fileInput.files = dataTransfer.files; // Assign the file to the input
 
                          // Display file information
                          fileInfo.innerHTML = `Selected file: <strong>${file.name}</strong> (${(file.size / 1024).toFixed(2)} KB)`;
 
                      } else {
-                         // Clear the file input and show error
-                         fileInput.value = ''; // Clear file selection
+                         // Not an image file
+                         fileInput.value = ''; // Clear file input
                          fileInfo.innerHTML = '<span style="color: red;">Please drop/select an image file.</span>';
                          console.warn("Non-image file dropped/selected.");
                      }
                  } else {
-                     // No file selected/dropped (e.g., canceled file picker)
-                      fileInput.value = ''; // Ensure file input is clear
-                      fileInfo.innerHTML = ''; // Clear file info display
+                     // No file selected or dropped (e.g., dialog cancelled)
+                      fileInput.value = '';
+                      fileInfo.innerHTML = '';
                  }
             }
         }
+
 
     </script>
 
