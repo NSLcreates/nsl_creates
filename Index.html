@@ -138,48 +138,8 @@
             background: #555;
         }
 
-        /* Portfolio/Gallery Section */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
+        /* Portfolio/Gallery Section - REMOVED */
 
-        .gallery-item {
-            background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .gallery-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            display: block;
-        }
-
-        .gallery-item-info {
-            padding: 15px;
-            text-align: center;
-        }
-
-        .gallery-item-info h3 {
-            margin-bottom: 5px;
-            font-size: 1.2rem;
-        }
-
-        .gallery-item-info p {
-            font-size: 0.9rem;
-            color: #666;
-        }
 
         /* Services Section */
         .services-grid {
@@ -224,6 +184,15 @@
             font-size: 1.1rem;
             margin-bottom: 20px;
         }
+         .pricing-info ul {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+            margin-bottom:20px;
+        }
+         .pricing-info ul li {
+            margin-bottom: 10px; /* Add some space between list items */
+         }
 
         /* About Section */
         #about .container {
@@ -232,15 +201,7 @@
             align-items: center;
             text-align: center;
         }
-        #about img.profile-pic {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 20px;
-            border: 5px solid #fff;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
+        /* Removed .profile-pic styling as image is removed */
 
         #about p {
             max-width: 700px;
@@ -283,6 +244,38 @@
             resize: vertical;
         }
 
+        /* Drag and Drop Area Styling */
+        .drop-zone {
+            border: 2px dashed #ccc;
+            border-radius: 5px;
+            padding: 25px;
+            text-align: center;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .drop-zone.dragover {
+            background-color: #e9e9e9;
+            border-color: #333;
+        }
+
+         .drop-zone p {
+             margin: 0;
+             font-size: 1rem;
+             color: #555;
+         }
+
+         .file-info {
+             margin-top: 10px;
+             font-size: 0.9rem;
+             color: #555;
+         }
+         .file-info strong {
+            color: #333;
+         }
+
+
         .contact-form button[type="submit"] {
             background: #333;
             color: #fff;
@@ -313,6 +306,7 @@
             text-decoration: underline;
          }
 
+
         /* Footer */
         footer {
             background: #333;
@@ -321,9 +315,6 @@
             padding: 2rem 0;
         }
 
-        footer p {
-            margin: 0;
-        }
         footer .social-links a {
             color: #fff;
             margin: 0 10px;
@@ -376,9 +367,6 @@
             section h2 {
                 font-size: 2rem;
             }
-            .gallery-grid {
-                grid-template-columns: 1fr; /* Stack gallery items */
-            }
             .services-grid {
                 grid-template-columns: 1fr; /* Stack service cards */
             }
@@ -396,7 +384,6 @@
             <nav id="nav-menu">
                 <ul>
                     <li><a href="#hero" class="active">Home</a></li>
-                    <li><a href="#portfolio">Portfolio</a></li>
                     <li><a href="#services">Services & Commissions</a></li>
                     <li><a href="#pricing">Pricing</a></li>
                     <li><a href="#about">About Me</a></li>
@@ -410,42 +397,6 @@
         <h1>Welcome to NSL Creates</h1>
         <p>Unique sketches crafted with passion by Naman Lumbhani. Let's bring your vision to life!</p>
         <a href="#contact" class="cta-button">Request a Commission</a>
-    </section>
-
-    <section id="portfolio">
-        <div class="container">
-            <h2>My Portfolio</h2>
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="https://via.placeholder.com/300x250?text=Sketch+1" alt="Sketch Title 1">
-                    <div class="gallery-item-info">
-                        <h3>Portrait Sketch</h3>
-                        <p>Graphite on paper, 2024</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://via.placeholder.com/300x250?text=Sketch+2" alt="Sketch Title 2">
-                    <div class="gallery-item-info">
-                        <h3>Character Design</h3>
-                        <p>Ink and charcoal, 2024</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://via.placeholder.com/300x250?text=Sketch+3" alt="Sketch Title 3">
-                    <div class="gallery-item-info">
-                        <h3>Abstract Sketch</h3>
-                        <p>Mixed media, 2023</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://via.placeholder.com/300x250?text=Sketch+4" alt="Sketch Title 4">
-                    <div class="gallery-item-info">
-                        <h3>Pet Portrait</h3>
-                        <p>Pencil sketch, 2024</p>
-                    </div>
-                </div>
-                </div>
-        </div>
     </section>
 
     <section id="services">
@@ -494,13 +445,11 @@
             <h2>Pricing</h2>
             <p>Each sketch is unique, and pricing depends on complexity, size, and style. Please get in touch for a personalized quote!</p>
             <p><strong>General Starting Prices (for guidance):</strong></p>
-            <ul style="list-style: none; padding: 0; text-align: center; margin-bottom:20px;">
-                <li><strong>Simple Headshot/Bust Sketch (Digital):</strong> Starting from $XX</li>
-                <li><strong>Detailed Half-Body Sketch (Digital):</strong> Starting from $YY</li>
-                <li><strong>Full Body Character Sketch (Digital):</strong> Starting from $ZZ</li>
-                <li><em>Physical sketches and shipping will have additional costs.</em></li>
+            <ul>
+                <li><strong>A5 Size Pencil Sketch:</strong> Starting from ₹199/- to ₹499/-</li>
             </ul>
-            <p>Factors that can influence the price include: number of subjects, complex backgrounds, level of detail, specific style requests.</p>
+             <p style="text-align:center; margin-top: 10px; font-size: 1rem;"><em>Note: The final price depends on the complexity and level of detail required.</em></p>
+            <p>Factors that can influence the price also include: number of subjects, complex backgrounds, specific style requests, and whether physical artwork/shipping is involved.</p>
             <div style="text-align:center; margin-top:30px;">
                 <a href="#contact" class="cta-button">Get a Custom Quote</a>
             </div>
@@ -510,10 +459,9 @@
     <section id="about">
         <div class="container">
             <h2>About Naman Lumbhani</h2>
-            <img src="https://via.placeholder.com/200x200?text=Naman+L." alt="Naman Lumbhani - NSL Creates" class="profile-pic">
-            <p>Hello! I'm Naman Lumbhani, the artist behind NSL Creates. Sketching has been my passion for [Number] years, and I love the power of lines and shading to bring ideas and emotions to paper (or screen!).</p>
+            <p>Hello! I'm Naman Lumbhani, the artist behind NSL Creates. Sketching has been my passion for many years, and I love the power of lines and shading to bring ideas and emotions to paper (or screen!).</p>
             <p>My style focuses on [Describe your style - e.g., expressive linework, realistic details, dynamic poses, minimalist approach, etc.]. I enjoy working on [Mention types of subjects you enjoy - e.g., portraits, fantasy characters, animals, etc.] and I'm always excited to take on new creative challenges.</p>
-            <p>When I'm not sketching, I enjoy [Mention a hobby or two - e.g., reading, gaming, exploring nature]. My goal with NSL Creates is to share my art and create meaningful pieces that resonate with you. I look forward to collaborating on your next sketch project!</p>
+            <p>When I'm not sketching, I enjoy [Mention a hobby or two - e.g., gaming, exploring nature]. My goal with NSL Creates is to share my art and create meaningful pieces that resonate with you. I look forward to collaborating on your next sketch project!</p>
         </div>
     </section>
 
@@ -522,16 +470,16 @@
             <h2>Get In Touch</h2>
             <p style="text-align:center; margin-bottom:30px;">Have a question or want to discuss a commission? Fill out the form below or email me directly.</p>
             <div class="contact-form">
-                <form action="mailto:your_email@example.com" method="post" enctype="text/plain">
+                <form action="https://formsubmit.co/nslcreatesofficial@gmail.com" method="post" enctype="multipart/form-data">
                     <div>
                         <label for="name">Name:</label>
                         <input type="text" id="name" name="name" required>
                     </div>
                     <div>
                         <label for="email">Email:</label>
-                        <input type="text" id="email" name="email" required>
+                        <input type="email" id="email" name="email" required>
                     </div>
-                    <div>
+                     <div>
                         <label for="subject">Subject:</label>
                         <input type="text" id="subject" name="subject" required>
                     </div>
@@ -539,20 +487,33 @@
                         <label for="message">Message/Commission Details:</label>
                         <textarea id="message" name="message" required></textarea>
                     </div>
+
+                    <div>
+                         <label for="file">Upload Reference Image (Optional):</label>
+                         <div class="drop-zone" id="dropZone">
+                            <p>Drag & Drop your image here, or click to select file</p>
+                            <input type="file" id="file" name="image" accept="image/*" style="display: none;">
+                            <div class="file-info" id="fileInfo"></div>
+                         </div>
+                    </div>
+
+
+                    <input type="text" name="_honey" style="display:none">
+
                     <button type="submit">Send Message</button>
                 </form>
             </div>
             <div class="contact-info">
-                <p>You can also reach me at: <a href="mailto:your_email@example.com">your_email@example.com</a></p>
+                <p>You can also reach me at: <a href="mailto:nslcreatesofficial@gmail.com">nslcreatesofficial@gmail.com</a></p>
                 </div>
         </div>
     </section>
 
     <footer>
         <div class="container">
-            <p>&copy; <span id="currentYear"></span> NSL Creates by Naman Lumbhani. All Rights Reserved.</p>
             <div class="social-links" style="margin-top:10px;">
                 </div>
+             <p style="margin-top: 10px; font-size: 0.9em;"> <span id="currentYear"></span> NSL Creates.</p>
         </div>
     </footer>
 
@@ -561,9 +522,13 @@
         const menuToggle = document.getElementById('mobile-menu');
         const navMenu = document.getElementById('nav-menu');
 
-        menuToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
+        // Check if elements exist before adding event listeners
+        if (menuToggle && navMenu) {
+            menuToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+            });
+        }
+
 
         // Smooth Scrolling & Active Nav Link
         document.querySelectorAll('nav a').forEach(anchor => {
@@ -572,53 +537,168 @@
                 if (this.getAttribute('href').startsWith('#')) {
                     e.preventDefault();
                     const targetId = this.getAttribute('href');
-                    document.querySelector(targetId).scrollIntoView({
-                        behavior: 'smooth'
-                    });
+                    const targetElement = document.querySelector(targetId);
 
-                    // Remove active class from all nav links
-                    document.querySelectorAll('nav a').forEach(link => link.classList.remove('active'));
-                    // Add active class to the clicked link
-                    this.classList.add('active');
+                    if (targetElement) {
+                         // Get header height to calculate scroll position correctly
+                        const headerHeight = document.querySelector('header').offsetHeight;
+                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
 
-                    // Close mobile menu if open
-                    if (navMenu.classList.contains('active')) {
-                        navMenu.classList.remove('active');
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+
+
+                        // Remove active class from all nav links
+                        document.querySelectorAll('nav a').forEach(link => link.classList.remove('active'));
+                        // Add active class to the clicked link
+                        this.classList.add('active');
+
+                        // Close mobile menu if open
+                        if (navMenu && navMenu.classList.contains('active')) {
+                            navMenu.classList.remove('active');
+                        }
                     }
                 }
             });
         });
 
-        // Set current year in footer
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        // Update the current year in the footer
+        const currentYearSpan = document.getElementById('currentYear');
+        if (currentYearSpan) {
+            currentYearSpan.textContent = new Date().getFullYear();
+        }
+
 
         // Optional: Change active nav link on scroll
         const sections = document.querySelectorAll('section');
         const navLi = document.querySelectorAll('nav ul li a');
+        const header = document.querySelector('header'); // Get the header to measure its height
 
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                // Adjust offset if you have a fixed header
-                if (pageYOffset >= (sectionTop - sectionHeight / 3 - 70)) { // 70 is header height approx
-                    current = section.getAttribute('id');
+        // Filter out any non-section elements or sections you don't want in navigation logic
+        const visibleSections = Array.from(sections).filter(section => section.id && section.id !== 'portfolio');
+
+
+        if (header && visibleSections.length > 0 && navLi.length > 0) {
+            window.addEventListener('scroll', () => {
+                let current = '';
+                const headerHeight = header.offsetHeight; // Get current header height
+                 // Add a buffer (e.g., 100px) so the section becomes active slightly before it hits the very top
+                const scrollBuffer = 100;
+
+
+                visibleSections.forEach(section => {
+                    // Calculate the position relative to the viewport top, accounting for scroll position and header height/buffer
+                    const sectionTop = section.getBoundingClientRect().top + window.pageYOffset;
+
+                    if (pageYOffset >= sectionTop - headerHeight - scrollBuffer) {
+                         current = section.getAttribute('id');
+                    }
+                });
+
+                navLi.forEach(a => {
+                    a.classList.remove('active');
+                    if (a.getAttribute('href') === `#${current}`) {
+                        a.classList.add('active');
+                    }
+                });
+                // Ensure "Home" is active if scrolled to the very top or just below the hero section
+                 // Adjusted condition to check if scroll position is near the top or within the hero
+                if (pageYOffset < visibleSections[0].getBoundingClientRect().top + window.pageYOffset - headerHeight - scrollBuffer + 50) { // Add a small tolerance
+                     navLi.forEach(a => a.classList.remove('active'));
+                     const homeLink = document.querySelector('nav ul li a[href="#hero"]');
+                     if (homeLink) {
+                         homeLink.classList.add('active');
+                     }
                 }
             });
+        }
 
-            navLi.forEach(a => {
-                a.classList.remove('active');
-                if (a.getAttribute('href') === `#${current}`) {
-                    a.classList.add('active');
-                }
+        // --- Drag and Drop Functionality ---
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('file');
+        const fileInfo = document.getElementById('fileInfo');
+
+        if (dropZone && fileInput && fileInfo) {
+             // Prevent default drag behaviors
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                dropZone.addEventListener(eventName, preventDefaults, false);
+                document.body.addEventListener(eventName, preventDefaults, false); // Prevent default on body too
             });
-            // Ensure "Home" is active if scrolled to the very top
-            if (pageYOffset < sections[0].offsetTop - 70) {
-                 navLi.forEach(a => a.classList.remove('active'));
-                 document.querySelector('nav ul li a[href="#hero"]').classList.add('active');
+
+             // Highlight drop zone when dragging over
+            ['dragenter', 'dragover'].forEach(eventName => {
+                dropZone.addEventListener(eventName, highlight, false);
+            });
+
+            ['dragleave', 'drop'].forEach(eventName => {
+                dropZone.addEventListener(eventName, unhighlight, false);
+            });
+
+             // Handle dropped files
+            dropZone.addEventListener('drop', handleDrop, false);
+
+            // Handle file selection via click
+            fileInput.addEventListener('change', handleChange, false);
+            dropZone.addEventListener('click', () => fileInput.click());
+
+
+            function preventDefaults(e) {
+                e.preventDefault();
+                e.stopPropagation();
             }
-        });
+
+            function highlight(e) {
+                dropZone.classList.add('dragover');
+            }
+
+            function unhighlight(e) {
+                dropZone.classList.remove('dragover');
+            }
+
+            function handleDrop(e) {
+                const dt = e.dataTransfer;
+                const files = dt.files;
+
+                handleFiles(files);
+            }
+
+            function handleChange(e) {
+                 const files = e.target.files;
+                 handleFiles(files);
+            }
+
+            function handleFiles(files) {
+                 // Assuming only one file for simplicity based on "the image"
+                 const file = files[0];
+
+                 if (file) {
+                     // Check if it's an image (optional but good practice)
+                     if (file.type.startsWith('image/')) {
+                         // Assign the file to the file input
+                         // Need to create a new FileList for the input element
+                         const dataTransfer = new DataTransfer();
+                         dataTransfer.items.add(file);
+                         fileInput.files = dataTransfer.files;
+
+                         // Display file information
+                         fileInfo.innerHTML = `Selected file: <strong>${file.name}</strong> (${(file.size / 1024).toFixed(2)} KB)`;
+
+                     } else {
+                         // Clear the file input and show error
+                         fileInput.value = ''; // Clear file selection
+                         fileInfo.innerHTML = '<span style="color: red;">Please drop/select an image file.</span>';
+                         console.warn("Non-image file dropped/selected.");
+                     }
+                 } else {
+                     // No file selected/dropped (e.g., canceled file picker)
+                      fileInput.value = ''; // Ensure file input is clear
+                      fileInfo.innerHTML = ''; // Clear file info display
+                 }
+            }
+        }
+
 
     </script>
 
