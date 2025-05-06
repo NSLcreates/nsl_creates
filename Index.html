@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NSL Creates by Naman Lumbhani - Sketch Artist</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: auto;
+            overflow: hidden;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: #333;
+            color: #fff;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            margin: 0;
+        }
+
+        header a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            color: #f0db4f; /* A highlight color */
+        }
+
+        /* Mobile Menu (Basic) */
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 80px 0 60px; /* Added top padding for fixed header */
+            border-bottom: 1px solid #eee;
+        }
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        section h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            color: #333;
+        }
+
+        /* Hero Section */
+        #hero {
+            background: #f4f4f4 url('https://via.placeholder.com/1500x700?text=Beautiful+Sketch+Banner') no-repeat center center/cover; /* Replace with your banner image */
+            color: #333; /* Change text color if your banner is dark */
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: 100px; /* Adjust if header height changes */
+        }
+
+        #hero h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        #hero p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #333;
+            color: #fff;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: #555;
+        }
+
+        /* Portfolio/Gallery Section */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-item-info {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .gallery-item-info h3 {
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+
+        .gallery-item-info p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .service-card {
+            background: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .service-card i { /* For icons, if you choose to use them e.g., Font Awesome */
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .service-card p {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        /* Pricing Section */
+        #pricing {
+            background-color: #f0f0f0;
+        }
+        .pricing-info p {
+            text-align: center;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        /* About Section */
+        #about .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        #about img.profile-pic {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 5px solid #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        #about p {
+            max-width: 700px;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        /* Contact Section */
+        #contact {
+            background: #e9e9e9;
+        }
+        .contact-form {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 25px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .contact-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .contact-form button[type="submit"] {
+            background: #333;
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        .contact-form button[type="submit"]:hover {
+            background: #555;
+        }
+
+        .contact-info p {
+             text-align: center;
+             font-size: 1.1rem;
+             margin-top: 30px;
+        }
+         .contact-info p a {
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+         }
+         .contact-info p a:hover {
+            text-decoration: underline;
+         }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        footer p {
+            margin: 0;
+        }
+        footer .social-links a {
+            color: #fff;
+            margin: 0 10px;
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+        footer .social-links a:hover {
+            color: #f0db4f;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+            }
+            header h1 {
+                margin-bottom: 10px;
+                text-align: center;
+            }
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                display: none; /* Hidden by default on mobile */
+            }
+            nav ul.active {
+                display: flex; /* Shown when active */
+            }
+            nav ul li {
+                margin: 10px 0;
+            }
+            .menu-toggle {
+                display: block;
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+            }
+
+            #hero {
+                height: auto;
+                padding: 120px 20px 60px; /* Adjust padding for mobile hero */
+            }
+            #hero h1 {
+                font-size: 2.2rem;
+            }
+            #hero p {
+                font-size: 1rem;
+            }
+
+            section h2 {
+                font-size: 2rem;
+            }
+            .gallery-grid {
+                grid-template-columns: 1fr; /* Stack gallery items */
+            }
+            .services-grid {
+                grid-template-columns: 1fr; /* Stack service cards */
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <a href="#hero"><h1>NSL Creates <span style="font-weight:normal; font-size: 0.7em;">by Naman Lumbhani</span></h1></a>
+            <div class="menu-toggle" id="mobile-menu">
+                &#9776; </div>
+            <nav id="nav-menu">
+                <ul>
+                    <li><a href="#hero" class="active">Home</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#services">Services & Commissions</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#about">About Me</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero">
+        <h1>Welcome to NSL Creates</h1>
+        <p>Unique sketches crafted with passion by Naman Lumbhani. Let's bring your vision to life!</p>
+        <a href="#contact" class="cta-button">Request a Commission</a>
+    </section>
+
+    <section id="portfolio">
+        <div class="container">
+            <h2>My Portfolio</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://via.placeholder.com/300x250?text=Sketch+1" alt="Sketch Title 1">
+                    <div class="gallery-item-info">
+                        <h3>Portrait Sketch</h3>
+                        <p>Graphite on paper, 2024</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://via.placeholder.com/300x250?text=Sketch+2" alt="Sketch Title 2">
+                    <div class="gallery-item-info">
+                        <h3>Character Design</h3>
+                        <p>Ink and charcoal, 2024</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://via.placeholder.com/300x250?text=Sketch+3" alt="Sketch Title 3">
+                    <div class="gallery-item-info">
+                        <h3>Abstract Sketch</h3>
+                        <p>Mixed media, 2023</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://via.placeholder.com/300x250?text=Sketch+4" alt="Sketch Title 4">
+                    <div class="gallery-item-info">
+                        <h3>Pet Portrait</h3>
+                        <p>Pencil sketch, 2024</p>
+                    </div>
+                </div>
+                </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="container">
+            <h2>Services & Commissions</h2>
+            <p style="text-align:center; margin-bottom: 30px;">I offer custom sketch artwork tailored to your needs. Here's what I specialize in and how the process works:</p>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div style="font-size: 2.5rem; color: #333; margin-bottom: 15px;">✏️</div>
+                    <h3>Custom Portraits</h3>
+                    <p>Capture the essence of a person or pet with a detailed and expressive sketch. Great for gifts or personal keepsakes.</p>
+                </div>
+                <div class="service-card">
+                    <div style="font-size: 2.5rem; color: #333; margin-bottom: 15px;">🎨</div>
+                    <h3>Character Sketches</h3>
+                    <p>Bring your original characters (OCs), D&D characters, or fan art ideas to life with unique character sketches.</p>
+                </div>
+                <div class="service-card">
+                    <div style="font-size: 2.5rem; color: #333; margin-bottom: 15px;">💡</div>
+                    <h3>Conceptual Sketches</h3>
+                    <p>Visualize your ideas, concepts, or story moments through evocative and imaginative sketches.</p>
+                </div>
+            </div>
+            <div style="margin-top: 40px; text-align:left;">
+                <h3>Commission Process:</h3>
+                <ol style="list-style-position: inside; padding-left: 20px;">
+                    <li><strong>Inquiry:</strong> Contact me with your idea, reference photos (if any), desired style, and size.</li>
+                    <li><strong>Discussion & Quote:</strong> We'll discuss the details, and I'll provide you with a quote and estimated timeline.</li>
+                    <li><strong>Deposit:</strong> A 50% non-refundable deposit is required to secure your commission slot.</li>
+                    <li><strong>Creation:</strong> I'll get to work on your sketch! I can provide work-in-progress updates if requested.</li>
+                    <li><strong>Review & Final Payment:</strong> Once the sketch is complete, I'll send you a watermarked preview for approval. After approval, the final 50% payment is due.</li>
+                    <li><strong>Delivery:</strong> You'll receive the high-resolution digital file of your sketch (or physical artwork if arranged).</li>
+                </ol>
+                <h3 style="margin-top:20px;">What's Included:</h3>
+                <ul style="list-style-position: inside; padding-left: 20px;">
+                    <li>High-resolution digital file (e.g., JPG, PNG, PDF).</li>
+                    <li>One round of minor revisions during the sketching phase.</li>
+                    <li>Personal usage rights (commercial rights can be discussed).</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing">
+        <div class="container pricing-info">
+            <h2>Pricing</h2>
+            <p>Each sketch is unique, and pricing depends on complexity, size, and style. Please get in touch for a personalized quote!</p>
+            <p><strong>General Starting Prices (for guidance):</strong></p>
+            <ul style="list-style: none; padding: 0; text-align: center; margin-bottom:20px;">
+                <li><strong>Simple Headshot/Bust Sketch (Digital):</strong> Starting from $XX</li>
+                <li><strong>Detailed Half-Body Sketch (Digital):</strong> Starting from $YY</li>
+                <li><strong>Full Body Character Sketch (Digital):</strong> Starting from $ZZ</li>
+                <li><em>Physical sketches and shipping will have additional costs.</em></li>
+            </ul>
+            <p>Factors that can influence the price include: number of subjects, complex backgrounds, level of detail, specific style requests.</p>
+            <div style="text-align:center; margin-top:30px;">
+                <a href="#contact" class="cta-button">Get a Custom Quote</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2>About Naman Lumbhani</h2>
+            <img src="https://via.placeholder.com/200x200?text=Naman+L." alt="Naman Lumbhani - NSL Creates" class="profile-pic">
+            <p>Hello! I'm Naman Lumbhani, the artist behind NSL Creates. Sketching has been my passion for [Number] years, and I love the power of lines and shading to bring ideas and emotions to paper (or screen!).</p>
+            <p>My style focuses on [Describe your style - e.g., expressive linework, realistic details, dynamic poses, minimalist approach, etc.]. I enjoy working on [Mention types of subjects you enjoy - e.g., portraits, fantasy characters, animals, etc.] and I'm always excited to take on new creative challenges.</p>
+            <p>When I'm not sketching, I enjoy [Mention a hobby or two - e.g., reading, gaming, exploring nature]. My goal with NSL Creates is to share my art and create meaningful pieces that resonate with you. I look forward to collaborating on your next sketch project!</p>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2>Get In Touch</h2>
+            <p style="text-align:center; margin-bottom:30px;">Have a question or want to discuss a commission? Fill out the form below or email me directly.</p>
+            <div class="contact-form">
+                <form action="mailto:your_email@example.com" method="post" enctype="text/plain">
+                    <div>
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div>
+                        <label for="email">Email:</label>
+                        <input type="text" id="email" name="email" required>
+                    </div>
+                    <div>
+                        <label for="subject">Subject:</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div>
+                        <label for="message">Message/Commission Details:</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+            <div class="contact-info">
+                <p>You can also reach me at: <a href="mailto:your_email@example.com">your_email@example.com</a></p>
+                </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="currentYear"></span> NSL Creates by Naman Lumbhani. All Rights Reserved.</p>
+            <div class="social-links" style="margin-top:10px;">
+                </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Smooth Scrolling & Active Nav Link
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                // If it's a link to an ID on the same page
+                if (this.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    document.querySelector(targetId).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+
+                    // Remove active class from all nav links
+                    document.querySelectorAll('nav a').forEach(link => link.classList.remove('active'));
+                    // Add active class to the clicked link
+                    this.classList.add('active');
+
+                    // Close mobile menu if open
+                    if (navMenu.classList.contains('active')) {
+                        navMenu.classList.remove('active');
+                    }
+                }
+            });
+        });
+
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Optional: Change active nav link on scroll
+        const sections = document.querySelectorAll('section');
+        const navLi = document.querySelectorAll('nav ul li a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                // Adjust offset if you have a fixed header
+                if (pageYOffset >= (sectionTop - sectionHeight / 3 - 70)) { // 70 is header height approx
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLi.forEach(a => {
+                a.classList.remove('active');
+                if (a.getAttribute('href') === `#${current}`) {
+                    a.classList.add('active');
+                }
+            });
+            // Ensure "Home" is active if scrolled to the very top
+            if (pageYOffset < sections[0].offsetTop - 70) {
+                 navLi.forEach(a => a.classList.remove('active'));
+                 document.querySelector('nav ul li a[href="#hero"]').classList.add('active');
+            }
+        });
+
+    </script>
+
+</body>
+</html>
