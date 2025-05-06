@@ -176,7 +176,7 @@
         }
 
         .cta-button:active {
-            transform: translateY(0); /* Press effect */
+            transform: translateY(0);
             box-shadow: none;
         }
 
@@ -557,9 +557,10 @@
     </header>
 
     <section id="hero">
-        <h1>Welcome to NSL Creates</h1>
-        <p>Unique sketches crafted with passion by Naman Lumbhani. Let's bring your vision to life!</p>
-        <a href="#contact" class="cta-button">Request a Commission</a>
+        <div class="container"> <h1>Welcome to NSL Creates</h1>
+            <p>Unique sketches crafted with passion by Naman Lumbhani. Let's bring your vision to life!</p>
+            <a href="#contact" class="cta-button">Request a Commission</a>
+        </div>
     </section>
 
     <section id="services">
@@ -623,9 +624,7 @@
         <div class="container">
             <h2>About Naman Lumbhani</h2>
             <p>Hello! I'm Naman Lumbhani, the artist behind NSL Creates. Sketching has been my passion for many years, and I love the power of lines and shading to bring ideas and emotions to paper (or screen!).</p>
-            <p>My style focuses on [Describe your style - e.g., expressive linework, realistic details, dynamic poses, minimalist approach, etc.]. I enjoy working on [Mention types of subjects you enjoy - e.g., portraits, fantasy characters, animals, etc.] and I'm always excited to take on new creative challenges.</p>
-            <p>When I'm not sketching, I enjoy [Mention a hobby or two - e.g., gaming, exploring nature]. My goal with NSL Creates is to share my art and create meaningful pieces that resonate with you. I look forward to collaborating on your next sketch project!</p>
-        </div>
+            <p>When I'm not sketching, I enjoy [Mention a hobby or two]. My goal with NSL Creates is to share my art and create meaningful pieces that resonate with you. I look forward to collaborating on your next sketch project!</p> </div>
     </section>
 
     <section id="contact">
@@ -652,7 +651,8 @@
                     </div>
 
                     <div>
-                         <label for="file">Upload Reference Image:</label> <div class="drop-zone" id="dropZone">
+                         <label for="file">Upload Reference Image:</label>
+                         <div class="drop-zone" id="dropZone">
                             <p>Drag & Drop your image here, or click to select file</p>
                             <input type="file" id="file" name="image" accept="image/*" style="display: none;">
                             <div class="file-info" id="fileInfo"></div>
@@ -728,13 +728,6 @@
                 }
             });
         });
-
-        // Update the current year in the footer (Removed copyright, but keeping if you want to add other dynamic text later)
-        // const currentYearSpan = document.getElementById('currentYear');
-        // if (currentYearSpan) {
-        //     currentYearSpan.textContent = new Date().getFullYear();
-        // }
-
 
         // Change active nav link on scroll & Section Fade-in (using Intersection Observer)
         const sections = document.querySelectorAll('section');
