@@ -36,7 +36,7 @@
             line-height: 1.7; /* Increased line height */
             color: var(--color-text-dark);
             background-color: var(--color-bg-light);
-            scroll-behavior: smooth; /* Smooth scrolling */
+             scroll-behavior: smooth; /* Smooth scrolling */
             /* Subtle paper texture background */
             background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0iI2ZjZmNmYyI+PC9yZWN0Pgo8Y2lyY2xlIGN4PSIxIiBjeT0iMSIgcj0iMSIgZmlsbD0iI2Y4ZjhmOCI+PC9jaXJjbGU+Cjwvc3ZnPg==');
             background-repeat: repeat;
@@ -54,13 +54,13 @@
         header {
             background: var(--color-header-footer);
             color: #fff;
-            padding: 0.9rem 0;
+            padding: 0.9rem 0; /* Slightly more padding */
             position: fixed;
             width: 100%;
             top: 0;
-            left: 0;
+            left: 0; /* Ensure header is full width */
             z-index: 1000;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3); /* Enhanced shadow */
             transition: background-color 0.3s ease;
         }
 
@@ -71,14 +71,14 @@
         }
 
         header .logo img {
-            height: 45px;
+            height: 45px; /* Adjust height as needed */
             width: auto;
             display: block;
             transition: transform 0.3s ease;
         }
 
          header .logo img:hover {
-             transform: scale(1.08);
+             transform: scale(1.08); /* More significant hover effect */
          }
 
 
@@ -95,25 +95,25 @@
         }
 
         nav ul li {
-            margin-left: 35px;
+            margin-left: 35px; /* Increased space */
         }
 
         nav ul li a {
-            color: rgba(255, 255, 255, 0.9);
+            color: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
             text-decoration: none;
-            font-weight: 500;
-            padding: 8px 0;
-            position: relative;
+            font-weight: 500; /* Medium weight */
+            padding: 8px 0; /* More padding for click area */
+            position: relative; /* For underline effect */
             transition: color 0.3s ease;
         }
 
-         nav ul li a::after {
+         nav ul li a::after { /* Underline effect */
              content: '';
              position: absolute;
              left: 0;
              bottom: 0;
              height: 2px;
-             width: 0;
+             width: 0; /* Start hidden */
              background-color: var(--color-secondary-accent); /* Use secondary accent for underline */
              transition: width 0.3s ease-out;
          }
@@ -122,30 +122,30 @@
             color: var(--color-secondary-accent);
         }
          nav ul li a:hover::after, nav ul li a.active::after {
-             width: 100%;
+             width: 100%; /* Expand underline on hover/active */
          }
 
 
         /* Mobile Menu (Basic) */
         .menu-toggle {
             display: none;
-            font-size: 2rem;
+            font-size: 2rem; /* Larger icon */
             cursor: pointer;
             color: #fff;
              transition: transform 0.3s ease;
         }
          .menu-toggle:hover {
-             transform: rotate(90deg);
+             transform: rotate(90deg); /* Rotate effect on hover */
          }
 
 
         /* Section Styling */
         section {
-            padding: 120px 0 100px;
+            padding: 120px 0 100px; /* More top and bottom padding */
             border-bottom: 1px solid var(--color-border);
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.9s ease-out, transform 0.9s ease-out;
+            opacity: 0; /* Start hidden for fade-in */
+            transform: translateY(40px); /* Start slightly further below */
+            transition: opacity 0.9s ease-out, transform 0.9s ease-out; /* Slower and smoother transition */
             background-color: var(--color-bg-light); /* Ensure sections have white background */
         }
 
@@ -164,14 +164,14 @@
 
 
         section h2 {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Poppins', sans-serif; /* Heading font */
             text-align: center;
-            margin-bottom: 60px;
-            font-size: 3.5rem;
+            margin-bottom: 60px; /* More space below title */
+            font-size: 3.5rem; /* Larger title */
             color: var(--color-dark-grey);
             position: relative;
              padding-bottom: 15px;
-             font-weight: 700;
+             font-weight: 700; /* Bold weight */
         }
          section h2::after {
              content: '';
@@ -179,8 +179,8 @@
              left: 50%;
              bottom: 0;
              transform: translateX(-50%);
-             height: 4px;
-             width: 100px;
+             height: 4px; /* Thicker underline */
+             width: 100px; /* Longer underline */
              background-color: var(--color-highlight); /* Use primary accent for underline */
              border-radius: 2px;
          }
@@ -264,8 +264,8 @@
         .service-card {
             background: #fff;
             padding: 40px;
-            border-radius: 10px; /* Slightly less rounded */
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Softer shadow */
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             text-align: center;
             transition: transform 0.4s ease, box-shadow 0.4s ease;
             border: 1px solid var(--color-light-grey);
@@ -277,15 +277,14 @@
 
         .service-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.15); /* Enhanced but not too heavy */
+            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
         }
 
         .service-card .icon {
             font-size: 4rem;
-            color: var(--color-highlight); /* Use highlight color for icons */
+            color: var(--color-highlight);
             margin-bottom: 25px;
             display: block;
-             /* Removed circular background */
         }
 
 
@@ -332,9 +331,8 @@
             margin-bottom: 15px;
             line-height: 1.8;
              padding-left: 10px;
-             position: relative; /* For custom bullet */
+             position: relative;
         }
-        /* Optional: Custom bullet style */
          .service-process ol li::marker {
              font-weight: bold;
              color: var(--color-primary-button);
@@ -369,7 +367,7 @@
             margin-right: auto;
         }
 
-        .pricing-info ul { /* Keeping ul styles from previous version if they were intended for the list that was removed */
+        .pricing-info ul {
             list-style: none;
             padding: 0;
             text-align: center;
@@ -403,8 +401,8 @@
             margin: 50px auto;
             padding: 40px;
             background: #fff;
-            border-radius: 10px; /* Less rounded */
-            box-shadow: 0 6px 20px rgba(0,0,0,0.1); /* Softer shadow */
+            border-radius: 10px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
             border: 1px solid var(--color-light-grey);
         }
 
@@ -424,7 +422,7 @@
             padding: 15px;
             margin-bottom: 20px;
             border: 1px solid var(--color-border);
-            border-radius: 8px; /* Slightly more rounded */
+            border-radius: 8px;
             font-size: 1.05rem;
             color: var(--color-dark-grey);
             background-color: var(--color-bg-light);
@@ -476,7 +474,7 @@
         /* Drag and Drop Area Styling */
         .drop-zone {
             border: 2px dashed var(--color-border);
-            border-radius: 8px; /* Less rounded */
+            border-radius: 8px;
             padding: 40px;
             text-align: center;
             cursor: pointer;
@@ -499,7 +497,7 @@
             position: relative;
         }
 
-         .drop-zone::before { /* Subtle pattern overlay */
+         .drop-zone::before {
              content: '';
              position: absolute;
              top: 0;
@@ -603,7 +601,7 @@
             transition: color 0.3s ease, transform 0.3s ease;
         }
         footer .social-links a:hover {
-            color: var(--color-secondary-accent); /* Use secondary accent for social hover */
+            color: var(--color-secondary-accent);
              transform: scale(1.2);
         }
 
@@ -672,7 +670,7 @@
              }
              .service-card .icon {
                  font-size: 3.5rem;
-                 width: auto; /* Auto size for icons */
+                 width: auto;
                  height: auto;
              }
              .service-card h3 {
@@ -732,7 +730,7 @@
 
 
              .price-estimate {
-                 font-size: 1.3rem; /* Adjusted */
+                 font-size: 1.3rem;
                  padding: 18px;
                  margin-top: 20px;
                  margin-bottom: 20px;
@@ -1136,16 +1134,14 @@
             </div>
             <div class="contact-info">
                 <p>You can also reach me at: <a href="mailto:nslcreatesofficial@gmail.com">nslcreatesofficial@gmail.com</a></p>
-                 </div>
+                </div>
         </div>
     </section>
 
     <footer>
         <div class="container">
             <div class="social-links">
-                <a href="#" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                 <a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                 <a href="#" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                 <a href="https://www.instagram.com/nsl_creates" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                  </div>
              <p>NSL Creates</p>
         </div>
