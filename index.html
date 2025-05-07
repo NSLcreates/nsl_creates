@@ -307,7 +307,8 @@
 
         .contact-form input[type="text"],
         .contact-form input[type="email"],
-        .contact-form textarea {
+        .contact-form textarea,
+        .contact-form select { /* Added select to styling */
             width: 100%;
             padding: 12px;
             margin-bottom: 20px;
@@ -316,7 +317,17 @@
             font-size: 1rem;
             color: var(--color-dark-grey);
             background-color: var(--color-bg-light);
+             box-sizing: border-box; /* Include padding and border in element's total width */
+             -webkit-appearance: none; /* Remove default browser styling for select */
+             -moz-appearance: none;
+             appearance: none;
+             background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M287%2C114.7L159.2%2C28.9c-9.2-9.5-24.2-9.5-33.4%2C0L5.4%2C114.7c-9.2%2C9.5-9.2%2C25%2C0%2C34.5l127.8%2C85.8c9.2%2C9.5%2C24.2%2C9.5%2C33.4%2C0l127.8-85.8C296.2%2C139.7%2C296.2%2C124.2%2C287%2C114.7z%22%2F%3E%3C%2Fsvg%3E'); /* Custom arrow */
+             background-repeat: no-repeat;
+             background-position: right 10px top 50%;
+             background-size: 12px auto;
+             padding-right: 30px; /* Make space for arrow */
         }
+
 
         .contact-form textarea {
             min-height: 150px; /* Taller textarea */
@@ -379,6 +390,20 @@
             transform: translateY(0);
             box-shadow: none;
         }
+
+         .price-estimate {
+             margin-top: 20px;
+             padding: 15px;
+             background-color: var(--color-border);
+             border-left: 5px solid var(--color-highlight);
+             border-radius: 4px;
+             font-size: 1.2rem;
+             font-weight: bold;
+             color: var(--color-dark-grey);
+             text-align: center;
+             margin-bottom: 20px;
+         }
+
 
         .contact-info p {
             text-align: center;
@@ -512,6 +537,10 @@
             .contact-form {
                 padding: 20px;
             }
+             .price-estimate {
+                 font-size: 1.1rem;
+                 padding: 10px;
+             }
         }
 
         /* Basic Fade-in Animation (can be enhanced with Intersection Observer) */
@@ -523,11 +552,6 @@
         }
 
         /* Removed .fade-in class as we are using is-visible with JS */
-        /* .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeIn 0.8s ease-out forwards;
-        } */
 
 
     </style>
@@ -630,10 +654,10 @@
 
     <section id="contact">
         <div class="container">
-            <h2>Get In Touch</h2>
-            <p style="text-align:center; margin-bottom:30px; color: var(--color-medium-grey);">Have a question or want to discuss a commission? Fill out the form below or email me directly.</p>
+            <h2>Get In Touch & Get an Estimate</h2>
+            <p style="text-align:center; margin-bottom:30px; color: var(--color-medium-grey);">Have a question or want to discuss a commission? Fill out the form below. You can also get an instant estimate based on your selections.</p>
             <div class="contact-form">
-                <form action="https://formsubmit.co/nslcreatesofficial@gmail.com" method="post" enctype="multipart/form-data">
+                <form action="https://formsubmit.co/nslcreatesofficial@gmail.com" method="post" enctype="multipart/form-data" id="contactForm">
                     <div>
                         <label for="name">Name:</label>
                         <input type="text" id="name" name="name" required>
@@ -646,8 +670,50 @@
                         <label for="subject">Subject:</label>
                         <input type="text" id="subject" name="subject" required>
                     </div>
+
+                    <div class="price-estimator">
+                         <h3>Get an Estimate:</h3>
+                         <div>
+                             <label for="sketch-size">Approximate Size:</label>
+                             <select id="sketch-size" name="Sketch Size">
+                                 <option value="A5">A5 (148 x 210 mm)</option>
+                                 <option value="A4">A4 (210 x 297 mm)</option>
+                                 <option value="A3">A3 (297 x 420 mm)</option>
+                                 <option value="Custom">Custom Size</option>
+                             </select>
+                         </div>
+                         <div>
+                             <label for="complexity">Complexity Level:</label>
+                             <select id="complexity" name="Complexity Level">
+                                 <option value="low">Low (Simple lines, minimal shading)</option>
+                                 <option value="medium">Medium (Moderate detail, standard shading)</option>
+                                 <option value="high">High (Intricate detail, complex shading/textures)</option>
+                             </select>
+                         </div>
+                          <div>
+                             <label for="num-subjects">Number of Main Subjects:</label>
+                             <select id="num-subjects" name="Number of Subjects">
+                                 <option value="1">1 Subject</option>
+                                 <option value="2">2 Subjects</option>
+                                 <option value="3">3+ Subjects</option>
+                             </select>
+                         </div>
+                         <div>
+                             <label for="background">Background:</label>
+                             <select id="background" name="Background">
+                                 <option value="none">None (Blank or simple)</option>
+                                 <option value="simple">Simple (Subtle wash, abstract)</option>
+                                 <option value="detailed">Detailed (Specific scene, complex elements)</option>
+                             </select>
+                         </div>
+
+                         <div class="price-estimate" id="estimatedPrice">
+                             Estimated Price: Select options above
+                         </div>
+                    </div>
+
                     <div>
-                        <label for="message">Message/Commission Details:</label>
+                        <label for="message">Message/Additional Details:</label>
                         <textarea id="message" name="message" required></textarea>
                     </div>
 
@@ -662,8 +728,10 @@
 
                     <input type="text" name="_honey" style="display:none">
                     <input type="hidden" name="_captcha" value="false">
+                     <input type="hidden" name="Estimated Price" id="hiddenEstimatedPrice" value="">
 
-                    <button type="submit">Send Message</button>
+
+                    <button type="submit">Send Message & Commission Request</button>
                 </form>
             </div>
             <div class="contact-info">
@@ -897,6 +965,85 @@
                  }
             }
         }
+
+        // --- Pricing Estimator Logic ---
+        const sizeSelect = document.getElementById('sketch-size');
+        const complexitySelect = document.getElementById('complexity');
+        const subjectsSelect = document.getElementById('num-subjects');
+        const backgroundSelect = document.getElementById('background');
+        const estimatedPriceDiv = document.getElementById('estimatedPrice');
+        const hiddenEstimatedPriceInput = document.getElementById('hiddenEstimatedPrice');
+
+        // Define your pricing rules here
+        // Base prices per size
+        const basePrices = {
+            'A5': 200, // Base price for A5
+            'A4': 400, // Example base price for A4
+            'A3': 700, // Example base price for A3
+            'Custom': 300 // Example base price for custom - will need manual follow up
+        };
+
+        // Complexity multipliers (added to base price)
+        const complexityCosts = {
+            'low': 50,
+            'medium': 100,
+            'high': 200
+        };
+
+        // Subject multipliers (added per additional subject over 1)
+        const subjectCosts = {
+            '1': 0, // No extra cost for 1 subject
+            '2': 100, // Example extra cost for 2 subjects
+            '3': 250  // Example extra cost for 3+ subjects
+        };
+
+        // Background costs (added based on type)
+        const backgroundCosts = {
+            'none': 0,
+            'simple': 80,  // Example simple background cost
+            'detailed': 200 // Example detailed background cost
+        };
+
+
+        function calculateEstimate() {
+            const size = sizeSelect.value;
+            const complexity = complexitySelect.value;
+            const subjects = subjectsSelect.value;
+            const background = backgroundSelect.value;
+
+            let currentPrice = basePrices[size] || 0; // Start with base price for size
+
+            currentPrice += complexityCosts[complexity] || 0;
+            currentPrice += subjectCosts[subjects] || 0;
+            currentPrice += backgroundCosts[background] || 0;
+
+             // Optional: Add some logic for "Custom" size if needed, or just keep the base price
+             if (size === 'Custom') {
+                  // Maybe add a note that this is a rough estimate and manual quote is needed
+                   estimatedPriceDiv.innerHTML = `Estimated Price: ~₹${currentPrice}/- (Custom size requires final quote)`;
+                   hiddenEstimatedPriceInput.value = `~₹${currentPrice}/- (Custom Size Estimate)`;
+                   return; // Exit function
+             }
+
+
+            // Display the calculated price
+            estimatedPriceDiv.innerHTML = `Estimated Price: ₹${currentPrice}/-`;
+            // Update the hidden input field to include in the form submission
+            hiddenEstimatedPriceInput.value = `₹${currentPrice}/-`;
+        }
+
+        // Add event listeners to the select elements to recalculate on change
+        if (sizeSelect && complexitySelect && subjectsSelect && backgroundSelect && estimatedPriceDiv && hiddenEstimatedPriceInput) {
+            sizeSelect.addEventListener('change', calculateEstimate);
+            complexitySelect.addEventListener('change', calculateEstimate);
+            subjectsSelect.addEventListener('change', calculateEstimate);
+            backgroundSelect.addEventListener('change', calculateEstimate);
+
+             // Calculate initial estimate when the page loads
+            calculateEstimate();
+        }
+
+
     </script>
 
 </body>
