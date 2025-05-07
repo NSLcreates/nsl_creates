@@ -22,6 +22,7 @@
             --color-medium-grey: #7F8C8D; /* Muted Mid-Grey for secondary text, paragraphs */
             --color-light-grey: #EBEBEB; /* Very light grey - for subtle backgrounds */
             --color-white: #ffffff;
+             --color-alert: #c0392b; /* A reddish color for important notes */
         }
 
         /* Basic Reset */
@@ -362,6 +363,18 @@
               font-weight: 500; /* Medium weight for emphasis */
          }
 
+         /* Important note styling */
+         .important-note {
+             text-align: center;
+             font-size: 1rem;
+             color: var(--color-alert);
+             margin-top: 20px;
+             font-weight: 500;
+         }
+          .important-note i {
+              margin-right: 5px;
+          }
+
 
         /* Pricing Section */
         #pricing {
@@ -378,6 +391,9 @@
             margin-right: auto;
             line-height: 1.8;
         }
+         #pricing .important-note {
+              margin-bottom: 30px; /* More space below the note */
+         }
 
         .pricing-info ul {
             list-style: none;
@@ -402,6 +418,11 @@
             color: var(--color-medium-grey);
             line-height: 1.8;
         }
+
+         #about p:last-of-type {
+              margin-bottom: 0; /* No extra margin after the last paragraph */
+         }
+
 
         /* Contact Section */
         #contact {
@@ -607,7 +628,16 @@
             background: var(--color-header-footer);
             color: var(--color-white);
             text-align: center;
-            padding: 4rem 0; /* More padding */
+            padding: 4rem 0 1.5rem; /* More top padding, less bottom padding */
+        }
+         footer .footer-note {
+              font-size: 0.85em; /* Smaller text for the note */
+              color: rgba(255, 255, 255, 0.5); /* Lighter text */
+              margin-bottom: 20px; /* Space above copyright */
+         }
+
+        footer .social-links {
+             margin-bottom: 25px; /* Space below social links */
         }
 
         footer .social-links a {
@@ -624,7 +654,7 @@
 
         footer p {
             color: rgba(255, 255, 255, 0.6); /* More transparent white */
-             margin-top: 25px; /* More space */
+             margin-top: 0; /* Remove top margin if footer-note is used */
              font-size: 1em; /* Slightly larger font */
         }
 
@@ -705,6 +735,9 @@
               .service-process li {
                   margin-bottom: 15px;
               }
+             .important-note {
+                 font-size: 0.95rem;
+             }
 
              .pricing-info p {
                  font-size: 1.2rem;
@@ -771,13 +804,19 @@
                  margin-top: 40px;
              }
              footer {
-                 padding: 3rem 0;
+                 padding: 3rem 0 1.2rem;
+             }
+              footer .footer-note {
+                   margin-bottom: 15px;
+              }
+             footer .social-links {
+                  margin-bottom: 20px;
              }
              footer .social-links a {
                  font-size: 2rem;
              }
              footer p {
-                 margin-top: 20px;
+                 font-size: 0.95em;
              }
              .scroll-to-top {
                  width: 50px;
@@ -906,7 +945,9 @@
                  width: 1em;
                  margin-left: -1em;
              }
-
+            .important-note {
+                 font-size: 0.9rem;
+             }
 
             .pricing-info p {
                 font-size: 1.1rem;
@@ -975,20 +1016,26 @@
              }
 
              footer {
-                 padding: 2.5rem 0;
+                 padding: 2.5rem 0 1rem;
+             }
+              footer .footer-note {
+                   margin-bottom: 10px;
+              }
+             footer .social-links {
+                  margin-bottom: 15px;
              }
              footer .social-links a {
                  font-size: 1.8rem;
                  margin: 0 15px;
              }
              footer p {
-                 margin-top: 15px;
+                 font-size: 0.9em;
              }
              .scroll-to-top {
-                 width: 45px;
-                 height: 45px;
-                 line-height: 45px;
-                 font-size: 1.4rem;
+                 width: 40px;
+                 height: 40px;
+                 line-height: 40px;
+                 font-size: 1.2rem;
                  bottom: 25px;
                  right: 25px;
              }
@@ -1054,10 +1101,10 @@
                 <ol>
                     <li><strong>Inquiry:</strong> Begin by reaching out with your detailed idea, including any reference photos, preferred style, and desired dimensions.</li>
                     <li><strong>Discussion & Quote:</strong> We will have a thorough discussion about your project's specifics. Following this, I will provide a personalized quote and an estimated timeline for completion.</li>
-                    <li><strong>Deposit:</strong> To confirm your commission slot and begin work, a 50% non-refundable deposit is required.</li>
+                    <li><strong>Deposit:</strong> To confirm your commission slot and begin work, a **20% non-refundable deposit is required and can be paid online.** The remaining balance can be paid offline or as per your preference upon completion.</li>
                     <li><strong>Creation:</strong> I will dedicate my attention to creating your sketch. Work-in-progress updates can be provided at key stages if you wish to follow along.</li>
-                    <li><strong>Review & Final Payment:</strong> Upon completion, you will receive a watermarked preview of the final sketch for your approval. The remaining 50% payment is due once you are satisfied.</li>
-                    <li><strong>Delivery:</strong> After receiving the final payment, you will be delivered the high-resolution digital file of your artwork. Physical delivery can be arranged separately if required.</li>
+                    <li><strong>Review & Final Payment:</strong> Once complete, you will receive a watermarked preview for approval. After approval, the final payment (80%) is due as arranged.</li>
+                    <li><strong>Delivery:</strong> After receiving the final payment, you will receive the high-resolution digital file of your artwork. **Physical artwork delivery is currently only available within Navsari, Gujarat.**</li>
                 </ol>
                 <h3>What's Included:</h3>
                 <ul>
@@ -1072,8 +1119,9 @@
     <section id="pricing">
         <div class="container pricing-info">
             <h2>Pricing</h2>
-            <p>The cost of each sketch is unique and depends on several factors, including the size, level of complexity, the number of main subjects, and the detail in the background.</p>
-            <p>For a guiding estimate tailored to your specific requirements, please utilize the estimator provided in the <a href="#contact" style="color: var(--color-dark-grey); font-weight: bold; text-decoration: underline;">Contact Section</a> below.</p>
+            <p style="font-size: 1.2rem;">The cost of each sketch is unique and depends on several factors, including the size, level of complexity, the number of main subjects, and the detail in the background.</p>
+             <p class="important-note"><i class="fas fa-info-circle"></i> Please note: Physical artwork delivery is currently limited to **Navsari, Gujarat**.</p>
+            <p style="font-size: 1.2rem;">For a guiding estimate tailored to your specific requirements, please utilize the estimator provided in the <a href="#contact" style="color: var(--color-dark-grey); font-weight: bold; text-decoration: underline;">Contact Section</a> below.</p>
              <p style="text-align:center; margin-top: 20px; font-size: 1rem; color: var(--color-medium-grey);"><em>Note: The estimate provides an initial guide. The final, precise quote will be confirmed after I personally review your specific request details and any reference images provided.</em></p>
             </div>
     </section>
@@ -1082,7 +1130,10 @@
         <div class="container">
             <h2>About Naman Lumbhani</h2>
             <p>Hello! I'm Naman Lumbhani, the artist and creator behind NSL Creates. Sketching has been a profound passion of mine for many years. I am continuously inspired by the expressive power held within simple lines and careful shading, transforming blank surfaces into vivid depictions of ideas and emotions.</p>
-            <p>Outside of the studio, I find joy in [Mention a hobby or two - keep it refined if possible, e.g., exploring art galleries, reading classic literature, nature walks]. Through NSL Creates, my aspiration is to share my artistic vision and craft meaningful pieces that deeply resonate with you. I eagerly anticipate the opportunity to collaborate with you on your next unique sketch project!</p>
+            <p>Outside of the studio, I find joy in **exploring nature and gaming**. Through NSL Creates, my aspiration is to share my artistic vision and craft meaningful pieces that deeply resonate with you. I eagerly anticipate the opportunity to collaborate with you on your next unique sketch project!</p>
+             <p class="important-note" style="color: var(--color-dark-grey); font-weight: 400; font-size: 1rem;">
+                <i class="fas fa-code"></i> This website is run by a 15-year-old for learning and experimental purposes, and was largely built with the assistance of AI tools.
+            </p>
         </div>
     </section>
 
@@ -1090,6 +1141,9 @@
         <div class="container">
             <h2>Get In Touch & Request an Estimate</h2>
             <p style="text-align:center; margin-bottom:40px; color: var(--color-medium-grey);">Have a question regarding a potential project or wish to initiate a commission? Please fill out the form below. You can also receive an instant estimated price based on your selected options.</p>
+
+            <p class="important-note"><i class="fas fa-shipping-fast"></i> Physical artwork delivery is currently only available within **Navsari, Gujarat**.</p>
+
             <div class="contact-form">
                 <form action="https://formsubmit.co/nslcreatesofficial@gmail.com" method="post" enctype="multipart/form-data" id="contactForm">
                     <div>
@@ -1175,6 +1229,8 @@
 
     <footer>
         <div class="container">
+             <p class="footer-note">This website is for learning purposes and was built with AI assistance.</p>
+
             <div class="social-links">
                  <a href="https://www.instagram.com/nsl_creates" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                  </div>
@@ -1399,32 +1455,33 @@
         const hiddenEstimatedPriceInput = document.getElementById('hiddenEstimatedPrice');
 
         // Define your pricing rules here (Adjust these values based on your actual pricing)
+        // Reduced prices by adjusting base costs and some add-on costs
         const basePrices = {
-            'A5': 250, // Increased base prices
-            'A4': 500,
-            'A3': 850,
+            'A5': 180, // Reduced from 250
+            'A4': 380, // Reduced from 500
+            'A3': 650, // Reduced from 850
         };
 
         const complexityCosts = {
-            'low': 75,
-            'medium': 200,
-            'high': 400
+            'low': 50, // Kept same
+            'medium': 150, // Reduced from 200
+            'high': 300 // Reduced from 400
         };
 
         const subjectCosts = {
             '1': 0,
-            '2': 200,
-            '3': 450
+            '2': 150, // Reduced from 200
+            '3': 350 // Reduced from 450
         };
 
         const backgroundCosts = {
             'none': 0,
-            'simple': 120,
-            'detailed': 400
+            'simple': 100, // Reduced from 120
+            'detailed': 300 // Reduced from 400
         };
 
-         // Set a general minimum price
-        const generalMinPrice = 249;
+         // Set a general minimum price - Adjusted down
+        const generalMinPrice = 150;
 
 
         function calculateEstimate() {
