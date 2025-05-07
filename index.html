@@ -23,6 +23,7 @@
             --color-light-grey: #EBEBEB; /* Very light grey - for subtle backgrounds */
             --color-white: #ffffff;
              --color-alert: #c0392b; /* A reddish color for important notes */
+             --color-error-text: #c0392b; /* Explicit error text color */
         }
 
         /* Basic Reset */
@@ -548,6 +549,11 @@
             background-color: rgba(168, 143, 78, 0.1); /* Light gold tint */
             border-color: var(--color-highlight);
         }
+         .drop-zone.error { /* Style for when file is required but not provided */
+             border-color: var(--color-error-text);
+             background-color: rgba(192, 57, 43, 0.05);
+         }
+
 
         .drop-zone p {
             margin: 0;
@@ -557,27 +563,6 @@
             position: relative;
         }
 
-         /* Remove the dotted pattern for a cleaner look */
-         /*
-         .drop-zone::before {
-             content: '';
-             position: absolute;
-             top: 0;
-             left: 0;
-             right: 0;
-             bottom: 0;
-             background: repeating-linear-gradient(
-                 45deg,
-                 transparent,
-                 transparent 5px,
-                 rgba(0, 0, 0, 0.02) 5px,
-                 rgba(0, 0, 0, 0.02) 10px
-             );
-             z-index: 1;
-             opacity: 0.5;
-         }
-         */
-
         .file-info {
             margin-top: 20px; /* More space */
             font-size: 1.05rem; /* Larger text */
@@ -586,6 +571,11 @@
             z-index: 2;
             position: relative;
         }
+         .file-info.error-message {
+             color: var(--color-error-text);
+             font-weight: bold;
+         }
+
 
         .contact-form button[type="submit"] {
             background: var(--color-primary-button);
@@ -1141,23 +1131,23 @@
                 <div class="service-card">
                     <div class="icon"><i class="fas fa-pencil-ruler"></i></div>
                     <h3>Custom Portraits</h3>
-                    <p>Capture the true essence and personality of a person or beloved pet with a detailed and expressive hand-drawn sketch. Perfect for cherished gifts or personal collections.</p>
+                    <p>Capture the true essence and personality of a person or beloved pet with a detailed and expressive hand-drawn sketch. Perfect for cherished gifts or personal collections. **A clear reference photo is essential for portraits.**</p>
                 </div>
                 <div class="service-card">
                     <div class="icon"><i class="fas fa-user-friends"></i></div>
                     <h3>Character Sketches</h3>
-                    <p>Visualize your original characters (OCs), tabletop RPG personas, or fan art concepts brought to life with dynamic and detailed character sketches.</p>
+                    <p>Visualize your original characters (OCs), tabletop RPG personas, or fan art concepts brought to life with dynamic and detailed character sketches. **Reference images or detailed descriptions are required.**</p>
                 </div>
                 <div class="service-card">
                     <div class="icon"><i class="fas fa-lightbulb"></i></div>
                     <h3>Conceptual Sketches</h3>
-                    <p>Transform your abstract ideas, narrative moments, or imaginative concepts into evocative and visually stunning sketches.</p>
+                    <p>Transform your abstract ideas, narrative moments, or imaginative concepts into evocative and visually stunning sketches. **Reference images or detailed descriptions are highly recommended.**</p>
                 </div>
             </div>
             <div class="service-process">
                 <h3>The Commission Process:</h3>
                 <ol>
-                    <li><strong>Inquiry:</strong> Begin by reaching out with your detailed idea, including any reference photos, preferred style, and desired dimensions.</li>
+                    <li><strong>Inquiry:</strong> Begin by reaching out with your detailed idea, including any reference photos (required for portraits/characters), preferred style, and desired dimensions.</li>
                     <li><strong>Discussion & Quote:</strong> We will have a thorough discussion about your project's specifics. Following this, I will provide a personalized quote and an estimated timeline for completion.</li>
                     <li><strong>Deposit:</strong> To confirm your commission slot and begin work, a **20% non-refundable deposit is required and can be paid via cash.** The remaining balance can be paid offline (cash) or as per your preference upon completion.</li>
                     <li><strong>Creation:</strong> I will dedicate my attention to creating your sketch. Work-in-progress updates can be provided at key stages if you wish to follow along.</li>
@@ -1177,7 +1167,7 @@
     <section id="pricing">
         <div class="container pricing-info">
             <h2>Pricing</h2>
-            <p style="font-size: 1.2rem;">The cost of each sketch is unique and depends on several factors, including the size, level of complexity, the number of main subjects, and the detail in the background.</p>
+            <p style="font-size: 1.2rem;">The cost of each sketch is unique and depends on several factors, including the size, level of complexity, the number of main subjects, and the detail in the background. Please ensure you can provide clear reference photos, especially for portraits.</p>
              <p class="important-note"><i class="fas fa-shipping-fast"></i> Please note: Physical artwork delivery is currently limited to **Navsari, Gujarat**. All payments are preferred in cash.</p>
             <p style="font-size: 1.2rem;">For a guiding estimate tailored to your specific requirements, please utilize the estimator provided in the <a href="#contact" style="color: var(--color-dark-grey); font-weight: bold; text-decoration: underline;">Contact Section</a> below.</p>
              <p style="text-align:center; margin-top: 20px; font-size: 1rem; color: var(--color-medium-grey);"><em>Note: The estimate provides an initial guide. The final, precise quote will be confirmed after I personally review your specific request details and any reference images provided.</em></p>
@@ -1195,7 +1185,7 @@
     <section id="contact">
         <div class="container">
             <h2>Get In Touch & Request an Estimate</h2>
-            <p style="text-align:center; margin-bottom:40px; color: var(--color-medium-grey);">Have a question regarding a potential project or wish to initiate a commission? Please fill out the form below. You can also receive an instant estimated price based on your selected options.</p>
+            <p style="text-align:center; margin-bottom:40px; color: var(--color-medium-grey);">Have a question regarding a potential project or wish to initiate a commission? Please fill out the form below. You can also receive an instant estimated price based on your selected options. **Remember to upload a reference image, especially for portraits and character sketches.**</p>
 
             <p class="important-note"><i class="fas fa-shipping-fast"></i> Physical artwork delivery is currently only available within **Navsari, Gujarat**. Cash payment is preferred for all transactions.</p>
 
@@ -1260,10 +1250,10 @@
                     </div>
 
                     <div>
-                         <label for="file">Upload Reference Image (Optional):</label>
+                         <label for="file">Upload Reference Image (Required):</label>
                          <div class="drop-zone" id="dropZone">
                             <p>Drag & Drop your image file here, or click to select file</p>
-                            <input type="file" id="file" name="image" accept="image/*" style="display: none;">
+                            <input type="file" id="file" name="image" accept="image/*" style="display: none;" required>
                             <div class="file-info" id="fileInfo"></div>
                          </div>
                     </div>
@@ -1432,12 +1422,14 @@
         const dropZone = document.getElementById('dropZone');
         const fileInput = document.getElementById('file');
         const fileInfo = document.getElementById('fileInfo');
+        const contactForm = document.getElementById('contactForm');
+
 
         if (dropZone && fileInput && fileInfo) {
              // Prevent default drag behaviors
             ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
                 dropZone.addEventListener(eventName, preventDefaults, false);
-                document.body.addEventListener(eventName, preventDefaults, false);
+                document.body.addEventListener(eventName, preventDefaults, false); // To prevent browser opening file
             });
 
              // Highlight drop zone when dragging over
@@ -1464,13 +1456,15 @@
 
             function highlight(e) {
                 dropZone.classList.add('dragover');
+                dropZone.classList.remove('error'); // Remove error highlight during drag
+                fileInfo.classList.remove('error-message');
+                fileInfo.innerHTML = ''; // Clear previous messages
             }
 
             function handleDrop(e) {
                 dropZone.classList.remove('dragover');
                 const dt = e.dataTransfer;
                 const files = dt.files;
-
                 handleFiles(files);
             }
 
@@ -1481,26 +1475,48 @@
 
             function handleFiles(files) {
                  const file = files[0];
+                 dropZone.classList.remove('error'); // Clear error styling on new file selection
+                 fileInfo.classList.remove('error-message');
+
 
                  if (file) {
                      if (file.type.startsWith('image/')) {
+                         // Update the actual file input
                          const dataTransfer = new DataTransfer();
                          dataTransfer.items.add(file);
-                         fileInput.files = dataTransfer.files;
+                         fileInput.files = dataTransfer.files; // This is crucial for the 'required' attribute and form submission
 
                          fileInfo.innerHTML = `Selected file: <strong>${file.name}</strong> (${(file.size / 1024).toFixed(2)} KB)`;
-
                      } else {
-                         fileInput.value = '';
-                         fileInfo.innerHTML = '<span style="color: red;">Please drop/select an image file.</span>';
+                         fileInput.value = ''; // Clear the invalid file from input
+                         fileInfo.innerHTML = '<span style="color: var(--color-error-text);">Please drop/select an image file.</span>';
+                         fileInfo.classList.add('error-message');
                          console.warn("Non-image file dropped/selected.");
                      }
                  } else {
-                      fileInput.value = '';
+                      fileInput.value = ''; // Ensure input is cleared if no file
                       fileInfo.innerHTML = '';
                  }
             }
         }
+
+        // Form submission validation for required file
+        if (contactForm && fileInput && fileInfo && dropZone) {
+            contactForm.addEventListener('submit', function(event) {
+                if (fileInput.files.length === 0) {
+                    event.preventDefault(); // Prevent form submission
+                    fileInfo.innerHTML = 'A reference image is required. Please upload a file.';
+                    fileInfo.classList.add('error-message');
+                    dropZone.classList.add('error'); // Add error styling to drop zone
+                    fileInput.focus(); // Try to focus (might not be visible, but good practice)
+                    dropZone.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                } else {
+                    fileInfo.classList.remove('error-message');
+                    dropZone.classList.remove('error');
+                }
+            });
+        }
+
 
         // --- Pricing Estimator Logic ---
         const sizeSelect = document.getElementById('sketch-size');
@@ -1510,83 +1526,61 @@
         const estimatedPriceDiv = document.getElementById('estimatedPrice');
         const hiddenEstimatedPriceInput = document.getElementById('hiddenEstimatedPrice');
 
-        // Define your pricing rules here (Adjust these values based on your actual pricing)
-        // Prices adjusted in the previous step remain the same as requested
         const basePrices = {
             'A5': 180,
             'A4': 380,
             'A3': 650,
         };
-
         const complexityCosts = {
             'low': 50,
             'medium': 150,
             'high': 300
         };
-
         const subjectCosts = {
             '1': 0,
             '2': 150,
             '3': 350
         };
-
         const backgroundCosts = {
             'none': 0,
             'simple': 100,
             'detailed': 300
         };
-
-         // Set a general minimum price
         const generalMinPrice = 150;
-
 
         function calculateEstimate() {
             const size = sizeSelect.value;
             const complexity = complexitySelect.value;
             const subjects = subjectsSelect.value;
             const background = backgroundSelect.value;
-
             let currentPrice = basePrices[size] || 0;
-
             currentPrice += complexityCosts[complexity] || 0;
             currentPrice += subjectCosts[subjects] || 0;
             currentPrice += backgroundCosts[background] || 0;
-
-            // Apply the general minimum price
-             currentPrice = Math.max(currentPrice, generalMinPrice);
-
-
-            // Display the calculated price WITHOUT "(Approx.)"
+            currentPrice = Math.max(currentPrice, generalMinPrice);
             let displayPrice = `Estimated Price: ₹${currentPrice}/-`;
-
             estimatedPriceDiv.innerHTML = displayPrice;
-             // Still include "(Estimate based on selections)" in the hidden input value for context
             hiddenEstimatedPriceInput.value = `${currentPrice}/- (Estimate based on selections)`;
         }
 
-        // Add event listeners to the select elements to recalculate on change
         if (sizeSelect && complexitySelect && subjectsSelect && backgroundSelect && estimatedPriceDiv && hiddenEstimatedPriceInput) {
             sizeSelect.addEventListener('change', calculateEstimate);
             complexitySelect.addEventListener('change', calculateEstimate);
             subjectsSelect.addEventListener('change', calculateEstimate);
             backgroundSelect.addEventListener('change', calculateEstimate);
-
-             // Calculate initial estimate when the page loads
             calculateEstimate();
         }
 
         // --- Scroll to Top Button Logic ---
         const scrollToTopBtn = document.getElementById('scrollToTopBtn');
-
         if (scrollToTopBtn) {
              window.addEventListener('scroll', () => {
-                 if (window.pageYOffset > 400) { // Show after scrolling down further
+                 if (window.pageYOffset > 400) {
                      scrollToTopBtn.classList.add('visible');
                  } else {
                      scrollToTopBtn.classList.remove('visible');
                  }
              });
-
              scrollToTopBtn.addEventListener('click', () => {
                  window.scrollTo({
                      top: 0,
@@ -1594,8 +1588,6 @@
                  });
              });
         }
-
-
     </script>
 
 </body>
