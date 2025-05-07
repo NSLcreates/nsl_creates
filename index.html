@@ -39,7 +39,7 @@
             background-color: var(--color-bg-light);
              scroll-behavior: smooth; /* Smooth scrolling */
             /* Subtle paper texture background - adjust color if needed */
-            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0iI0Y4RjVFRiI+PC9yZWN0Pgo8Y2lyY2xlIGN4PSIxIiBjeT0iMSIgcj0iMC41IiBmaWxsPSIjRTZFNkU2Ij48L2NpcmNsZT4KPC9zdmc+'); /* Slightly adjusted to match new bg color */
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0iI0Y4RjVFRiI+PCByZWN0Pgo8Y2lyY2xlIGN4PSIxIiBjeT0iMSIgcj0iMC41IiBmaWxsPSIjRTZFNkU2Ij48L2NpcmNsZT4KPC9zdmc+'); /* Slightly adjusted to match new bg color */
             background-repeat: repeat;
         }
 
@@ -71,17 +71,19 @@
             align-items: center;
         }
 
-        header .logo img {
-            height: 50px; /* Adjust height as needed */
-            width: auto;
-            display: block;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-             filter: brightness(1.1); /* Slightly brighten logo on dark background */
+        header .logo a {
+            text-decoration: none; /* Remove underline from logo text link */
+             color: inherit; /* Inherit color from parent */
+             display: block; /* Make the link a block element */
+             font-family: 'Playfair Display', serif; /* Apply the heading font */
+             font-size: 1.8rem; /* Adjust font size */
+             font-weight: 700; /* Apply bold weight */
+             color: var(--color-highlight); /* Apply highlight color */
+             transition: color 0.3s ease, transform 0.3s ease; /* Add transition */
         }
-
-         header .logo img:hover {
-             transform: scale(1.05); /* Subtle hover effect */
-             opacity: 0.9;
+         header .logo a:hover {
+              color: var(--color-secondary-accent); /* Change color on hover */
+              transform: scale(1.05); /* Subtle scale effect */
          }
 
 
@@ -165,6 +167,12 @@
          #pricing {
              background-color: rgba(212, 195, 181, 0.1); /* Lighter version of border color */
          }
+          /* Disclaimer section styling */
+          #disclaimer {
+              padding: 60px 0; /* Smaller padding */
+              background-color: var(--color-white); /* White background */
+              border-bottom: 1px solid var(--color-border);
+          }
 
 
         section h2 {
@@ -189,6 +197,14 @@
              background-color: var(--color-highlight); /* Use primary accent for underline */
              border-radius: 2px;
          }
+         #disclaimer h2 {
+              font-size: 2.5rem; /* Smaller heading for disclaimer */
+              margin-bottom: 30px;
+              padding-bottom: 10px;
+         }
+          #disclaimer h2::after {
+               width: 80px; /* Shorter underline for disclaimer */
+          }
 
 
         /* Hero Section */
@@ -356,6 +372,16 @@
               width: 1.2em; /* Adjust space */
               margin-left: -1.2em;
           }
+
+        /* Styling for disclaimer paragraph */
+        #disclaimer p {
+            max-width: 900px;
+            margin: 20px auto; /* Center the paragraph */
+            font-size: 1.1rem;
+            color: var(--color-dark-grey);
+            line-height: 1.7;
+            text-align: center;
+        }
 
 
          .service-process li strong {
@@ -703,6 +729,17 @@
              section h2::after {
                   width: 100px;
              }
+             #disclaimer h2 {
+                 font-size: 2rem;
+                 margin-bottom: 25px;
+             }
+             #disclaimer h2::after {
+                 width: 60px;
+             }
+             #disclaimer p {
+                  font-size: 1.05rem;
+             }
+
              #hero h1 {
                  font-size: 4.5rem;
              }
@@ -836,9 +873,10 @@
                 padding-left: 20px; /* Add padding to mobile header */
             }
 
-            header .logo img {
-                height: 40px;
-            }
+             header .logo a {
+                  font-size: 1.5rem;
+             }
+
 
              /* Adjustments for mobile menu */
             nav ul {
@@ -907,6 +945,19 @@
                  height: 2px;
                  width: 80px;
              }
+             #disclaimer {
+                  padding: 50px 20px;
+             }
+             #disclaimer h2 {
+                 font-size: 1.8rem;
+                 margin-bottom: 20px;
+             }
+             #disclaimer h2::after {
+                 width: 50px;
+             }
+              #disclaimer p {
+                  font-size: 1rem;
+              }
 
             .services-grid {
                 grid-template-columns: 1fr;
@@ -1048,9 +1099,7 @@
     <header>
         <div class="container">
             <div class="logo">
-                <a href="#hero">
-                    <img src="image.png" alt="NSL Creates Logo">
-                </a>
+                <a href="#hero">nsl_creates</a>
             </div>
             <div class="menu-toggle" id="mobile-menu">
                 &#9776;
@@ -1074,6 +1123,14 @@
             <a href="#contact" class="cta-button">Request a Commission</a>
         </div>
     </section>
+
+    <section id="disclaimer">
+        <div class="container">
+            <h2>Disclaimer</h2>
+            <p><i class="fas fa-info-circle"></i> Please note: This website is currently run by a 15-year-old for learning and experimental purposes. A significant portion of the website's code and design was developed with the assistance of AI tools. While every effort has been made to ensure accuracy and functionality, please understand that this site serves as a portfolio and learning project. Your understanding is appreciated.</p>
+        </div>
+    </section>
+
 
     <section id="services">
         <div class="container">
@@ -1104,7 +1161,7 @@
                     <li><strong>Deposit:</strong> To confirm your commission slot and begin work, a **20% non-refundable deposit is required and can be paid online.** The remaining balance can be paid offline or as per your preference upon completion.</li>
                     <li><strong>Creation:</strong> I will dedicate my attention to creating your sketch. Work-in-progress updates can be provided at key stages if you wish to follow along.</li>
                     <li><strong>Review & Final Payment:</strong> Once complete, you will receive a watermarked preview for approval. After approval, the final payment (80%) is due as arranged.</li>
-                    <li><strong>Delivery:</strong> After receiving the final payment, you will receive the high-resolution digital file of your artwork. **Physical artwork delivery is currently only available within Navsari, Gujarat.**</li>
+                    <li><strong>Delivery:</strong> After receiving the final payment, you will receive the high-resolution digital file of your artwork (available in formats like JPG, PNG, or PDF). **Physical artwork delivery is currently only available within Navsari, Gujarat.**</li>
                 </ol>
                 <h3>What's Included:</h3>
                 <ul>
@@ -1120,7 +1177,7 @@
         <div class="container pricing-info">
             <h2>Pricing</h2>
             <p style="font-size: 1.2rem;">The cost of each sketch is unique and depends on several factors, including the size, level of complexity, the number of main subjects, and the detail in the background.</p>
-             <p class="important-note"><i class="fas fa-info-circle"></i> Please note: Physical artwork delivery is currently limited to **Navsari, Gujarat**.</p>
+             <p class="important-note"><i class="fas fa-shipping-fast"></i> Please note: Physical artwork delivery is currently limited to **Navsari, Gujarat**.</p>
             <p style="font-size: 1.2rem;">For a guiding estimate tailored to your specific requirements, please utilize the estimator provided in the <a href="#contact" style="color: var(--color-dark-grey); font-weight: bold; text-decoration: underline;">Contact Section</a> below.</p>
              <p style="text-align:center; margin-top: 20px; font-size: 1rem; color: var(--color-medium-grey);"><em>Note: The estimate provides an initial guide. The final, precise quote will be confirmed after I personally review your specific request details and any reference images provided.</em></p>
             </div>
@@ -1131,10 +1188,7 @@
             <h2>About Naman Lumbhani</h2>
             <p>Hello! I'm Naman Lumbhani, the artist and creator behind NSL Creates. Sketching has been a profound passion of mine for many years. I am continuously inspired by the expressive power held within simple lines and careful shading, transforming blank surfaces into vivid depictions of ideas and emotions.</p>
             <p>Outside of the studio, I find joy in **exploring nature and gaming**. Through NSL Creates, my aspiration is to share my artistic vision and craft meaningful pieces that deeply resonate with you. I eagerly anticipate the opportunity to collaborate with you on your next unique sketch project!</p>
-             <p class="important-note" style="color: var(--color-dark-grey); font-weight: 400; font-size: 1rem;">
-                <i class="fas fa-code"></i> This website is run by a 15-year-old for learning and experimental purposes, and was largely built with the assistance of AI tools.
-            </p>
-        </div>
+             </div>
     </section>
 
     <section id="contact">
@@ -1455,32 +1509,32 @@
         const hiddenEstimatedPriceInput = document.getElementById('hiddenEstimatedPrice');
 
         // Define your pricing rules here (Adjust these values based on your actual pricing)
-        // Reduced prices by adjusting base costs and some add-on costs
+        // Prices adjusted in the previous step remain the same as requested
         const basePrices = {
-            'A5': 180, // Reduced from 250
-            'A4': 380, // Reduced from 500
-            'A3': 650, // Reduced from 850
+            'A5': 180,
+            'A4': 380,
+            'A3': 650,
         };
 
         const complexityCosts = {
-            'low': 50, // Kept same
-            'medium': 150, // Reduced from 200
-            'high': 300 // Reduced from 400
+            'low': 50,
+            'medium': 150,
+            'high': 300
         };
 
         const subjectCosts = {
             '1': 0,
-            '2': 150, // Reduced from 200
-            '3': 350 // Reduced from 450
+            '2': 150,
+            '3': 350
         };
 
         const backgroundCosts = {
             'none': 0,
-            'simple': 100, // Reduced from 120
-            'detailed': 300 // Reduced from 400
+            'simple': 100,
+            'detailed': 300
         };
 
-         // Set a general minimum price - Adjusted down
+         // Set a general minimum price
         const generalMinPrice = 150;
 
 
@@ -1500,15 +1554,11 @@
              currentPrice = Math.max(currentPrice, generalMinPrice);
 
 
-            // Display the calculated price
+            // Display the calculated price WITHOUT "(Approx.)"
             let displayPrice = `Estimated Price: ₹${currentPrice}/-`;
 
-             // Add "Approximate" note based on complexity factors
-             if (complexity === 'high' || subjects === '3' || background === 'detailed') {
-                  displayPrice += ' (Approx.)';
-             }
-
             estimatedPriceDiv.innerHTML = displayPrice;
+             // Still include "(Estimate based on selections)" in the hidden input value for context
             hiddenEstimatedPriceInput.value = `${currentPrice}/- (Estimate based on selections)`;
         }
 
