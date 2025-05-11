@@ -40,7 +40,7 @@
             background-color: var(--color-bg-light);
              scroll-behavior: smooth; /* Smooth scrolling */
             /* Subtle paper texture background - adjust color if needed */
-            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0iI0Y4RjVFRiI+PCByZWN0Pgo8Y2lyY2xlIGN4PSIxIiBjeT0iMSIgcj0iMC41IiBmaWxsPSIjRTZFNkU2Ij48L2NpcmNsZT4KPC9zdmc+'); /* Slightly adjusted to match new bg color */
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CjxyZWN0IHdpZHRoPSIyMCIgaGVpZGhodPSIyMCIgZmlsbD0iI0Y4RjVFRiI+PCByZWN0Pgo8Y2lyY2xlIGN4PSIxIiBjeT0iMSIgcj0iMC41IiBmaWxsPSIjRTZFNkU2Ij48L2NpcmNsZT4KPC9zdmc+'); /* Slightly adjusted to match new bg color */
             background-repeat: repeat;
         }
 
@@ -210,13 +210,39 @@
           #disclaimer h2::after {
                width: 80px; /* Shorter underline for disclaimer */
           }
-          #gallery h2 {
-               font-size: 3.5rem; /* Slightly smaller heading for gallery */
+          #gallery h2, #services h2, #pricing h2, #about h2, #contact h2 { /* Target specific sections for pencil icon consistency */
+               font-size: 3.5rem;
                margin-bottom: 60px;
           }
-           #gallery h2::after {
-                width: 100px; /* Shorter underline for gallery */
+           #gallery h2::after, #services h2::after, #pricing h2::after, #about h2::after, #contact h2::after {
+                width: 100px;
            }
+
+        /* Animated Pencil for Section Titles */
+        .section-title-pencil {
+            display: inline-block;
+            margin-left: 15px;
+            font-size: 2.8rem; /* Adjust size as needed, relative to h2 */
+            color: var(--color-highlight);
+            opacity: 0;
+            transform: translateX(-30px) translateY(-10px) rotate(-45deg) scale(0.7);
+            transition: opacity 0.6s ease-out 0.3s, transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0.3s; /* cubic-bezier for a spring-like effect */
+            vertical-align: middle; /* Align with text better */
+        }
+
+        section.is-visible h2 .section-title-pencil {
+            opacity: 1;
+            transform: translateX(0) translateY(0) rotate(0deg) scale(1);
+            animation: pencilSway 3.5s ease-in-out infinite 1s; /* Start animation after initial transition (0.6s + 0.3s delay + 0.1s buffer) */
+        }
+
+        @keyframes pencilSway {
+            0%   { transform: translateX(0px) translateY(0px) rotate(-5deg) perspective(500px) rotateY(0deg) scale(1); }
+            25%  { transform: translateX(5px) translateY(-3px) rotate(0deg) perspective(500px) rotateY(8deg) scale(1.02); }
+            50%  { transform: translateX(0px) translateY(0px) rotate(5deg) perspective(500px) rotateY(0deg) scale(1); }
+            75%  { transform: translateX(-5px) translateY(-3px) rotate(0deg) perspective(500px) rotateY(-8deg) scale(1.02); }
+            100% { transform: translateX(0px) translateY(0px) rotate(-5deg) perspective(500px) rotateY(0deg) scale(1); }
+        }
 
 
         /* Hero Section */
@@ -275,14 +301,14 @@
             transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
             border: none;
             cursor: pointer;
-            box-shadow: 0 6px 12px rgba(0,0,0,0.25); /* Softer, more pronounced shadow */
+            box-shadow: 0 6px 12px rgba(0,0,0,0.20); /* Slightly adjusted shadow */
              letter-spacing: 0.5px;
         }
 
         .cta-button:hover {
             background: var(--color-highlight);
-            transform: translateY(-6px);
-             box-shadow: 0 10px 20px rgba(0,0,0,0.35);
+            transform: translateY(-6px); /* More lift */
+             box-shadow: 0 10px 20px rgba(44,62,80,0.30), 0 6px 10px rgba(44,62,80,0.22); /* Enhanced, slightly darker shadow */
         }
          .cta-button:active {
              transform: translateY(-2px);
@@ -327,8 +353,9 @@
             border-radius: 12px; /* Slightly more rounded */
             box-shadow: 0 8px 20px rgba(0,0,0,0.1); /* Softer shadow */
             text-align: center;
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.3s ease, border-left-color 0.3s ease; /* Added transitions */
             border: 1px solid var(--color-border);
+            border-left: 4px solid transparent; /* Initial transparent border */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -338,7 +365,11 @@
         .service-card:hover {
             transform: translateY(-10px); /* More pronounced lift */
             box-shadow: 0 15px 30px rgba(0,0,0,0.18);
+            background-color: #fdfdfb; /* Slightly off-white hover */
+            border-left-color: var(--color-highlight); /* Highlight border on hover */
+            /* padding-left: calc(45px - 4px); Accounted for by box-sizing, check if needed */
         }
+
 
         .service-card .icon {
             font-size: 4.5rem; /* Larger icons */
@@ -575,18 +606,22 @@
             text-align: center;
             cursor: pointer;
             margin-bottom: 30px; /* More space */
-            transition: background-color 0.3s ease, border-color 0.3s ease;
+            transition: background-color 0.3s ease, border-color 0.3s ease, border-style 0.3s ease, box-shadow 0.3s ease;
             background-color: #fcfcfc; /* Slightly lighter than bg-light */
             position: relative;
         }
 
         .drop-zone.dragover {
-            background-color: rgba(168, 143, 78, 0.1); /* Light gold tint */
+            background-color: rgba(168, 143, 78, 0.15); /* Light gold tint, slightly more intense */
             border-color: var(--color-highlight);
+            border-style: solid; /* Change to solid on dragover */
+            box-shadow: 0 0 18px rgba(168, 143, 78, 0.35); /* Add a subtle glow */
         }
          .drop-zone.error { /* Style for when file is required but not provided */
              border-color: var(--color-error-text);
              background-color: rgba(192, 57, 43, 0.05);
+             border-style: dashed; /* Keep dashed for error or change if preferred */
+             box-shadow: none; /* Remove glow on error */
          }
 
 
@@ -624,14 +659,14 @@
             width: 100%;
             margin-top: 35px; /* More space */
             cursor: pointer;
-            box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.20);
              letter-spacing: 0.5px;
         }
 
         .contact-form button[type="submit"]:hover {
             background: var(--color-highlight);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+            transform: translateY(-4px); /* Slightly more lift */
+            box-shadow: 0 8px 16px rgba(44,62,80,0.28), 0 5px 9px rgba(44,62,80,0.20); /* Enhanced shadow */
         }
          .contact-form button[type="submit"]:active {
              transform: translateY(0);
@@ -720,13 +755,13 @@
             height: 55px; /* Larger button */
             border-radius: 50%;
             text-align: center;
-            line-height: 55px;
+            line-height: 55px; /* Ensure icon is centered */
             font-size: 1.8rem; /* Larger icon */
             box-shadow: 0 5px 10px rgba(0,0,0,0.25);
             z-index: 900;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease, background-color 0.3s ease;
+            transition: opacity 0.3s ease, visibility 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
             cursor: pointer;
          }
 
@@ -736,6 +771,7 @@
          }
          .scroll-to-top:hover {
              background-color: var(--color-highlight);
+             transform: scale(1.1); /* Slight scale on hover */
          }
 
 
@@ -747,8 +783,8 @@
              section {
                  padding: 100px 0 80px;
              }
-             section h2 {
-                 font-size: 3.5rem;
+             section h2 { /* General h2 styling for smaller screens */
+                 font-size: 3.2rem;
                  margin-bottom: 60px;
              }
              section h2::after {
@@ -764,13 +800,18 @@
               #disclaimer p {
                   font-size: 1.05rem;
               }
-              #gallery h2 {
-                   font-size: 3rem;
+
+              #gallery h2, #services h2, #pricing h2, #about h2, #contact h2 {
+                   font-size: 2.8rem; /* Adjusted size for sections with pencil */
                    margin-bottom: 50px;
               }
-               #gallery h2::after {
+               #gallery h2::after, #services h2::after, #pricing h2::after, #about h2::after, #contact h2::after {
                     width: 80px;
                }
+               .section-title-pencil {
+                   font-size: 2.2rem;
+               }
+
 
              #hero h1 {
                  font-size: 4.5rem;
@@ -791,6 +832,9 @@
              }
              .service-card {
                  padding: 40px;
+             }
+             .service-card:hover {
+                /* padding-left: calc(40px - 4px); Re-evaluate if needed with box-sizing */
              }
              .service-card .icon {
                  font-size: 4rem;
@@ -907,7 +951,7 @@
              .scroll-to-top {
                  width: 50px;
                  height: 50px;
-                 line-height: 50px;
+                 line-height: 50px; /* Ensure icon is centered */
                  font-size: 1.6rem;
                  bottom: 30px;
                  right: 30px;
@@ -985,8 +1029,8 @@
             section {
                 padding: 80px 20px 60px;
             }
-            section h2 {
-                 font-size: 3rem;
+            section h2 { /* General h2 for mobile */
+                 font-size: 2.5rem; /* Further reduce for mobile */
                  margin-bottom: 50px;
                  padding-bottom: 15px;
             }
@@ -1007,13 +1051,18 @@
               #disclaimer p {
                   font-size: 1rem;
               }
-              #gallery h2 {
-                  font-size: 2.5rem;
+
+              #gallery h2, #services h2, #pricing h2, #about h2, #contact h2 { /* Sections with pencil */
+                  font-size: 2.2rem; /* Smaller for mobile */
                   margin-bottom: 40px;
               }
-               #gallery h2::after {
+               #gallery h2::after, #services h2::after, #pricing h2::after, #about h2::after, #contact h2::after {
                     width: 70px;
                }
+                .section-title-pencil {
+                   font-size: 1.8rem; /* Smaller pencil on mobile */
+                   margin-left: 10px;
+                }
 
 
             .sketch-gallery {
@@ -1032,6 +1081,9 @@
             }
              .service-card {
                  padding: 35px;
+             }
+             .service-card:hover {
+                /* padding-left: calc(35px - 4px); Re-evaluate if needed */
              }
              .service-card .icon {
                  font-size: 3.5rem;
@@ -1152,7 +1204,7 @@
              .scroll-to-top {
                  width: 40px;
                  height: 40px;
-                 line-height: 40px;
+                 line-height: 40px; /* Ensure icon is centered */
                  font-size: 1.2rem;
                  bottom: 25px;
                  right: 25px;
@@ -1200,7 +1252,7 @@
 
     <section id="gallery">
          <div class="container">
-             <h2>My Sketch Samples</h2>
+             <h2>My Sketch Samples <span class="section-title-pencil"><i class="fas fa-pencil-alt"></i></span></h2>
              <p style="text-align:center; margin-bottom: 50px; color: var(--color-medium-grey); font-size: 1.2rem;">Browse through some examples of my work to get a feel for my style and quality.</p>
              <div class="sketch-gallery">
                  <img src="20250105_015608.jpg" alt="Harry potter">
@@ -1213,7 +1265,7 @@
 
     <section id="services">
         <div class="container">
-            <h2>Services & Commissions</h2>
+            <h2>Services & Commissions <span class="section-title-pencil"><i class="fas fa-pencil-alt"></i></span></h2>
             <p style="text-align:center; margin-bottom: 50px; color: var(--color-medium-grey); font-size: 1.2rem;">I offer custom sketch artwork tailored to your unique needs and vision. Here's what I specialize in and how the process works:</p>
             <div class="services-grid">
                 <div class="service-card">
@@ -1254,7 +1306,7 @@
 
     <section id="pricing">
         <div class="container pricing-info">
-            <h2>Pricing</h2>
+            <h2>Pricing <span class="section-title-pencil"><i class="fas fa-pencil-alt"></i></span></h2>
             <p style="font-size: 1.2rem;">The cost of each sketch is unique and depends on several factors, including the size, level of complexity, the number of main subjects, and the detail in the background. Please ensure you can provide clear reference photos, especially for portraits.</p>
              <p class="important-note"><i class="fas fa-shipping-fast"></i> Please note: Physical artwork delivery is currently limited to **Navsari, Gujarat**. All payments are preferred in cash.</p>
             <p style="font-size: 1.2rem;">For a guiding estimate tailored to your specific requirements, please utilize the estimator provided in the <a href="#contact" style="color: var(--color-dark-grey); font-weight: bold; text-decoration: underline;">Contact Section</a> below.</p>
@@ -1264,7 +1316,7 @@
 
     <section id="about">
         <div class="container">
-            <h2>About Naman Lumbhani</h2>
+            <h2>About Naman Lumbhani <span class="section-title-pencil"><i class="fas fa-pencil-alt"></i></span></h2>
             <p>Hello! I'm Naman Lumbhani, the artist and creator behind NSL Creates. Sketching has been a profound passion of mine for many years. I am continuously inspired by the expressive power held within simple lines and careful shading, transforming blank surfaces into vivid depictions of ideas and emotions.</p>
             <p>Outside of the studio, I find joy in **exploring nature and gaming**. You can also find me on <a href="https://www.instagram.com/nsl_creates" target="_blank" style="color: var(--color-highlight); text-decoration: underline;">Instagram (@nsl_creates)</a> and check out my <a href="https://youtube.com/@nslcreatesofficial?si=D62UGYhSgte30f5I" target="_blank" style="color: var(--color-highlight); text-decoration: underline;">YouTube channel (@nslcreatesofficial)</a>. Through NSL Creates, my aspiration is to share my artistic vision and craft meaningful pieces that deeply resonate with you. I eagerly anticipate the opportunity to collaborate with you on your next unique sketch project!</p>
              </div>
@@ -1272,7 +1324,7 @@
 
     <section id="contact">
         <div class="container">
-            <h2>Get In Touch & Request an Estimate</h2>
+            <h2>Get In Touch & Request an Estimate <span class="section-title-pencil"><i class="fas fa-pencil-alt"></i></span></h2>
             <p style="text-align:center; margin-bottom:40px; color: var(--color-medium-grey);">Have a question regarding a potential project or wish to initiate a commission? Please fill out the form below. You can also receive an instant estimated price based on your selected options. **Remember to upload a reference image, especially for portraits and character sketches.**</p>
 
             <p class="important-note"><i class="fas fa-shipping-fast"></i> Physical artwork delivery is currently only available within **Navsari, Gujarat**. Cash payment is preferred for all transactions.</p>
@@ -1368,7 +1420,7 @@
                  <a href="https://www.instagram.com/nsl_creates" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                  <a href="https://youtube.com/@nslcreatesofficial?si=D62UGYhSgte30f5I" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                  </div>
-             <p>2025 NSL Creates.</p>
+             <p>&copy; 2025 NSL Creates.</p>
         </div>
     </footer>
 
