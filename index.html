@@ -154,6 +154,7 @@
             transform: translateY(50px); /* Start slightly further below */
             transition: opacity 1s ease-out, transform 1s ease-out; /* Slower and smoother transition */
             background-color: var(--color-bg-light); /* Ensure sections have background */
+            min-height: 80vh; /* Ensure sections have enough height for scroll transitions to be noticeable */
         }
 
         section.is-visible {
@@ -173,6 +174,7 @@
               padding: 60px 0; /* Smaller padding */
               background-color: var(--color-white); /* White background */
               border-bottom: 1px solid var(--color-border);
+              min-height: auto; /* Disclaimer may not need full height */
           }
           /* Gallery section slightly different background */
            #gallery {
@@ -184,7 +186,7 @@
             font-family: 'Playfair Display', serif; /* Heading font */
             text-align: center;
             margin-bottom: 70px; /* More space below title */
-            font-size: 4rem; /* Larger title */
+            font-size: 3.5rem; /* Unified size for main sections */
             color: var(--color-text-dark); /* Darker text for headings */
             position: relative;
              padding-bottom: 20px; /* Space for underline */
@@ -198,52 +200,18 @@
              bottom: 0;
              transform: translateX(-50%);
              height: 3px; /* Thicker underline */
-             width: 120px; /* Longer underline */
+             width: 100px; /* Unified underline width */
              background-color: var(--color-highlight); /* Use primary accent for underline */
              border-radius: 2px;
          }
-         #disclaimer h2 {
-              font-size: 2.5rem; /* Smaller heading for disclaimer */
+         #disclaimer h2 { /* Disclaimer still has its own specific styling */
+              font-size: 2.5rem;
               margin-bottom: 30px;
               padding-bottom: 10px;
          }
           #disclaimer h2::after {
-               width: 80px; /* Shorter underline for disclaimer */
+               width: 80px;
           }
-          #gallery h2, #services h2, #pricing h2, #about h2, #contact h2 { /* Target specific sections for pencil icon consistency */
-               font-size: 3.5rem;
-               margin-bottom: 60px;
-          }
-           #gallery h2::after, #services h2::after, #pricing h2::after, #about h2::after, #contact h2::after {
-                width: 100px;
-           }
-
-        /* Animated Pencil for Section Titles */
-        .section-title-pencil {
-            display: inline-block;
-            margin-left: 15px;
-            font-size: 2.8rem; /* Adjust size as needed, relative to h2 */
-            color: var(--color-highlight);
-            opacity: 0;
-            transform: translateX(-30px) translateY(-10px) rotate(-45deg) scale(0.7);
-            transition: opacity 0.6s ease-out 0.3s, transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0.3s; /* cubic-bezier for a spring-like effect */
-            vertical-align: middle; /* Align with text better */
-        }
-
-        section.is-visible h2 .section-title-pencil {
-            opacity: 1;
-            transform: translateX(0) translateY(0) rotate(0deg) scale(1);
-            animation: pencilSway 3.5s ease-in-out infinite 1s; /* Start animation after initial transition (0.6s + 0.3s delay + 0.1s buffer) */
-        }
-
-        @keyframes pencilSway {
-            0%   { transform: translateX(0px) translateY(0px) rotate(-5deg) perspective(500px) rotateY(0deg) scale(1); }
-            25%  { transform: translateX(5px) translateY(-3px) rotate(0deg) perspective(500px) rotateY(8deg) scale(1.02); }
-            50%  { transform: translateX(0px) translateY(0px) rotate(5deg) perspective(500px) rotateY(0deg) scale(1); }
-            75%  { transform: translateX(-5px) translateY(-3px) rotate(0deg) perspective(500px) rotateY(-8deg) scale(1.02); }
-            100% { transform: translateX(0px) translateY(0px) rotate(-5deg) perspective(500px) rotateY(0deg) scale(1); }
-        }
-
 
         /* Hero Section */
         #hero {
@@ -301,14 +269,14 @@
             transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
             border: none;
             cursor: pointer;
-            box-shadow: 0 6px 12px rgba(0,0,0,0.20); /* Slightly adjusted shadow */
+            box-shadow: 0 6px 12px rgba(0,0,0,0.20);
              letter-spacing: 0.5px;
         }
 
         .cta-button:hover {
             background: var(--color-highlight);
-            transform: translateY(-6px); /* More lift */
-             box-shadow: 0 10px 20px rgba(44,62,80,0.30), 0 6px 10px rgba(44,62,80,0.22); /* Enhanced, slightly darker shadow */
+            transform: translateY(-6px);
+             box-shadow: 0 10px 20px rgba(44,62,80,0.30), 0 6px 10px rgba(44,62,80,0.22);
         }
          .cta-button:active {
              transform: translateY(-2px);
@@ -318,23 +286,23 @@
          /* Gallery Section Styling */
          .sketch-gallery {
              display: grid;
-             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjust minmax for image size */
-             gap: 40px; /* Space between images */
+             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+             gap: 40px;
              margin-top: 40px;
          }
 
           .sketch-gallery img {
-              display: block; /* Remove extra space below image */
-              width: 100%; /* Make image responsive */
+              display: block;
+              width: 100%;
               height: auto;
-              border-radius: 8px; /* Rounded corners for images */
-              box-shadow: 0 6px 15px rgba(0,0,0,0.15); /* Subtle shadow */
-              border: 1px solid var(--color-border); /* Light border */
+              border-radius: 8px;
+              box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+              border: 1px solid var(--color-border);
               transition: transform 0.3s ease, box-shadow 0.3s ease;
           }
 
            .sketch-gallery img:hover {
-               transform: scale(1.03); /* Slightly enlarge on hover */
+               transform: scale(1.03);
                box-shadow: 0 10px 20px rgba(0,0,0,0.2);
            }
 
@@ -342,45 +310,44 @@
         /* Services Section */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Slightly wider minmax */
-            gap: 60px; /* More space */
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 60px;
             margin-top: 50px;
         }
 
         .service-card {
             background: var(--color-white);
-            padding: 45px; /* More padding */
-            border-radius: 12px; /* Slightly more rounded */
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1); /* Softer shadow */
+            padding: 45px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
             text-align: center;
-            transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.3s ease, border-left-color 0.3s ease; /* Added transitions */
+            transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.3s ease, border-left-color 0.3s ease;
             border: 1px solid var(--color-border);
-            border-left: 4px solid transparent; /* Initial transparent border */
+            border-left: 4px solid transparent;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start; /* Align items to top */
+            justify-content: flex-start;
         }
 
         .service-card:hover {
-            transform: translateY(-10px); /* More pronounced lift */
+            transform: translateY(-10px);
             box-shadow: 0 15px 30px rgba(0,0,0,0.18);
-            background-color: #fdfdfb; /* Slightly off-white hover */
-            border-left-color: var(--color-highlight); /* Highlight border on hover */
-            /* padding-left: calc(45px - 4px); Accounted for by box-sizing, check if needed */
+            background-color: #fdfdfb;
+            border-left-color: var(--color-highlight);
         }
 
 
         .service-card .icon {
-            font-size: 4.5rem; /* Larger icons */
+            font-size: 4.5rem;
             color: var(--color-highlight);
-            margin-bottom: 30px; /* More space below icon */
+            margin-bottom: 30px;
             display: block;
         }
 
 
         .service-card h3 {
-            font-family: 'Playfair Display', serif; /* Heading font */
+            font-family: 'Playfair Display', serif;
             font-size: 2.2rem;
             margin-bottom: 20px;
             color: var(--color-text-dark);
@@ -413,8 +380,8 @@
         .service-process ol,
         .service-process ul {
             list-style-position: outside;
-            padding-left: 40px; /* More padding */
-            margin: 30px auto; /* More margin */
+            padding-left: 40px;
+            margin: 30px auto;
              max-width: 900px;
              color: var(--color-medium-grey);
              font-size: 1.1rem;
@@ -422,28 +389,27 @@
         }
 
         .service-process li {
-            margin-bottom: 18px; /* More space between list items */
-             padding-left: 15px; /* More padding */
+            margin-bottom: 18px;
+             padding-left: 15px;
              position: relative;
         }
          .service-process ol li::marker {
              font-weight: bold;
-             color: var(--color-highlight); /* Use highlight color for markers */
-              font-size: 1.2em; /* Slightly larger markers */
+             color: var(--color-highlight);
+              font-size: 1.2em;
          }
           .service-process ul li::before {
               content: '•';
-              color: var(--color-highlight); /* Use highlight color for bullets */
+              color: var(--color-highlight);
               font-weight: bold;
               display: inline-block;
-              width: 1.2em; /* Adjust space */
+              width: 1.2em;
               margin-left: -1.2em;
           }
 
-        /* Styling for disclaimer paragraph */
         #disclaimer p {
             max-width: 900px;
-            margin: 20px auto; /* Center the paragraph */
+            margin: 20px auto;
             font-size: 1.1rem;
             color: var(--color-dark-grey);
             line-height: 1.7;
@@ -453,10 +419,9 @@
 
          .service-process li strong {
              color: var(--color-dark-grey);
-              font-weight: 500; /* Medium weight for emphasis */
+              font-weight: 500;
          }
 
-         /* Important note styling */
          .important-note {
              text-align: center;
              font-size: 1rem;
@@ -469,15 +434,14 @@
           }
 
 
-        /* Pricing Section */
         #pricing {
-            background-color: rgba(212, 195, 181, 0.1); /* Lighter version of border color */
+            background-color: rgba(212, 195, 181, 0.1);
         }
 
         .pricing-info p {
             text-align: center;
             font-size: 1.3rem;
-            margin-bottom: 40px; /* More space */
+            margin-bottom: 40px;
             color: var(--color-medium-grey);
             max-width: 1000px;
             margin-left: auto;
@@ -485,7 +449,7 @@
             line-height: 1.8;
         }
          #pricing .important-note {
-              margin-bottom: 30px; /* More space below the note */
+              margin-bottom: 30px;
          }
 
         .pricing-info ul {
@@ -496,7 +460,6 @@
         }
 
 
-        /* About Section */
         #about .container {
             display: flex;
             flex-direction: column;
@@ -506,38 +469,37 @@
 
         #about p {
             max-width: 1000px;
-            margin-bottom: 30px; /* More space */
+            margin-bottom: 30px;
             font-size: 1.25rem;
             color: var(--color-medium-grey);
             line-height: 1.8;
         }
 
          #about p:last-of-type {
-              margin-bottom: 0; /* No extra margin after the last paragraph */
+              margin-bottom: 0;
          }
 
 
-        /* Contact Section */
         #contact {
-            background: var(--color-bg-light); /* Use the warm off-white background */
+            background: var(--color-bg-light);
         }
 
         .contact-form {
-            max-width: 700px; /* Wider form */
-            margin: 60px auto; /* More margin */
-            padding: 50px; /* More padding */
-            background: var(--color-white); /* White background for the form card */
-            border-radius: 15px; /* More rounded */
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15); /* Softer shadow */
+            max-width: 700px;
+            margin: 60px auto;
+            padding: 50px;
+            background: var(--color-white);
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
             border: 1px solid var(--color-border);
         }
 
         .contact-form label {
             display: block;
-            margin-bottom: 12px; /* More space */
+            margin-bottom: 12px;
             font-weight: 500;
             color: var(--color-dark-grey);
-            font-size: 1.2rem; /* Larger labels */
+            font-size: 1.2rem;
         }
 
         .contact-form input[type="text"],
@@ -545,97 +507,95 @@
         .contact-form textarea,
         .contact-form select {
             width: 100%;
-            padding: 18px; /* More padding */
-            margin-bottom: 25px; /* More space */
+            padding: 18px;
+            margin-bottom: 25px;
             border: 1px solid var(--color-border);
-            border-radius: 10px; /* More rounded */
-            font-size: 1.1rem; /* Larger font */
+            border-radius: 10px;
+            font-size: 1.1rem;
             color: var(--color-dark-grey);
-            background-color: var(--color-bg-light); /* Use lighter background for inputs */
+            background-color: var(--color-bg-light);
             box-sizing: border-box;
             -webkit-appearance: none;
             -moz-appearance: none;
             appearance: none;
-             /* Custom select arrow color */
             background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%237F8C8D%22%20d%3D%22M287%2C114.7L159.2%2C28.9c-9.2-9.5-24.2-9.5-33.4%2C0L5.4%2C114.7c-9.2%2C9.5-9.2%2C25%2C0%2C34.5l127.8%2C85.8c9.2%2C9.5%2C24.2%2C9.5%2C33.4%2C0l127.8-85.8C296.2%2C139.7%2C296.2%2C124.2%2C287%2C114.7z%22%2F%3E%3C%2Fsvg%3E');
             background-repeat: no-repeat;
-            background-position: right 20px top 50%; /* More space for arrow */
-            background-size: 18px auto; /* Larger arrow */
-            padding-right: 50px; /* Ensure text doesn't go under arrow */
+            background-position: right 20px top 50%;
+            background-size: 18px auto;
+            padding-right: 50px;
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
          .contact-form input[type="text"]:focus,
          .contact-form input[type="email"]:focus,
          .contact-form textarea:focus,
          .contact-form select:focus {
-             border-color: var(--color-highlight); /* Highlight color on focus */
-             box-shadow: 0 0 10px rgba(168, 143, 78, 0.4); /* Gold shadow on focus */
+             border-color: var(--color-highlight);
+             box-shadow: 0 0 10px rgba(168, 143, 78, 0.4);
              outline: none;
          }
 
 
         .contact-form textarea {
-            min-height: 220px; /* Taller textarea */
+            min-height: 220px;
             resize: vertical;
         }
 
         .price-estimator {
-             margin-bottom: 40px; /* More space */
-             padding-top: 30px; /* More padding */
+             margin-bottom: 40px;
+             padding-top: 30px;
              border-top: 1px solid var(--color-border);
         }
         .price-estimator h3 {
             font-family: 'Playfair Display', serif;
             text-align: center;
-            margin-bottom: 30px; /* More space */
-            font-size: 2rem; /* Larger heading */
+            margin-bottom: 30px;
+            font-size: 2rem;
             color: var(--color-dark-grey);
              font-weight: 600;
         }
 
         .price-estimator > div {
-            margin-bottom: 20px; /* More space */
+            margin-bottom: 20px;
         }
 
 
-        /* Drag and Drop Area Styling */
         .drop-zone {
             border: 2px dashed var(--color-border);
-            border-radius: 10px; /* More rounded */
-            padding: 50px; /* More padding */
+            border-radius: 10px;
+            padding: 50px;
             text-align: center;
             cursor: pointer;
-            margin-bottom: 30px; /* More space */
+            margin-bottom: 30px;
             transition: background-color 0.3s ease, border-color 0.3s ease, border-style 0.3s ease, box-shadow 0.3s ease;
-            background-color: #fcfcfc; /* Slightly lighter than bg-light */
+            background-color: #fcfcfc;
             position: relative;
         }
 
         .drop-zone.dragover {
-            background-color: rgba(168, 143, 78, 0.15); /* Light gold tint, slightly more intense */
+            background-color: rgba(168, 143, 78, 0.15);
             border-color: var(--color-highlight);
-            border-style: solid; /* Change to solid on dragover */
-            box-shadow: 0 0 18px rgba(168, 143, 78, 0.35); /* Add a subtle glow */
+            border-style: solid;
+            box-shadow: 0 0 18px rgba(168, 143, 78, 0.35);
         }
-         .drop-zone.error { /* Style for when file is required but not provided */
+         .drop-zone.error {
              border-color: var(--color-error-text);
              background-color: rgba(192, 57, 43, 0.05);
-             border-style: dashed; /* Keep dashed for error or change if preferred */
-             box-shadow: none; /* Remove glow on error */
+             border-style: dashed;
+             box-shadow: none;
          }
 
 
         .drop-zone p {
             margin: 0;
-            font-size: 1.15rem; /* Larger text */
+            font-size: 1.15rem;
             color: var(--color-medium-grey);
             z-index: 2;
             position: relative;
         }
 
         .file-info {
-            margin-top: 20px; /* More space */
-            font-size: 1.05rem; /* Larger text */
+            margin-top: 20px;
+            font-size: 1.05rem;
             color: var(--color-dark-grey);
             font-weight: 500;
             z-index: 2;
@@ -649,15 +609,15 @@
 
         .contact-form button[type="submit"] {
             background: var(--color-primary-button);
-            color: var(--color-text-dark); /* Dark text on gold button */
-            padding: 18px 35px; /* More padding */
+            color: var(--color-text-dark);
+            padding: 18px 35px;
             border: none;
-            border-radius: 35px; /* More rounded */
-            font-size: 1.3rem; /* Larger font */
+            border-radius: 35px;
+            font-size: 1.3rem;
             font-weight: 600;
             transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
             width: 100%;
-            margin-top: 35px; /* More space */
+            margin-top: 35px;
             cursor: pointer;
             box-shadow: 0 6px 12px rgba(0,0,0,0.20);
              letter-spacing: 0.5px;
@@ -665,8 +625,8 @@
 
         .contact-form button[type="submit"]:hover {
             background: var(--color-highlight);
-            transform: translateY(-4px); /* Slightly more lift */
-            box-shadow: 0 8px 16px rgba(44,62,80,0.28), 0 5px 9px rgba(44,62,80,0.20); /* Enhanced shadow */
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(44,62,80,0.28), 0 5px 9px rgba(44,62,80,0.20);
         }
          .contact-form button[type="submit"]:active {
              transform: translateY(0);
@@ -675,25 +635,25 @@
 
 
          .price-estimate {
-             margin-top: 35px; /* More space */
-             padding: 25px; /* More padding */
-             background-color: var(--color-white); /* White background */
-             border: 1px solid var(--color-border); /* Border */
-             border-left: 8px solid var(--color-highlight); /* Thicker gold border-left */
-             border-radius: 10px; /* More rounded */
-             font-size: 1.6rem; /* Larger font */
+             margin-top: 35px;
+             padding: 25px;
+             background-color: var(--color-white);
+             border: 1px solid var(--color-border);
+             border-left: 8px solid var(--color-highlight);
+             border-radius: 10px;
+             font-size: 1.6rem;
              font-weight: 700;
-             color: var(--color-text-dark); /* Dark text */
+             color: var(--color-text-dark);
              text-align: center;
-             margin-bottom: 30px; /* More space */
-             box-shadow: 0 3px 12px rgba(0,0,0,0.1); /* Softer shadow */
+             margin-bottom: 30px;
+             box-shadow: 0 3px 12px rgba(0,0,0,0.1);
          }
 
 
         .contact-info p {
             text-align: center;
-            font-size: 1.25rem; /* Larger text */
-            margin-top: 50px; /* More space */
+            font-size: 1.25rem;
+            margin-top: 50px;
             color: var(--color-medium-grey);
         }
 
@@ -714,49 +674,49 @@
             background: var(--color-header-footer);
             color: var(--color-white);
             text-align: center;
-            padding: 4rem 0 1.5rem; /* More top padding, less bottom padding */
+            padding: 4rem 0 1.5rem;
         }
          footer .footer-note {
-              font-size: 0.85em; /* Smaller text for the note */
-              color: rgba(255, 255, 255, 0.5); /* Lighter text */
-              margin-bottom: 20px; /* Space above copyright */
+              font-size: 0.85em;
+              color: rgba(255, 255, 255, 0.5);
+              margin-bottom: 20px;
          }
 
         footer .social-links {
-             margin-bottom: 25px; /* Space below social links */
+             margin-bottom: 25px;
         }
 
         footer .social-links a {
-            color: rgba(255, 255, 255, 0.7); /* Slightly transparent white */
-            margin: 0 15px; /* Adjusted space for more icons */
-            font-size: 2.5rem; /* Larger icons */
+            color: rgba(255, 255, 255, 0.7);
+            margin: 0 15px;
+            font-size: 2.5rem;
             text-decoration: none;
             transition: color 0.3s ease, transform 0.3s ease;
         }
         footer .social-links a:hover {
-            color: var(--color-secondary-accent); /* Gold hover */
+            color: var(--color-secondary-accent);
              transform: scale(1.2);
         }
 
         footer p {
-            color: rgba(255, 255, 255, 0.6); /* More transparent white */
-             margin-top: 0; /* Remove top margin if footer-note is used */
-             font-size: 1em; /* Slightly larger font */
+            color: rgba(255, 255, 255, 0.6);
+             margin-top: 0;
+             font-size: 1em;
         }
 
         /* Scroll-to-Top Button */
          .scroll-to-top {
             position: fixed;
-            bottom: 40px; /* More space from bottom */
-            right: 40px; /* More space from right */
+            bottom: 40px;
+            right: 40px;
             background-color: var(--color-primary-button);
-            color: var(--color-text-dark); /* Dark text on gold button */
-            width: 55px; /* Larger button */
-            height: 55px; /* Larger button */
+            color: var(--color-text-dark);
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
             text-align: center;
-            line-height: 55px; /* Ensure icon is centered */
-            font-size: 1.8rem; /* Larger icon */
+            line-height: 55px;
+            font-size: 1.8rem;
             box-shadow: 0 5px 10px rgba(0,0,0,0.25);
             z-index: 900;
             opacity: 0;
@@ -771,8 +731,56 @@
          }
          .scroll-to-top:hover {
              background-color: var(--color-highlight);
-             transform: scale(1.1); /* Slight scale on hover */
+             transform: scale(1.1);
          }
+
+        /* Page Transition Pencil Animation */
+        #page-transition-pencil {
+            position: fixed;
+            /* Start position (e.g., bottom right, off-screen or very small) */
+            bottom: -50px;
+            right: -50px;
+            font-size: 2rem; /* Initial small size */
+            color: var(--color-primary-button);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+            z-index: 1500; /* Above most content, below popups/modals if any */
+            opacity: 0;
+            transform-origin: center center;
+            pointer-events: none; /* So it doesn't interfere with mouse events */
+            will-change: transform, opacity; /* Hint for browser optimization */
+        }
+
+        #page-transition-pencil.animate {
+            /* Animation duration should be noticeable but not too long */
+            animation: pencilSectionHop 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes pencilSectionHop {
+            0% {
+                opacity: 0;
+                /* Start from bottom-right, slightly off-screen, small and rotated */
+                transform: translate(50px, 50px) scale(0.3) rotate(-90deg) perspective(600px) rotateY(45deg);
+            }
+            15% {
+                opacity: 1;
+                /* Move towards center, growing, start 3D rotation */
+                transform: translate(-30vw, -30vh) scale(1.5) rotate(-15deg) perspective(600px) rotateY(30deg) rotateX(-10deg);
+            }
+            50% { /* "Becomes big" - peak of size and central movement */
+                opacity: 1;
+                transform: translate(-45vw, -48vh) scale(3.5) rotate(10deg) perspective(600px) rotateY(-25deg) rotateX(5deg);
+            }
+            85% {
+                opacity: 1;
+                /* Move towards top-left, shrinking, continue 3D rotation */
+                transform: translate(-70vw, -70vh) scale(1.2) rotate(45deg) perspective(600px) rotateY(20deg) rotateX(15deg);
+            }
+            100% {
+                opacity: 0;
+                /* End at top-left, off-screen or very small, rotated */
+                transform: translate(-100vw, -100vh) scale(0.3) rotate(90deg) perspective(600px) rotateY(-45deg);
+            }
+        }
 
 
         /* Responsive Design */
@@ -783,12 +791,12 @@
              section {
                  padding: 100px 0 80px;
              }
-             section h2 { /* General h2 styling for smaller screens */
-                 font-size: 3.2rem;
+             section h2 {
+                 font-size: 2.8rem; /* Adjusted size for sections */
                  margin-bottom: 60px;
              }
              section h2::after {
-                  width: 100px;
+                  width: 80px;
              }
              #disclaimer h2 {
                  font-size: 2rem;
@@ -800,18 +808,6 @@
               #disclaimer p {
                   font-size: 1.05rem;
               }
-
-              #gallery h2, #services h2, #pricing h2, #about h2, #contact h2 {
-                   font-size: 2.8rem; /* Adjusted size for sections with pencil */
-                   margin-bottom: 50px;
-              }
-               #gallery h2::after, #services h2::after, #pricing h2::after, #about h2::after, #contact h2::after {
-                    width: 80px;
-               }
-               .section-title-pencil {
-                   font-size: 2.2rem;
-               }
-
 
              #hero h1 {
                  font-size: 4.5rem;
@@ -832,9 +828,6 @@
              }
              .service-card {
                  padding: 40px;
-             }
-             .service-card:hover {
-                /* padding-left: calc(40px - 4px); Re-evaluate if needed with box-sizing */
              }
              .service-card .icon {
                  font-size: 4rem;
@@ -943,7 +936,7 @@
              }
              footer .social-links a {
                  font-size: 2rem;
-                 margin: 0 12px; /* Adjusted for more icons */
+                 margin: 0 12px;
              }
              footer p {
                  font-size: 0.95em;
@@ -951,11 +944,18 @@
              .scroll-to-top {
                  width: 50px;
                  height: 50px;
-                 line-height: 50px; /* Ensure icon is centered */
+                 line-height: 50px;
                  font-size: 1.6rem;
                  bottom: 30px;
                  right: 30px;
              }
+            @keyframes pencilSectionHop { /* Adjust for smaller screens */
+                0% { opacity: 0; transform: translate(30px, 30px) scale(0.3) rotate(-90deg) perspective(400px) rotateY(45deg); }
+                15% { opacity: 1; transform: translate(-35vw, -35vh) scale(1.2) rotate(-15deg) perspective(400px) rotateY(30deg) rotateX(-10deg); }
+                50% { opacity: 1; transform: translate(-45vw, -45vh) scale(2.5) rotate(10deg) perspective(400px) rotateY(-25deg) rotateX(5deg); } /* Smaller max scale */
+                85% { opacity: 1; transform: translate(-65vw, -65vh) scale(1) rotate(45deg) perspective(400px) rotateY(20deg) rotateX(15deg); }
+                100% { opacity: 0; transform: translate(-100vw, -100vh) scale(0.3) rotate(90deg) perspective(400px) rotateY(-45deg); }
+            }
         }
 
 
@@ -963,35 +963,33 @@
             header .container {
                 flex-direction: column;
                 align-items: flex-start;
-                padding-left: 20px; /* Add padding to mobile header */
+                padding-left: 20px;
             }
 
              header .logo a {
                   font-size: 1.5rem;
              }
 
-
-             /* Adjustments for mobile menu */
             nav ul {
                 flex-direction: column;
                 align-items: center;
                 width: 100%;
-                display: none; /* Hidden by default */
+                display: none;
                 background: var(--color-header-footer);
-                position: static; /* Allow it to flow in the document */
+                position: static;
                 box-shadow: none;
                  padding: 10px 0;
-                 border-top: 1px solid rgba(255, 255, 255, 0.1); /* Subtle separator */
-                 transition: max-height 0.5s ease-in-out; /* Smooth slide down */
-                 max-height: 0; /* Initially collapsed */
+                 border-top: 1px solid rgba(255, 255, 255, 0.1);
+                 transition: max-height 0.5s ease-in-out;
+                 max-height: 0;
                  overflow: hidden;
             }
              nav ul.active {
-                 display: flex; /* Show when active */
-                 max-height: 300px; /* Adjust based on number of links */
+                 display: flex;
+                 max-height: 300px;
              }
               nav ul li {
-                 margin: 10px 0; /* More vertical space */
+                 margin: 10px 0;
               }
              nav ul li a {
                  color: var(--color-white);
@@ -1003,7 +1001,7 @@
                  color: var(--color-secondary-accent);
              }
               nav ul li a::after {
-                  display: none; /* Hide underline on mobile */
+                  display: none;
               }
 
             .menu-toggle {
@@ -1029,14 +1027,14 @@
             section {
                 padding: 80px 20px 60px;
             }
-            section h2 { /* General h2 for mobile */
-                 font-size: 2.5rem; /* Further reduce for mobile */
+            section h2 {
+                 font-size: 2.2rem; /* Further reduce for mobile */
                  margin-bottom: 50px;
                  padding-bottom: 15px;
             }
              section h2::after {
                  height: 2px;
-                 width: 80px;
+                 width: 70px;
              }
              #disclaimer {
                   padding: 50px 20px;
@@ -1052,21 +1050,9 @@
                   font-size: 1rem;
               }
 
-              #gallery h2, #services h2, #pricing h2, #about h2, #contact h2 { /* Sections with pencil */
-                  font-size: 2.2rem; /* Smaller for mobile */
-                  margin-bottom: 40px;
-              }
-               #gallery h2::after, #services h2::after, #pricing h2::after, #about h2::after, #contact h2::after {
-                    width: 70px;
-               }
-                .section-title-pencil {
-                   font-size: 1.8rem; /* Smaller pencil on mobile */
-                   margin-left: 10px;
-                }
-
 
             .sketch-gallery {
-                 grid-template-columns: 1fr; /* Stack images on very small screens */
+                 grid-template-columns: 1fr;
                  gap: 25px;
                  margin-top: 25px;
             }
@@ -1081,9 +1067,6 @@
             }
              .service-card {
                  padding: 35px;
-             }
-             .service-card:hover {
-                /* padding-left: calc(35px - 4px); Re-evaluate if needed */
              }
              .service-card .icon {
                  font-size: 3.5rem;
@@ -1196,7 +1179,7 @@
              }
              footer .social-links a {
                  font-size: 1.8rem;
-                 margin: 0 10px; /* Adjusted for more icons */
+                 margin: 0 10px;
              }
              footer p {
                  font-size: 0.9em;
@@ -1204,11 +1187,22 @@
              .scroll-to-top {
                  width: 40px;
                  height: 40px;
-                 line-height: 40px; /* Ensure icon is centered */
+                 line-height: 40px;
                  font-size: 1.2rem;
                  bottom: 25px;
                  right: 25px;
              }
+
+            #page-transition-pencil {
+                font-size: 1.5rem; /* Smaller base for mobile */
+            }
+            @keyframes pencilSectionHop { /* Adjust for very small screens */
+                0% { opacity: 0; transform: translate(20px, 20px) scale(0.2) rotate(-90deg) perspective(300px) rotateY(45deg); }
+                15% { opacity: 1; transform: translate(-30vw, -30vh) scale(1) rotate(-15deg) perspective(300px) rotateY(30deg) rotateX(-10deg); }
+                50% { opacity: 1; transform: translate(-45vw, -45vh) scale(2) rotate(10deg) perspective(300px) rotateY(-25deg) rotateX(5deg); } /* Smaller max scale */
+                85% { opacity: 1; transform: translate(-60vw, -60vh) scale(0.8) rotate(45deg) perspective(300px) rotateY(20deg) rotateX(15deg); }
+                100% { opacity: 0; transform: translate(-100vw, -100vh) scale(0.2) rotate(90deg) perspective(300px) rotateY(-45deg); }
+            }
         }
 
     </style>
@@ -1235,6 +1229,8 @@
         </div>
     </header>
 
+    <i id="page-transition-pencil" class="fas fa-pencil-alt"></i>
+
     <section id="hero">
         <div class="container">
             <h1>Welcome to <span class="site-title">NSL Creates</span></h1>
@@ -1252,7 +1248,7 @@
 
     <section id="gallery">
          <div class="container">
-             <h2>My Sketch Samples <span class="section-title-pencil"><i class="fas fa-pencil-alt"></i></span></h2>
+             <h2>My Sketch Samples</h2>
              <p style="text-align:center; margin-bottom: 50px; color: var(--color-medium-grey); font-size: 1.2rem;">Browse through some examples of my work to get a feel for my style and quality.</p>
              <div class="sketch-gallery">
                  <img src="20250105_015608.jpg" alt="Harry potter">
@@ -1265,7 +1261,7 @@
 
     <section id="services">
         <div class="container">
-            <h2>Services & Commissions <span class="section-title-pencil"><i class="fas fa-pencil-alt"></i></span></h2>
+            <h2>Services & Commissions</h2>
             <p style="text-align:center; margin-bottom: 50px; color: var(--color-medium-grey); font-size: 1.2rem;">I offer custom sketch artwork tailored to your unique needs and vision. Here's what I specialize in and how the process works:</p>
             <div class="services-grid">
                 <div class="service-card">
@@ -1306,7 +1302,7 @@
 
     <section id="pricing">
         <div class="container pricing-info">
-            <h2>Pricing <span class="section-title-pencil"><i class="fas fa-pencil-alt"></i></span></h2>
+            <h2>Pricing</h2>
             <p style="font-size: 1.2rem;">The cost of each sketch is unique and depends on several factors, including the size, level of complexity, the number of main subjects, and the detail in the background. Please ensure you can provide clear reference photos, especially for portraits.</p>
              <p class="important-note"><i class="fas fa-shipping-fast"></i> Please note: Physical artwork delivery is currently limited to **Navsari, Gujarat**. All payments are preferred in cash.</p>
             <p style="font-size: 1.2rem;">For a guiding estimate tailored to your specific requirements, please utilize the estimator provided in the <a href="#contact" style="color: var(--color-dark-grey); font-weight: bold; text-decoration: underline;">Contact Section</a> below.</p>
@@ -1316,7 +1312,7 @@
 
     <section id="about">
         <div class="container">
-            <h2>About Naman Lumbhani <span class="section-title-pencil"><i class="fas fa-pencil-alt"></i></span></h2>
+            <h2>About Naman Lumbhani</h2>
             <p>Hello! I'm Naman Lumbhani, the artist and creator behind NSL Creates. Sketching has been a profound passion of mine for many years. I am continuously inspired by the expressive power held within simple lines and careful shading, transforming blank surfaces into vivid depictions of ideas and emotions.</p>
             <p>Outside of the studio, I find joy in **exploring nature and gaming**. You can also find me on <a href="https://www.instagram.com/nsl_creates" target="_blank" style="color: var(--color-highlight); text-decoration: underline;">Instagram (@nsl_creates)</a> and check out my <a href="https://youtube.com/@nslcreatesofficial?si=D62UGYhSgte30f5I" target="_blank" style="color: var(--color-highlight); text-decoration: underline;">YouTube channel (@nslcreatesofficial)</a>. Through NSL Creates, my aspiration is to share my artistic vision and craft meaningful pieces that deeply resonate with you. I eagerly anticipate the opportunity to collaborate with you on your next unique sketch project!</p>
              </div>
@@ -1324,7 +1320,7 @@
 
     <section id="contact">
         <div class="container">
-            <h2>Get In Touch & Request an Estimate <span class="section-title-pencil"><i class="fas fa-pencil-alt"></i></span></h2>
+            <h2>Get In Touch & Request an Estimate</h2>
             <p style="text-align:center; margin-bottom:40px; color: var(--color-medium-grey);">Have a question regarding a potential project or wish to initiate a commission? Please fill out the form below. You can also receive an instant estimated price based on your selected options. **Remember to upload a reference image, especially for portraits and character sketches.**</p>
 
             <p class="important-note"><i class="fas fa-shipping-fast"></i> Physical artwork delivery is currently only available within **Navsari, Gujarat**. Cash payment is preferred for all transactions.</p>
@@ -1420,7 +1416,7 @@
                  <a href="https://www.instagram.com/nsl_creates" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                  <a href="https://youtube.com/@nslcreatesofficial?si=D62UGYhSgte30f5I" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                  </div>
-             <p>&copy; 2025 NSL Creates.</p>
+             <p>© 2025 NSL Creates.</p>
         </div>
     </footer>
 
@@ -1434,12 +1430,10 @@
         const menuToggle = document.getElementById('mobile-menu');
         const navMenu = document.getElementById('nav-menu');
 
-        // Check if elements exist before adding event listeners
         if (menuToggle && navMenu) {
             menuToggle.addEventListener('click', () => {
                 navMenu.classList.toggle('active');
             });
-             // Close menu when a link is clicked (for mobile)
             document.querySelectorAll('#nav-menu a').forEach(link => {
                 link.addEventListener('click', () => {
                     if (navMenu.classList.contains('active')) {
@@ -1452,14 +1446,12 @@
         // Smooth Scrolling & Active Nav Link
         document.querySelectorAll('nav a').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                // If it's a link to an ID on the same page
                 if (this.getAttribute('href').startsWith('#')) {
                     e.preventDefault();
                     const targetId = this.getAttribute('href');
                     const targetElement = document.querySelector(targetId);
 
                     if (targetElement) {
-                         // Get header height to calculate scroll position correctly
                         const headerHeight = document.querySelector('header').offsetHeight;
                         const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
 
@@ -1468,12 +1460,9 @@
                             behavior: 'smooth'
                         });
 
-                        // Remove active class from all nav links
                         document.querySelectorAll('nav a').forEach(link => link.classList.remove('active'));
-                        // Add active class to the clicked link
                         this.classList.add('active');
 
-                        // Close mobile menu if open (redundant with above, but safe)
                         if (navMenu && navMenu.classList.contains('active')) {
                             navMenu.classList.remove('active');
                         }
@@ -1482,173 +1471,171 @@
             });
         });
 
-        // Change active nav link on scroll & Section Fade-in (using Intersection Observer)
         const sections = document.querySelectorAll('section');
         const navLi = document.querySelectorAll('nav ul li a');
         const header = document.querySelector('header');
+        const visibleSections = Array.from(sections).filter(section => section.id);
 
-        // Filter out any non-section elements or sections you don't want in navigation logic
-        const visibleSections = Array.from(sections).filter(section => section.id); // Keep all sections with IDs
+        // Page Transition Pencil
+        const pageTransitionPencil = document.getElementById('page-transition-pencil');
+        let isPencilAnimating = false;
+        let pencilAnimationTimeout;
+        let lastActiveSectionId = '';
+
 
         if (header && visibleSections.length > 0 && navLi.length > 0) {
-
-             // Intersection Observer for Section Fade-in
              const observerOptions = {
-                 root: null, // viewport
+                 root: null,
                  rootMargin: '0px',
-                 threshold: 0.1 // Trigger when 10% of the section is visible
+                 threshold: 0.1
              };
 
-             const observer = new IntersectionObserver((entries, observer) => {
+             const sectionObserver = new IntersectionObserver((entries, observer) => {
                  entries.forEach(entry => {
                      if (entry.isIntersecting) {
                          entry.target.classList.add('is-visible');
-                         // Optional: Stop observing once visible
-                         // observer.unobserve(entry.target);
                      } else {
-                         // Optional: Remove class if it scrolls out of view
                           entry.target.classList.remove('is-visible');
                      }
                  });
              }, observerOptions);
 
              visibleSections.forEach(section => {
-                 // Don't observe the hero section if you want it visible from the start
                  if (section.id !== 'hero') {
-                     observer.observe(section);
+                     sectionObserver.observe(section);
                  } else {
-                     // Ensure hero is marked as visible immediately
                      section.classList.add('is-visible');
                  }
              });
 
-
-             // Scroll logic for Active Nav Link
              window.addEventListener('scroll', () => {
-                let current = '';
+                let currentSectionId = '';
                 const headerHeight = header.offsetHeight;
-                const scrollBuffer = 250; // Increased buffer for nav highlighting
+                // Adjusted scrollBuffer for more accurate section detection for pencil trigger
+                const scrollBufferForPencil = headerHeight + 50;
+
 
                 visibleSections.forEach(section => {
                     const sectionTop = section.getBoundingClientRect().top + window.pageYOffset;
                     const sectionHeight = section.offsetHeight;
 
-                    // Adjust condition to be more forgiving when scrolling quickly
-                    if (pageYOffset >= sectionTop - headerHeight - scrollBuffer && pageYOffset < sectionTop + sectionHeight - headerHeight - scrollBuffer / 2) {
-                         current = section.getAttribute('id');
+                    // Determine current prominent section
+                    // This condition makes a section "current" if its top is above a certain point in the viewport
+                    // and its bottom is below that point, prioritizing sections filling the view.
+                    if (pageYOffset >= sectionTop - scrollBufferForPencil && pageYOffset < sectionTop + sectionHeight - scrollBufferForPencil) {
+                         currentSectionId = section.getAttribute('id');
                     }
                 });
+                 // Fallback for hero or if no section perfectly matches (e.g., while scrolling fast between small sections)
+                if (!currentSectionId && pageYOffset < (visibleSections[0].getBoundingClientRect().top + window.pageYOffset)) {
+                    currentSectionId = 'hero';
+                }
+
 
                 navLi.forEach(a => {
                     a.classList.remove('active');
-                    if (a.getAttribute('href') && a.getAttribute('href').substring(1) === current) {
+                    if (a.getAttribute('href') && a.getAttribute('href').substring(1) === currentSectionId) {
                         a.classList.add('active');
                     }
                 });
-
-                 // Handle the case when scrolled to the very top or within the hero section
-                 // Make sure the 'Home' link is active when near the top
-                 if (pageYOffset < (visibleSections.length > 1 ? (visibleSections[1].getBoundingClientRect().top + window.pageYOffset - headerHeight - scrollBuffer + 50) : (visibleSections[0].offsetHeight - headerHeight))) {
+                 // Ensure 'Home' link is active for hero section or when at the very top
+                 if (currentSectionId === 'hero' || pageYOffset < (visibleSections.length > 0 ? (visibleSections[0].offsetTop - headerHeight - 100) : 200) ) {
                       navLi.forEach(a => a.classList.remove('active'));
                       const homeLink = document.querySelector('nav ul li a[href="#hero"]');
-                      if (homeLink) {
-                          homeLink.classList.add('active');
-                      }
+                      if (homeLink) homeLink.classList.add('active');
+                      if (currentSectionId === '' && pageYOffset < 200) currentSectionId = 'hero'; // Default to hero if at top
                  }
+
+
+                // Pencil Animation Trigger
+                if (pageTransitionPencil && currentSectionId && currentSectionId !== 'disclaimer' && currentSectionId !== lastActiveSectionId && !isPencilAnimating) {
+                    isPencilAnimating = true;
+                    pageTransitionPencil.classList.add('animate');
+
+                    // Remove class and reset flag after animation ends
+                    pageTransitionPencil.onanimationend = () => {
+                        pageTransitionPencil.classList.remove('animate');
+                        // Short cooldown before it can animate again
+                        setTimeout(() => {
+                            isPencilAnimating = false;
+                        }, 300); // 300ms cooldown
+                        pageTransitionPencil.onanimationend = null; // Clean up listener
+                    };
+                }
+                if(currentSectionId) { // Only update if a section is identified
+                    lastActiveSectionId = currentSectionId;
+                }
             });
         }
 
-        // --- Drag and Drop Functionality ---
+        // Drag and Drop Functionality
         const dropZone = document.getElementById('dropZone');
         const fileInput = document.getElementById('file');
         const fileInfo = document.getElementById('fileInfo');
         const contactForm = document.getElementById('contactForm');
 
-
         if (dropZone && fileInput && fileInfo) {
-             // Prevent default drag behaviors
             ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
                 dropZone.addEventListener(eventName, preventDefaults, false);
-                document.body.addEventListener(eventName, preventDefaults, false); // To prevent browser opening file
+                document.body.addEventListener(eventName, preventDefaults, false);
             });
-
-             // Highlight drop zone when dragging over
             ['dragenter', 'dragover'].forEach(eventName => {
                 dropZone.addEventListener(eventName, highlight, false);
             });
-
             ['dragleave', 'drop'].forEach(eventName => {
                 dropZone.classList.remove('dragover');
             });
-
-             // Handle dropped files
             dropZone.addEventListener('drop', handleDrop, false);
-
-            // Handle file selection via click
             fileInput.addEventListener('change', handleChange, false);
             dropZone.addEventListener('click', () => fileInput.click());
-
 
             function preventDefaults(e) {
                 e.preventDefault();
                 e.stopPropagation();
             }
-
-            function highlight(e) {
+            function highlight() {
                 dropZone.classList.add('dragover');
-                dropZone.classList.remove('error'); // Remove error highlight during drag
+                dropZone.classList.remove('error');
                 fileInfo.classList.remove('error-message');
-                fileInfo.innerHTML = ''; // Clear previous messages
+                fileInfo.innerHTML = '';
             }
-
             function handleDrop(e) {
-                dropZone.classList.remove('dragover');
                 const dt = e.dataTransfer;
                 const files = dt.files;
                 handleFiles(files);
             }
-
             function handleChange(e) {
-                 const files = e.target.files;
-                 handleFiles(files);
+                 handleFiles(e.target.files);
             }
-
             function handleFiles(files) {
                  const file = files[0];
-                 dropZone.classList.remove('error'); // Clear error styling on new file selection
+                 dropZone.classList.remove('error');
                  fileInfo.classList.remove('error-message');
-
-
                  if (file) {
                      if (file.type.startsWith('image/')) {
-                         // Update the actual file input
                          const dataTransfer = new DataTransfer();
                          dataTransfer.items.add(file);
-                         fileInput.files = dataTransfer.files; // This is crucial for the 'required' attribute and form submission
-
+                         fileInput.files = dataTransfer.files;
                          fileInfo.innerHTML = `Selected file: <strong>${file.name}</strong> (${(file.size / 1024).toFixed(2)} KB)`;
                      } else {
-                         fileInput.value = ''; // Clear the invalid file from input
+                         fileInput.value = '';
                          fileInfo.innerHTML = '<span style="color: var(--color-error-text);">Please drop/select an image file.</span>';
                          fileInfo.classList.add('error-message');
-                         console.warn("Non-image file dropped/selected.");
                      }
                  } else {
-                      fileInput.value = ''; // Ensure input is cleared if no file
+                      fileInput.value = '';
                       fileInfo.innerHTML = '';
                  }
             }
         }
 
-        // Form submission validation for required file
         if (contactForm && fileInput && fileInfo && dropZone) {
             contactForm.addEventListener('submit', function(event) {
                 if (fileInput.files.length === 0) {
-                    event.preventDefault(); // Prevent form submission
+                    event.preventDefault();
                     fileInfo.innerHTML = 'A reference image is required. Please upload a file.';
                     fileInfo.classList.add('error-message');
-                    dropZone.classList.add('error'); // Add error styling to drop zone
-                    fileInput.focus(); // Try to focus (might not be visible, but good practice)
+                    dropZone.classList.add('error');
                     dropZone.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 } else {
                     fileInfo.classList.remove('error-message');
@@ -1657,35 +1644,17 @@
             });
         }
 
-
-        // --- Pricing Estimator Logic ---
+        // Pricing Estimator Logic
         const sizeSelect = document.getElementById('sketch-size');
         const complexitySelect = document.getElementById('complexity');
         const subjectsSelect = document.getElementById('num-subjects');
         const backgroundSelect = document.getElementById('background');
         const estimatedPriceDiv = document.getElementById('estimatedPrice');
         const hiddenEstimatedPriceInput = document.getElementById('hiddenEstimatedPrice');
-
-        const basePrices = {
-            'A5': 180,
-            'A4': 380,
-            'A3': 650,
-        };
-        const complexityCosts = {
-            'low': 50,
-            'medium': 150,
-            'high': 300
-        };
-        const subjectCosts = {
-            '1': 0,
-            '2': 150,
-            '3': 350
-        };
-        const backgroundCosts = {
-            'none': 0,
-            'simple': 100,
-            'detailed': 300
-        };
+        const basePrices = { 'A5': 180, 'A4': 380, 'A3': 650 };
+        const complexityCosts = { 'low': 50, 'medium': 150, 'high': 300 };
+        const subjectCosts = { '1': 0, '2': 150, '3': 350 };
+        const backgroundCosts = { 'none': 0, 'simple': 100, 'detailed': 300 };
         const generalMinPrice = 150;
 
         function calculateEstimate() {
@@ -1698,34 +1667,23 @@
             currentPrice += subjectCosts[subjects] || 0;
             currentPrice += backgroundCosts[background] || 0;
             currentPrice = Math.max(currentPrice, generalMinPrice);
-            let displayPrice = `Estimated Price: ₹${currentPrice}/-`;
-            estimatedPriceDiv.innerHTML = displayPrice;
+            estimatedPriceDiv.innerHTML = `Estimated Price: ₹${currentPrice}/-`;
             hiddenEstimatedPriceInput.value = `${currentPrice}/- (Estimate based on selections)`;
         }
 
         if (sizeSelect && complexitySelect && subjectsSelect && backgroundSelect && estimatedPriceDiv && hiddenEstimatedPriceInput) {
-            sizeSelect.addEventListener('change', calculateEstimate);
-            complexitySelect.addEventListener('change', calculateEstimate);
-            subjectsSelect.addEventListener('change', calculateEstimate);
-            backgroundSelect.addEventListener('change', calculateEstimate);
+            [sizeSelect, complexitySelect, subjectsSelect, backgroundSelect].forEach(el => el.addEventListener('change', calculateEstimate));
             calculateEstimate();
         }
 
-        // --- Scroll to Top Button Logic ---
+        // Scroll to Top Button Logic
         const scrollToTopBtn = document.getElementById('scrollToTopBtn');
         if (scrollToTopBtn) {
              window.addEventListener('scroll', () => {
-                 if (window.pageYOffset > 400) {
-                     scrollToTopBtn.classList.add('visible');
-                 } else {
-                     scrollToTopBtn.classList.remove('visible');
-                 }
+                 scrollToTopBtn.classList.toggle('visible', window.pageYOffset > 400);
              });
              scrollToTopBtn.addEventListener('click', () => {
-                 window.scrollTo({
-                     top: 0,
-                     behavior: 'smooth'
-                 });
+                 window.scrollTo({ top: 0, behavior: 'smooth' });
              });
         }
     </script>
