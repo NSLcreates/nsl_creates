@@ -10,23 +10,23 @@
 
     <style>
         :root {
-            /* Darker Professional Palette (Retained) */
-            --color-bg-dark: #121212; /* Even deeper charcoal, near black */
-            --color-bg-light: #1e1e1e; /* Slightly lighter dark grey */
-            --color-text-light: #ffffff; /* Pure white for headings/highlights */
-            --color-text-dark: #b0b0b0; /* Muted grey for body text */
-            --color-header-footer: #121212; /* Match background */
-            --color-primary-button: #bb86fc; /* Vibrant but professional purple */
-            --color-highlight: #03dac6; /* Teal accent */
-            --color-secondary-accent: #3700b3; /* Darker purple */
-            --color-border: #333333; /* Soft grey border */
-            --color-dark-grey: #b0b0b0; /* Body text color */
-            --color-medium-grey: #808080; /* Medium grey for less important text */
-            --color-white: #ffffff; /* Still pure white where needed */
-            --color-alert: #cf6679; /* Muted red */
-            --color-error-text: #cf6679; /* Muted red */
+            /* Darker Professional Palette */
+            --color-bg-dark: #121212;
+            --color-bg-light: #1e1e1e;
+            --color-text-light: #ffffff;
+            --color-text-dark: #b0b0b0;
+            --color-header-footer: #121212;
+            --color-primary-button: #bb86fc;
+            --color-highlight: #03dac6;
+            --color-secondary-accent: #3700b3;
+            --color-border: #333333;
+            --color-dark-grey: #b0b0b0;
+            --color-medium-grey: #808080;
+            --color-white: #ffffff;
+            --color-alert: #cf6679;
+            --color-error-text: #cf6679;
 
-             /* Added subtle gradients inspired by premium sites */
+             /* Subtle gradients */
              --gradient-primary: linear-gradient(90deg, var(--color-primary-button), var(--color-secondary-accent));
              --gradient-highlight: linear-gradient(90deg, var(--color-highlight), var(--color-primary-button));
         }
@@ -39,8 +39,7 @@
             color: var(--color-text-dark);
             background-color: var(--color-bg-dark);
             scroll-behavior: smooth;
-             /* Enable 3D transforms for children */
-            perspective: 1000px; /* Adds perspective for 3D */
+            perspective: 1000px; /* Adds perspective for 3D effects */
         }
 
         .container { width: 90%; max-width: 1400px; margin: auto; overflow: hidden; padding: 0 20px; }
@@ -93,8 +92,7 @@
             background-color: var(--color-bg-dark);
             min-height: 80vh;
             position: relative;
-             /* Ensure children with 3D transforms are not clipped by overflow */
-            overflow: visible;
+            overflow: visible; /* Allows 3D children to escape bounds */
         }
         section.is-visible {
             opacity: 1;
@@ -105,22 +103,10 @@
         #pricing, #gallery { background-color: var(--color-bg-light); }
         #disclaimer { padding: 50px 0; background-color: var(--color-bg-light); border-bottom: 1px solid var(--color-border); min-height: auto; }
 
-        section h2 {
-            font-family: 'Playfair Display', serif; text-align: center; margin-bottom: 60px;
-            font-size: 3rem; color: var(--color-text-light);
-            position: relative;
-            padding-bottom: 15px; font-weight: 700; letter-spacing: 0.8px;
-        }
-        section h2::after {
-            content: ''; position: absolute; left: 50%; bottom: 0; transform: translateX(-50%);
-            height: 2px; width: 80px; background-color: var(--color-primary-button); border-radius: 1px;
-        }
-        #disclaimer h2 { font-size: 2rem; margin-bottom: 20px; padding-bottom: 8px; }
-        #disclaimer h2::after { width: 60px; }
-
         /* Hero Section - Modified for 3D */
         #hero {
-            background: linear-gradient(rgba(18, 18, 18, 0.8), rgba(18, 18, 18, 0.8)); /* Retained overlay */
+            /* Remove background image/attachment, use overlay */
+            background: linear-gradient(rgba(18, 18, 18, 0.85), rgba(18, 18, 18, 0.85)); /* Darker overlay to contrast with 3D */
             color: var(--color-text-light);
             height: 100vh;
             display: flex;
@@ -133,7 +119,7 @@
             transform: translateY(0);
             transition: none;
             position: relative;
-            overflow: hidden; /* Hide content overflow */
+            overflow: hidden;
         }
 
         /* Container for the 3D element */
@@ -144,14 +130,35 @@
             width: 100%;
             height: 100%;
             z-index: 1; /* Place behind hero content */
-            /* Fallback background image if 3D fails */
-            background: url('https://googleusercontent.com/image_generation_content/0') no-repeat center center/cover;
         }
+
+         /* Style for the Three.js canvas */
+        #hero-canvas {
+            display: block; /* Remove extra space below canvas */
+            width: 100% !important; /* Important to override potential inline styles */
+            height: 100% !important; /* Important to override potential inline styles */
+            filter: blur(2px); /* Optional: add a subtle blur to the background 3D */
+            opacity: 0.6; /* Optional: reduce opacity */
+        }
+
+        /* Style for the fallback message */
+        #hero-fallback-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--color-text-dark);
+            font-size: 1.1rem;
+            text-align: center;
+            z-index: 1; /* Below content */
+            display: none; /* Hidden by default */
+        }
+
 
         /* Ensure hero content is above the 3D */
         #hero .hero-content {
              z-index: 2;
-             position: relative; /* Needed for z-index to work */
+             position: relative;
              max-width: 1000px;
              padding: 0 20px;
         }
@@ -207,16 +214,15 @@
             display: block; width: 100%; height: auto; border-radius: 6px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
             border: 1px solid var(--color-border);
-            transition: transform 0.4s ease-out, box-shadow 0.3s ease, border-color 0.3s ease; /* Added transform transition */
+            transition: transform 0.4s ease-out, box-shadow 0.3s ease, border-color 0.3s ease;
              cursor: pointer;
-             /* Prepare for 3D transform */
              transform-style: preserve-3d;
              transform-origin: center center;
         }
         /* 3D Hover effect for gallery images */
         .sketch-gallery img:hover {
-            transform: scale(1.05) rotateY(8deg) rotateX(5deg) translateZ(10px); /* Subtle scale, rotation, and depth */
-            box-shadow: 0 8px 18px rgba(0,0,0,0.4); /* Enhanced shadow */
+            transform: scale(1.05) rotateY(8deg) rotateX(5deg) translateZ(10px);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.4);
              border-color: var(--color-primary-button);
         }
 
@@ -230,11 +236,10 @@
             border: 1px solid var(--color-border);
             display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
              cursor: default;
-             /* Added subtle 3D readiness */
              transform-style: preserve-3d;
         }
         .service-card:hover {
-            transform: translateY(-8px) translateZ(10px); /* Lift and move forward */
+            transform: translateY(-8px) translateZ(10px);
             box-shadow: 0 10px 20px rgba(0,0,0,0.4);
             background-color: #282828;
         }
@@ -279,28 +284,68 @@
          /* Removed hover */
 
         .contact-form label { display: block; margin-bottom: 10px; font-weight: 500; color: var(--color-text-light); font-size: 1.1rem; }
+        /* Styles for standard inputs */
         .contact-form input[type="text"],
         .contact-form input[type="email"],
         .contact-form textarea,
         .contact-form select {
-            width: 100%; padding: 15px; margin-bottom: 20px; border: 1px solid var(--color-border);
+            width: 100%; padding: 15px; margin-bottom: 20px;
+            border: 1px solid var(--color-border);
             border-radius: 8px; font-size: 1rem; color: var(--color-text-light);
             background-color: var(--color-bg-dark);
             box-sizing: border-box; appearance: none;
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            /* Style for select dropdown arrow */
             background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23A0AEC0%22%20d%3D%22M287%2C114.7L159.2%2C28.9c-9.2-9.5-24.2-9.5-33.4%2C0L5.4%2C114.7c-9.2%2C9.5-9.2%2C25%2C0%2C34.5l127.8%2C85.8c9.2%2C9.5%2C24.2%2C9.5%2C33.4%2C0l127.8-85.8C296.2%2C139.7%2C296.2%2C124.2%2C287%2C114.7z%22%2F%3E%3C%2Fsvg%3E');
             background-repeat: no-repeat; background-position: right 15px top 50%; background-size: 16px auto;
             padding-right: 40px;
         }
 
-        .contact-form input[type="tel"] {
-             width: calc(100% - 65px);
-             padding-left: 10px;
-             margin-left: 65px;
-             display: inline-block;
-             vertical-align: top;
-             margin-bottom: 20px;
-             background-image: none;
+         /* Styling for the phone input prefix container - make it look like a single input */
+         .phone-input-container {
+             display: flex; /* Use flexbox for alignment */
+             align-items: center; /* Vertically center items */
+             margin-bottom: 20px; /* Match other input margin bottom */
+             border: 1px solid var(--color-border); /* Match other input border */
+             border-radius: 8px; /* Match other input border-radius */
+             background-color: var(--color-bg-dark); /* Match other input background */
+             padding: 0 15px; /* Match horizontal padding of other inputs */
+             transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Match other input transition */
+             box-sizing: border-box; /* Include padding and border in element's total width and height */
+             width: 100%; /* Make it fill the container like other inputs */
+         }
+
+          .phone-input-container:focus-within { /* Style container when input inside is focused */
+             border-color: var(--color-primary-button); box-shadow: 0 0 8px rgba(187, 134, 252, 0.5);
+             outline: none; /* Remove outline from input */
+         }
+
+         .phone-input-container .country-code {
+             color: var(--color-text-dark); /* Muted grey text for prefix */
+             font-size: 1rem; /* Match input font size */
+             margin-right: 8px; /* Space between +91 and input */
+             flex-shrink: 0; /* Prevent shrinking */
+             flex-grow: 0; /* Prevent growing */
+             padding: 15px 0; /* Match vertical padding of the input text */
+         }
+
+          .phone-input-container .country-code .flag {
+             margin-right: 5px; /* Space between flag and +91 */
+             font-size: 1.2rem; /* Slightly larger flag */
+         }
+
+         .contact-form input[type="tel"] {
+             flex-grow: 1; /* Allow input to take remaining space */
+             border: none; /* Remove border from input itself */
+             padding: 15px 0; /* Match vertical padding, no horizontal padding here */
+             margin: 0; /* Remove margin */
+             background-color: transparent; /* Transparent background */
+             color: var(--color-text-light); /* Light text color */
+             font-size: 1rem;
+             outline: none; /* Remove default input outline */
+             box-shadow: none; /* Remove box shadow */
+             transition: none; /* Remove transition */
+             width: auto; /* Allow flex-grow to control width */
          }
 
 
@@ -308,7 +353,7 @@
         .contact-form input[type="email"]:focus,
         .contact-form textarea:focus,
         .contact-form select:focus,
-         .contact-form input[type="tel"]:focus {
+         .phone-input-container:focus-within { /* Apply focus style to container */
             border-color: var(--color-primary-button); box-shadow: 0 0 8px rgba(187, 134, 252, 0.5);
             outline: none;
         }
@@ -402,66 +447,44 @@
         .scroll-to-top.visible { opacity: 1; visibility: visible; }
         .scroll-to-top:hover { background-color: var(--color-highlight); transform: scale(1.1); }
 
-
-        /* Persistent Pencil - Keeping the SVG for now, might replace with 3D */
-        #persistent-pencil {
+        /* Sticky CTA Button Styles */
+        .sticky-cta-button {
             position: fixed;
-            right: 10px;
-            top: 50%;
-            width: 60px;
-            height: auto;
-            z-index: 950;
-            opacity: 0.8;
-            transform: translateY(-50%) translateX(30px) rotate(15deg) scale(0.65);
-            transform-origin: center center;
-            transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease-out;
-            pointer-events: none;
-            will-change: transform, opacity;
-            animation: pencilIdle 8s ease-in-out infinite;
-        }
-
-        #persistent-pencil.initial-load-pencil {
+            bottom: 30px;
+            right: 30px;
+            background: var(--color-primary-button);
+            color: var(--color-bg-dark);
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+            z-index: 999;
             opacity: 0;
-            transform: translateY(-50%) translateX(80px) rotate(60deg) scale(0.3);
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.2s ease-out;
+             transform: translateY(20px);
+             cursor: pointer;
         }
 
-        #persistent-pencil.emphasize {
-            animation-play-state: paused !important;
+        .sticky-cta-button.visible {
             opacity: 1;
-            transform: translateY(-50%) translateX(0px) rotate(-8deg) scale(1) perspective(1000px) rotateY(25deg) translateZ(30px);
+            visibility: visible;
+            transform: translateY(0);
         }
 
-        @keyframes pencilIdle {
-            0%, 100% { transform: translateY(-50%) translateX(30px) rotate(15deg) scale(0.65) translateZ(0px); opacity: 0.8; }
-            25% { transform: translateY(-51%) translateX(28px) rotate(17deg) scale(0.66) translateZ(3px); opacity: 0.82; }
-            50% { transform: translateY(-49%) translateX(32px) rotate(13deg) scale(0.64) translateZ(-3px); opacity: 0.78; }
-            75% { transform: translateY(-51%) translateX(29px) rotate(16deg) scale(0.655) translateZ(1px); opacity: 0.81; }
-        }
+         .sticky-cta-button:hover {
+             background: var(--color-highlight);
+             transform: translateY(-3px);
+         }
 
-        /* SVG Pencil Colors (Dark Theme Palette) */
-        #persistent-pencil defs linearGradient#yellowPaint stop:nth-child(1) { stop-color: var(--color-primary-button); }
-        #persistent-pencil defs linearGradient#yellowPaint stop:nth-child(2) { stop-color: var(--color-highlight); }
-        #persistent-pencil defs linearGradient#yellowPaint stop:nth-child(3) { stop-color: var(--color-secondary-accent); }
-        #persistent-pencil defs linearGradient#woodCore stop { stop-color: var(--color-border); }
-        #persistent-pencil defs linearGradient#graphiteLead stop:nth-child(1) { stop-color: var(--color-text-light); }
-        #persistent-pencil defs linearGradient#graphiteLead stop:nth-child(2) { stop-color: var(--color-text-dark); }
-        #persistent-pencil defs linearGradient#graphiteLead stop:nth-child(3) { stop-color: var(--color-medium-grey); }
-        #persistent-pencil defs linearGradient#metalFerrule stop:nth-child(1), #persistent-pencil defs linearGradient#metalFerrule stop:nth-child(4) { stop-color: var(--color-medium-grey); }
-         #persistent-pencil defs linearGradient#metalFerrule stop:nth-child(2), #persistent-pencil defs linearGradient#metalFerrule stop:nth-child(3) { stop-color: var(--color-border); }
-         #persistent-pencil defs linearGradient#metalFerrule stop:nth-child(5) { stop-color: var(--color-medium-grey); }
-        #persistent-pencil rect[fill="#F4A7B9"] { fill: var(--color-alert); }
-        #persistent-pencil rect[fill="#9E9E9E"] { fill: var(--color-border); }
-        #persistent-pencil path[fill="#FFEE58"] { fill: var(--color-secondary-accent); opacity: 0.7; }
-        #persistent-pencil path[fill="#FBC02D"] { fill: var(--color-highlight); opacity: 0.6; }
-        #persistent-pencil path[fill="#D2B48C"] { fill: rgba(74, 85, 104, 0.7); opacity: 0.5; }
-        #persistent-pencil path[fill="#C19A6B"] { fill: rgba(26, 32, 44, 0.8); opacity: 0.4; }
-        #persistent-pencil polygon[fill="#757575"] { fill: var(--color-border); }
-        #pencilRealisticShadow feGaussianBlur { stdDeviation: 6; }
-        #pencilRealisticShadow feOffset { dy: 8; dx: 5; }
-        #pencilRealisticShadow feFuncA { slope: 0.5; }
+         .sticky-cta-button:active {
+             transform: translateY(-1px);
+             box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+         }
 
-
-        /* Responsive Design Adjustments */
+        /* Responsive adjustments */
         @media (max-width: 1024px) {
              .container { padding: 0 15px; }
              section { padding: 80px 0 60px; transform: translateY(40px) scale(0.99); }
@@ -480,13 +503,13 @@
               .cta-button:active { transform: translateY(-1px); }
              .sketch-gallery { gap: 20px; margin-top: 20px; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
              .sketch-gallery img { border-radius: 5px; }
-              .sketch-gallery img:hover { transform: scale(1.05) rotateY(8deg) rotateX(5deg) translateZ(8px); } /* Adjusted 3D depth */
+              .sketch-gallery img:hover { transform: scale(1.05) rotateY(8deg) rotateX(5deg) translateZ(8px); }
              .services-grid { gap: 30px; margin-top: 30px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
              .service-card { padding: 30px; border-radius: 8px; }
              .service-card .icon { font-size: 3rem; margin-bottom: 15px; }
              .service-card h3 { font-size: 1.6rem; margin-bottom: 10px; }
              .service-card p { font-size: 0.95rem; }
-              .service-card:hover { transform: translateY(-6px) translateZ(8px); } /* Adjusted 3D depth */
+              .service-card:hover { transform: translateY(-6px) translateZ(8px); }
              .service-process { margin-top: 50px; padding-top: 30px; }
              .service-process h3 { font-size: 1.8rem; margin-bottom: 15px; }
              .service-process ol, .service-process ul { padding-left: 20px; margin: 15px auto; font-size: 0.95rem; }
@@ -498,12 +521,15 @@
              .contact-form { max-width: 500px; margin: 40px auto; padding: 30px; border-radius: 8px; }
               .contact-form:hover { transform: none; }
              .contact-form label { font-size: 1rem; margin-bottom: 8px; }
-             .contact-form input[type="text"],
-             .contact-form input[type="email"],
-             .contact-form textarea,
-             .contact-form select { padding: 12px; font-size: 0.95rem; margin-bottom: 15px; border-radius: 6px; }
-             .contact-form input[type="tel"] { padding: 12px 10px 12px 10px; width: calc(100% - 60px); margin-left: 60px; }
-             .contact-form input[type="text"]:focus, .contact-form input[type="email"]:focus, .contact-form textarea:focus, .contact-form select:focus, .contact-form input[type="tel"]:focus { transform: none; }
+             /* Phone input container padding */
+             .phone-input-container { padding: 0 12px; margin-bottom: 15px;}
+             .phone-input-container .country-code { font-size: 0.95rem; margin-right: 6px; padding: 12px 0;}
+             .phone-input-container .country-code .flag { font-size: 1.1rem; margin-right: 4px; }
+             .contact-form input[type="tel"] { padding: 12px 0; font-size: 0.95rem; }
+
+             .contact-form input[type="text"], .contact-form input[type="email"], .contact-form textarea, .contact-form select { padding: 12px; font-size: 0.95rem; margin-bottom: 15px; border-radius: 6px; }
+
+              .contact-form input[type="text"]:focus, .contact-form input[type="email"]:focus, .contact-form textarea:focus, .contact-form select:focus, .phone-input-container:focus-within { transform: none; }
              .contact-form select { background-position: right 10px top 50%; background-size: 14px auto; padding-right: 35px; }
              .price-estimator h3 { font-size: 1.4rem; margin-bottom: 15px; }
              .price-estimator > div { margin-bottom: 10px; }
@@ -524,15 +550,7 @@
              footer p { font-size: 0.85em; }
              .scroll-to-top { width: 40px; height: 40px; line-height: 40px; font-size: 1.4rem; bottom: 25px; right: 25px; }
 
-             /* Persistent Pencil Responsive Adjustments */
-              #persistent-pencil { width: 50px; right: 5px; transform: translateY(-50%) translateX(25px) rotate(15deg) scale(0.55); animation-duration: 9s; }
-             #persistent-pencil.emphasize { transform: translateY(-50%) translateX(0px) rotate(-5deg) scale(0.85) perspective(800px) rotateY(20deg) translateZ(20px); }
-             @keyframes pencilIdle {
-                0%, 100% { transform: translateY(-50%) translateX(25px) rotate(15deg) scale(0.55) translateZ(0px); opacity: 0.75; }
-                25% { transform: translateY(-51%) translateX(23px) rotate(17deg) scale(0.56) translateZ(2px); opacity: 0.78; }
-                50% { transform: translateY(-49%) translateX(27px) rotate(13deg) scale(0.54) translateZ(-2px); opacity: 0.72; }
-                75% { transform: translateY(-51%) translateX(24px) rotate(16deg) scale(0.555) translateZ(1px); opacity: 0.77; }
-            }
+             /* Persistent Pencil - REMOVED */
         }
 
         @media (max-width: 768px) {
@@ -565,13 +583,13 @@
             #disclaimer p { font-size: 0.9rem; }
             .sketch-gallery { grid-template-columns: 1fr; gap: 15px; margin-top: 15px; }
             .sketch-gallery img { border-radius: 4px; }
-             .sketch-gallery img:hover { transform: scale(1.05) rotateY(5deg) rotateX(3deg) translateZ(5px); } /* Adjusted 3D depth */
+             .sketch-gallery img:hover { transform: scale(1.05) rotateY(5deg) rotateX(3deg) translateZ(5px); }
             .services-grid { grid-template-columns: 1fr; gap: 20px; margin-top: 20px; }
             .service-card { padding: 20px; border-radius: 6px; }
             .service-card .icon { font-size: 2.5rem; margin-bottom: 10px; }
             .service-card h3 { font-size: 1.4rem; margin-bottom: 8px; }
             .service-card p { font-size: 0.9rem; }
-             .service-card:hover { transform: translateY(-4px) translateZ(6px); } /* Adjusted 3D depth */
+             .service-card:hover { transform: translateY(-4px) translateZ(6px); }
             .service-process { margin-top: 30px; padding-top: 20px; }
             .service-process h3 { font-size: 1.6rem; margin-bottom: 10px; }
             .service-process ol, .service-process ul { padding-left: 10px; margin: 10px auto; font-size: 0.9rem; }
@@ -583,13 +601,15 @@
             .contact-form { max-width: 95%; margin: 30px auto; padding: 20px; border-radius: 6px; }
              .contact-form:hover { transform: none; }
             .contact-form label { font-size: 0.95rem; margin-bottom: 5px; }
-            .contact-form input[type="text"],
-            .contact-form input[type="email"],
-            .contact-form textarea,
-            .contact-form select { padding: 10px; font-size: 0.9rem; margin-bottom: 15px; border-radius: 4px; }
-             .contact-form input[type="tel"] { padding: 10px 10px 10px 0; width: calc(100% - 50px); margin-left: 50px; }
+             /* Phone input container padding */
+            .phone-input-container { padding: 0 10px; margin-bottom: 15px; border-radius: 4px;}
+             .phone-input-container .country-code { font-size: 0.9rem; margin-right: 5px; padding: 10px 0;}
+             .phone-input-container .country-code .flag { font-size: 1rem; margin-right: 3px; }
+             .contact-form input[type="tel"] { padding: 10px 0; font-size: 0.9rem; }
 
-             .contact-form input[type="text"]:focus, .contact-form input[type="email"]:focus, .contact-form textarea:focus, .contact-form select:focus, .contact-form input[type="tel"]:focus { transform: none; }
+            .contact-form input[type="text"], .contact-form input[type="email"], .contact-form textarea, .contact-form select { padding: 10px; font-size: 0.9rem; margin-bottom: 15px; border-radius: 4px; }
+
+             .contact-form input[type="text"]:focus, .contact-form input[type="email']:focus, .contact-form textarea:focus, .contact-form select:focus, .phone-input-container:focus-within { transform: none; }
             .contact-form select { background-position: right 8px top 50%; background-size: 10px auto; padding-right: 30px; }
             .price-estimator h3 { font-size: 1.2rem; margin-bottom: 10px; }
             .price-estimator > div { margin-bottom: 8px; }
@@ -609,16 +629,6 @@
             footer .social-links a { font-size: 1.6rem; margin: 0 8px; }
             footer p { font-size: 0.8em; }
             .scroll-to-top { width: 30px; height: 30px; line-height: 30px; font-size: 1rem; bottom: 15px; right: 15px; }
-
-            /* Persistent Pencil Responsive Adjustments */
-            #persistent-pencil { width: 35px; right: 2px; transform: translateY(-50%) translateX(15px) rotate(15deg) scale(0.45); animation-duration: 9s; }
-             #persistent-pencil.emphasize { transform: translateY(-50%) translateX(0px) rotate(-3deg) scale(0.7) perspective(600px) rotateY(15deg) translateZ(15px); }
-             @keyframes pencilIdle {
-                0%, 100% { transform: translateY(-50%) translateX(15px) rotate(15deg) scale(0.45) translateZ(0px); opacity: 0.7; }
-                25% { transform: translateY(-51%) translateX(13px) rotate(17deg) scale(0.46) translateZ(1px); opacity: 0.73; }
-                50% { transform: translateY(-49%) translateX(17px) rotate(13deg) scale(0.44) translateZ(-1px); opacity: 0.68; }
-                75% { transform: translateY(-51%) translateX(14px) rotate(16deg) scale(0.455) translateZ(0.5px); opacity: 0.72; }
-            }
         }
 
         /* Sticky CTA Button Styles */
@@ -668,64 +678,6 @@
              .sticky-cta-button:active { transform: translateY(-1px); }
         }
 
-        /* Styling for the phone input prefix */
-         .phone-input-container {
-             display: flex;
-             align-items: center;
-             margin-bottom: 20px;
-             border: 1px solid var(--color-border);
-             border-radius: 8px;
-             background-color: var(--color-bg-dark);
-             padding-left: 15px;
-             transition: border-color 0.3s ease, box-shadow 0.3s ease;
-         }
-
-          .phone-input-container:focus-within {
-             border-color: var(--color-primary-button); box-shadow: 0 0 8px rgba(187, 134, 252, 0.5);
-             outline: none;
-         }
-
-
-         .phone-input-container .country-code {
-             color: var(--color-text-dark);
-             font-size: 1rem;
-             margin-right: 8px;
-             flex-shrink: 0;
-             flex-grow: 0;
-         }
-
-          .phone-input-container .country-code .flag {
-             margin-right: 5px;
-             font-size: 1.2rem;
-         }
-
-         .phone-input-container input[type="tel"] {
-             flex-grow: 1;
-             border: none;
-             padding: 15px 15px 15px 0;
-             margin: 0;
-             background-color: transparent;
-             color: var(--color-text-light);
-             font-size: 1rem;
-             outline: none;
-             box-shadow: none;
-             transition: none;
-         }
-
-        /* Adjust phone input container padding on smaller screens */
-        @media (max-width: 1024px) {
-            .phone-input-container { padding-left: 12px; }
-            .phone-input-container .country-code { font-size: 0.95rem; margin-right: 6px; }
-             .phone-input-container .country-code .flag { font-size: 1.1rem; margin-right: 4px; }
-             .phone-input-container input[type="tel"] { padding: 12px 12px 12px 0; font-size: 0.95rem; }
-        }
-         @media (max-width: 768px) {
-            .phone-input-container { padding-left: 10px; border-radius: 4px; margin-bottom: 15px; }
-            .phone-input-container .country-code { font-size: 0.9rem; margin-right: 5px; }
-             .phone-input-container .country-code .flag { font-size: 1rem; margin-right: 3px; }
-             .phone-input-container input[type="tel"] { padding: 10px 10px 10px 0; font-size: 0.9rem; }
-         }
-
 
     </style>
 </head>
@@ -753,53 +705,12 @@
         </div>
     </header>
 
-    <svg id="persistent-pencil" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 300">
-        <defs>
-            <linearGradient id="yellowPaint" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#B794F4"/> <stop offset="50%" stop-color="#9F7AEA"/> <stop offset="100%" stop-color="#B38EDC"/> </linearGradient>
-            <linearGradient id="woodCore" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#4A5568"/> <stop offset="100%" stop-color="#4A5568"/> </linearGradient>
-            <linearGradient id="graphiteLead" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#E2E8F0"/> <stop offset="50%" stop-color="#CBD5E0"/> <stop offset="100%" stop-color="#A0AFC0"/> </linearGradient>
-            <linearGradient id="metalFerrule" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#A0AEC0"/> <stop offset="30%" stop-color="#718096"/> <stop offset="50%" stop-color="#4A5568"/> <stop offset="70%" stop-color="#718096"/>
-                <stop offset="100%" stop-color="#A0AEC0"/> </linearGradient>
-             <filter id="pencilRealisticShadow" x="-60%" y="-20%" width="220%" height="160%">
-                <feGaussianBlur in="SourceAlpha" stdDeviation="6" result="blur"/>
-                <feOffset dy="8" dx="5" in="blur" result="offsetBlur"/>
-                <feComponentTransfer in="offsetBlur" result="shadowOpacity">
-                    <feFuncA type="linear" slope="0.5"/>
-                </feComponentTransfer>
-                <feMerge>
-                    <feMergeNode in="shadowOpacity"/>
-                    <feMergeNode in="SourceGraphic"/>
-                </feMerge>
-            </filter>
-        </defs>
-
-        <g filter="url(#pencilRealisticShadow)">
-            <rect x="15.5" y="5" width="19" height="25" fill="#FC8181" rx="2.5" ry="2.5"/>
-            <rect x="12.5" y="30" width="25" height="20" fill="url(#metalFerrule)" rx="2" ry="2"/>
-            <rect x="13.5" y="33" width="23" height="2.5" fill="#718096" rx="1"/>
-            <rect x="13.5" y="43.5" width="23" height="2.5" fill="#718096" rx="1"/>
-
-            <polygon points="10,50 40,50 41.5,230 8.5,230" fill="url(#yellowPaint)"/>
-            <path d="M10,50 L11.5,51 L11.5,229 L8.5,230 Z" fill="#B38EDC" opacity="0.7"/>
-            <path d="M40,50 L38.5,51 L38.5,229 L41.5,230 Z" fill="#9F7AEA" opacity="0.6"/>
-            <polygon points="8.5,230 41.5,230 25,280" fill="url(#woodCore)"/>
-             <path d="M8.5,230 L15,232 L25,280 Z" fill="#636B7D" opacity="0.5" />
-            <path d="M41.5,230 L35,232 L25,280 Z" fill="#3D4451" opacity="0.4" />
-
-
-            <polygon points="23,270 27,270 25,295" fill="url(#graphiteLead)"/>
-            <polygon points="24,290 26,290 25,295" fill="#718096"/>
-        </g>
-    </svg>
-
-
     <section id="hero">
         <div class="hero-3d-container">
-            <p style="color: var(--color-text-dark); text-align: center; padding-top: 10%;">Loading 3D Experience...</p>
+            <canvas id="hero-canvas"></canvas>
+            <div id="hero-fallback-message">
+                 3D experience not supported on your browser or device. <br> Displaying static background.
+            </div>
         </div>
 
         <div class="container hero-content">
@@ -1006,6 +917,7 @@
 
     <a href="#contact" class="sticky-cta-button" id="stickyCtaBtn">Request Commission</a>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r163/three.min.js"></script>
 
     <script>
         // Mobile Menu Toggle
@@ -1061,22 +973,6 @@
         const header = document.querySelector('header');
         const visibleSections = Array.from(sections).filter(section => section.id);
 
-        // Persistent Pencil - Keeping JS for emphasize logic, but pencil SVG can be replaced
-        const persistentPencil = document.getElementById('persistent-pencil');
-        let isPencilEmphasized = false;
-        let lastActiveSectionForPencil = '';
-        let pencilEmphasisTimeout;
-        let pencilIdleResumeTimeout;
-
-        if (persistentPencil) {
-            persistentPencil.classList.add('initial-load-pencil');
-            requestAnimationFrame(() => {
-                 setTimeout(() => {
-                    persistentPencil.classList.remove('initial-load-pencil');
-                    persistentPencil.style.animationPlayState = 'running';
-                }, 700);
-            });
-        }
 
         if (header && visibleSections.length > 0 && navLi.length > 0) {
              const observerOptions = {
@@ -1099,6 +995,8 @@
                  sectionObserver.observe(section);
              });
 
+
+            // Simplified Scroll Logic for Active Nav Link
             const handleScrollLogic = () => {
                 let currentSectionId = '';
                 const headerHeight = header.offsetHeight;
@@ -1120,49 +1018,12 @@
                         a.classList.add('active');
                     }
                 });
-
-                const mainContentSectionsForPencil = ['gallery', 'services', 'pricing', 'about', 'contact'];
-                const isInMainContent = currentSectionId && mainContentSectionsForPencil.includes(currentSectionId);
-
-                if (persistentPencil) {
-                    if (isInMainContent && currentSectionId !== lastActiveSectionForPencil) {
-                        if (!isPencilEmphasized) {
-                            isPencilEmphasized = true;
-                            persistentPencil.style.animationPlayState = 'paused';
-                            persistentPencil.classList.add('emphasize');
-                            clearTimeout(pencilEmphasisTimeout);
-                             pencilEmphasisTimeout = setTimeout(() => {
-                                 persistentPencil.classList.remove('emphasize');
-                                 clearTimeout(pencilIdleResumeTimeout);
-                                 pencilIdleResumeTimeout = setTimeout(() => {
-                                     persistentPencil.style.animationPlayState = 'running';
-                                     isPencilEmphasized = false;
-                                 }, 800);
-                             }, 1500);
-                        }
-                    } else if (!isInMainContent && persistentPencil.classList.contains('emphasize')) {
-                         persistentPencil.classList.remove('emphasize');
-                         clearTimeout(pencilEmphasisTimeout);
-                         clearTimeout(pencilIdleResumeTimeout);
-                         pencilIdleResumeTimeout = setTimeout(() => {
-                             persistentPencil.style.animationPlayState = 'running';
-                             isPencilEmphasized = false;
-                         }, 800);
-                    } else if (!isInMainContent && !persistentPencil.classList.contains('emphasize') && persistentPencil.style.animationPlayState !== 'running') {
-                         persistentPencil.style.animationPlayState = 'running';
-                         isPencilEmphasized = false;
-                    }
-                }
-
-                if (currentSectionId) {
-                    lastActiveSectionForPencil = currentSectionId;
-                }
             };
 
              let lastScrollTop = 0;
              const scrollHandler = () => {
                  const st = window.pageYOffset || document.documentElement.scrollTop;
-                 if (Math.abs(st - lastScrollTop) > 50 || getCurrentSectionBasedOnScroll() !== lastActiveSectionForPencil) {
+                 if (Math.abs(st - lastScrollTop) > 50 || getCurrentSectionBasedOnScroll() !== getLastActiveSection()) {
                       requestAnimationFrame(handleScrollLogic);
                      lastScrollTop = st <= 0 ? 0 : st;
                  } else {
@@ -1190,9 +1051,19 @@
                  }
                  return currentSectionId;
              }
+             // Helper to get the ID of the currently active section for comparison
+             const getLastActiveSection = () => {
+                 for(let i = 0; i < navLi.length; i++) {
+                     if (navLi[i].classList.contains('active')) {
+                         return navLi[i].getAttribute('href').substring(1);
+                     }
+                 }
+                 return ''; // No active section found
+             }
+
 
              window.addEventListener('scroll', scrollHandler);
-             requestAnimationFrame(handleScrollLogic);
+             requestAnimationFrame(handleScrollLogic); // Initial check on load
         }
 
 
@@ -1323,6 +1194,97 @@
              window.addEventListener('scroll', showButton);
              showButton(); // Check visibility on page load
         }
+
+        // --- Three.js Hero Section Setup ---
+        const heroCanvas = document.getElementById('hero-canvas');
+        const hero3dContainer = document.querySelector('.hero-3d-container');
+        const heroFallbackMessage = document.getElementById('hero-fallback-message');
+
+        if (heroCanvas && hero3dContainer) {
+            // Check for WebGL support
+            const isWebGLAvailable = (function () {
+                try {
+                    const canvas = document.createElement('canvas');
+                    return !!(window.WebGLRenderingContext && (canvas.getContext('webgl') || canvas.getContext('experimental-webgl')));
+                } catch (e) {
+                    return false;
+                }
+            })();
+
+            if (isWebGLAvailable) {
+                // Hide fallback message
+                if (heroFallbackMessage) heroFallbackMessage.style.display = 'none';
+
+                // 1. Create Scene, Camera, Renderer
+                const scene = new THREE.Scene();
+                const camera = new THREE.PerspectiveCamera(75, hero3dContainer.clientWidth / hero3dContainer.clientHeight, 0.1, 1000);
+                const renderer = new THREE.WebGLRenderer({ canvas: heroCanvas, antialias: true, alpha: true }); // alpha: true for transparency
+
+                renderer.setSize(hero3dContainer.clientWidth, hero3dContainer.clientHeight);
+                renderer.setPixelRatio(window.devicePixelRatio); // Handle high DPI screens
+
+                // 2. Add a Simple Geometry (e.g., a Box)
+                const geometry = new THREE.BoxGeometry(3, 3, 3); // Adjust size as needed
+                // const geometry = new THREE.SphereGeometry(2, 32, 32); // Alternative: Sphere
+
+                // 3. Add Material
+                // Using a basic material, could be more complex with textures etc.
+                const material = new THREE.MeshPhongMaterial({ color: 0xbb86fc, shininess: 50 }); // Using primary color with some shine
+                // const material = new THREE.MeshBasicMaterial({ color: 0xbb86fc, wireframe: true }); // Alternative: Wireframe
+
+                // 4. Create Mesh and Add to Scene
+                const cube = new THREE.Mesh(geometry, material);
+                scene.add(cube);
+
+                // 5. Add Lighting
+                const ambientLight = new THREE.AmbientLight(0x404040); // Soft white light
+                scene.add(ambientLight);
+
+                const directionalLight = new THREE.DirectionalLight(0xffffff, 1); // White light
+                directionalLight.position.set(5, 5, 5).normalize();
+                scene.add(directionalLight);
+
+                // 6. Position Camera
+                camera.position.z = 5; // Move camera back
+
+                // 7. Animation Loop
+                const animate = () => {
+                    requestAnimationFrame(animate);
+
+                    // Rotate the object
+                    cube.rotation.x += 0.005;
+                    cube.rotation.y += 0.005;
+
+                    renderer.render(scene, camera);
+                };
+
+                // 8. Handle Window Resize
+                const onWindowResize = () => {
+                    const width = hero3dContainer.clientWidth;
+                    const height = hero3dContainer.clientHeight;
+                    camera.aspect = width / height;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(width, height);
+                };
+
+                window.addEventListener('resize', onWindowResize);
+
+                // Start the animation
+                animate();
+
+            } else {
+                // WebGL is not supported, show fallback message and remove canvas
+                 if (heroFallbackMessage) heroFallbackMessage.style.display = 'block';
+                 if (heroCanvas) heroCanvas.style.display = 'none';
+
+                 // Optional: Apply the original background image as a true fallback
+                 hero3dContainer.style.backgroundImage = "url('https://googleusercontent.com/image_generation_content/0')";
+                 hero3dContainer.style.backgroundSize = "cover";
+                 hero3dContainer.style.backgroundPosition = "center center";
+            }
+        }
+         // --- End Three.js Setup ---
+
 
     </script>
 
