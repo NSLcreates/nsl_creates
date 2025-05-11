@@ -34,35 +34,33 @@
         }
 
         body {
-            font-family: 'Roboto', sans-serif; /* Body font - light or regular weight */
-            line-height: 1.8; /* Increased line height for readability */
-            color: var(--color-dark-grey); /* Use dark grey for general text */
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.8;
+            color: var(--color-dark-grey);
             background-color: var(--color-bg-light);
-             scroll-behavior: smooth; /* Smooth scrolling */
-            /* Subtle paper texture background - adjust color if needed */
-            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CjxyZWN0IHdpZHRoPSIyMCIgaGVpZGhodPSIyMCIgZmlsbD0iI0Y4RjVFRiI+PCByZWN0Pgo8Y2lyY2xlIGN4PSIxIiBjeT0iMSIgcj0iMC41IiBmaWxsPSIjRTZFNkU2Ij48L2NpcmNsZT4KPC9zdmc+'); /* Slightly adjusted to match new bg color */
+             scroll-behavior: smooth;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CjxyZWN0IHdpZHRoPSIyMCIgaGVpZGhodPSIyMCIgZmlsbD0iI0Y4RjVFRiI+PCByZWN0Pgo8Y2lyY2xlIGN4PSIxIiBjeT0iMSIgcj0iMC41IiBmaWxsPSIjRTZFNkU2Ij48L2NpcmNsZT4KPC9zdmc+');
             background-repeat: repeat;
         }
 
         .container {
             width: 90%;
-            max-width: 1300px; /* Slightly wider container for more breathing room */
+            max-width: 1300px;
             margin: auto;
             overflow: hidden;
-            padding: 0 30px; /* More horizontal padding */
+            padding: 0 30px;
         }
 
-        /* Header & Navigation */
         header {
             background: var(--color-header-footer);
             color: var(--color-white);
-            padding: 1.1rem 0; /* More padding */
+            padding: 1.1rem 0;
             position: fixed;
             width: 100%;
             top: 0;
-            left: 0; /* Ensure header is full width */
+            left: 0;
             z-index: 1000;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.4); /* Enhanced shadow */
+            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
             transition: background-color 0.3s ease;
         }
 
@@ -73,18 +71,18 @@
         }
 
         header .logo a {
-            text-decoration: none; /* Remove underline from logo text link */
-             color: inherit; /* Inherit color from parent */
-             display: block; /* Make the link a block element */
-             font-family: 'Playfair Display', serif; /* Apply the heading font */
-             font-size: 1.8rem; /* Adjust font size */
-             font-weight: 700; /* Apply bold weight */
-             color: var(--color-highlight); /* Apply highlight color */
-             transition: color 0.3s ease, transform 0.3s ease; /* Add transition */
+            text-decoration: none;
+             color: inherit;
+             display: block;
+             font-family: 'Playfair Display', serif;
+             font-size: 1.8rem;
+             font-weight: 700;
+             color: var(--color-highlight);
+             transition: color 0.3s ease, transform 0.3s ease;
         }
          header .logo a:hover {
-              color: var(--color-secondary-accent); /* Change color on hover */
-              transform: scale(1.05); /* Subtle scale effect */
+              color: var(--color-secondary-accent);
+              transform: scale(1.05);
          }
 
 
@@ -101,27 +99,27 @@
         }
 
         nav ul li {
-            margin-left: 40px; /* Increased space */
+            margin-left: 40px;
         }
 
         nav ul li a {
-            color: rgba(255, 255, 255, 0.8); /* Slightly transparent white */
+            color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
-            font-weight: 400; /* Regular weight for nav links */
-            padding: 10px 0; /* More padding for click area */
-            position: relative; /* For underline effect */
+            font-weight: 400;
+            padding: 10px 0;
+            position: relative;
             transition: color 0.3s ease;
-             letter-spacing: 0.5px; /* Slight letter spacing */
+             letter-spacing: 0.5px;
         }
 
-         nav ul li a::after { /* Underline effect */
+         nav ul li a::after {
              content: '';
              position: absolute;
              left: 0;
-             bottom: -3px; /* Position below text */
+             bottom: -3px;
              height: 2px;
-             width: 0; /* Start hidden */
-             background-color: var(--color-secondary-accent); /* Use secondary accent for underline */
+             width: 0;
+             background-color: var(--color-secondary-accent);
              transition: width 0.3s ease-out;
          }
 
@@ -129,32 +127,30 @@
             color: var(--color-secondary-accent);
         }
          nav ul li a:hover::after, nav ul li a.active::after {
-             width: 100%; /* Expand underline on hover/active */
+             width: 100%;
          }
 
 
-        /* Mobile Menu (Basic) */
         .menu-toggle {
             display: none;
-            font-size: 2.2rem; /* Larger icon */
+            font-size: 2.2rem;
             cursor: pointer;
             color: var(--color-white);
              transition: transform 0.3s ease;
         }
          .menu-toggle:hover {
-             transform: rotate(90deg); /* Rotate effect on hover */
+             transform: rotate(90deg);
          }
 
 
-        /* Section Styling */
         section {
-            padding: 140px 0 120px; /* More top and bottom padding */
+            padding: 140px 0 120px;
             border-bottom: 1px solid var(--color-border);
-            opacity: 0; /* Start hidden for fade-in */
-            transform: translateY(50px); /* Start slightly further below */
-            transition: opacity 1s ease-out, transform 1s ease-out; /* Slower and smoother transition */
-            background-color: var(--color-bg-light); /* Ensure sections have background */
-            min-height: 80vh; /* Ensure sections have enough height for scroll transitions to be noticeable */
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+            background-color: var(--color-bg-light);
+            min-height: 80vh;
         }
 
         section.is-visible {
@@ -165,32 +161,29 @@
         section:last-of-type {
             border-bottom: none;
         }
-         /* Pricing section slightly different background */
          #pricing {
-             background-color: rgba(212, 195, 181, 0.1); /* Lighter version of border color */
+             background-color: rgba(212, 195, 181, 0.1);
          }
-          /* Disclaimer section styling */
           #disclaimer {
-              padding: 60px 0; /* Smaller padding */
-              background-color: var(--color-white); /* White background */
+              padding: 60px 0;
+              background-color: var(--color-white);
               border-bottom: 1px solid var(--color-border);
-              min-height: auto; /* Disclaimer may not need full height */
+              min-height: auto;
           }
-          /* Gallery section slightly different background */
            #gallery {
-               background-color: rgba(212, 195, 181, 0.1); /* Match pricing section background */
+               background-color: rgba(212, 195, 181, 0.1);
            }
 
 
         section h2 {
-            font-family: 'Playfair Display', serif; /* Heading font */
+            font-family: 'Playfair Display', serif;
             text-align: center;
-            margin-bottom: 70px; /* More space below title */
-            font-size: 3.5rem; /* Unified size for main sections */
-            color: var(--color-text-dark); /* Darker text for headings */
+            margin-bottom: 70px;
+            font-size: 3.5rem;
+            color: var(--color-text-dark);
             position: relative;
-             padding-bottom: 20px; /* Space for underline */
-             font-weight: 700; /* Bold weight */
+             padding-bottom: 20px;
+             font-weight: 700;
              letter-spacing: 1px;
         }
          section h2::after {
@@ -199,12 +192,12 @@
              left: 50%;
              bottom: 0;
              transform: translateX(-50%);
-             height: 3px; /* Thicker underline */
-             width: 100px; /* Unified underline width */
-             background-color: var(--color-highlight); /* Use primary accent for underline */
+             height: 3px;
+             width: 100px;
+             background-color: var(--color-highlight);
              border-radius: 2px;
          }
-         #disclaimer h2 { /* Disclaimer still has its own specific styling */
+         #disclaimer h2 {
               font-size: 2.5rem;
               margin-bottom: 30px;
               padding-bottom: 10px;
@@ -213,27 +206,26 @@
                width: 80px;
           }
 
-        /* Hero Section */
         #hero {
             background: linear-gradient(rgba(248, 245, 239, 0.8), rgba(248, 245, 239, 0.8)), url('https://googleusercontent.com/image_generation_content/0') no-repeat center center/cover;
             color: var(--color-text-dark);
-            height: 100vh; /* Full viewport height */
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding-top: 100px; /* Account for fixed header */
+            padding-top: 100px;
             opacity: 1;
             transform: translateY(0);
             transition: none;
             position: relative;
-             background-attachment: fixed; /* Parallax effect */
+             background-attachment: fixed;
         }
 
 
         #hero h1 {
-            font-family: 'Playfair Display', serif; /* Heading font */
+            font-family: 'Playfair Display', serif;
             font-size: 5.5rem;
             margin-bottom: 30px;
             text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
@@ -243,7 +235,7 @@
         }
          #hero h1 .site-title {
              font-weight: 700;
-             color: var(--color-highlight); /* Use highlight color */
+             color: var(--color-highlight);
          }
 
 
@@ -252,7 +244,7 @@
             margin-bottom: 60px;
             max-width: 900px;
             text-shadow: 1px 1px 5px rgba(0,0,0,0.2);
-            font-weight: 300; /* Lighter weight for description */
+            font-weight: 300;
             color: var(--color-dark-grey);
             line-height: 1.7;
         }
@@ -260,10 +252,10 @@
         .cta-button {
             display: inline-block;
             background: var(--color-primary-button);
-            color: var(--color-text-dark); /* Dark text on gold button */
-            padding: 18px 45px; /* More padding */
+            color: var(--color-text-dark);
+            padding: 18px 45px;
             text-decoration: none;
-            border-radius: 35px; /* More rounded */
+            border-radius: 35px;
             font-size: 1.4rem;
             font-weight: 500;
             transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
@@ -283,7 +275,6 @@
              box-shadow: 0 4px 8px rgba(0,0,0,0.2);
          }
 
-         /* Gallery Section Styling */
          .sketch-gallery {
              display: grid;
              grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -306,8 +297,6 @@
                box-shadow: 0 10px 20px rgba(0,0,0,0.2);
            }
 
-
-        /* Services Section */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -669,7 +658,6 @@
             text-decoration: underline;
         }
 
-        /* Footer */
         footer {
             background: var(--color-header-footer);
             color: var(--color-white);
@@ -704,7 +692,6 @@
              font-size: 1em;
         }
 
-        /* Scroll-to-Top Button */
          .scroll-to-top {
             position: fixed;
             bottom: 40px;
@@ -734,475 +721,152 @@
              transform: scale(1.1);
          }
 
-        /* Page Transition Pencil Animation */
-        #page-transition-pencil {
+        /* Persistent Pencil Styling */
+        #persistent-pencil {
             position: fixed;
-            /* Start position (e.g., bottom right, off-screen or very small) */
-            bottom: -50px;
-            right: -50px;
-            font-size: 2rem; /* Initial small size */
-            color: var(--color-primary-button);
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-            z-index: 1500; /* Above most content, below popups/modals if any */
+            right: 15px; /* Initial horizontal position */
+            top: 50%;    /* Vertically centered */
+            width: 70px; /* Adjust width of SVG */
+            height: auto; /* Maintain aspect ratio */
+            z-index: 950; /* Below header, above most content */
+            opacity: 0.75; /* Base opacity */
+            /* Base state: partially visible, slightly rotated, smaller scale */
+            transform: translateY(-50%) translateX(35px) rotate(15deg) scale(0.6);
+            transform-origin: 50% 50%; /* Rotate around center */
+            transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.8s ease; /* Smooth springy transition */
+            pointer-events: none; /* So it doesn't block interactions */
+            will-change: transform, opacity;
+        }
+
+        #persistent-pencil.focused {
+            opacity: 1;
+            /* Focused state: more visible, larger, different rotation for 3D effect */
+            transform: translateY(-50%) translateX(0px) rotate(-5deg) scale(0.85) perspective(1200px) rotateY(20deg);
+        }
+
+        #persistent-pencil.initial-load { /* Special state for first appearance */
             opacity: 0;
-            transform-origin: center center;
-            pointer-events: none; /* So it doesn't interfere with mouse events */
-            will-change: transform, opacity; /* Hint for browser optimization */
-        }
-
-        #page-transition-pencil.animate {
-            /* Animation duration should be noticeable but not too long */
-            animation: pencilSectionHop 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-
-        @keyframes pencilSectionHop {
-            0% {
-                opacity: 0;
-                /* Start from bottom-right, slightly off-screen, small and rotated */
-                transform: translate(50px, 50px) scale(0.3) rotate(-90deg) perspective(600px) rotateY(45deg);
-            }
-            15% {
-                opacity: 1;
-                /* Move towards center, growing, start 3D rotation */
-                transform: translate(-30vw, -30vh) scale(1.5) rotate(-15deg) perspective(600px) rotateY(30deg) rotateX(-10deg);
-            }
-            50% { /* "Becomes big" - peak of size and central movement */
-                opacity: 1;
-                transform: translate(-45vw, -48vh) scale(3.5) rotate(10deg) perspective(600px) rotateY(-25deg) rotateX(5deg);
-            }
-            85% {
-                opacity: 1;
-                /* Move towards top-left, shrinking, continue 3D rotation */
-                transform: translate(-70vw, -70vh) scale(1.2) rotate(45deg) perspective(600px) rotateY(20deg) rotateX(15deg);
-            }
-            100% {
-                opacity: 0;
-                /* End at top-left, off-screen or very small, rotated */
-                transform: translate(-100vw, -100vh) scale(0.3) rotate(90deg) perspective(600px) rotateY(-45deg);
-            }
+            transform: translateY(-50%) translateX(80px) rotate(45deg) scale(0.4);
         }
 
 
         /* Responsive Design */
         @media (max-width: 1024px) {
-             .container {
-                 padding: 0 20px;
-             }
-             section {
-                 padding: 100px 0 80px;
-             }
-             section h2 {
-                 font-size: 2.8rem; /* Adjusted size for sections */
-                 margin-bottom: 60px;
-             }
-             section h2::after {
-                  width: 80px;
-             }
-             #disclaimer h2 {
-                 font-size: 2rem;
-                 margin-bottom: 25px;
-             }
-             #disclaimer h2::after {
-                 width: 60px;
-             }
-              #disclaimer p {
-                  font-size: 1.05rem;
-              }
+             .container { padding: 0 20px; }
+             section { padding: 100px 0 80px; }
+             section h2 { font-size: 2.8rem; margin-bottom: 60px; }
+             section h2::after { width: 80px; }
+             #disclaimer h2 { font-size: 2rem; margin-bottom: 25px; }
+             #disclaimer h2::after { width: 60px; }
+             #disclaimer p { font-size: 1.05rem; }
+             #hero h1 { font-size: 4.5rem; }
+             #hero p { font-size: 1.4rem; }
+             .sketch-gallery { gap: 30px; margin-top: 30px; }
+             .sketch-gallery img { border-radius: 6px; }
+             .services-grid { gap: 50px; }
+             .service-card { padding: 40px; }
+             .service-card .icon { font-size: 4rem; }
+             .service-card h3 { font-size: 2rem; }
+             .service-card p { font-size: 1.1rem; }
+             .service-process { margin-top: 70px; padding-top: 40px; }
+             .service-process h3 { font-size: 2.2rem; }
+             .service-process ol, .service-process ul { padding-left: 30px; font-size: 1.05rem; }
+             .service-process li { margin-bottom: 15px; }
+             .service-process ul li::before { width: 1em; margin-left: -1em; }
+             .important-note { font-size: 0.95rem; }
+             .pricing-info p { font-size: 1.2rem; margin-bottom: 30px; }
+             #about p { font-size: 1.15rem; }
+             .contact-form { max-width: 600px; margin: 50px auto; padding: 45px; }
+             .contact-form label { font-size: 1.1rem; }
+             .contact-form input[type="text"], .contact-form input[type="email"], .contact-form textarea, .contact-form select { padding: 15px; font-size: 1.05rem; margin-bottom: 20px; }
+             .contact-form select { background-position: right 15px top 50%; background-size: 16px auto; padding-right: 45px; }
+             .price-estimator h3 { font-size: 1.8rem; margin-bottom: 25px; }
+             .price-estimator > div { margin-bottom: 15px; }
+             .drop-zone { padding: 40px; margin-bottom: 25px; }
+             .drop-zone p { font-size: 1.1rem; }
+             .file-info { font-size: 1rem; }
+             .price-estimate { font-size: 1.4rem; padding: 20px; margin-top: 30px; margin-bottom: 25px; }
+             .contact-form button[type="submit"] { padding: 16px 30px; font-size: 1.2rem; margin-top: 30px; }
+             .contact-info p { font-size: 1.15rem; margin-top: 40px; }
+             footer { padding: 3rem 0 1.2rem; }
+             footer .footer-note { margin-bottom: 15px; }
+             footer .social-links { margin-bottom: 20px; }
+             footer .social-links a { font-size: 2rem; margin: 0 12px; }
+             footer p { font-size: 0.95em; }
+             .scroll-to-top { width: 50px; height: 50px; line-height: 50px; font-size: 1.6rem; bottom: 30px; right: 30px; }
 
-             #hero h1 {
-                 font-size: 4.5rem;
+             #persistent-pencil {
+                width: 60px;
+                right: 10px;
+                transform: translateY(-50%) translateX(25px) rotate(15deg) scale(0.5);
              }
-             #hero p {
-                 font-size: 1.4rem;
+             #persistent-pencil.focused {
+                transform: translateY(-50%) translateX(0px) rotate(-5deg) scale(0.7) perspective(1000px) rotateY(15deg);
              }
-             .sketch-gallery {
-                  gap: 30px;
-                  margin-top: 30px;
-             }
-              .sketch-gallery img {
-                  border-radius: 6px;
-              }
-
-             .services-grid {
-                 gap: 50px;
-             }
-             .service-card {
-                 padding: 40px;
-             }
-             .service-card .icon {
-                 font-size: 4rem;
-             }
-             .service-card h3 {
-                 font-size: 2rem;
-             }
-             .service-card p {
-                 font-size: 1.1rem;
-             }
-
-             .service-process {
-                 margin-top: 70px;
-                 padding-top: 40px;
-             }
-             .service-process h3 {
-                  font-size: 2.2rem;
-             }
-              .service-process ol, .service-process ul {
-                  padding-left: 30px;
-                  font-size: 1.05rem;
-              }
-              .service-process li {
-                  margin-bottom: 15px;
-              }
-             .service-process ul li::before {
-                 width: 1em;
-                 margin-left: -1em;
-             }
-            .important-note {
-                 font-size: 0.95rem;
-             }
-
-            .pricing-info p {
-                font-size: 1.2rem;
-                margin-bottom: 30px;
-            }
-             #about p {
-                 font-size: 1.15rem;
-             }
-
-             .contact-form {
-                 max-width: 600px;
-                 margin: 50px auto;
-                 padding: 45px;
-             }
-             .contact-form label {
-                 font-size: 1.1rem;
-             }
-             .contact-form input[type="text"],
-             .contact-form input[type="email"],
-             .contact-form textarea,
-             .contact-form select {
-                  padding: 15px;
-                  font-size: 1.05rem;
-                  margin-bottom: 20px;
-             }
-              .contact-form select {
-                  background-position: right 15px top 50%;
-                  background-size: 16px auto;
-                  padding-right: 45px;
-              }
-             .price-estimator h3 {
-                 font-size: 1.8rem;
-                 margin-bottom: 25px;
-             }
-             .price-estimator > div {
-                  margin-bottom: 15px;
-             }
-             .drop-zone {
-                 padding: 40px;
-                 margin-bottom: 25px;
-             }
-              .drop-zone p {
-                 font-size: 1.1rem;
-              }
-             .file-info {
-                 font-size: 1rem;
-             }
-
-
-             .price-estimate {
-                 font-size: 1.4rem;
-                 padding: 20px;
-                 margin-top: 30px;
-                 margin-bottom: 25px;
-             }
-
-             .contact-form button[type="submit"] {
-                 padding: 16px 30px;
-                 font-size: 1.2rem;
-                 margin-top: 30px;
-             }
-             .contact-info p {
-                 font-size: 1.15rem;
-                 margin-top: 40px;
-             }
-             footer {
-                 padding: 3rem 0 1.2rem;
-             }
-              footer .footer-note {
-                   margin-bottom: 15px;
-              }
-             footer .social-links {
-                  margin-bottom: 20px;
-             }
-             footer .social-links a {
-                 font-size: 2rem;
-                 margin: 0 12px;
-             }
-             footer p {
-                 font-size: 0.95em;
-             }
-             .scroll-to-top {
-                 width: 50px;
-                 height: 50px;
-                 line-height: 50px;
-                 font-size: 1.6rem;
-                 bottom: 30px;
-                 right: 30px;
-             }
-            @keyframes pencilSectionHop { /* Adjust for smaller screens */
-                0% { opacity: 0; transform: translate(30px, 30px) scale(0.3) rotate(-90deg) perspective(400px) rotateY(45deg); }
-                15% { opacity: 1; transform: translate(-35vw, -35vh) scale(1.2) rotate(-15deg) perspective(400px) rotateY(30deg) rotateX(-10deg); }
-                50% { opacity: 1; transform: translate(-45vw, -45vh) scale(2.5) rotate(10deg) perspective(400px) rotateY(-25deg) rotateX(5deg); } /* Smaller max scale */
-                85% { opacity: 1; transform: translate(-65vw, -65vh) scale(1) rotate(45deg) perspective(400px) rotateY(20deg) rotateX(15deg); }
-                100% { opacity: 0; transform: translate(-100vw, -100vh) scale(0.3) rotate(90deg) perspective(400px) rotateY(-45deg); }
-            }
         }
 
-
         @media (max-width: 768px) {
-            header .container {
-                flex-direction: column;
-                align-items: flex-start;
-                padding-left: 20px;
-            }
+            header .container { flex-direction: column; align-items: flex-start; padding-left: 20px; }
+            header .logo a { font-size: 1.5rem; }
+            nav ul { flex-direction: column; align-items: center; width: 100%; display: none; background: var(--color-header-footer); position: static; box-shadow: none; padding: 10px 0; border-top: 1px solid rgba(255, 255, 255, 0.1); transition: max-height 0.5s ease-in-out; max-height: 0; overflow: hidden; }
+            nav ul.active { display: flex; max-height: 300px; }
+            nav ul li { margin: 10px 0; }
+            nav ul li a { color: var(--color-white); border-bottom: none; padding: 8px 0; font-size: 1.1rem; }
+            nav ul li a:hover, nav ul li a.active { color: var(--color-secondary-accent); }
+            nav ul li a::after { display: none; }
+            .menu-toggle { display: block; position: absolute; top: 1.2rem; right: 1.2rem; }
+            #hero { height: auto; padding: 100px 20px 60px; }
+            #hero h1 { font-size: 3.5rem; margin-bottom: 20px; }
+            #hero p { font-size: 1.3rem; margin-bottom: 40px; }
+            section { padding: 80px 20px 60px; }
+            section h2 { font-size: 2.2rem; margin-bottom: 50px; padding-bottom: 15px; }
+            section h2::after { height: 2px; width: 70px; }
+            #disclaimer { padding: 50px 20px; }
+            #disclaimer h2 { font-size: 1.8rem; margin-bottom: 20px; }
+            #disclaimer h2::after { width: 50px; }
+            #disclaimer p { font-size: 1rem; }
+            .sketch-gallery { grid-template-columns: 1fr; gap: 25px; margin-top: 25px; }
+            .sketch-gallery img { border-radius: 5px; }
+            .services-grid { grid-template-columns: 1fr; gap: 40px; }
+            .service-card { padding: 35px; }
+            .service-card .icon { font-size: 3.5rem; margin-bottom: 25px; }
+            .service-card h3 { font-size: 1.8rem; }
+            .service-card p { font-size: 1.1rem; }
+            .service-process { margin-top: 60px; padding-top: 30px; }
+            .service-process h3 { font-size: 2rem; }
+            .service-process ol, .service-process ul { padding-left: 20px; margin: 20px auto; font-size: 1rem; }
+            .service-process li { margin-bottom: 12px; }
+            .service-process ul li::before { width: 1em; margin-left: -1em; }
+            .important-note { font-size: 0.9rem; }
+            .pricing-info p { font-size: 1.1rem; margin-bottom: 25px; }
+            #about p { font-size: 1.05rem; }
+            .contact-form { margin: 40px auto; padding: 35px; }
+            .contact-form label { font-size: 1.05rem; margin-bottom: 8px; }
+            .contact-form input[type="text"], .contact-form input[type="email"], .contact-form textarea, .contact-form select { padding: 12px; font-size: 1rem; margin-bottom: 18px; }
+            .contact-form select { background-position: right 10px top 50%; background-size: 14px auto; padding-right: 40px; }
+            .price-estimator h3 { font-size: 1.6rem; margin-bottom: 20px; }
+            .price-estimator > div { margin-bottom: 15px; }
+            .drop-zone { padding: 35px; margin-bottom: 20px; }
+            .drop-zone p { font-size: 1.05rem; }
+            .file-info { font-size: 0.95rem; }
+            .price-estimate { font-size: 1.3rem; padding: 18px; margin-top: 25px; margin-bottom: 20px; }
+            .contact-form button[type="submit"] { padding: 15px 25px; font-size: 1.1rem; margin-top: 25px; }
+            .contact-info p { font-size: 1.1rem; margin-top: 30px; }
+            footer { padding: 2.5rem 0 1rem; }
+            footer .footer-note { margin-bottom: 10px; }
+            footer .social-links { margin-bottom: 15px; }
+            footer .social-links a { font-size: 1.8rem; margin: 0 10px; }
+            footer p { font-size: 0.9em; }
+            .scroll-to-top { width: 40px; height: 40px; line-height: 40px; font-size: 1.2rem; bottom: 25px; right: 25px; }
 
-             header .logo a {
-                  font-size: 1.5rem;
+            #persistent-pencil { /* Hidden on very small screens or styled differently */
+                width: 45px;
+                right: 5px;
+                transform: translateY(-50%) translateX(20px) rotate(15deg) scale(0.4);
              }
-
-            nav ul {
-                flex-direction: column;
-                align-items: center;
-                width: 100%;
-                display: none;
-                background: var(--color-header-footer);
-                position: static;
-                box-shadow: none;
-                 padding: 10px 0;
-                 border-top: 1px solid rgba(255, 255, 255, 0.1);
-                 transition: max-height 0.5s ease-in-out;
-                 max-height: 0;
-                 overflow: hidden;
-            }
-             nav ul.active {
-                 display: flex;
-                 max-height: 300px;
+             #persistent-pencil.focused {
+                transform: translateY(-50%) translateX(0px) rotate(-5deg) scale(0.55) perspective(800px) rotateY(10deg);
              }
-              nav ul li {
-                 margin: 10px 0;
-              }
-             nav ul li a {
-                 color: var(--color-white);
-                 border-bottom: none;
-                 padding: 8px 0;
-                 font-size: 1.1rem;
-             }
-              nav ul li a:hover, nav ul li a.active {
-                 color: var(--color-secondary-accent);
-             }
-              nav ul li a::after {
-                  display: none;
-              }
-
-            .menu-toggle {
-                display: block;
-                position: absolute;
-                top: 1.2rem;
-                right: 1.2rem;
-            }
-
-            #hero {
-                height: auto;
-                padding: 100px 20px 60px;
-            }
-             #hero h1 {
-                 font-size: 3.5rem;
-                 margin-bottom: 20px;
-             }
-              #hero p {
-                 font-size: 1.3rem;
-                 margin-bottom: 40px;
-             }
-
-            section {
-                padding: 80px 20px 60px;
-            }
-            section h2 {
-                 font-size: 2.2rem; /* Further reduce for mobile */
-                 margin-bottom: 50px;
-                 padding-bottom: 15px;
-            }
-             section h2::after {
-                 height: 2px;
-                 width: 70px;
-             }
-             #disclaimer {
-                  padding: 50px 20px;
-             }
-             #disclaimer h2 {
-                 font-size: 1.8rem;
-                 margin-bottom: 20px;
-             }
-             #disclaimer h2::after {
-                 width: 50px;
-             }
-              #disclaimer p {
-                  font-size: 1rem;
-              }
-
-
-            .sketch-gallery {
-                 grid-template-columns: 1fr;
-                 gap: 25px;
-                 margin-top: 25px;
-            }
-             .sketch-gallery img {
-                 border-radius: 5px;
-             }
-
-
-            .services-grid {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-             .service-card {
-                 padding: 35px;
-             }
-             .service-card .icon {
-                 font-size: 3.5rem;
-                 margin-bottom: 25px;
-             }
-             .service-card h3 {
-                 font-size: 1.8rem;
-             }
-             .service-card p {
-                 font-size: 1.1rem;
-             }
-
-             .service-process {
-                 margin-top: 60px;
-                 padding-top: 30px;
-             }
-             .service-process h3 {
-                  font-size: 2rem;
-             }
-              .service-process ol, .service-process ul {
-                  padding-left: 20px;
-                  margin: 20px auto;
-                  font-size: 1rem;
-              }
-             .service-process li {
-                  margin-bottom: 12px;
-             }
-             .service-process ul li::before {
-                 width: 1em;
-                 margin-left: -1em;
-             }
-            .important-note {
-                 font-size: 0.9rem;
-             }
-
-            .pricing-info p {
-                font-size: 1.1rem;
-                margin-bottom: 25px;
-            }
-             #about p {
-                 font-size: 1.05rem;
-             }
-
-
-            .contact-form {
-                margin: 40px auto;
-                padding: 35px;
-            }
-             .contact-form label {
-                 font-size: 1.05rem;
-                 margin-bottom: 8px;
-             }
-            .contact-form input[type="text"],
-            .contact-form input[type="email"],
-            .contact-form textarea,
-            .contact-form select {
-                 padding: 12px;
-                 font-size: 1rem;
-                 margin-bottom: 18px;
-            }
-             .contact-form select {
-                  background-position: right 10px top 50%;
-                  background-size: 14px auto;
-                  padding-right: 40px;
-             }
-             .price-estimator h3 {
-                 font-size: 1.6rem;
-                 margin-bottom: 20px;
-             }
-             .price-estimator > div {
-                  margin-bottom: 15px;
-             }
-             .drop-zone {
-                 padding: 35px;
-                 margin-bottom: 20px;
-             }
-             .drop-zone p {
-                 font-size: 1.05rem;
-             }
-              .file-info {
-                 font-size: 0.95rem;
-              }
-
-             .price-estimate {
-                 font-size: 1.3rem;
-                 padding: 18px;
-                 margin-top: 25px;
-                 margin-bottom: 20px;
-             }
-
-             .contact-form button[type="submit"] {
-                 padding: 15px 25px;
-                 font-size: 1.1rem;
-                 margin-top: 25px;
-             }
-
-             .contact-info p {
-                 font-size: 1.1rem;
-                 margin-top: 30px;
-             }
-
-             footer {
-                 padding: 2.5rem 0 1rem;
-             }
-              footer .footer-note {
-                   margin-bottom: 10px;
-              }
-             footer .social-links {
-                  margin-bottom: 15px;
-             }
-             footer .social-links a {
-                 font-size: 1.8rem;
-                 margin: 0 10px;
-             }
-             footer p {
-                 font-size: 0.9em;
-             }
-             .scroll-to-top {
-                 width: 40px;
-                 height: 40px;
-                 line-height: 40px;
-                 font-size: 1.2rem;
-                 bottom: 25px;
-                 right: 25px;
-             }
-
-            #page-transition-pencil {
-                font-size: 1.5rem; /* Smaller base for mobile */
-            }
-            @keyframes pencilSectionHop { /* Adjust for very small screens */
-                0% { opacity: 0; transform: translate(20px, 20px) scale(0.2) rotate(-90deg) perspective(300px) rotateY(45deg); }
-                15% { opacity: 1; transform: translate(-30vw, -30vh) scale(1) rotate(-15deg) perspective(300px) rotateY(30deg) rotateX(-10deg); }
-                50% { opacity: 1; transform: translate(-45vw, -45vh) scale(2) rotate(10deg) perspective(300px) rotateY(-25deg) rotateX(5deg); } /* Smaller max scale */
-                85% { opacity: 1; transform: translate(-60vw, -60vh) scale(0.8) rotate(45deg) perspective(300px) rotateY(20deg) rotateX(15deg); }
-                100% { opacity: 0; transform: translate(-100vw, -100vh) scale(0.2) rotate(90deg) perspective(300px) rotateY(-45deg); }
-            }
         }
 
     </style>
@@ -1229,7 +893,42 @@
         </div>
     </header>
 
-    <i id="page-transition-pencil" class="fas fa-pencil-alt"></i>
+    <svg id="persistent-pencil" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 300">
+        <defs>
+            <linearGradient id="pencilWood" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#E0C18F;"/>
+                <stop offset="50%" style="stop-color:#D4AF7A;"/>
+                <stop offset="100%" style="stop-color:#C89B67;"/>
+            </linearGradient>
+            <linearGradient id="pencilPaint" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#FFD700;" />
+                <stop offset="100%" style="stop-color:#FFA500;" />
+            </linearGradient>
+            <filter id="pencilSoftShadow" x="-30%" y="-10%" width="160%" height="140%">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="4"/>
+                <feOffset dx="3" dy="4" result="offsetblur"/>
+                <feComponentTransfer>
+                    <feFuncA type="linear" slope="0.5"/>
+                </feComponentTransfer>
+                <feMerge>
+                    <feMergeNode/>
+                    <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+            </filter>
+        </defs>
+        <g style="filter:url(#pencilSoftShadow);">
+            <polygon points="15,35 65,35 70,230 10,230" fill="url(#pencilPaint)"/>
+            <path d="M15,35 L22,37 L22,229 L10,230 Z" fill="rgba(255,223,128,0.8)" /> <path d="M65,35 L58,37 L58,229 L70,230 Z" fill="rgba(204,138,0,0.5)" /> <rect x="20" y="10" width="40" height="25" fill="#silver" rx="3" ry="3"/>
+            <rect x="22" y="12" width="36" height="3" fill="#darkgrey" rx="1" ry="1"/>
+            <rect x="22" y="30" width="36" height="3" fill="#grey" rx="1" ry="1"/>
+            <rect x="20" y="0" width="40" height="15" fill="#FFB6C1" rx="3" ry="3"/>
+            <polygon points="10,230 70,230 40,280" fill="url(#pencilWood)"/>
+            <path d="M10,230 L18,231 L40,280 L10,230 Z" fill="rgba(212,175,122,0.7)"/>
+            <path d="M70,230 L62,231 L40,280 L70,230 Z" fill="rgba(180,140,90,0.6)"/>
+            <polygon points="35,270 45,270 40,295" fill="#383838"/>
+            <polygon points="38,268 42,268 40,280" fill="#202020"/>
+        </g>
+    </svg>
 
     <section id="hero">
         <div class="container">
@@ -1476,27 +1175,31 @@
         const header = document.querySelector('header');
         const visibleSections = Array.from(sections).filter(section => section.id);
 
-        // Page Transition Pencil
-        const pageTransitionPencil = document.getElementById('page-transition-pencil');
-        let isPencilAnimating = false;
-        let pencilAnimationTimeout;
-        let lastActiveSectionId = '';
+        // Persistent Pencil
+        const persistentPencil = document.getElementById('persistent-pencil');
+        let isPersistentPencilActive = false;
+        let lastActiveSectionIdForPencil = ''; // Separate tracker for pencil to manage its own state
+        let pencilFocusTimeout;
+
+        if (persistentPencil) {
+            // Initial animation for the pencil after load
+            setTimeout(() => {
+                persistentPencil.classList.remove('initial-load');
+            }, 500); // Let it transition from initial-load state to base state
+             persistentPencil.classList.add('initial-load'); // Start with this class
+        }
 
 
         if (header && visibleSections.length > 0 && navLi.length > 0) {
              const observerOptions = {
                  root: null,
                  rootMargin: '0px',
-                 threshold: 0.1
+                 threshold: 0.1 // Section visibility threshold
              };
 
              const sectionObserver = new IntersectionObserver((entries, observer) => {
                  entries.forEach(entry => {
-                     if (entry.isIntersecting) {
-                         entry.target.classList.add('is-visible');
-                     } else {
-                          entry.target.classList.remove('is-visible');
-                     }
+                     entry.target.classList.toggle('is-visible', entry.isIntersecting);
                  });
              }, observerOptions);
 
@@ -1504,71 +1207,96 @@
                  if (section.id !== 'hero') {
                      sectionObserver.observe(section);
                  } else {
-                     section.classList.add('is-visible');
+                     section.classList.add('is-visible'); // Hero is visible by default
                  }
              });
 
-             window.addEventListener('scroll', () => {
+            // Debounce function to limit how often a function can run
+            function debounce(func, wait) {
+                let timeout;
+                return function executedFunction(...args) {
+                    const later = () => {
+                        clearTimeout(timeout);
+                        func(...args);
+                    };
+                    clearTimeout(timeout);
+                    timeout = setTimeout(later, wait);
+                };
+            }
+
+            const handleScrollForPencil = () => {
                 let currentSectionId = '';
                 const headerHeight = header.offsetHeight;
-                // Adjusted scrollBuffer for more accurate section detection for pencil trigger
-                const scrollBufferForPencil = headerHeight + 50;
-
+                // Determine which section is most prominent in the viewport
+                // A section is prominent if its top is within the top 60% of the viewport
+                // and its bottom is below the top 40% of the viewport.
+                // This helps select a section that occupies a significant part of the screen.
+                let maxVisibility = 0;
 
                 visibleSections.forEach(section => {
-                    const sectionTop = section.getBoundingClientRect().top + window.pageYOffset;
-                    const sectionHeight = section.offsetHeight;
+                    const rect = section.getBoundingClientRect();
+                    const viewportHeight = window.innerHeight;
+                    
+                    // Calculate visible height of the section
+                    const visibleTop = Math.max(0, rect.top);
+                    const visibleBottom = Math.min(viewportHeight, rect.bottom);
+                    const visibleHeight = Math.max(0, visibleBottom - visibleTop);
 
-                    // Determine current prominent section
-                    // This condition makes a section "current" if its top is above a certain point in the viewport
-                    // and its bottom is below that point, prioritizing sections filling the view.
-                    if (pageYOffset >= sectionTop - scrollBufferForPencil && pageYOffset < sectionTop + sectionHeight - scrollBufferForPencil) {
-                         currentSectionId = section.getAttribute('id');
+                    if (visibleHeight > maxVisibility) {
+                        maxVisibility = visibleHeight;
+                        currentSectionId = section.getAttribute('id');
                     }
                 });
-                 // Fallback for hero or if no section perfectly matches (e.g., while scrolling fast between small sections)
-                if (!currentSectionId && pageYOffset < (visibleSections[0].getBoundingClientRect().top + window.pageYOffset)) {
-                    currentSectionId = 'hero';
-                }
 
 
+                // Update Nav Links
                 navLi.forEach(a => {
                     a.classList.remove('active');
                     if (a.getAttribute('href') && a.getAttribute('href').substring(1) === currentSectionId) {
                         a.classList.add('active');
                     }
                 });
-                 // Ensure 'Home' link is active for hero section or when at the very top
-                 if (currentSectionId === 'hero' || pageYOffset < (visibleSections.length > 0 ? (visibleSections[0].offsetTop - headerHeight - 100) : 200) ) {
-                      navLi.forEach(a => a.classList.remove('active'));
+                if (currentSectionId === 'hero' || (!currentSectionId && window.pageYOffset < window.innerHeight / 2)) {
+                     navLi.forEach(a => a.classList.remove('active'));
                       const homeLink = document.querySelector('nav ul li a[href="#hero"]');
                       if (homeLink) homeLink.classList.add('active');
-                      if (currentSectionId === '' && pageYOffset < 200) currentSectionId = 'hero'; // Default to hero if at top
-                 }
-
-
-                // Pencil Animation Trigger
-                if (pageTransitionPencil && currentSectionId && currentSectionId !== 'disclaimer' && currentSectionId !== lastActiveSectionId && !isPencilAnimating) {
-                    isPencilAnimating = true;
-                    pageTransitionPencil.classList.add('animate');
-
-                    // Remove class and reset flag after animation ends
-                    pageTransitionPencil.onanimationend = () => {
-                        pageTransitionPencil.classList.remove('animate');
-                        // Short cooldown before it can animate again
-                        setTimeout(() => {
-                            isPencilAnimating = false;
-                        }, 300); // 300ms cooldown
-                        pageTransitionPencil.onanimationend = null; // Clean up listener
-                    };
+                      if(!currentSectionId) currentSectionId = 'hero';
                 }
-                if(currentSectionId) { // Only update if a section is identified
-                    lastActiveSectionId = currentSectionId;
+
+
+                // Persistent Pencil Animation Trigger
+                const mainContentSections = ['gallery', 'services', 'pricing', 'about', 'contact'];
+                if (persistentPencil && currentSectionId && mainContentSections.includes(currentSectionId) && currentSectionId !== lastActiveSectionIdForPencil) {
+                    if (!isPersistentPencilActive) {
+                        isPersistentPencilActive = true;
+                        persistentPencil.classList.add('focused');
+
+                        clearTimeout(pencilFocusTimeout);
+                        pencilFocusTimeout = setTimeout(() => {
+                            persistentPencil.classList.remove('focused');
+                            isPersistentPencilActive = false;
+                        }, 1500); // Duration pencil stays focused
+                    }
                 }
-            });
+                // If scrolling back to hero or out of main content sections, ensure pencil is not focused
+                else if (persistentPencil && (!mainContentSections.includes(currentSectionId) || currentSectionId === 'hero')) {
+                    if (persistentPencil.classList.contains('focused')){
+                        persistentPencil.classList.remove('focused');
+                        clearTimeout(pencilFocusTimeout);
+                        isPersistentPencilActive = false;
+                    }
+                }
+                if(currentSectionId) {
+                    lastActiveSectionIdForPencil = currentSectionId;
+                }
+            };
+
+            window.addEventListener('scroll', debounce(handleScrollForPencil, 100)); // Debounce scroll handling
+            handleScrollForPencil(); // Initial check
         }
 
-        // Drag and Drop Functionality
+
+        // Drag and Drop Functionality (same as before)
         const dropZone = document.getElementById('dropZone');
         const fileInput = document.getElementById('file');
         const fileInfo = document.getElementById('fileInfo');
@@ -1589,24 +1317,15 @@
             fileInput.addEventListener('change', handleChange, false);
             dropZone.addEventListener('click', () => fileInput.click());
 
-            function preventDefaults(e) {
-                e.preventDefault();
-                e.stopPropagation();
-            }
+            function preventDefaults(e) { e.preventDefault(); e.stopPropagation(); }
             function highlight() {
                 dropZone.classList.add('dragover');
                 dropZone.classList.remove('error');
                 fileInfo.classList.remove('error-message');
                 fileInfo.innerHTML = '';
             }
-            function handleDrop(e) {
-                const dt = e.dataTransfer;
-                const files = dt.files;
-                handleFiles(files);
-            }
-            function handleChange(e) {
-                 handleFiles(e.target.files);
-            }
+            function handleDrop(e) { handleFiles(e.dataTransfer.files); }
+            function handleChange(e) { handleFiles(e.target.files); }
             function handleFiles(files) {
                  const file = files[0];
                  dropZone.classList.remove('error');
@@ -1644,7 +1363,7 @@
             });
         }
 
-        // Pricing Estimator Logic
+        // Pricing Estimator Logic (same as before)
         const sizeSelect = document.getElementById('sketch-size');
         const complexitySelect = document.getElementById('complexity');
         const subjectsSelect = document.getElementById('num-subjects');
@@ -1676,7 +1395,7 @@
             calculateEstimate();
         }
 
-        // Scroll to Top Button Logic
+        // Scroll to Top Button Logic (same as before)
         const scrollToTopBtn = document.getElementById('scrollToTopBtn');
         if (scrollToTopBtn) {
              window.addEventListener('scroll', () => {
