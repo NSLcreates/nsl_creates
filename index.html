@@ -44,7 +44,7 @@
 
         header {
             background: var(--color-header-footer); color: var(--color-text-light); /* Use light text on dark header */
-            padding: 1.1rem 0;
+            padding: 1.1rem 0; /* Default padding for larger screens */
             position: fixed; width: 100%; top: 0; left: 0; z-index: 1000;
             box-shadow: 0 6px 15px rgba(0,0,0,0.6); /* Darker shadow */
             transition: background-color 0.3s ease;
@@ -347,7 +347,7 @@
                 opacity: 0.78;
             }
             75% {
-                 transform: translateY(-51%) translateX(29px) rotate(16deg) scale(0.655) translateZ(2px);
+                 transform: translateY(-51%) translateX(29px) rotate(16deg) scale(0.655) translateZ(1px);
                  opacity: 0.81;
             }
         }
@@ -469,6 +469,10 @@
 
         @media (max-width: 768px) {
             .container { padding: 0 15px; } /* Reduced padding */
+            header {
+                /* Reduced vertical padding on mobile header */
+                padding: 0.8rem 0;
+            }
             header .container {
                 flex-direction: column;
                 align-items: flex-start; /* Ensure items align left */
@@ -476,13 +480,17 @@
                  /* Allow header to expand vertically */
                  box-sizing: border-box; /* Include padding in element's total width and height */
             }
+             header .logo {
+                 /* Ensure logo doesn't take full width unncessarily */
+                 width: auto;
+             }
             header .logo a { font-size: 1.3rem; }
 
-            /* Mobile Menu Styling (Fixed Collapsing) */
+            /* Mobile Menu Styling (Fixed Collapsing and Height) */
             nav {
                  width: 100%; /* Nav takes full width to position menu correctly */
                  order: 1; /* Place nav below the logo/toggle */
-                 margin-top: 10px; /* Add some space below logo/toggle */
+                 margin-top: 8px; /* Add some space below logo/toggle - reduced */
                  transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out; /* Add opacity transition */
                  overflow: hidden; /* Hide overflow during transition */
                  max-height: 0; /* Start collapsed */
@@ -492,7 +500,7 @@
             nav ul {
                  flex-direction: column;
                  width: 100%;
-                 padding: 10px 0; /* Reduced padding */
+                 padding: 8px 0; /* Reduced padding */
                  background: var(--color-header-footer);
                  box-shadow: none; /* No box shadow inside the nav block */
                  border-top: 1px solid rgba(255, 255, 255, 0.1); /* Keep border */
@@ -500,18 +508,35 @@
 
             nav ul.active {
                  display: flex; /* Keep flex for column layout */
-                 max-height: 500px; /* Increased max-height significantly */
+                 max-height: 500px; /* Increased max-height significantly - adjust if you have many more links */
                  opacity: 1; /* Make visible */
                  overflow-y: auto; /* Add scrolling if menu exceeds max-height */
                  -webkit-overflow-scrolling: touch; /* Improve touch scrolling on iOS */
             }
 
-            nav ul li { margin: 8px 0; width: 100%; } /* Reduced margin, full width list items */
-            nav ul li a { color: var(--color-text-light); font-size: 1rem; padding: 10px 15px; display: block; width: 100%; } /* Adjusted padding, full width links */
+            nav ul li { margin: 6px 0; width: 100%; } /* Reduced margin, full width list items */
+            nav ul li a { color: var(--color-text-light); font-size: 1rem; padding: 8px 15px; display: block; width: 100%; } /* Adjusted padding, full width links */
             nav ul li a:hover, nav ul li a.active { color: var(--color-secondary-accent); background-color: rgba(255, 255, 255, 0.08); /* Add subtle hover/active background */ }
             nav ul li a::after { display: none; } /* Hide underline animation on mobile */
 
-            .menu-toggle { display: block; position: static; margin-left: auto; } /* Position toggle to the right of logo in the top row */
+            /* Ensure logo and toggle are in a row above the menu */
+            .header-top-row {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+            }
+
+            /* Move logo and toggle into the top-row structure */
+            header .container .logo {
+                 width: auto; /* Allow logo to size itself */
+            }
+            header .container .menu-toggle {
+                margin-left: auto; /* Push toggle to the right */
+                order: 2; /* Ensure toggle is after logo */
+            }
+             header .container .logo { order: 1; }
+
 
             #hero { height: auto; padding: 80px 15px 40px; } /* Reduced padding */
             #hero h1 { font-size: 3rem; margin-bottom: 15px; }
@@ -588,17 +613,38 @@
             }
         }
 
+         /* Added a div to wrap logo and toggle for better mobile layout control */
+         header .container .header-top-row {
+             display: flex;
+             justify-content: space-between;
+             align-items: center;
+             width: 100%; /* Ensure it takes full width of container */
+         }
+          /* Restyle logo and toggle when they are children of header-top-row */
+         @media (max-width: 768px) {
+            header .container .logo,
+            header .container .menu-toggle {
+                /* Reset mobile-specific flex properties from header.container if needed, let parent handle */
+                margin-left: 0;
+                order: 0;
+            }
+             header .container .menu-toggle { margin-left: auto; } /* Push toggle right */
+         }
+
+
     </style>
 </head>
 <body>
 
     <header>
         <div class="container">
-            <div class="logo">
-                <a href="#hero">nsl_creates</a>
-            </div>
-            <div class="menu-toggle" id="mobile-menu">
-                ☰
+            <div class="header-top-row">
+                <div class="logo">
+                    <a href="#hero">nsl_creates</a>
+                </div>
+                <div class="menu-toggle" id="mobile-menu">
+                    ☰
+                </div>
             </div>
             <nav id="nav-menu">
                 <ul>
@@ -864,14 +910,18 @@
                  // document.querySelector('header').classList.toggle('menu-open');
             });
             document.querySelectorAll('#nav-menu a').forEach(link => {
-                link.addEventListener('click', function() {
+                link.addEventListener('click', function() { // Use function() for `this` context
                     if (navMenu.classList.contains('active')) {
-                        navMenu.classList.remove('active');
-                         // Remove no-scroll class if added
-                         // document.body.classList.remove('no-scroll');
-                         // document.querySelector('header').classList.remove('menu-open');
+                        // Delay closing the menu slightly to allow smooth scroll to start
+                        setTimeout(() => {
+                           navMenu.classList.remove('active');
+                            // Remove no-scroll class if added
+                            // document.body.classList.remove('no-scroll');
+                            // document.querySelector('header').classList.remove('menu-open');
+                        }, 300); // Match the transition duration
                     }
-                    // Remove active from all and add to clicked
+                    // Remove active from all and add to clicked (handled by scroll observer too)
+                    // Keeping immediate update for quick feedback on click
                     document.querySelectorAll('#nav-menu a').forEach(navLink => navLink.classList.remove('active'));
                     this.classList.add('active');
                 });
@@ -901,10 +951,13 @@
                          // Active class update is also handled by scroll observer below for accuracy
 
                         if (navMenu && navMenu.classList.contains('active')) {
-                            navMenu.classList.remove('active');
-                            // Remove no-scroll class if added
-                             // document.body.classList.remove('no-scroll');
-                             // document.querySelector('header').classList.remove('menu-open');
+                            // Delay closing the menu slightly to allow smooth scroll to start
+                            setTimeout(() => {
+                                navMenu.classList.remove('active');
+                                // Remove no-scroll class if added
+                                // document.body.classList.remove('no-scroll');
+                                // document.querySelector('header').classList.remove('menu-open');
+                             }, 300); // Match the transition duration
                         }
                     }
                 }
@@ -914,6 +967,7 @@
         const sections = document.querySelectorAll('section');
         const navLi = document.querySelectorAll('nav ul li a');
         const header = document.querySelector('header');
+        // Filter out sections without IDs if necessary, but yours all have IDs
         const visibleSections = Array.from(sections).filter(section => section.id);
 
         // Persistent Pencil
