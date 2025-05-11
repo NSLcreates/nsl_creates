@@ -38,6 +38,7 @@
             /* Update background pattern for dark theme */
             background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIj4KPHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiBmaWxsPSIjMUEyMDJDIj4gPCByZWN0Pgo8Y2lyY2xlIGN4PSIxIiBjeT0iMSIgcj0iMC41IiBmaWxsPSIjNEU1NDZBIj48L2NpcmNsZT4KPC9zdmc+');
             background-repeat: repeat;
+            perspective: 1000px; /* Global perspective for subtle page depth */
         }
 
         .container { width: 90%; max-width: 1300px; margin: auto; overflow: hidden; padding: 0 30px; }
@@ -48,47 +49,49 @@
             position: fixed; width: 100%; top: 0; left: 0; z-index: 1000;
             box-shadow: 0 6px 15px rgba(0,0,0,0.6); /* Darker shadow */
             transition: background-color 0.3s ease;
+             transform-style: preserve-3d; /* Enable 3D for header elements */
         }
         header .container { display: flex; justify-content: space-between; align-items: center; }
         header .logo a {
             text-decoration: none; color: var(--color-highlight); display: block;
             font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700;
             transition: color 0.3s ease, transform 0.3s ease;
+             transform: translateZ(10px); /* Push logo forward */
         }
-        header .logo a:hover { color: var(--color-secondary-accent); transform: scale(1.05); }
+        header .logo a:hover { color: var(--color-secondary-accent); transform: scale(1.05) translateZ(15px); }
         nav ul { list-style: none; padding: 0; margin: 0; display: flex; }
         nav ul li { margin-left: 40px; }
         nav ul li a {
             color: rgba(255, 255, 255, 0.8); text-decoration: none; font-weight: 400;
             padding: 10px 0; position: relative; transition: color 0.3s ease; letter-spacing: 0.5px;
+             transform: translateZ(10px); /* Push nav items forward */
         }
         nav ul li a::after {
             content: ''; position: absolute; left: 0; bottom: -3px; height: 2px; width: 0;
             background-color: var(--color-secondary-accent); transition: width 0.3s ease-out;
         }
-        nav ul li a:hover, nav ul li a.active { color: var(--color-secondary-accent); }
+        nav ul li a:hover, nav ul li a.active { color: var(--color-secondary-accent); transform: translateZ(15px); }
         nav ul li a:hover::after, nav ul li a.active::after { width: 100%; }
         .menu-toggle { display: none; font-size: 2.2rem; cursor: pointer; color: var(--color-text-light); transition: transform 0.3s ease; }
         .menu-toggle:hover { transform: rotate(90deg); }
 
         section {
             padding: 140px 0 120px; border-bottom: 1px solid var(--color-border);
-            opacity: 0; transform: translateY(50px);
-            transition: opacity 1s ease-out, transform 1s ease-out;
+            opacity: 0;
+            /* Initial 3D tilt and position */
+            transform: translateY(80px) rotateX(8deg) rotateY(-8deg) scale(0.95);
+            transform-style: preserve-3d; /* Preserve 3D space for children if any */
+            transition: opacity 1s ease-out, transform 1.2s cubic-bezier(0.25, 1, 0.5, 1); /* Smoother 3D transition */
             background-color: var(--color-bg-dark); /* Use dark background */
             min-height: 80vh;
             position: relative; /* Needed for potential 3D transforms on child elements */
-            perspective: 1000px; /* Add perspective for 3D effects */
+             perspective: 1000px; /* Perspective for elements within sections */
         }
          /* Simple 3D tilt effect on sections as they appear */
         section.is-visible {
             opacity: 1;
-            transform: translateY(0) rotateX(0deg) rotateY(0deg);
-             transition: opacity 1s ease-out, transform 1.2s cubic-bezier(0.25, 1, 0.5, 1); /* Smoother 3D transition */
+            transform: translateY(0) rotateX(0deg) rotateY(0deg) scale(1); /* Return to flat, normal size */
         }
-         section:not(.is-visible) {
-            transform: translateY(50px) rotateX(5deg) rotateY(-5deg); /* Initial 3D tilt */
-         }
 
 
         section:last-of-type { border-bottom: none; }
@@ -101,12 +104,13 @@
             font-size: 3.5rem; color: var(--color-text-light); /* Light text on dark background */
             position: relative;
             padding-bottom: 20px; font-weight: 700; letter-spacing: 1px;
+             transform: translateZ(20px); /* Push H2 forward in its section's 3D space */
         }
         section h2::after {
             content: ''; position: absolute; left: 50%; bottom: 0; transform: translateX(-50%);
             height: 3px; width: 100px; background-color: var(--color-highlight); border-radius: 2px;
         }
-        #disclaimer h2 { font-size: 2.5rem; margin-bottom: 30px; padding-bottom: 10px; }
+        #disclaimer h2 { font-size: 2.5rem; margin-bottom: 30px; padding-bottom: 10px; transform: translateZ(15px); }
         #disclaimer h2::after { width: 80px; }
 
         #hero {
@@ -121,8 +125,12 @@
             text-shadow: 2px 2px 12px rgba(0,0,0,0.6); /* Darker shadow */
             font-weight: 700; letter-spacing: 1.5px; line-height: 1.2;
             color: var(--color-text-light); /* Light text */
-             transform: translateZ(50px); /* Push H1 forward in 3D space */
+             transform: translateZ(80px); /* Push H1 further forward */
+             transition: transform 0.5s ease-out;
         }
+         #hero h1:hover {
+             transform: translateZ(100px) rotateY(2deg); /* More dynamic hover */
+         }
         #hero h1 .site-title { font-weight: 700; color: var(--color-highlight); }
         #hero p {
             font-size: 1.6rem; margin-bottom: 60px; max-width: 900px;
@@ -130,35 +138,40 @@
             font-weight: 300;
             color: var(--color-text-dark); /* Muted light grey */
             line-height: 1.7;
-             transform: translateZ(30px); /* Push P forward */
+             transform: translateZ(50px); /* Push P further forward */
+              transition: transform 0.5s ease-out;
         }
+         #hero p:hover {
+             transform: translateZ(70px) rotateY(-1deg); /* More dynamic hover */
+         }
+
 
         .cta-button {
             display: inline-block; background: var(--color-primary-button); color: var(--color-text-dark);
             padding: 18px 45px; text-decoration: none; border-radius: 35px; font-size: 1.4rem; font-weight: 500;
             transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
             border: none; cursor: pointer; box-shadow: 0 6px 12px rgba(0,0,0,0.3); /* Darker shadow */
-            letter-spacing: 0.5px;
              transform-style: preserve-3d; /* Enable 3D transforms for hover */
-             transform: translateZ(20px); /* Push button forward */
+             transform: translateZ(40px); /* Push button further forward */
         }
         .cta-button:hover {
             background: var(--color-highlight);
-            transform: translateY(-6px) translateZ(40px) rotateX(5deg); /* Lift and tilt on hover in 3D */
+            transform: translateY(-6px) translateZ(60px) rotateX(8deg); /* Lift and tilt more aggressively on hover in 3D */
             box-shadow: 0 10px 20px rgba(0,0,0,0.4), 0 6px 10px rgba(0,0,0,0.3); /* Darker shadow */
         }
-        .cta-button:active { transform: translateY(-2px) translateZ(25px); box-shadow: 0 4px 8px rgba(0,0,0,0.3); }
+        .cta-button:active { transform: translateY(-2px) translateZ(45px); box-shadow: 0 4px 8px rgba(0,0,0,0.3); }
 
         .sketch-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 40px; }
         .sketch-gallery img {
             display: block; width: 100%; height: auto; border-radius: 8px;
             box-shadow: 0 6px 15px rgba(0,0,0,0.2); /* Darker shadow */
             border: 1px solid var(--color-border);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.4s ease, box-shadow 0.4s ease; /* Slightly slower transition */
             transform-style: preserve-3d; /* Enable 3D transforms for hover */
+             transform: translateZ(0); /* Ensure base state is 0 */
         }
         .sketch-gallery img:hover {
-            transform: scale(1.03) translateZ(20px) rotateY(5deg); /* Lift and tilt on hover in 3D */
+            transform: scale(1.05) translateZ(40px) rotateY(8deg); /* Lift and tilt more aggressively on hover in 3D */
             box-shadow: 0 10px 20px rgba(0,0,0,0.3); /* Darker shadow */
         }
 
@@ -168,13 +181,14 @@
             padding: 45px; border-radius: 12px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.2); /* Darker shadow */
             text-align: center;
-            transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.3s ease, border-left-color 0.3s ease;
+            transition: transform 0.5s ease, box-shadow 0.5s ease, background-color 0.3s ease, border-left-color 0.3s ease; /* Slower transition */
             border: 1px solid var(--color-border); border-left: 4px solid transparent;
             display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
              transform-style: preserve-3d; /* Enable 3D transforms for hover */
+             transform: translateZ(0); /* Ensure base state is 0 */
         }
         .service-card:hover {
-            transform: translateY(-10px) translateZ(20px) rotateX(-3deg); /* Lift and tilt on hover in 3D */
+            transform: translateY(-15px) translateZ(30px) rotateX(-5deg); /* Lift and tilt more aggressively on hover in 3D */
             box-shadow: 0 15px 30px rgba(0,0,0,0.3); /* Darker shadow */
             background-color: #3a475a; /* Slightly lighter dark background */
             border-left-color: var(--color-highlight);
@@ -211,21 +225,30 @@
             max-width: 700px; margin: 60px auto; padding: 50px; background: var(--color-bg-light); /* Darker background */
             border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); /* Darker shadow */
             border: 1px solid var(--color-border);
+             transform-style: preserve-3d; /* Enable 3D transforms for hover/focus */
         }
+         .contact-form:hover {
+             transform: translateZ(10px); /* Subtle lift on hover */
+             box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+         }
+
         .contact-form label { display: block; margin-bottom: 12px; font-weight: 500; color: var(--color-text-light); font-size: 1.2rem; } /* Light text */
         .contact-form input[type="text"], .contact-form input[type="email"], .contact-form textarea, .contact-form select {
             width: 100%; padding: 18px; margin-bottom: 25px; border: 1px solid var(--color-border);
             border-radius: 10px; font-size: 1.1rem; color: var(--color-text-light); /* Light text */
             background-color: var(--color-bg-dark); /* Deep charcoal input background */
             box-sizing: border-box; appearance: none;
+             transform: translateZ(5px); /* Push inputs forward slightly */
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease-out; /* Add transform transition */
              /* Adjust select dropdown arrow color for dark theme */
             background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23A0AEC0%22%20d%3D%22M287%2C114.7L159.2%2C28.9c-9.2-9.5-24.2-9.5-33.4%2C0L5.4%2C114.7c-9.2%2C9.5-9.2%2C25%2C0%2C34.5l127.8%2C85.8c9.2%2C9.5%2C24.2%2C9.5%2C33.4%2C0l127.8-85.8C296.2%2C139.7%2C296.2%2C124.2%2C287%2C114.7z%22%2F%3E%3C%2Fsvg%3E');
             background-repeat: no-repeat; background-position: right 20px top 50%; background-size: 18px auto;
-            padding-right: 50px; transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            padding-right: 50px;
         }
         .contact-form input[type="text"]:focus, .contact-form input[type="email"]:focus, .contact-form textarea:focus, .contact-form select:focus {
             border-color: var(--color-highlight); box-shadow: 0 0 10px rgba(159, 122, 234, 0.4); /* Highlight color shadow */
             outline: none;
+             transform: translateZ(10px); /* Push focused inputs further forward */
         }
         .contact-form textarea { min-height: 220px; resize: vertical; }
         .price-estimator { margin-bottom: 40px; padding-top: 30px; border-top: 1px solid var(--color-border); }
@@ -235,11 +258,17 @@
         .drop-zone {
             border: 2px dashed var(--color-border); border-radius: 10px; padding: 50px; text-align: center;
             cursor: pointer; margin-bottom: 30px;
-            transition: background-color 0.3s ease, border-color 0.3s ease, border-style 0.3s ease, box-shadow 0.3s ease;
+            transition: background-color 0.3s ease, border-color 0.3s ease, border-style 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
             background-color: #28303f; /* Slightly lighter dark background */
             position: relative;
+             transform-style: preserve-3d;
+             transform: translateZ(5px); /* Push drop zone forward */
         }
-        .drop-zone.dragover { background-color: rgba(159, 122, 234, 0.15); border-color: var(--color-highlight); border-style: solid; box-shadow: 0 0 18px rgba(159, 122, 234, 0.35); } /* Highlight color */
+         .drop-zone:hover {
+             transform: translateZ(10px); /* Lift on hover */
+         }
+
+        .drop-zone.dragover { background-color: rgba(159, 122, 234, 0.15); border-color: var(--color-highlight); border-style: solid; box-shadow: 0 0 18px rgba(159, 122, 234, 0.35); transform: translateZ(15px); } /* Highlight color, push further */
         .drop-zone.error { border-color: var(--color-error-text); background-color: rgba(252, 129, 129, 0.05); border-style: dashed; box-shadow: none; } /* Alert color */
         .drop-zone p { margin: 0; font-size: 1.15rem; color: var(--color-medium-grey); z-index: 2; position: relative; }
         .file-info { margin-top: 20px; font-size: 1.05rem; color: var(--color-text-dark); font-weight: 500; z-index: 2; position: relative; } /* Muted light text */
@@ -251,23 +280,24 @@
             border: none; border-radius: 35px; font-size: 1.3rem; font-weight: 600;
             transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
             width: 100%; margin-top: 35px; cursor: pointer; box-shadow: 0 6px 12px rgba(0,0,0,0.3); /* Darker shadow */
-            letter-spacing: 0.5px;
              transform-style: preserve-3d; /* Enable 3D transforms for hover */
+             transform: translateZ(20px); /* Push button forward */
         }
         .contact-form button[type="submit"]:hover {
              background: var(--color-highlight);
-             transform: translateY(-4px) translateZ(15px) rotateX(3deg); /* Lift and tilt on hover in 3D */
+             transform: translateY(-4px) translateZ(30px) rotateX(5deg); /* Lift and tilt on hover in 3D */
              box-shadow: 0 8px 16px rgba(0,0,0,0.4), 5px 9px rgba(0,0,0,0.3); /* Darker shadow */
         }
-        .contact-form button[type="submit"]:active { transform: translateY(0) translateZ(5px); box-shadow: 0 3px 6px rgba(0,0,0,0.3); }
+        .contact-form button[type="submit"]:active { transform: translateY(0) translateZ(22px); box-shadow: 0 3px 6px rgba(0,0,0,0.3); }
 
         .price-estimate {
             margin-top: 35px; padding: 25px; background-color: var(--color-bg-light); /* Darker background */
             border: 1px solid var(--color-border); border-left: 8px solid var(--color-highlight);
             border-radius: 10px; font-size: 1.6rem; font-weight: 700; color: var(--color-text-light); /* Light text */
             text-align: center; margin-bottom: 30px; box-shadow: 0 3px 12px rgba(0,0,0,0.2); /* Darker shadow */
+             transform: translateZ(10px); /* Push estimate forward */
+             transition: transform 0.3s ease;
         }
-
         .contact-info p { text-align: center; font-size: 1.25rem; margin-top: 50px; color: var(--color-medium-grey); }
         .contact-info p a { color: var(--color-text-light); text-decoration: none; font-weight: bold; transition: color 0.3s ease, text-decoration 0.3s ease; } /* Light text link */
         .contact-info p a:hover { color: var(--color-primary-button); text-decoration: underline; }
@@ -303,46 +333,47 @@
             height: auto;
             z-index: 950;
             opacity: 0.8;
-            transform: translateY(-50%) translateX(30px) rotate3d(1, 1, 0, 15deg) scale(0.65); /* Use rotate3d for combined rotation */
+            /* Base transform with a visible initial 3D angle */
+            transform: translateY(-50%) translateX(30px) rotate3d(1, 1, 0, 20deg) scale(0.65); /* Increased rotation angle */
             transform-origin: center center;
             /* Enhanced Transition for smooth changes to/from emphasized state */
             transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.8s ease-out; /* Added bounce/overshoot effect */
             pointer-events: none;
             will-change: transform, opacity;
             /* Apply idle animation */
-            animation: pencilIdle 10s ease-in-out infinite; /* Adjusted duration */
+            animation: pencilIdle 12s ease-in-out infinite; /* Adjusted duration */
         }
 
         #persistent-pencil.initial-load-pencil {
             opacity: 0;
-            transform: translateY(-50%) translateX(80px) rotate3d(1, 1, 0, 60deg) scale(0.3); /* Match initial with rotate3d */
+            transform: translateY(-50%) translateX(100px) rotate3d(1, 1, 0, 90deg) scale(0.2); /* More dramatic initial position/rotation */
         }
 
         #persistent-pencil.emphasize {
             animation-play-state: paused !important;
             opacity: 1;
             /* Emphasized state: more visible, larger, pronounced 3D rotation */
-            transform: translateY(-50%) translateX(0px) rotate3d(0.5, -1, 0.2, 25deg) scale(1) translateZ(50px); /* More dynamic 3D rotation */
+            transform: translateY(-50%) translateX(0px) rotate3d(0.8, -1, 0.3, 35deg) scale(1.1) translateZ(80px); /* More dynamic 3D rotation, larger scale, pushed further forward */
              /* Ensure transition applies to emphasize state */
-             transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.6s ease-out; /* Smooth ease-out with slight overshoot */
+             transition: transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.7s ease-out; /* Smooth ease-out with slight overshoot */
         }
 
         /* Refined Idle Animation (Enhanced 3D) */
         @keyframes pencilIdle {
             0%, 100% {
-                transform: translateY(-50%) translateX(30px) rotate3d(1, 1, 0, 15deg) scale(0.65);
+                transform: translateY(-50%) translateX(30px) rotate3d(1, 1, 0, 20deg) scale(0.65);
                 opacity: 0.8;
             }
             25% {
-                transform: translateY(-51%) translateX(28px) rotate3d(1, 1.2, 0.1, 17deg) scale(0.66);
+                transform: translateY(-51%) translateX(28px) rotate3d(1.1, 1.2, 0.1, 22deg) scale(0.66);
                 opacity: 0.82;
             }
             50% {
-                transform: translateY(-49%) translateX(32px) rotate3d(1.2, 0.8, -0.1, 13deg) scale(0.64);
+                transform: translateY(-49%) translateX(32px) rotate3d(1.2, 0.8, -0.1, 18deg) scale(0.64);
                 opacity: 0.78;
             }
             75% {
-                 transform: translateY(-51%) translateX(29px) rotate3d(0.8, 1.1, 0.05, 16deg) scale(0.655);
+                 transform: translateY(-51%) translateX(29px) rotate3d(0.9, 1.1, 0.05, 21deg) scale(0.655);
                  opacity: 0.81;
             }
         }
@@ -351,42 +382,59 @@
         /* Responsive Design Adjustments */
         @media (max-width: 1024px) {
              .container { padding: 0 20px; }
-             section { padding: 100px 0 80px; }
-             section h2 { font-size: 2.8rem; margin-bottom: 60px; }
-             section h2::after { width: 80px; }
-             #disclaimer h2 { font-size: 2rem; margin-bottom: 25px; }
+             section { padding: 100px 0 80px;
+                 transform: translateY(60px) rotateX(6deg) rotateY(-6deg) scale(0.98); /* Adjusted initial transform */
+             }
+              section.is-visible {
+                transform: translateY(0) rotateX(0deg) rotateY(0deg) scale(1);
+            }
+             section h2 { font-size: 2.5rem; margin-bottom: 50px; transform: translateZ(15px); }
+             section h2::after { width: 70px; }
+             #disclaimer h2 { font-size: 2rem; margin-bottom: 25px; transform: translateZ(12px); }
              #disclaimer h2::after { width: 60px; }
              #disclaimer p { font-size: 1.05rem; }
-             #hero h1 { font-size: 4.5rem; }
-             #hero p { font-size: 1.4rem; }
+             #hero h1 { font-size: 4rem; margin-bottom: 20px; transform: translateZ(60px); }
+              #hero h1:hover { transform: translateZ(80px) rotateY(2deg); }
+             #hero p { font-size: 1.3rem; margin-bottom: 40px; transform: translateZ(40px); }
+              #hero p:hover { transform: translateZ(55px) rotateY(-1deg); }
+             .cta-button { padding: 16px 40px; font-size: 1.3rem; transform: translateZ(30px); }
+             .cta-button:hover { transform: translateY(-5px) translateZ(50px) rotateX(6deg); }
+             .cta-button:active { transform: translateY(-2px) translateZ(35px); }
              .sketch-gallery { gap: 30px; margin-top: 30px; }
              .sketch-gallery img { border-radius: 6px; }
+             .sketch-gallery img:hover { transform: scale(1.04) translateZ(30px) rotateY(6deg); }
              .services-grid { gap: 50px; }
              .service-card { padding: 40px; }
              .service-card .icon { font-size: 4rem; }
-             .service-card h3 { font-size: 2rem; color: var(--color-text-light); }
+             .service-card h3 { font-size: 2rem; }
              .service-card p { font-size: 1.1rem; }
+             .service-card:hover { transform: translateY(-12px) translateZ(25px) rotateX(-4deg); }
              .service-process { margin-top: 70px; padding-top: 40px; }
-             .service-process h3 { font-size: 2.2rem; color: var(--color-text-light); }
+             .service-process h3 { font-size: 2.2rem; }
              .service-process ol, .service-process ul { padding-left: 30px; font-size: 1.05rem; }
              .service-process li { margin-bottom: 15px; }
              .service-process ul li::before { width: 1em; margin-left: -1em; }
-             .important-note { font-size: 0.95rem; color: var(--color-alert); }
+             .important-note { font-size: 0.95rem; }
              .pricing-info p { font-size: 1.2rem; margin-bottom: 30px; }
              #about p { font-size: 1.15rem; }
              .contact-form { max-width: 600px; margin: 50px auto; padding: 45px; }
-             .contact-form label { font-size: 1.1rem; color: var(--color-text-light); }
-             .contact-form input[type="text"], .contact-form input[type="email"], .contact-form textarea, .contact-form select { padding: 15px; font-size: 1.05rem; margin-bottom: 20px; }
+              .contact-form:hover { transform: translateZ(8px); }
+             .contact-form label { font-size: 1.1rem; }
+             .contact-form input[type="text"], .contact-form input[type="email"], .contact-form textarea, .contact-form select { padding: 15px; font-size: 1.05rem; margin-bottom: 20px; transform: translateZ(4px); }
+              .contact-form input[type="text"]:focus, .contact-form input[type="email"]:focus, .contact-form textarea:focus, .contact-form select:focus { transform: translateZ(8px); }
              .contact-form select { background-position: right 15px top 50%; background-size: 16px auto; padding-right: 45px; }
-             .price-estimator h3 { font-size: 1.8rem; margin-bottom: 25px; color: var(--color-text-light); }
+             .price-estimator h3 { font-size: 1.8rem; margin-bottom: 25px; }
              .price-estimator > div { margin-bottom: 15px; }
-             .drop-zone { padding: 40px; margin-bottom: 25px; }
+             .drop-zone { padding: 40px; margin-bottom: 25px; transform: translateZ(4px); }
+              .drop-zone:hover { transform: translateZ(8px); }
+             .drop-zone.dragover { transform: translateZ(12px); }
              .drop-zone p { font-size: 1.1rem; }
              .file-info { font-size: 1rem; }
-             .price-estimate { font-size: 1.4rem; padding: 20px; margin-top: 30px; margin-bottom: 25px; color: var(--color-text-light); }
-             .contact-form button[type="submit"] { padding: 16px 30px; font-size: 1.2rem; margin-top: 30px; }
+             .price-estimate { font-size: 1.4rem; padding: 20px; margin-top: 30px; margin-bottom: 25px; transform: translateZ(8px); }
+             .contact-form button[type="submit"] { padding: 16px 30px; font-size: 1.2rem; margin-top: 30px; transform: translateZ(15px); }
+             .contact-form button[type="submit"]:hover { transform: translateY(-4px) translateZ(25px) rotateX(5deg); }
+             .contact-form button[type="submit"]:active { transform: translateY(0) translateZ(18px); }
              .contact-info p { font-size: 1.15rem; margin-top: 40px; }
-             .contact-info p a { color: var(--color-text-light); }
              footer { padding: 3rem 0 1.2rem; }
              footer .footer-note { margin-bottom: 15px; }
              footer .social-links { margin-bottom: 20px; }
@@ -398,88 +446,103 @@
               #persistent-pencil {
                 width: 50px;
                 right: 5px;
-                transform: translateY(-50%) translateX(25px) rotate3d(1, 1, 0, 15deg) scale(0.55);
+                transform: translateY(-50%) translateX(25px) rotate3d(1, 1, 0, 20deg) scale(0.55);
              }
              #persistent-pencil.emphasize {
-                transform: translateY(-50%) translateX(0px) rotate3d(0.5, -1, 0.2, 20deg) scale(0.85) translateZ(30px);
+                transform: translateY(-50%) translateX(0px) rotate3d(0.8, -1, 0.3, 30deg) scale(0.95) translateZ(50px); /* Adjusted scale and translateZ */
              }
              @keyframes pencilIdle {
-                0%, 100% { transform: translateY(-50%) translateX(25px) rotate3d(1, 1, 0, 15deg) scale(0.55); opacity: 0.75; }
-                25% { transform: translateY(-51%) translateX(23px) rotate3d(1, 1.2, 0.1, 17deg) scale(0.56); opacity: 0.78; }
-                50% { transform: translateY(-49%) translateX(27px) rotate3d(1.2, 0.8, -0.1, 13deg) scale(0.54); opacity: 0.72; }
-                75% { transform: translateY(-51%) translateX(24px) rotate3d(0.8, 1.1, 0.05, 16deg) scale(0.555); opacity: 0.77; }
+                0%, 100% { transform: translateY(-50%) translateX(25px) rotate3d(1, 1, 0, 20deg) scale(0.55); opacity: 0.75; }
+                25% { transform: translateY(-51%) translateX(23px) rotate3d(1.1, 1.2, 0.1, 22deg) scale(0.56); opacity: 0.78; }
+                50% { transform: translateY(-49%) translateX(27px) rotate3d(1.2, 0.8, -0.1, 18deg) scale(0.54); opacity: 0.72; }
+                75% { transform: translateY(-51%) translateX(24px) rotate3d(0.9, 1.1, 0.05, 21deg) scale(0.555); opacity: 0.77; }
             }
         }
 
         @media (max-width: 768px) {
-            header .container { flex-direction: column; align-items: flex-start; padding-left: 20px; }
-            header .logo a { font-size: 1.5rem; }
+            .container { padding: 0 15px; } /* Reduced padding */
+            header .container { padding-left: 15px; }
+            header .logo a { font-size: 1.3rem; }
             nav ul { background: var(--color-header-footer); }
             nav ul.active { display: flex; max-height: 300px; }
-            nav ul li { margin: 10px 0; }
-            nav ul li a { color: var(--color-text-light); }
+            nav ul li { margin: 8px 0; } /* Reduced margin */
+            nav ul li a { color: var(--color-text-light); font-size: 1rem; padding: 6px 0; } /* Adjusted padding and font size */
             nav ul li a:hover, nav ul li a.active { color: var(--color-secondary-accent); }
-            .menu-toggle { display: block; position: absolute; top: 1.2rem; right: 1.2rem; color: var(--color-text-light); }
-            #hero { height: auto; padding: 100px 20px 60px; }
-            #hero h1 { font-size: 3.5rem; margin-bottom: 20px; }
-            #hero p { font-size: 1.3rem; margin-bottom: 40px; }
-            section { padding: 80px 20px 60px; }
-            section h2 { font-size: 2.2rem; margin-bottom: 50px; padding-bottom: 15px; }
-            section h2::after { height: 2px; width: 70px; }
-            #disclaimer { padding: 50px 20px; }
-            #disclaimer h2 { font-size: 1.8rem; margin-bottom: 20px; }
-            #disclaimer h2::after { width: 50px; }
-            #disclaimer p { font-size: 1rem; }
-            .sketch-gallery { grid-template-columns: 1fr; gap: 25px; margin-top: 25px; }
-            .sketch-gallery img { border-radius: 5px; }
-            .services-grid { grid-template-columns: 1fr; gap: 40px; }
-            .service-card { padding: 35px; }
-            .service-card .icon { font-size: 3.5rem; margin-bottom: 25px; }
-            .service-card h3 { font-size: 1.8rem; }
-            .service-card p { font-size: 1.1rem; }
-            .service-process { margin-top: 60px; padding-top: 30px; }
-            .service-process h3 { font-size: 2rem; }
-            .service-process ol, .service-process ul { padding-left: 20px; margin: 20px auto; font-size: 1rem; }
-            .service-process li { margin-bottom: 12px; }
-            .service-process ul li::before { width: 1em; margin-left: -1em; }
-            .important-note { font-size: 0.9rem; }
-            .pricing-info p { font-size: 1.1rem; margin-bottom: 25px; }
-            #about p { font-size: 1.05rem; }
-            .contact-form { margin: 40px auto; padding: 35px; }
-            .contact-form label { font-size: 1.05rem; margin-bottom: 8px; }
-            .contact-form input[type="text"], .contact-form input[type="email"], .contact-form textarea, .contact-form select { padding: 12px; font-size: 1rem; margin-bottom: 18px; }
-            .contact-form select { background-position: right 10px top 50%; background-size: 14px auto; padding-right: 40px; }
-            .price-estimator h3 { font-size: 1.6rem; margin-bottom: 20px; }
-            .price-estimator > div { margin-bottom: 15px; }
-            .drop-zone { padding: 35px; margin-bottom: 20px; }
-            .drop-zone p { font-size: 1.05rem; }
-            .file-info { font-size: 0.95rem; }
-            .price-estimate { font-size: 1.3rem; padding: 18px; margin-top: 25px; margin-bottom: 20px; }
-            .contact-form button[type="submit"] { padding: 15px 25px; font-size: 1.1rem; margin-top: 25px; }
-            .contact-info p { font-size: 1.1rem; margin-top: 30px; }
-            .contact-info p a { color: var(--color-text-light); }
-            footer { padding: 2.5rem 0 1rem; }
-            footer .footer-note { margin-bottom: 10px; }
-            footer .social-links { margin-bottom: 15px; }
-            footer .social-links a { font-size: 1.8rem; margin: 0 10px; }
-            footer p { font-size: 0.9em; }
-            .scroll-to-top { width: 40px; height: 40px; line-height: 40px; font-size: 1.2rem; bottom: 25px; right: 25px; }
+            .menu-toggle { display: block; position: absolute; top: 1rem; right: 1rem; color: var(--color-text-light); font-size: 2rem; } /* Adjusted size and position */
+            #hero { height: auto; padding: 80px 15px 40px; } /* Reduced padding */
+            #hero h1 { font-size: 3rem; margin-bottom: 15px; transform: translateZ(40px); } /* Reduced font size and transform */
+             #hero h1:hover { transform: translateZ(50px) rotateY(2deg); }
+            #hero p { font-size: 1.1rem; margin-bottom: 30px; transform: translateZ(30px); } /* Reduced font size and transform */
+             #hero p:hover { transform: translateZ(40px) rotateY(-1deg); }
+            section { padding: 60px 15px 40px; /* Reduced padding */
+                 transform: translateY(50px) rotateX(10deg) rotateY(-10deg) scale(0.9); /* More pronounced initial transform */
+             }
+              section.is-visible {
+                transform: translateY(0) rotateX(0deg) rotateY(0deg) scale(1);
+            }
+            section h2 { font-size: 2rem; margin-bottom: 40px; padding-bottom: 10px; transform: translateZ(10px); } /* Reduced font size and transform */
+            section h2::after { height: 2px; width: 60px; } /* Reduced size */
+            #disclaimer { padding: 40px 15px; } /* Reduced padding */
+            #disclaimer h2 { font-size: 1.6rem; margin-bottom: 15px; transform: translateZ(8px); } /* Reduced font size and transform */
+            #disclaimer h2::after { width: 40px; } /* Reduced size */
+            #disclaimer p { font-size: 0.95rem; } /* Reduced font size */
+            .sketch-gallery { grid-template-columns: 1fr; gap: 20px; margin-top: 20px; } /* Reduced gap */
+            .sketch-gallery img { border-radius: 4px; } /* Reduced border-radius */
+            .sketch-gallery img:hover { transform: scale(1.03) translateZ(20px) rotateY(8deg); } /* Adjusted transform */
+            .services-grid { grid-template-columns: 1fr; gap: 30px; margin-top: 30px; } /* Reduced gap */
+            .service-card { padding: 30px; } /* Reduced padding */
+            .service-card .icon { font-size: 3rem; margin-bottom: 20px; } /* Reduced size and margin */
+            .service-card h3 { font-size: 1.6rem; } /* Reduced font size */
+            .service-card p { font-size: 1rem; } /* Reduced font size */
+             .service-card:hover { transform: translateY(-8px) translateZ(15px) rotateX(-5deg); } /* Adjusted transform */
+            .service-process { margin-top: 50px; padding-top: 20px; } /* Reduced margin and padding */
+            .service-process h3 { font-size: 1.8rem; } /* Reduced font size */
+            .service-process ol, .service-process ul { padding-left: 15px; margin: 15px auto; font-size: 0.95rem; } /* Reduced padding and font size */
+            .service-process li { margin-bottom: 10px; padding-left: 10px; } /* Reduced margin and padding */
+            .service-process ul li::before { width: 0.8em; margin-left: -0.8em; } /* Adjusted size */
+            .important-note { font-size: 0.85rem; } /* Reduced font size */
+            .pricing-info p { font-size: 1rem; margin-bottom: 20px; } /* Reduced font size and margin */
+            #about p { font-size: 1rem; } /* Reduced font size */
+            .contact-form { margin: 30px auto; padding: 30px; } /* Reduced margin and padding */
+             .contact-form:hover { transform: translateZ(5px); }
+            .contact-form label { font-size: 1rem; margin-bottom: 6px; } /* Reduced font size and margin */
+            .contact-form input[type="text"], .contact-form input[type="email"], .contact-form textarea, .contact-form select { padding: 10px; font-size: 0.95rem; margin-bottom: 15px; transform: translateZ(3px); } /* Reduced padding, font size, margin, transform */
+            .contact-form input[type="text"]:focus, .contact-form input[type="email"]:focus, .contact-form textarea:focus, .contact-form select:focus { transform: translateZ(6px); }
+            .contact-form select { background-position: right 8px top 50%; background-size: 12px auto; padding-right: 35px; } /* Adjusted size and padding */
+            .price-estimator h3 { font-size: 1.4rem; margin-bottom: 15px; } /* Reduced font size and margin */
+            .price-estimator > div { margin-bottom: 10px; } /* Reduced margin */
+            .drop-zone { padding: 30px; margin-bottom: 15px; transform: translateZ(3px); } /* Reduced padding, margin, transform */
+             .drop-zone:hover { transform: translateZ(6px); }
+             .drop-zone.dragover { transform: translateZ(10px); }
+            .drop-zone p { font-size: 1rem; } /* Reduced font size */
+            .file-info { font-size: 0.9rem; } /* Reduced font size */
+            .price-estimate { font-size: 1.2rem; padding: 15px; margin-top: 20px; margin-bottom: 15px; transform: translateZ(6px); } /* Reduced font size, padding, margin, transform */
+            .contact-form button[type="submit"] { padding: 14px 20px; font-size: 1rem; margin-top: 20px; transform: translateZ(10px); } /* Reduced padding, font size, margin, transform */
+             .contact-form button[type="submit"]:hover { transform: translateY(-3px) translateZ(20px) rotateX(5deg); } /* Adjusted transform */
+             .contact-form button[type="submit"]:active { transform: translateY(0) translateZ(12px); }
+            .contact-info p { font-size: 1rem; margin-top: 20px; } /* Reduced font size and margin */
+            footer { padding: 2rem 0 0.8rem; } /* Reduced padding */
+            footer .footer-note { margin-bottom: 8px; } /* Reduced margin */
+            footer .social-links { margin-bottom: 10px; } /* Reduced margin */
+            footer .social-links a { font-size: 1.6rem; margin: 0 8px; } /* Reduced size and margin */
+            footer p { font-size: 0.85em; } /* Reduced font size */
+            .scroll-to-top { width: 35px; height: 35px; line-height: 35px; font-size: 1rem; bottom: 20px; right: 20px; } /* Reduced size and position */
 
             /* Persistent Pencil Responsive Adjustments */
-            #persistent-pencil { /* Make pencil smaller or hide on very small screens if too obtrusive */
-                width: 40px;
-                right: 2px;
-                transform: translateY(-50%) translateX(15px) rotate3d(1, 1, 0, 15deg) scale(0.45);
-                animation-duration: 9s;
+            #persistent-pencil {
+                width: 35px; /* Further reduce pencil size on small screens */
+                right: 0px;
+                transform: translateY(-50%) translateX(10px) rotate3d(1, 1, 0, 20deg) scale(0.4); /* Adjusted size and position */
+                animation-duration: 10s;
              }
              #persistent-pencil.emphasize {
-                transform: translateY(-50%) translateX(0px) rotate3d(0.5, -1, 0.2, 15deg) scale(0.7) translateZ(25px);
+                transform: translateY(-50%) translateX(0px) rotate3d(0.8, -1, 0.3, 25deg) scale(0.8) translateZ(40px); /* Adjusted scale and translateZ */
              }
              @keyframes pencilIdle {
-                0%, 100% { transform: translateY(-50%) translateX(15px) rotate3d(1, 1, 0, 15deg) scale(0.45); opacity: 0.7; }
-                25% { transform: translateY(-51%) translateX(13px) rotate3d(1, 1.2, 0.1, 17deg) scale(0.46); opacity: 0.73; }
-                50% { transform: translateY(-49%) translateX(17px) rotate3d(1.2, 0.8, -0.1, 13deg) scale(0.44); opacity: 0.68; }
-                75% { transform: translateY(-51%) translateX(14px) rotate3d(0.8, 1.1, 0.05, 16deg) scale(0.455); opacity: 0.72; }
+                0%, 100% { transform: translateY(-50%) translateX(10px) rotate3d(1, 1, 0, 20deg) scale(0.4); opacity: 0.7; }
+                25% { transform: translateY(-51%) translateX(8px) rotate3d(1.1, 1.2, 0.1, 22deg) scale(0.41); opacity: 0.73; }
+                50% { transform: translateY(-49%) translateX(12px) rotate3d(1.2, 0.8, -0.1, 18deg) scale(0.39); opacity: 0.68; }
+                75% { transform: translateY(-51%) translateX(9px) rotate3d(0.9, 1.1, 0.05, 21deg) scale(0.405); opacity: 0.72; }
             }
         }
 
@@ -762,8 +825,7 @@
                             behavior: 'smooth'
                         });
 
-                        // Update active class logic to use IntersectionObserver or similar for better accuracy
-                         // For now, keep basic logic for immediate click feedback, refine with observer below
+                        // Update active class logic
                          document.querySelectorAll('nav a').forEach(link => link.classList.remove('active'));
                          this.classList.add('active');
 
@@ -806,7 +868,7 @@
         if (header && visibleSections.length > 0 && navLi.length > 0) {
              const observerOptions = {
                  root: null,
-                 rootMargin: '0px 0px -20% 0px', /* Adjust root margin to trigger slightly before section is fully in view */
+                 rootMargin: '0px 0px -30% 0px', /* Adjust root margin to trigger earlier */
                  threshold: 0.1
              };
 
@@ -831,7 +893,7 @@
             const handleScrollLogic = () => {
                 let currentSectionId = '';
                 const headerHeight = header.offsetHeight;
-                const scrollPosition = window.pageYOffset + headerHeight + 100; // Add buffer for better detection
+                const scrollPosition = window.pageYOffset + headerHeight + 150; // Increased buffer for better detection
 
                 sections.forEach(section => {
                     if (section.offsetTop <= scrollPosition && section.offsetTop + section.offsetHeight > scrollPosition) {
@@ -875,8 +937,8 @@
                                  pencilIdleResumeTimeout = setTimeout(() => {
                                      persistentPencil.style.animationPlayState = 'running'; // Resume idle animation
                                      isPencilEmphasized = false;
-                                 }, 600); // Matches the emphasis transition duration
-                             }, 1500); // How long the pencil stays in the emphasized state
+                                 }, 700); // Matches the emphasis transition duration
+                             }, 1800); // How long the pencil stays in the emphasized state (increased)
                         }
                     } else if (!isInMainContent && persistentPencil.classList.contains('emphasize')) {
                         // If scrolling out of main content sections, ensure it transitions back from emphasize
@@ -887,7 +949,7 @@
                          pencilIdleResumeTimeout = setTimeout(() => {
                              persistentPencil.style.animationPlayState = 'running';
                              isPencilEmphasized = false;
-                         }, 600); // Matches the emphasis transition duration
+                         }, 700); // Matches the emphasis transition duration
                     } else if (!isInMainContent && !persistentPencil.classList.contains('emphasize') && persistentPencil.style.animationPlayState !== 'running') {
                         // If not in main content, not emphasized, and idle is paused, resume idle
                          persistentPencil.style.animationPlayState = 'running';
@@ -901,13 +963,13 @@
             };
 
             // Use a less aggressive scroll listener or an IntersectionObserver for active nav links
-            // Keeping the debounce for the pencil animation trigger for now, but could refine
              let lastScrollTop = 0;
              const scrollHandler = () => {
                  const st = window.pageYOffset || document.documentElement.scrollTop;
                  // Only trigger the main logic if scrolling a significant amount to avoid over-firing
-                 if (Math.abs(st - lastScrollTop) > 50 || getCurrentSectionBasedOnScroll() !== lastActiveSectionForPencil) { // Trigger on significant scroll or section change
-                      handleScrollLogic();
+                 // Also trigger if the detected section changes, even on small scrolls
+                 if (Math.abs(st - lastScrollTop) > 50 || getCurrentSectionBasedOnScroll() !== lastActiveSectionForPencil) {
+                      requestAnimationFrame(handleScrollLogic); // Use rAF for smoother updates
                      lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
                  } else {
                       // Still update active nav link on smaller scrolls if the section changes
@@ -925,7 +987,7 @@
                 let currentSectionId = '';
                 const headerHeight = header.offsetHeight;
                 // Adjust the trigger point slightly above the header for better feel
-                const scrollPosition = window.pageYOffset + headerHeight + 100;
+                const scrollPosition = window.pageYOffset + headerHeight + 150; // Increased buffer
                  sections.forEach(section => {
                     if (section.offsetTop <= scrollPosition && section.offsetTop + section.offsetHeight > scrollPosition) {
                          currentSectionId = section.getAttribute('id');
@@ -940,7 +1002,7 @@
 
 
              window.addEventListener('scroll', scrollHandler);
-             handleScrollLogic(); // Initial check on load
+             requestAnimationFrame(handleScrollLogic); // Initial check on load with rAF
         }
 
 
