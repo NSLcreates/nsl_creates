@@ -250,7 +250,10 @@
          /* Removed hover */
 
         .contact-form label { display: block; margin-bottom: 10px; font-weight: 500; color: var(--color-text-light); font-size: 1.1rem; } /* Light text, adjusted size */
-        .contact-form input[type="text"], .contact-form input[type="email"], .contact-form textarea, .contact-form select {
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea,
+        .contact-form select {
             width: 100%; padding: 15px; margin-bottom: 20px; border: 1px solid var(--color-border); /* Adjusted padding/margin */
             border-radius: 8px; font-size: 1rem; color: var(--color-text-light); /* Light text, adjusted size */
             background-color: var(--color-bg-dark); /* Deep charcoal input background (Retained) */
@@ -261,7 +264,25 @@
             background-repeat: no-repeat; background-position: right 15px top 50%; background-size: 16px auto; /* Adjusted position/size */
             padding-right: 40px; /* Adjusted padding */
         }
-        .contact-form input[type="text"]:focus, .contact-form input[type="email"]:focus, .contact-form textarea:focus, .contact-form select:focus {
+
+        /* Specific style for the phone number input */
+         .contact-form input[type="tel"] {
+             width: calc(100% - 65px); /* Adjust width to make space for prefix */
+             padding-left: 10px; /* Add some padding after the prefix */
+             margin-left: 65px; /* Pull input left to sit next to prefix */
+             display: inline-block; /* Ensure it's inline */
+             vertical-align: top; /* Align to top */
+             margin-bottom: 20px; /* Retain bottom margin */
+             /* Remove background image for the select dropdown if it's applied */
+             background-image: none;
+         }
+
+
+        .contact-form input[type="text"]:focus,
+        .contact-form input[type="email"]:focus,
+        .contact-form textarea:focus,
+        .contact-form select:focus,
+         .contact-form input[type="tel"]:focus { /* Added tel input focus */
             border-color: var(--color-primary-button); box-shadow: 0 0 8px rgba(187, 134, 252, 0.5); /* Primary color shadow */
             outline: none;
         }
@@ -484,8 +505,18 @@
              .contact-form { max-width: 500px; margin: 40px auto; padding: 30px; border-radius: 8px; }
               .contact-form:hover { transform: none; }
              .contact-form label { font-size: 1rem; margin-bottom: 8px; }
-             .contact-form input[type="text"], .contact-form input[type="email"], .contact-form textarea, .contact-form select { padding: 12px; font-size: 0.95rem; margin-bottom: 15px; border-radius: 6px; }
-              .contact-form input[type="text"]:focus, .contact-form input[type="email"]:focus, .contact-form textarea:focus, .contact-form select:focus { transform: none; }
+             .contact-form input[type="text"],
+             .contact-form input[type="email"],
+             .contact-form textarea,
+             .contact-form select { padding: 12px; font-size: 0.95rem; margin-bottom: 15px; border-radius: 6px; }
+             .contact-form input[type="tel"] { /* Adjusted mobile style for tel input */
+                 padding: 12px 10px 12px 10px; /* Add padding around text */
+                 width: calc(100% - 60px); /* Adjust width */
+                 margin-left: 60px; /* Pull left */
+             }
+
+
+              .contact-form input[type="text"]:focus, .contact-form input[type="email"]:focus, .contact-form textarea:focus, .contact-form select:focus, .contact-form input[type="tel"]:focus { transform: none; }
              .contact-form select { background-position: right 10px top 50%; background-size: 14px auto; padding-right: 35px; }
              .price-estimator h3 { font-size: 1.4rem; margin-bottom: 15px; }
              .price-estimator > div { margin-bottom: 10px; }
@@ -624,8 +655,17 @@
             .contact-form { max-width: 95%; margin: 30px auto; padding: 20px; border-radius: 6px; }
              .contact-form:hover { transform: none; }
             .contact-form label { font-size: 0.95rem; margin-bottom: 5px; }
-            .contact-form input[type="text"], .contact-form input[type="email"], .contact-form textarea, .contact-form select { padding: 10px; font-size: 0.9rem; margin-bottom: 15px; border-radius: 4px; }
-             .contact-form input[type="text"]:focus, .contact-form input[type="email']:focus, .contact-form textarea:focus, .contact-form select:focus { transform: none; }
+            .contact-form input[type="text"],
+            .contact-form input[type="email"],
+            .contact-form textarea,
+            .contact-form select { padding: 10px; font-size: 0.9rem; margin-bottom: 15px; border-radius: 4px; }
+             .contact-form input[type="tel"] { /* Adjusted mobile style for tel input */
+                 padding: 10px 10px 10px 10px; /* Add padding around text */
+                 width: calc(100% - 50px); /* Adjust width */
+                 margin-left: 50px; /* Pull left */
+             }
+
+             .contact-form input[type="text"]:focus, .contact-form input[type="email"]:focus, .contact-form textarea:focus, .contact-form select:focus, .contact-form input[type="tel"]:focus { transform: none; }
             .contact-form select { background-position: right 8px top 50%; background-size: 10px auto; padding-right: 30px; }
             .price-estimator h3 { font-size: 1.2rem; margin-bottom: 10px; }
             .price-estimator > div { margin-bottom: 8px; }
@@ -702,17 +742,83 @@
          }
 
         /* Responsive adjustments for sticky button */
+        @media (max-width: 1024px) {
+             .sticky-cta-button {
+                 bottom: 25px; right: 25px;
+                 padding: 10px 20px; font-size: 1rem;
+                 border-radius: 20px;
+             }
+        }
         @media (max-width: 768px) {
             .sticky-cta-button {
                 bottom: 20px; /* Adjusted position */
                 right: 20px; /* Adjusted position */
-                padding: 10px 20px; /* Adjusted padding */
-                font-size: 1rem; /* Adjusted font size */
-                border-radius: 20px; /* Adjusted border-radius */
+                padding: 8px 18px; /* Adjusted padding */
+                font-size: 0.9rem; /* Adjusted font size */
+                border-radius: 18px; /* Adjusted border-radius */
             }
              .sticky-cta-button:hover { transform: translateY(-2px); }
              .sticky-cta-button:active { transform: translateY(-1px); }
         }
+
+        /* Styling for the phone input prefix */
+         .phone-input-container {
+             display: flex; /* Use flexbox for alignment */
+             align-items: center; /* Vertically center items */
+             margin-bottom: 20px; /* Match input margin bottom */
+             border: 1px solid var(--color-border); /* Add border to container */
+             border-radius: 8px; /* Match input border-radius */
+             background-color: var(--color-bg-dark); /* Match input background */
+             padding-left: 15px; /* Padding inside the border */
+             transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Match input transition */
+         }
+
+          .phone-input-container:focus-within { /* Style container when input inside is focused */
+             border-color: var(--color-primary-button); box-shadow: 0 0 8px rgba(187, 134, 252, 0.5);
+             outline: none; /* Remove outline from input */
+         }
+
+
+         .phone-input-container .country-code {
+             color: var(--color-text-dark); /* Muted grey text */
+             font-size: 1rem; /* Match input font size */
+             margin-right: 8px; /* Space between +91 and input */
+             /* Ensure it doesn't shrink/grow */
+             flex-shrink: 0;
+             flex-grow: 0;
+         }
+
+          .phone-input-container .country-code .flag {
+             margin-right: 5px; /* Space between flag and +91 */
+             font-size: 1.2rem; /* Slightly larger flag */
+         }
+
+         .phone-input-container input[type="tel"] {
+             flex-grow: 1; /* Allow input to take remaining space */
+             border: none; /* Remove border from input itself */
+             padding: 15px 15px 15px 0; /* Adjust padding to remove left padding, keep right/top/bottom */
+             margin: 0; /* Remove margin */
+             background-color: transparent; /* Transparent background */
+             color: var(--color-text-light); /* Light text color */
+             font-size: 1rem;
+             outline: none; /* Remove default input outline */
+             box-shadow: none; /* Remove box shadow */
+             transition: none; /* Remove transition */
+         }
+
+        /* Adjust phone input container padding on smaller screens */
+        @media (max-width: 1024px) {
+            .phone-input-container { padding-left: 12px; }
+            .phone-input-container .country-code { font-size: 0.95rem; margin-right: 6px; }
+             .phone-input-container .country-code .flag { font-size: 1.1rem; margin-right: 4px; }
+             .phone-input-container input[type="tel"] { padding: 12px 12px 12px 0; font-size: 0.95rem; }
+        }
+         @media (max-width: 768px) {
+            .phone-input-container { padding-left: 10px; border-radius: 4px; margin-bottom: 15px; }
+            .phone-input-container .country-code { font-size: 0.9rem; margin-right: 5px; }
+             .phone-input-container .country-code .flag { font-size: 1rem; margin-right: 3px; }
+             .phone-input-container input[type="tel"] { padding: 10px 10px 10px 0; font-size: 0.9rem; }
+         }
 
 
     </style>
@@ -748,7 +854,7 @@
             <linearGradient id="woodCore" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stop-color="#4A5568"/> <stop offset="100%" stop-color="#4A5568"/> </linearGradient>
             <linearGradient id="graphiteLead" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#E2E8F0"/> <stop offset="50%" stop-color="#CBD5E0"/> <stop offset="100%" stop-color="#A0AEC0"/> </linearGradient>
+                <stop offset="0%" stop-color="#E2E8F0"/> <stop offset="50%" stop-color="#CBD5E0"/> <stop offset="100%" stop-color="#A0AFC0"/> </linearGradient>
             <linearGradient id="metalFerrule" x1="0%" y1="0%" x2="0%" y2="100%">
                 <stop offset="0%" stop-color="#A0AEC0"/> <stop offset="30%" stop-color="#718096"/> <stop offset="50%" stop-color="#4A5568"/> <stop offset="70%" stop-color="#718096"/>
                 <stop offset="100%" stop-color="#A0AEC0"/> </linearGradient>
@@ -891,6 +997,13 @@
                     <div>
                         <label for="email">Your Email:</label>
                         <input type="email" id="email" name="email" required>
+                    </div>
+                     <div>
+                        <label for="phone">Your Phone Number:</label>
+                         <div class="phone-input-container">
+                             <span class="country-code">🇮🇳 +91</span>
+                             <input type="tel" id="phone" name="Phone Number" required>
+                         </div>
                     </div>
                      <div>
                         <label for="subject">Subject:</label>
@@ -1339,8 +1452,8 @@
 
         if (stickyCtaBtn && heroSection) {
              const showButton = () => {
-                 // Show button if scrolled past the hero section
-                 if (window.pageYOffset > heroSection.offsetHeight - 100) { // Adjust offset as needed
+                 // Show button if scrolled past the hero section height + a buffer
+                 if (window.pageYOffset > heroSection.offsetHeight - 50) { // Adjust offset as needed
                      stickyCtaBtn.classList.add('visible');
                  } else {
                      stickyCtaBtn.classList.remove('visible');
