@@ -250,11 +250,12 @@
             transform: translateY(-50%) translateX(30px) rotate(15deg) scale(0.65);
             transform-origin: center center;
             /* Transition for smooth changes to/from emphasized state */
-            transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease-out; /* More sophisticated bezier */
+            /* Using a more dynamic cubic-bezier for emphasis */
+            transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.8s ease-out; /* Added bounce/overshoot effect */
             pointer-events: none;
             will-change: transform, opacity;
             /* Apply idle animation */
-            animation: pencilIdle 8s ease-in-out infinite; /* Adjusted duration */
+            animation: pencilIdle 9s ease-in-out infinite; /* Adjusted duration for subtle movement */
         }
 
         #persistent-pencil.initial-load-pencil { /* Used by JS for initial fade-in */
@@ -267,6 +268,8 @@
             opacity: 1;
             /* Emphasized state: more visible, larger, 3D rotation with a slight forward tilt */
             transform: translateY(-50%) translateX(0px) rotate(-8deg) scale(1) perspective(1000px) rotateY(25deg) translateZ(30px); /* More pronounced emphasize */
+             /* Ensure transition applies to emphasize state */
+             transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.6s ease-out; /* Smooth ease-out with slight overshoot */
         }
 
         /* Refined Idle Animation */
@@ -833,7 +836,7 @@
                                  pencilIdleResumeTimeout = setTimeout(() => {
                                      persistentPencil.style.animationPlayState = 'running'; // Resume idle animation
                                      isPencilEmphasized = false;
-                                 }, 800); // Matches the emphasis transition duration
+                                 }, 600); // Matches the emphasis transition duration
                              }, 1500); // How long the pencil stays in the emphasized state
                         }
                     } else if (!isInMainContent && persistentPencil.classList.contains('emphasize')) {
@@ -845,7 +848,7 @@
                          pencilIdleResumeTimeout = setTimeout(() => {
                              persistentPencil.style.animationPlayState = 'running';
                              isPencilEmphasized = false;
-                         }, 800); // Matches the emphasis transition duration
+                         }, 600); // Matches the emphasis transition duration
                     } else if (!isInMainContent && !persistentPencil.classList.contains('emphasize') && persistentPencil.style.animationPlayState !== 'running') {
                         // If not in main content, not emphasized, and idle is paused, resume idle
                          persistentPencil.style.animationPlayState = 'running';
@@ -863,12 +866,13 @@
              let lastScrollTop = 0;
              const scrollHandler = () => {
                  const st = window.pageYOffset || document.documentElement.scrollTop;
-                 if (Math.abs(st - lastScrollTop) > 50) { // Trigger logic less frequently on smaller scrolls
-                     handleScrollLogic();
+                 // Only trigger the main logic if scrolling a significant amount to avoid over-firing
+                 if (Math.abs(st - lastScrollTop) > 50 || currentSectionId !== getCurrentSectionBasedOnScroll()) {
+                      handleScrollLogic();
                      lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
                  } else {
-                     // Still update active nav link on smaller scrolls if needed, but maybe not pencil
-                      const currentSectionId = getCurrentSectionBasedOnScroll(); // Need a lightweight way to get current section
+                      // Update active nav link even on smaller scrolls if the section changes
+                      const currentSectionId = getCurrentSectionBasedOnScroll();
                        navLi.forEach(a => {
                             a.classList.remove('active');
                             if (a.getAttribute('href') && a.getAttribute('href').substring(1) === currentSectionId) {
@@ -881,13 +885,15 @@
              const getCurrentSectionBasedOnScroll = () => {
                 let currentSectionId = '';
                 const headerHeight = header.offsetHeight;
+                // Adjust the trigger point slightly above the header for better feel
                 const scrollPosition = window.pageYOffset + headerHeight + 100;
                  sections.forEach(section => {
                     if (section.offsetTop <= scrollPosition && section.offsetTop + section.offsetHeight > scrollPosition) {
                          currentSectionId = section.getAttribute('id');
                     }
                  });
-                 if (window.pageYOffset < sections[1].offsetTop - headerHeight) {
+                 // Handle the case when at the very top, ensure 'hero' is active
+                 if (window.pageYOffset === 0 || (sections.length > 1 && window.pageYOffset < sections[1].offsetTop - headerHeight)) {
                      currentSectionId = 'hero';
                  }
                  return currentSectionId;
