@@ -10,18 +10,21 @@
 
     <style>
         :root {
-            --color-bg-light: #F8F5EF;
-            --color-text-dark: #2C3E50;
-            --color-header-footer: #2C3E50;
-            --color-primary-button: #C9A053;
-            --color-highlight: #A88F4E;
-            --color-secondary-accent: #E5D2A3;
-            --color-border: #D4C3B5;
-            --color-dark-grey: #34495E;
-            --color-medium-grey: #7F8C8D;
-            --color-white: #ffffff;
-            --color-alert: #c0392b;
-            --color-error-text: #c0392b;
+            /* Darker Professional Palette */
+            --color-bg-dark: #1a202c; /* Deep charcoal */
+            --color-bg-light: #2d3748; /* Darker grey-blue */
+            --color-text-light: #e2e8f0; /* Light grey */
+            --color-text-dark: #cbd5e0; /* Muted light grey */
+            --color-header-footer: #1a202c; /* Deep charcoal */
+            --color-primary-button: #b794f4; /* Muted purple */
+            --color-highlight: #9f7aea; /* Brighter purple */
+            --color-secondary-accent: #b38edc; /* Lighter purple */
+            --color-border: #4a5568; /* Grey-blue border */
+            --color-dark-grey: #cbd5e0; /* Muted light grey for general text */
+            --color-medium-grey: #a0aec0; /* Medium grey */
+            --color-white: #ffffff; /* Still pure white where needed */
+            --color-alert: #fc8181; /* Muted red */
+            --color-error-text: #fc8181; /* Muted red */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -30,18 +33,21 @@
             font-family: 'Roboto', sans-serif;
             line-height: 1.8;
             color: var(--color-dark-grey);
-            background-color: var(--color-bg-light);
+            background-color: var(--color-bg-dark); /* Use dark background */
             scroll-behavior: smooth;
-            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIj4KPHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiBmaWxsPSIjRjhGNUVGIj4gPCByZWN0Pgo8Y2lyY2xlIGN4PSIxIiBjeT0iMSIgcj0iMC41IiBmaWxsPSIjRTZFNkU2Ij48L2NpcmNsZT4KPC9zdmc+');
+            /* Update background pattern for dark theme */
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIj4KPHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiBmaWxsPSIjMUEyMDJDIj4gPCByZWN0Pgo8Y2lyY2xlIGN4PSIxIiBjeT0iMSIgcj0iMC41IiBmaWxsPSIjNEU1NDZBIj48L2NpcmNsZT4KPC9zdmc+');
             background-repeat: repeat;
         }
 
         .container { width: 90%; max-width: 1300px; margin: auto; overflow: hidden; padding: 0 30px; }
 
         header {
-            background: var(--color-header-footer); color: var(--color-white); padding: 1.1rem 0;
+            background: var(--color-header-footer); color: var(--color-text-light); /* Use light text on dark header */
+            padding: 1.1rem 0;
             position: fixed; width: 100%; top: 0; left: 0; z-index: 1000;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.4); transition: background-color 0.3s ease;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.6); /* Darker shadow */
+            transition: background-color 0.3s ease;
         }
         header .container { display: flex; justify-content: space-between; align-items: center; }
         header .logo a {
@@ -62,24 +68,38 @@
         }
         nav ul li a:hover, nav ul li a.active { color: var(--color-secondary-accent); }
         nav ul li a:hover::after, nav ul li a.active::after { width: 100%; }
-        .menu-toggle { display: none; font-size: 2.2rem; cursor: pointer; color: var(--color-white); transition: transform 0.3s ease; }
+        .menu-toggle { display: none; font-size: 2.2rem; cursor: pointer; color: var(--color-text-light); transition: transform 0.3s ease; }
         .menu-toggle:hover { transform: rotate(90deg); }
 
         section {
             padding: 140px 0 120px; border-bottom: 1px solid var(--color-border);
             opacity: 0; transform: translateY(50px);
             transition: opacity 1s ease-out, transform 1s ease-out;
-            background-color: var(--color-bg-light); min-height: 80vh;
+            background-color: var(--color-bg-dark); /* Use dark background */
+            min-height: 80vh;
+            position: relative; /* Needed for potential 3D transforms on child elements */
+            perspective: 1000px; /* Add perspective for 3D effects */
         }
-        section.is-visible { opacity: 1; transform: translateY(0); }
+         /* Simple 3D tilt effect on sections as they appear */
+        section.is-visible {
+            opacity: 1;
+            transform: translateY(0) rotateX(0deg) rotateY(0deg);
+             transition: opacity 1s ease-out, transform 1.2s cubic-bezier(0.25, 1, 0.5, 1); /* Smoother 3D transition */
+        }
+         section:not(.is-visible) {
+            transform: translateY(50px) rotateX(5deg) rotateY(-5deg); /* Initial 3D tilt */
+         }
+
+
         section:last-of-type { border-bottom: none; }
-        #pricing { background-color: rgba(212, 195, 181, 0.1); }
-        #disclaimer { padding: 60px 0; background-color: var(--color-white); border-bottom: 1px solid var(--color-border); min-height: auto; }
-        #gallery { background-color: rgba(212, 195, 181, 0.1); }
+        #pricing { background-color: rgba(74, 85, 104, 0.2); } /* Darker muted background */
+        #disclaimer { padding: 60px 0; background-color: var(--color-bg-light); border-bottom: 1px solid var(--color-border); min-height: auto; } /* Darker background */
+        #gallery { background-color: rgba(74, 85, 104, 0.2); } /* Darker muted background */
 
         section h2 {
             font-family: 'Playfair Display', serif; text-align: center; margin-bottom: 70px;
-            font-size: 3.5rem; color: var(--color-text-dark); position: relative;
+            font-size: 3.5rem; color: var(--color-text-light); /* Light text on dark background */
+            position: relative;
             padding-bottom: 20px; font-weight: 700; letter-spacing: 1px;
         }
         section h2::after {
@@ -90,146 +110,183 @@
         #disclaimer h2::after { width: 80px; }
 
         #hero {
-            background: linear-gradient(rgba(248, 245, 239, 0.8), rgba(248, 245, 239, 0.8)), url('https://googleusercontent.com/image_generation_content/0') no-repeat center center/cover;
-            color: var(--color-text-dark); height: 100vh; display: flex; flex-direction: column;
+            background: linear-gradient(rgba(26, 32, 44, 0.8), rgba(26, 32, 44, 0.8)), url('https://googleusercontent.com/image_generation_content/0') no-repeat center center/cover; /* Darker overlay */
+            color: var(--color-text-light); height: 100vh; display: flex; flex-direction: column;
             justify-content: center; align-items: center; text-align: center; padding-top: 100px;
             opacity: 1; transform: translateY(0); transition: none; position: relative; background-attachment: fixed;
+             perspective: 1000px; /* Perspective for Hero elements */
         }
         #hero h1 {
             font-family: 'Playfair Display', serif; font-size: 5.5rem; margin-bottom: 30px;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.3); font-weight: 700; letter-spacing: 1.5px; line-height: 1.2;
+            text-shadow: 2px 2px 12px rgba(0,0,0,0.6); /* Darker shadow */
+            font-weight: 700; letter-spacing: 1.5px; line-height: 1.2;
+            color: var(--color-text-light); /* Light text */
+             transform: translateZ(50px); /* Push H1 forward in 3D space */
         }
         #hero h1 .site-title { font-weight: 700; color: var(--color-highlight); }
         #hero p {
             font-size: 1.6rem; margin-bottom: 60px; max-width: 900px;
-            text-shadow: 1px 1px 5px rgba(0,0,0,0.2); font-weight: 300;
-            color: var(--color-dark-grey); line-height: 1.7;
+            text-shadow: 1px 1px 8px rgba(0,0,0,0.4); /* Darker shadow */
+            font-weight: 300;
+            color: var(--color-text-dark); /* Muted light grey */
+            line-height: 1.7;
+             transform: translateZ(30px); /* Push P forward */
         }
 
         .cta-button {
             display: inline-block; background: var(--color-primary-button); color: var(--color-text-dark);
             padding: 18px 45px; text-decoration: none; border-radius: 35px; font-size: 1.4rem; font-weight: 500;
             transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-            border: none; cursor: pointer; box-shadow: 0 6px 12px rgba(0,0,0,0.20); letter-spacing: 0.5px;
+            border: none; cursor: pointer; box-shadow: 0 6px 12px rgba(0,0,0,0.3); /* Darker shadow */
+            letter-spacing: 0.5px;
+             transform-style: preserve-3d; /* Enable 3D transforms for hover */
+             transform: translateZ(20px); /* Push button forward */
         }
         .cta-button:hover {
-            background: var(--color-highlight); transform: translateY(-6px);
-            box-shadow: 0 10px 20px rgba(44,62,80,0.30), 0 6px 10px rgba(44,62,80,0.22);
+            background: var(--color-highlight);
+            transform: translateY(-6px) translateZ(40px) rotateX(5deg); /* Lift and tilt on hover in 3D */
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4), 0 6px 10px rgba(0,0,0,0.3); /* Darker shadow */
         }
-        .cta-button:active { transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+        .cta-button:active { transform: translateY(-2px) translateZ(25px); box-shadow: 0 4px 8px rgba(0,0,0,0.3); }
 
         .sketch-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 40px; }
         .sketch-gallery img {
             display: block; width: 100%; height: auto; border-radius: 8px;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.15); border: 1px solid var(--color-border);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2); /* Darker shadow */
+            border: 1px solid var(--color-border);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transform-style: preserve-3d; /* Enable 3D transforms for hover */
         }
-        .sketch-gallery img:hover { transform: scale(1.03); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        .sketch-gallery img:hover {
+            transform: scale(1.03) translateZ(20px) rotateY(5deg); /* Lift and tilt on hover in 3D */
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3); /* Darker shadow */
+        }
 
         .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 60px; margin-top: 50px; }
         .service-card {
-            background: var(--color-white); padding: 45px; border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1); text-align: center;
+            background: var(--color-bg-light); /* Darker background */
+            padding: 45px; border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2); /* Darker shadow */
+            text-align: center;
             transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.3s ease, border-left-color 0.3s ease;
             border: 1px solid var(--color-border); border-left: 4px solid transparent;
             display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+             transform-style: preserve-3d; /* Enable 3D transforms for hover */
         }
         .service-card:hover {
-            transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.18);
-            background-color: #fdfdfb; border-left-color: var(--color-highlight);
+            transform: translateY(-10px) translateZ(20px) rotateX(-3deg); /* Lift and tilt on hover in 3D */
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3); /* Darker shadow */
+            background-color: #3a475a; /* Slightly lighter dark background */
+            border-left-color: var(--color-highlight);
         }
         .service-card .icon { font-size: 4.5rem; color: var(--color-highlight); margin-bottom: 30px; display: block; }
-        .service-card h3 { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 20px; color: var(--color-text-dark); font-weight: 600; }
+        .service-card h3 { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 20px; color: var(--color-text-light); font-weight: 600; }
         .service-card p { font-size: 1.15rem; color: var(--color-medium-grey); margin-bottom: 0; line-height: 1.7; }
 
         .service-process { margin-top: 90px; padding-top: 50px; border-top: 2px dashed var(--color-border); text-align: left; }
         .service-process h3 {
-            font-family: 'Playfair Display', serif; color: var(--color-text-dark); margin-top: 0; margin-bottom: 25px;
+            font-family: 'Playfair Display', serif; color: var(--color-text-light); margin-top: 0; margin-bottom: 25px;
             font-size: 2.4rem; text-align: center; font-weight: 600;
         }
         .service-process ol, .service-process ul { list-style-position: outside; padding-left: 40px; margin: 30px auto; max-width: 900px; color: var(--color-medium-grey); font-size: 1.1rem; line-height: 1.8; }
         .service-process li { margin-bottom: 18px; padding-left: 15px; position: relative; }
         .service-process ol li::marker { font-weight: bold; color: var(--color-highlight); font-size: 1.2em; }
         .service-process ul li::before { content: '•'; color: var(--color-highlight); font-weight: bold; display: inline-block; width: 1.2em; margin-left: -1.2em; }
-        #disclaimer p { max-width: 900px; margin: 20px auto; font-size: 1.1rem; color: var(--color-dark-grey); line-height: 1.7; text-align: center; }
-        .service-process li strong { color: var(--color-dark-grey); font-weight: 500; }
+        #disclaimer p { max-width: 900px; margin: 20px auto; font-size: 1.1rem; color: var(--color-text-dark); line-height: 1.7; text-align: center; }
+        .service-process li strong { color: var(--color-text-light); font-weight: 500; }
         .important-note { text-align: center; font-size: 1rem; color: var(--color-alert); margin-top: 20px; font-weight: 500; }
         .important-note i { margin-right: 5px; }
 
-        #pricing { background-color: rgba(212, 195, 181, 0.1); }
+        #pricing { background-color: rgba(74, 85, 104, 0.2); } /* Darker muted background */
         .pricing-info p { text-align: center; font-size: 1.3rem; margin-bottom: 40px; color: var(--color-medium-grey); max-width: 1000px; margin: auto; line-height: 1.8; }
-        #pricing .important-note { margin-bottom: 30px; }
+        #pricing .important-note { margin-bottom: 30px; color: var(--color-alert); } /* Ensure note is visible */
         .pricing-info ul { list-style: none; padding: 0; text-align: center; margin-bottom: 25px; }
 
         #about .container { display: flex; flex-direction: column; align-items: center; text-align: center; }
         #about p { max-width: 1000px; margin-bottom: 30px; font-size: 1.25rem; color: var(--color-medium-grey); line-height: 1.8; }
         #about p:last-of-type { margin-bottom: 0; }
 
-        #contact { background: var(--color-bg-light); }
+        #contact { background: var(--color-bg-dark); } /* Deep charcoal background */
         .contact-form {
-            max-width: 700px; margin: 60px auto; padding: 50px; background: var(--color-white);
-            border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); border: 1px solid var(--color-border);
+            max-width: 700px; margin: 60px auto; padding: 50px; background: var(--color-bg-light); /* Darker background */
+            border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); /* Darker shadow */
+            border: 1px solid var(--color-border);
         }
-        .contact-form label { display: block; margin-bottom: 12px; font-weight: 500; color: var(--color-dark-grey); font-size: 1.2rem; }
+        .contact-form label { display: block; margin-bottom: 12px; font-weight: 500; color: var(--color-text-light); font-size: 1.2rem; } /* Light text */
         .contact-form input[type="text"], .contact-form input[type="email"], .contact-form textarea, .contact-form select {
             width: 100%; padding: 18px; margin-bottom: 25px; border: 1px solid var(--color-border);
-            border-radius: 10px; font-size: 1.1rem; color: var(--color-dark-grey); background-color: var(--color-bg-light);
+            border-radius: 10px; font-size: 1.1rem; color: var(--color-text-light); /* Light text */
+            background-color: var(--color-bg-dark); /* Deep charcoal input background */
             box-sizing: border-box; appearance: none;
-            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%237F8C8D%22%20d%3D%22M287%2C114.7L159.2%2C28.9c-9.2-9.5-24.2-9.5-33.4%2C0L5.4%2C114.7c-9.2%2C9.5-9.2%2C25%2C0%2C34.5l127.8%2C85.8c9.2%2C9.5%2C24.2%2C9.5%2C33.4%2C0l127.8-85.8C296.2%2C139.7%2C296.2%2C124.2%2C287%2C114.7z%22%2F%3E%3C%2Fsvg%3E');
+             /* Adjust select dropdown arrow color for dark theme */
+            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23A0AEC0%22%20d%3D%22M287%2C114.7L159.2%2C28.9c-9.2-9.5-24.2-9.5-33.4%2C0L5.4%2C114.7c-9.2%2C9.5-9.2%2C25%2C0%2C34.5l127.8%2C85.8c9.2%2C9.5%2C24.2%2C9.5%2C33.4%2C0l127.8-85.8C296.2%2C139.7%2C296.2%2C124.2%2C287%2C114.7z%22%2F%3E%3C%2Fsvg%3E');
             background-repeat: no-repeat; background-position: right 20px top 50%; background-size: 18px auto;
             padding-right: 50px; transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
         .contact-form input[type="text"]:focus, .contact-form input[type="email"]:focus, .contact-form textarea:focus, .contact-form select:focus {
-            border-color: var(--color-highlight); box-shadow: 0 0 10px rgba(168, 143, 78, 0.4); outline: none;
+            border-color: var(--color-highlight); box-shadow: 0 0 10px rgba(159, 122, 234, 0.4); /* Highlight color shadow */
+            outline: none;
         }
         .contact-form textarea { min-height: 220px; resize: vertical; }
         .price-estimator { margin-bottom: 40px; padding-top: 30px; border-top: 1px solid var(--color-border); }
-        .price-estimator h3 { font-family: 'Playfair Display', serif; text-align: center; margin-bottom: 30px; font-size: 2rem; color: var(--color-dark-grey); font-weight: 600; }
+        .price-estimator h3 { font-family: 'Playfair Display', serif; text-align: center; margin-bottom: 30px; font-size: 2rem; color: var(--color-text-light); font-weight: 600; } /* Light text */
         .price-estimator > div { margin-bottom: 20px; }
 
         .drop-zone {
             border: 2px dashed var(--color-border); border-radius: 10px; padding: 50px; text-align: center;
             cursor: pointer; margin-bottom: 30px;
             transition: background-color 0.3s ease, border-color 0.3s ease, border-style 0.3s ease, box-shadow 0.3s ease;
-            background-color: #fcfcfc; position: relative;
+            background-color: #28303f; /* Slightly lighter dark background */
+            position: relative;
         }
-        .drop-zone.dragover { background-color: rgba(168, 143, 78, 0.15); border-color: var(--color-highlight); border-style: solid; box-shadow: 0 0 18px rgba(168, 143, 78, 0.35); }
-        .drop-zone.error { border-color: var(--color-error-text); background-color: rgba(192, 57, 43, 0.05); border-style: dashed; box-shadow: none; }
+        .drop-zone.dragover { background-color: rgba(159, 122, 234, 0.15); border-color: var(--color-highlight); border-style: solid; box-shadow: 0 0 18px rgba(159, 122, 234, 0.35); } /* Highlight color */
+        .drop-zone.error { border-color: var(--color-error-text); background-color: rgba(252, 129, 129, 0.05); border-style: dashed; box-shadow: none; } /* Alert color */
         .drop-zone p { margin: 0; font-size: 1.15rem; color: var(--color-medium-grey); z-index: 2; position: relative; }
-        .file-info { margin-top: 20px; font-size: 1.05rem; color: var(--color-dark-grey); font-weight: 500; z-index: 2; position: relative; }
+        .file-info { margin-top: 20px; font-size: 1.05rem; color: var(--color-text-dark); font-weight: 500; z-index: 2; position: relative; } /* Muted light text */
         .file-info.error-message { color: var(--color-error-text); font-weight: bold; }
 
         .contact-form button[type="submit"] {
-            background: var(--color-primary-button); color: var(--color-text-dark); padding: 18px 35px;
+            background: var(--color-primary-button); color: var(--color-text-dark); /* Muted light text on button */
+            padding: 18px 35px;
             border: none; border-radius: 35px; font-size: 1.3rem; font-weight: 600;
             transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-            width: 100%; margin-top: 35px; cursor: pointer; box-shadow: 0 6px 12px rgba(0,0,0,0.20); letter-spacing: 0.5px;
+            width: 100%; margin-top: 35px; cursor: pointer; box-shadow: 0 6px 12px rgba(0,0,0,0.3); /* Darker shadow */
+            letter-spacing: 0.5px;
+             transform-style: preserve-3d; /* Enable 3D transforms for hover */
         }
-        .contact-form button[type="submit"]:hover { background: var(--color-highlight); transform: translateY(-4px); box-shadow: 0 8px 16px rgba(44,62,80,0.28), 5px 9px rgba(44,62,80,0.20); }
-        .contact-form button[type="submit"]:active { transform: translateY(0); box-shadow: 0 3px 6px rgba(0,0,0,0.2); }
+        .contact-form button[type="submit"]:hover {
+             background: var(--color-highlight);
+             transform: translateY(-4px) translateZ(15px) rotateX(3deg); /* Lift and tilt on hover in 3D */
+             box-shadow: 0 8px 16px rgba(0,0,0,0.4), 5px 9px rgba(0,0,0,0.3); /* Darker shadow */
+        }
+        .contact-form button[type="submit"]:active { transform: translateY(0) translateZ(5px); box-shadow: 0 3px 6px rgba(0,0,0,0.3); }
 
         .price-estimate {
-            margin-top: 35px; padding: 25px; background-color: var(--color-white);
+            margin-top: 35px; padding: 25px; background-color: var(--color-bg-light); /* Darker background */
             border: 1px solid var(--color-border); border-left: 8px solid var(--color-highlight);
-            border-radius: 10px; font-size: 1.6rem; font-weight: 700; color: var(--color-text-dark);
-            text-align: center; margin-bottom: 30px; box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+            border-radius: 10px; font-size: 1.6rem; font-weight: 700; color: var(--color-text-light); /* Light text */
+            text-align: center; margin-bottom: 30px; box-shadow: 0 3px 12px rgba(0,0,0,0.2); /* Darker shadow */
         }
 
         .contact-info p { text-align: center; font-size: 1.25rem; margin-top: 50px; color: var(--color-medium-grey); }
-        .contact-info p a { color: var(--color-dark-grey); text-decoration: none; font-weight: bold; transition: color 0.3s ease, text-decoration 0.3s ease; }
+        .contact-info p a { color: var(--color-text-light); text-decoration: none; font-weight: bold; transition: color 0.3s ease, text-decoration 0.3s ease; } /* Light text link */
         .contact-info p a:hover { color: var(--color-primary-button); text-decoration: underline; }
 
-        footer { background: var(--color-header-footer); color: var(--color-white); text-align: center; padding: 4rem 0 1.5rem; }
-        footer .footer-note { font-size: 0.85em; color: rgba(255, 255, 255, 0.5); margin-bottom: 20px; }
+        footer {
+            background: var(--color-header-footer); color: var(--color-text-light); /* Light text */
+            text-align: center; padding: 4rem 0 1.5rem;
+        }
+        footer .footer-note { font-size: 0.85em; color: rgba(226, 232, 240, 0.5); margin-bottom: 20px; } /* Muted light text */
         footer .social-links { margin-bottom: 25px; }
-        footer .social-links a { color: rgba(255, 255, 255, 0.7); margin: 0 15px; font-size: 2.5rem; text-decoration: none; transition: color 0.3s ease, transform 0.3s ease; }
+        footer .social-links a { color: rgba(226, 232, 240, 0.7); margin: 0 15px; font-size: 2.5rem; text-decoration: none; transition: color 0.3s ease, transform 0.3s ease; } /* Muted light icons */
         footer .social-links a:hover { color: var(--color-secondary-accent); transform: scale(1.2); }
-        footer p { color: rgba(255, 255, 255, 0.6); margin-top: 0; font-size: 1em; }
+        footer p { color: rgba(226, 232, 240, 0.6); margin-top: 0; font-size: 1em; } /* Muted light text */
 
         .scroll-to-top {
             position: fixed; bottom: 40px; right: 40px; background-color: var(--color-primary-button);
-            color: var(--color-text-dark); width: 55px; height: 55px; border-radius: 50%;
-            text-align: center; line-height: 55px; font-size: 1.8rem; box-shadow: 0 5px 10px rgba(0,0,0,0.25);
+            color: var(--color-text-dark); /* Muted light text */
+            width: 55px; height: 55px; border-radius: 50%;
+            text-align: center; line-height: 55px; font-size: 1.8rem; box-shadow: 0 5px 10px rgba(0,0,0,0.4); /* Darker shadow */
             z-index: 900; opacity: 0; visibility: hidden;
             transition: opacity 0.3s ease, visibility 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
             cursor: pointer;
@@ -237,60 +294,59 @@
         .scroll-to-top.visible { opacity: 1; visibility: visible; }
         .scroll-to-top:hover { background-color: var(--color-highlight); transform: scale(1.1); }
 
-        /* Persistent Pencil Styling */
+        /* Persistent Pencil Styling (Enhanced 3D) */
         #persistent-pencil {
             position: fixed;
             right: 10px;
             top: 50%;
-            width: 60px; /* Base width for the SVG pencil */
-            height: auto; /* Maintain aspect ratio of SVG */
+            width: 60px;
+            height: auto;
             z-index: 950;
-            opacity: 0.8; /* Base opacity, slightly see-through */
-            /* Initial state: partially off-screen, scaled down, rotated */
-            transform: translateY(-50%) translateX(30px) rotate(15deg) scale(0.65);
+            opacity: 0.8;
+            transform: translateY(-50%) translateX(30px) rotate3d(1, 1, 0, 15deg) scale(0.65); /* Use rotate3d for combined rotation */
             transform-origin: center center;
-            /* Transition for smooth changes to/from emphasized state */
-            /* Using a more dynamic cubic-bezier for emphasis */
+            /* Enhanced Transition for smooth changes to/from emphasized state */
             transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.8s ease-out; /* Added bounce/overshoot effect */
             pointer-events: none;
             will-change: transform, opacity;
             /* Apply idle animation */
-            animation: pencilIdle 9s ease-in-out infinite; /* Adjusted duration for subtle movement */
+            animation: pencilIdle 10s ease-in-out infinite; /* Adjusted duration */
         }
 
-        #persistent-pencil.initial-load-pencil { /* Used by JS for initial fade-in */
+        #persistent-pencil.initial-load-pencil {
             opacity: 0;
-            transform: translateY(-50%) translateX(80px) rotate(60deg) scale(0.3); /* More dramatic initial position */
+            transform: translateY(-50%) translateX(80px) rotate3d(1, 1, 0, 60deg) scale(0.3); /* Match initial with rotate3d */
         }
 
         #persistent-pencil.emphasize {
-            animation-play-state: paused !important; /* Important to override idle during emphasis */
+            animation-play-state: paused !important;
             opacity: 1;
-            /* Emphasized state: more visible, larger, 3D rotation with a slight forward tilt */
-            transform: translateY(-50%) translateX(0px) rotate(-8deg) scale(1) perspective(1000px) rotateY(25deg) translateZ(30px); /* More pronounced emphasize */
+            /* Emphasized state: more visible, larger, pronounced 3D rotation */
+            transform: translateY(-50%) translateX(0px) rotate3d(0.5, -1, 0.2, 25deg) scale(1) translateZ(50px); /* More dynamic 3D rotation */
              /* Ensure transition applies to emphasize state */
              transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.6s ease-out; /* Smooth ease-out with slight overshoot */
         }
 
-        /* Refined Idle Animation */
-        @keyframes pencilIdle { /* Subtle continuous movement with more variation */
+        /* Refined Idle Animation (Enhanced 3D) */
+        @keyframes pencilIdle {
             0%, 100% {
-                transform: translateY(-50%) translateX(30px) rotate(15deg) scale(0.65) translateZ(0px);
+                transform: translateY(-50%) translateX(30px) rotate3d(1, 1, 0, 15deg) scale(0.65);
                 opacity: 0.8;
             }
             25% {
-                transform: translateY(-51%) translateX(28px) rotate(17deg) scale(0.66) translateZ(3px);
+                transform: translateY(-51%) translateX(28px) rotate3d(1, 1.2, 0.1, 17deg) scale(0.66);
                 opacity: 0.82;
             }
             50% {
-                transform: translateY(-49%) translateX(32px) rotate(13deg) scale(0.64) translateZ(-3px);
+                transform: translateY(-49%) translateX(32px) rotate3d(1.2, 0.8, -0.1, 13deg) scale(0.64);
                 opacity: 0.78;
             }
             75% {
-                 transform: translateY(-51%) translateX(29px) rotate(16deg) scale(0.655) translateZ(2px);
+                 transform: translateY(-51%) translateX(29px) rotate3d(0.8, 1.1, 0.05, 16deg) scale(0.655);
                  opacity: 0.81;
             }
         }
+
 
         /* Responsive Design Adjustments */
         @media (max-width: 1024px) {
@@ -308,28 +364,29 @@
              .services-grid { gap: 50px; }
              .service-card { padding: 40px; }
              .service-card .icon { font-size: 4rem; }
-             .service-card h3 { font-size: 2rem; }
+             .service-card h3 { font-size: 2rem; color: var(--color-text-light); }
              .service-card p { font-size: 1.1rem; }
              .service-process { margin-top: 70px; padding-top: 40px; }
-             .service-process h3 { font-size: 2.2rem; }
+             .service-process h3 { font-size: 2.2rem; color: var(--color-text-light); }
              .service-process ol, .service-process ul { padding-left: 30px; font-size: 1.05rem; }
              .service-process li { margin-bottom: 15px; }
              .service-process ul li::before { width: 1em; margin-left: -1em; }
-             .important-note { font-size: 0.95rem; }
+             .important-note { font-size: 0.95rem; color: var(--color-alert); }
              .pricing-info p { font-size: 1.2rem; margin-bottom: 30px; }
              #about p { font-size: 1.15rem; }
              .contact-form { max-width: 600px; margin: 50px auto; padding: 45px; }
-             .contact-form label { font-size: 1.1rem; }
+             .contact-form label { font-size: 1.1rem; color: var(--color-text-light); }
              .contact-form input[type="text"], .contact-form input[type="email"], .contact-form textarea, .contact-form select { padding: 15px; font-size: 1.05rem; margin-bottom: 20px; }
              .contact-form select { background-position: right 15px top 50%; background-size: 16px auto; padding-right: 45px; }
-             .price-estimator h3 { font-size: 1.8rem; margin-bottom: 25px; }
+             .price-estimator h3 { font-size: 1.8rem; margin-bottom: 25px; color: var(--color-text-light); }
              .price-estimator > div { margin-bottom: 15px; }
              .drop-zone { padding: 40px; margin-bottom: 25px; }
              .drop-zone p { font-size: 1.1rem; }
              .file-info { font-size: 1rem; }
-             .price-estimate { font-size: 1.4rem; padding: 20px; margin-top: 30px; margin-bottom: 25px; }
+             .price-estimate { font-size: 1.4rem; padding: 20px; margin-top: 30px; margin-bottom: 25px; color: var(--color-text-light); }
              .contact-form button[type="submit"] { padding: 16px 30px; font-size: 1.2rem; margin-top: 30px; }
              .contact-info p { font-size: 1.15rem; margin-top: 40px; }
+             .contact-info p a { color: var(--color-text-light); }
              footer { padding: 3rem 0 1.2rem; }
              footer .footer-note { margin-bottom: 15px; }
              footer .social-links { margin-bottom: 20px; }
@@ -341,29 +398,28 @@
               #persistent-pencil {
                 width: 50px;
                 right: 5px;
-                transform: translateY(-50%) translateX(25px) rotate(15deg) scale(0.55);
+                transform: translateY(-50%) translateX(25px) rotate3d(1, 1, 0, 15deg) scale(0.55);
              }
              #persistent-pencil.emphasize {
-                transform: translateY(-50%) translateX(0px) rotate(-5deg) scale(0.85) perspective(800px) rotateY(20deg) translateZ(20px);
+                transform: translateY(-50%) translateX(0px) rotate3d(0.5, -1, 0.2, 20deg) scale(0.85) translateZ(30px);
              }
              @keyframes pencilIdle {
-                0%, 100% { transform: translateY(-50%) translateX(25px) rotate(15deg) scale(0.55) translateZ(0px); opacity: 0.75; }
-                25% { transform: translateY(-51%) translateX(23px) rotate(17deg) scale(0.56) translateZ(2px); opacity: 0.78; }
-                50% { transform: translateY(-49%) translateX(27px) rotate(13deg) scale(0.54) translateZ(-2px); opacity: 0.72; }
-                75% { transform: translateY(-51%) translateX(24px) rotate(16deg) scale(0.555) translateZ(1px); opacity: 0.77; }
+                0%, 100% { transform: translateY(-50%) translateX(25px) rotate3d(1, 1, 0, 15deg) scale(0.55); opacity: 0.75; }
+                25% { transform: translateY(-51%) translateX(23px) rotate3d(1, 1.2, 0.1, 17deg) scale(0.56); opacity: 0.78; }
+                50% { transform: translateY(-49%) translateX(27px) rotate3d(1.2, 0.8, -0.1, 13deg) scale(0.54); opacity: 0.72; }
+                75% { transform: translateY(-51%) translateX(24px) rotate3d(0.8, 1.1, 0.05, 16deg) scale(0.555); opacity: 0.77; }
             }
         }
 
         @media (max-width: 768px) {
             header .container { flex-direction: column; align-items: flex-start; padding-left: 20px; }
             header .logo a { font-size: 1.5rem; }
-            nav ul { flex-direction: column; align-items: center; width: 100%; display: none; background: var(--color-header-footer); position: static; box-shadow: none; padding: 10px 0; border-top: 1px solid rgba(255, 255, 255, 0.1); transition: max-height 0.5s ease-in-out; max-height: 0; overflow: hidden; }
+            nav ul { background: var(--color-header-footer); }
             nav ul.active { display: flex; max-height: 300px; }
             nav ul li { margin: 10px 0; }
-            nav ul li a { color: var(--color-white); border-bottom: none; padding: 8px 0; font-size: 1.1rem; }
+            nav ul li a { color: var(--color-text-light); }
             nav ul li a:hover, nav ul li a.active { color: var(--color-secondary-accent); }
-            nav ul li a::after { display: none; }
-            .menu-toggle { display: block; position: absolute; top: 1.2rem; right: 1.2rem; }
+            .menu-toggle { display: block; position: absolute; top: 1.2rem; right: 1.2rem; color: var(--color-text-light); }
             #hero { height: auto; padding: 100px 20px 60px; }
             #hero h1 { font-size: 3.5rem; margin-bottom: 20px; }
             #hero p { font-size: 1.3rem; margin-bottom: 40px; }
@@ -401,6 +457,7 @@
             .price-estimate { font-size: 1.3rem; padding: 18px; margin-top: 25px; margin-bottom: 20px; }
             .contact-form button[type="submit"] { padding: 15px 25px; font-size: 1.1rem; margin-top: 25px; }
             .contact-info p { font-size: 1.1rem; margin-top: 30px; }
+            .contact-info p a { color: var(--color-text-light); }
             footer { padding: 2.5rem 0 1rem; }
             footer .footer-note { margin-bottom: 10px; }
             footer .social-links { margin-bottom: 15px; }
@@ -412,17 +469,17 @@
             #persistent-pencil { /* Make pencil smaller or hide on very small screens if too obtrusive */
                 width: 40px;
                 right: 2px;
-                transform: translateY(-50%) translateX(15px) rotate(15deg) scale(0.45);
-                animation-duration: 9s; /* Slow down idle animation further */
+                transform: translateY(-50%) translateX(15px) rotate3d(1, 1, 0, 15deg) scale(0.45);
+                animation-duration: 9s;
              }
              #persistent-pencil.emphasize {
-                transform: translateY(-50%) translateX(0px) rotate(-3deg) scale(0.7) perspective(600px) rotateY(15deg) translateZ(15px);
+                transform: translateY(-50%) translateX(0px) rotate3d(0.5, -1, 0.2, 15deg) scale(0.7) translateZ(25px);
              }
              @keyframes pencilIdle {
-                0%, 100% { transform: translateY(-50%) translateX(15px) rotate(15deg) scale(0.45) translateZ(0px); opacity: 0.7; }
-                25% { transform: translateY(-51%) translateX(13px) rotate(17deg) scale(0.46) translateZ(1px); opacity: 0.73; }
-                50% { transform: translateY(-49%) translateX(17px) rotate(13deg) scale(0.44) translateZ(-1px); opacity: 0.68; }
-                75% { transform: translateY(-51%) translateX(14px) rotate(16deg) scale(0.455) translateZ(0.5px); opacity: 0.72; }
+                0%, 100% { transform: translateY(-50%) translateX(15px) rotate3d(1, 1, 0, 15deg) scale(0.45); opacity: 0.7; }
+                25% { transform: translateY(-51%) translateX(13px) rotate3d(1, 1.2, 0.1, 17deg) scale(0.46); opacity: 0.73; }
+                50% { transform: translateY(-49%) translateX(17px) rotate3d(1.2, 0.8, -0.1, 13deg) scale(0.44); opacity: 0.68; }
+                75% { transform: translateY(-51%) translateX(14px) rotate3d(0.8, 1.1, 0.05, 16deg) scale(0.455); opacity: 0.72; }
             }
         }
 
@@ -453,22 +510,13 @@
     <svg id="persistent-pencil" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 300">
         <defs>
             <linearGradient id="yellowPaint" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#FDD835"/> <stop offset="50%" stop-color="#FBBC05"/> <stop offset="100%" stop-color="#F9A825"/> </linearGradient>
-            <linearGradient id="woodCore" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#F0E2C6"/> <stop offset="100%" stop-color="#E6D3B3"/> </linearGradient>
-            <linearGradient id="graphiteLead" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#616161"/> <stop offset="50%" stop-color="#4A4A4A"/> <stop offset="100%" stop-color="#555555"/>
-            </linearGradient>
-            <linearGradient id="metalFerrule" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#E8E8E8"/> <stop offset="30%" stop-color="#C0C0C0"/> <stop offset="50%" stop-color="#B0B0B0"/> <stop offset="70%" stop-color="#C0C0C0"/>
-                <stop offset="100%" stop-color="#E8E8E8"/>
-            </linearGradient>
-             <filter id="pencilRealisticShadow" x="-60%" y="-20%" width="220%" height="160%">
-                <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur"/>
-                <feOffset dy="5" dx="3" in="blur" result="offsetBlur"/>
-                <feComponentTransfer in="offsetBlur" result="shadowOpacity">
-                    <feFuncA type="linear" slope="0.35"/>
-                </feComponentTransfer>
+                <stop offset="0%" stop-color="#B794F4"/> <stop offset="50%" stop-color="#9F7AEA"/> <stop offset="100%" stop-color="#B38EDC"/> </linearGradient> <linearGradient id="woodCore" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#4A5568"/> <stop offset="100%" stop-color="#4A5568"/> </linearGradient> <linearGradient id="graphiteLead" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#E2E8F0"/> <stop offset="50%" stop-color="#CBD5E0"/> <stop offset="100%" stop-color="#A0AEC0"/> </linearGradient> <linearGradient id="metalFerrule" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#A0AEC0"/> <stop offset="30%" stop-color="#718096"/> <stop offset="50%" stop-color="#4A5568"/> <stop offset="70%" stop-color="#718096"/>
+                <stop offset="100%" stop-color="#A0AEC0"/> </linearGradient> <filter id="pencilRealisticShadow" x="-60%" y="-20%" width="220%" height="160%">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="6" result="blur"/> <feOffset dy="8" dx="5" in="blur" result="offsetBlur"/> <feComponentTransfer in="offsetBlur" result="shadowOpacity">
+                    <feFuncA type="linear" slope="0.5"/> </feComponentTransfer>
                 <feMerge>
                     <feMergeNode in="shadowOpacity"/>
                     <feMergeNode in="SourceGraphic"/>
@@ -477,20 +525,11 @@
         </defs>
 
         <g filter="url(#pencilRealisticShadow)">
-            <rect x="15.5" y="5" width="19" height="25" fill="#F4A7B9" rx="2.5" ry="2.5"/>
-            <rect x="12.5" y="30" width="25" height="20" fill="url(#metalFerrule)" rx="2" ry="2"/>
-            <rect x="13.5" y="33" width="23" height="2.5" fill="#9E9E9E" rx="1"/>
-            <rect x="13.5" y="43.5" width="23" height="2.5" fill="#9E9E9E" rx="1"/>
-
-            <polygon points="10,50 40,50 41.5,230 8.5,230" fill="url(#yellowPaint)"/>
-            <path d="M10,50 L11.5,51 L11.5,229 L8.5,230 Z" fill="#FFEE58" opacity="0.7"/> <path d="M40,50 L38.5,51 L38.5,229 L41.5,230 Z" fill="#FBC02D" opacity="0.6"/> <polygon points="8.5,230 41.5,230 25,280" fill="url(#woodCore)"/>
-             <path d="M8.5,230 L15,232 L25,280 Z" fill="#D2B48C" opacity="0.5" />
-            <path d="M41.5,230 L35,232 L25,280 Z" fill="#C19A6B" opacity="0.4" />
-
-
-            <polygon points="23,270 27,270 25,295" fill="url(#graphiteLead)"/>
-            <polygon points="24,290 26,290 25,295" fill="#757575"/>
-        </g>
+            <rect x="15.5" y="5" width="19" height="25" fill="#FC8181" rx="2.5" ry="2.5"/> <rect x="12.5" y="30" width="25" height="20" fill="url(#metalFerrule)" rx="2" ry="2"/>
+            <rect x="13.5" y="33" width="23" height="2.5" fill="#718096" rx="1"/> <rect x="13.5" y="43.5" width="23" height="2.5" fill="#718096" rx="1"/> <polygon points="10,50 40,50 41.5,230 8.5,230" fill="url(#yellowPaint)"/>
+            <path d="M10,50 L11.5,51 L11.5,229 L8.5,230 Z" fill="#B38EDC" opacity="0.7"/> <path d="M40,50 L38.5,51 L38.5,229 L41.5,230 Z" fill="#9F7AEA" opacity="0.6"/> <polygon points="8.5,230 41.5,230 25,280" fill="url(#woodCore)"/>
+             <path d="M8.5,230 L15,232 L25,280 Z" fill="#636B7D" opacity="0.5" /> <path d="M41.5,230 L35,232 L25,280 Z" fill="#3D4451" opacity="0.4" /> <polygon points="23,270 27,270 25,295" fill="url(#graphiteLead)"/>
+            <polygon points="24,290 26,290 25,295" fill="#718096"/> </g>
     </svg>
 
 
@@ -679,7 +718,7 @@
                  <a href="https://www.instagram.com/nsl_creates" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                  <a href="https://youtube.com/@nslcreatesofficial?si=D62UGYhSgte30f5I" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                  </div>
-             <p>© 2025 NSL Creates.</p>
+             <p>NSL Creates.</p>
         </div>
     </footer>
 
@@ -801,7 +840,7 @@
                 });
 
                  // Handle the case when at the very top, ensure 'hero' is active
-                 if (window.pageYOffset < sections[1].offsetTop - headerHeight) {
+                 if (window.pageYOffset === 0 || (sections.length > 1 && window.pageYOffset < sections[1].offsetTop - headerHeight)) {
                      currentSectionId = 'hero';
                  }
 
@@ -867,11 +906,11 @@
              const scrollHandler = () => {
                  const st = window.pageYOffset || document.documentElement.scrollTop;
                  // Only trigger the main logic if scrolling a significant amount to avoid over-firing
-                 if (Math.abs(st - lastScrollTop) > 50 || currentSectionId !== getCurrentSectionBasedOnScroll()) {
+                 if (Math.abs(st - lastScrollTop) > 50 || getCurrentSectionBasedOnScroll() !== lastActiveSectionForPencil) { // Trigger on significant scroll or section change
                       handleScrollLogic();
                      lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
                  } else {
-                      // Update active nav link even on smaller scrolls if the section changes
+                      // Still update active nav link on smaller scrolls if the section changes
                       const currentSectionId = getCurrentSectionBasedOnScroll();
                        navLi.forEach(a => {
                             a.classList.remove('active');
