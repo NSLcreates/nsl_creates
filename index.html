@@ -60,12 +60,14 @@
              padding: 0 20px; /* Match container padding */
         }
         header .logo a {
-            text-decoration: none; color: var(--color-text-light); display: block; /* Logo in light text */
+            text-decoration: none;
+            color: var(--color-primary-button); /* Set logo color to primary purple */
+            display: block; /* Logo in light text */
             font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700;
             transition: color 0.3s ease;
         }
-         header .logo a span { color: var(--color-highlight); } /* Accent color for part of the logo */
-        header .logo a:hover { color: var(--color-highlight); }
+         /* Removed specific span styling */
+        header .logo a:hover { color: var(--color-highlight); } /* Highlight color on hover */
         nav ul { list-style: none; padding: 0; margin: 0; display: flex; }
         nav ul li { margin-left: 30px; } /* Reduced margin */
         nav ul li a {
@@ -226,7 +228,7 @@
         .important-note i { margin-right: 5px; }
 
         #pricing { background-color: var(--color-bg-light); } /* Darker muted background (Retained) */
-        .pricing-info p { text-align: center; font-size: 1.1rem; margin-bottom: 30px; color: var(--color-text-dark); max-width: 1000px; margin: auto; line-height: 1.7; } /* Adjusted font size/margin */
+        .pricing-info p { text-align: center; font-size: 1.1rem; margin-bottom: 25px; color: var(--color-text-dark); max-width: 1000px; margin: auto; line-height: 1.7; } /* Adjusted font size/margin */
         #pricing .important-note { margin-bottom: 20px; color: var(--color-alert); } /* Ensure note is visible (Retained) */
         .pricing-info ul { list-style: none; padding: 0; text-align: center; margin-bottom: 20px; }
 
@@ -623,7 +625,7 @@
              .contact-form:hover { transform: none; }
             .contact-form label { font-size: 0.95rem; margin-bottom: 5px; }
             .contact-form input[type="text"], .contact-form input[type="email"], .contact-form textarea, .contact-form select { padding: 10px; font-size: 0.9rem; margin-bottom: 15px; border-radius: 4px; }
-             .contact-form input[type="text"]:focus, .contact-form input[type="email"]:focus, .contact-form textarea:focus, .contact-form select:focus { transform: none; }
+             .contact-form input[type="text"]:focus, .contact-form input[type="email']:focus, .contact-form textarea:focus, .contact-form select:focus { transform: none; }
             .contact-form select { background-position: right 8px top 50%; background-size: 10px auto; padding-right: 30px; }
             .price-estimator h3 { font-size: 1.2rem; margin-bottom: 10px; }
             .price-estimator > div { margin-bottom: 8px; }
@@ -662,6 +664,56 @@
             }
         }
 
+        /* Sticky CTA Button Styles */
+        .sticky-cta-button {
+            position: fixed;
+            bottom: 30px; /* Position from bottom */
+            right: 30px; /* Position from right */
+            background: var(--color-primary-button);
+            color: var(--color-bg-dark); /* Dark text on button */
+            padding: 12px 25px; /* Adjusted padding */
+            text-decoration: none;
+            border-radius: 25px; /* Rounded corners */
+            font-size: 1.1rem; /* Font size */
+            font-weight: 500;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4); /* Shadow */
+            z-index: 999; /* Ensure it's above most elements */
+            opacity: 0; /* Initially hidden */
+            visibility: hidden; /* Initially hidden */
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.2s ease-out;
+             transform: translateY(20px); /* Start slightly below final position */
+             cursor: pointer;
+        }
+
+        .sticky-cta-button.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0); /* Slide up to final position */
+        }
+
+         .sticky-cta-button:hover {
+             background: var(--color-highlight); /* Highlight color on hover */
+             transform: translateY(-3px);
+         }
+
+         .sticky-cta-button:active {
+             transform: translateY(-1px);
+             box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+         }
+
+        /* Responsive adjustments for sticky button */
+        @media (max-width: 768px) {
+            .sticky-cta-button {
+                bottom: 20px; /* Adjusted position */
+                right: 20px; /* Adjusted position */
+                padding: 10px 20px; /* Adjusted padding */
+                font-size: 1rem; /* Adjusted font size */
+                border-radius: 20px; /* Adjusted border-radius */
+            }
+             .sticky-cta-button:hover { transform: translateY(-2px); }
+             .sticky-cta-button:active { transform: translateY(-1px); }
+        }
+
 
     </style>
 </head>
@@ -671,7 +723,7 @@
         <div class="container">
             <div class="header-top-row">
                 <div class="logo">
-                    <a href="#hero">nsl_<span>creates</span></a>
+                    <a href="#hero">nsl_creates</a>
                 </div>
                 <div class="menu-toggle" id="mobile-menu">
                     ☰
@@ -799,6 +851,9 @@
                     <li>Personal usage rights are granted by default (discussions regarding commercial rights are welcome).</li>
                 </ul>
             </div>
+            <div style="text-align: center; margin-top: 50px;">
+                 <a href="#contact" class="cta-button">Request a Commission</a>
+            </div>
         </div>
     </section>
 
@@ -925,6 +980,8 @@
      <div class="scroll-to-top" id="scrollToTopBtn">
          <i class="fas fa-arrow-up"></i>
      </div>
+
+    <a href="#contact" class="sticky-cta-button" id="stickyCtaBtn">Request Commission</a>
 
 
     <script>
@@ -1275,6 +1332,26 @@
                  window.scrollTo({ top: 0, behavior: 'smooth' });
              });
         }
+
+        // Sticky CTA Button Visibility Logic
+        const stickyCtaBtn = document.getElementById('stickyCtaBtn');
+        const heroSection = document.getElementById('hero');
+
+        if (stickyCtaBtn && heroSection) {
+             const showButton = () => {
+                 // Show button if scrolled past the hero section
+                 if (window.pageYOffset > heroSection.offsetHeight - 100) { // Adjust offset as needed
+                     stickyCtaBtn.classList.add('visible');
+                 } else {
+                     stickyCtaBtn.classList.remove('visible');
+                 }
+             };
+
+             window.addEventListener('scroll', showButton);
+             // Check visibility on page load in case user lands mid-page
+             showButton();
+        }
+
     </script>
 
 </body>
