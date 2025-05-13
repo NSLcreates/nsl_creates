@@ -274,7 +274,8 @@
         /* Gallery */
         .sketch-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 30px; }
         .sketch-gallery img {
-            display: block; width: 100%; height: auto; border-radius: 8px; /* Slightly larger radius */
+            display: block; width: 100%; height: auto; /* THESE LINES MAINTAIN ASPECT RATIO */
+            border-radius: 8px; /* Slightly larger radius */
             box-shadow: var(--shadow-medium); /* Medium shadow */
             border: 1px solid var(--color-border);
             transition: transform 0.5s ease-out, box-shadow 0.4s ease, border-color 0.3s ease; /* Slower transform */
@@ -528,7 +529,7 @@
         footer .social-links { margin-bottom: 25px; } /* Increased margin */
         footer .social-links a { color: rgba(176, 176, 176, 0.8); margin: 0 15px; font-size: 2.2rem; text-decoration: none; transition: color 0.3s ease, transform 0.3s ease; } /* Increased size and margin */
         footer .social-links a:hover { color: var(--color-primary-button); transform: scale(1.3); } /* More pronounced scale */
-        footer p { color: rgba(176, 176, 176, 0.7); margin-top: 0; font-size: 0.95em; } /* Increased font size */
+         /* Removed the copyright paragraph from the footer */
 
         .scroll-to-top {
             position: fixed; bottom: 30px; right: 30px; background-color: var(--color-primary-button);
@@ -571,7 +572,7 @@
              .sketch-gallery { gap: 25px; margin-top: 25px; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
              .sketch-gallery img { border-radius: 6px; }
               .sketch-gallery img:hover { transform: scale(1.07) rotateY(9deg) rotateX(5deg) translateZ(15px); }
-             .services-grid { gap: 40px; margin-top: 30px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+             .services-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 30px; }
              .service-card { padding: 35px; border-radius: 10px; }
              .service-card .icon { font-size: 3.5rem; margin-bottom: 20px; }
              .service-card h3 { font-size: 1.8rem; margin-bottom: 12px; }
@@ -609,7 +610,7 @@
              footer .footer-note { font-size: 0.8em; margin-bottom: 15px; }
              footer .social-links { margin-bottom: 20px; }
              footer .social-links a { font-size: 2rem; margin: 0 12px; }
-             footer p { font-size: 0.9em; }
+             /* Removed the copyright paragraph from here in media query */
              .scroll-to-top { width: 50px; height: 50px; line-height: 50px; font-size: 1.6rem; bottom: 25px; right: 25px; }
         }
 
@@ -685,7 +686,7 @@
             footer .footer-note { font-size: 0.75em; margin-bottom: 10px; }
             footer .social-links { margin-bottom: 15px; }
             footer .social-links a { font-size: 1.8rem; margin: 0 10px; }
-            footer p { font-size: 0.85em; }
+            /* Removed the copyright paragraph from here in media query */
             .scroll-to-top { width: 45px; height: 45px; line-height: 45px; font-size: 1.4rem; bottom: 20px; right: 20px; }
         }
 
@@ -709,6 +710,7 @@
              .price-estimate { font-size: 1.1rem; padding: 12px; }
              .contact-form button[type="submit"] { font-size: 1rem; padding: 10px 20px; }
              footer .social-links a { font-size: 1.6rem; margin: 0 8px; }
+             /* Removed the copyright paragraph from here in media query */
              .scroll-to-top { width: 40px; height: 40px; line-height: 40px; font-size: 1.2rem; }
 
          }
@@ -940,7 +942,7 @@
                  <a href="https://www.instagram.com/nslforge" target="_blank" aria-label="Instagram" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
                  <a href="https://www.youtube.com/@nslforgeofficial" target="_blank" aria-label="YouTube" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
                  </div>
-             <p>© NSL Forge. All rights reserved.</p> </div>
+             </div>
     </footer>
 
      <div class="scroll-to-top" id="scrollToTopBtn" aria-label="Scroll to top">
@@ -1032,22 +1034,24 @@
                           const prevRect = prev.getBoundingClientRect();
                           const currentRect = current.getBoundingClientRect();
 
-                          // Prioritize sections whose top is just below the header
-                          const prevTop = prevRect.top + window.scrollY;
-                          const currentTop = currentRect.top + window.scrollY;
+                          // Prioritize sections whose top is just below the header or within a reasonable range
+                          const isCurrentSectionAtTop = currentRect.top <= headerHeight + 50 && currentRect.bottom > headerHeight + 50;
 
-                          // Check if the current section is within the viewport and higher up (closer to header) than the previous best
-                          if (currentRect.top <= headerHeight && currentRect.bottom > headerHeight) {
-                              if (!prev || prevRect.top > currentRect.top) {
+                          if (isCurrentSectionAtTop) {
+                              if (!prev || prevRect.top > currentRect.top) { // If current is higher up (closer to header)
                                   return current;
                               }
                           }
-                           // Fallback: If no section top is below header, take the one whose center is closest to the viewport center
-                          if (!prev || Math.abs(currentRect.top + currentRect.height / 2 - window.innerHeight / 2) < Math.abs(prevRect.top + prevRect.height / 2 - window.innerHeight / 2)) {
-                               // return current; // This makes it jump - less intuitive
+                           // If no section is precisely at the top, fall back to the one whose center is closest to viewport center
+                           // (This part is less critical but can help when exactly between sections)
+                          const prevCenterDist = prev ? Math.abs(prevRect.top + prevRect.height / 2 - window.innerHeight / 2) : Infinity;
+                          const currentCenterDist = Math.abs(currentRect.top + currentRect.height / 2 - window.innerHeight / 2);
+
+                          if (!isCurrentSectionAtTop && (!prev || currentCenterDist < prevCenterDist)) {
+                               // return current; // Avoid this - stick to sections hitting the top area for primary logic
                           }
 
-                          return prev;
+                          return prev; // Keep the previous best or null
                       }, null);
 
 
@@ -1055,12 +1059,13 @@
                      if (visibleSection) {
                          navLi.forEach(a => {
                               a.classList.remove('active');
-                              if (a.getAttribute('href') && a.getAttribute('href').substring(1) === visibleSection.getAttribute('id')) {
+                               const linkSectionId = a.getAttribute('href').substring(1);
+                              if (linkSectionId === visibleSection.getAttribute('id')) {
                                   a.classList.add('active');
                               }
                           });
                      } else {
-                          // If somehow no section is visible (e.g., between sections),
+                          // If somehow no section is clearly at the top (e.g., very top of page before first section),
                           // default to the first or hero link
                           if (window.scrollY < sections[0].offsetTop + sections[0].offsetHeight / 2) {
                                navLi.forEach(a => a.classList.remove('active'));
@@ -1124,22 +1129,24 @@
             });
 
              // Handle active class on initial load and resize if observer isn't enough
+             // This function acts as a fallback/initial setter
               const updateActiveOnLoad = () => {
                   const headerHeight = header.offsetHeight;
-                  // Find which section is currently at the top of the viewport below the header
-                  let currentActiveSectionId = null;
+                  let currentActiveSectionId = 'hero'; // Default to hero
+
                   for (let i = 0; i < sections.length; i++) {
                       const section = sections[i];
                        const rect = section.getBoundingClientRect();
-                       // Check if the section's top is above or at the bottom of the header height offset,
-                       // AND its bottom is below the header height offset.
-                       if (rect.top <= headerHeight + 10 && rect.bottom > headerHeight + 10) {
+                       // Check if the section's top is roughly at or above the bottom of the header offset
+                       // A buffer (e.g., 10px) is often needed due to precision
+                       if (rect.top <= headerHeight + 10) {
                            currentActiveSectionId = section.getAttribute('id');
-                           break; // Found the section at the top
-                       }
-                       // If we are above the first section, make Hero active
-                       if (i === 0 && rect.top > headerHeight) {
-                            currentActiveSectionId = 'hero';
+                            // Continue loop to find the LOWEST section whose top is past the header
+                           // This makes scrolling *down* correctly activate the next section
+                       } else {
+                            // If the current section's top is below the header,
+                            // the previously checked section is the one currently at the top.
+                            // We can break here assuming sections are ordered in HTML.
                             break;
                        }
                   }
@@ -1156,6 +1163,9 @@
               // Add listener for initial load and resize
               window.addEventListener('load', updateActiveOnLoad);
               window.addEventListener('resize', updateActiveOnLoad); // Recalculate on resize
+             // Also call it once the DOM is fully loaded to catch initial state before load event might fire
+              document.addEventListener('DOMContentLoaded', updateActiveOnLoad);
+
 
         }
 
@@ -1204,9 +1214,10 @@
 
             function highlight() {
                 dropZone.classList.add('dragover');
-                dropZone.classList.remove('error'); // Remove error state on new drag
-                fileInfo.classList.remove('error-message');
-                // fileInfo.innerHTML = ''; // Clear previous file info/errors - maybe keep it until new file is selected
+                // Keep existing file info/error message until a new file is actually selected
+                // dropZone.classList.remove('error'); // Remove error state on new drag
+                // fileInfo.classList.remove('error-message');
+                // fileInfo.innerHTML = '';
             }
 
             function handleDrop(e) {
@@ -1227,26 +1238,38 @@
                  fileInfo.innerHTML = ''; // Clear previous message immediately
 
                  if (file) {
-                     if (file.type.startsWith('image/')) {
-                         // File is an image, proceed
-                         // No need for DataTransfer for modern forms, just setting fileInput.files is enough
-                         fileInput.files = files; // Set the file to the input
-                         fileInfo.innerHTML = `Selected file: <strong>${file.name}</strong> (${(file.size / 1024).toFixed(2)} KB)`; // Display file info
-                     } else {
+                     // Check file size (e.g., max 5MB) - adjust as needed
+                     const maxSizeMB = 5;
+                     const maxSizeBytes = maxSizeMB * 1024 * 1024;
+
+                     if (!file.type.startsWith('image/')) {
                          // File is not an image
                          fileInput.value = ''; // Clear the file input
-                         fileInfo.innerHTML = '<span style="color: var(--color-error-text);">Please drop/select an **image file**.</span>';
+                         fileInfo.innerHTML = `<span style="color: var(--color-error-text);">Error: Please drop/select an **image file**.</span>`;
                          fileInfo.classList.add('error-message');
                          dropZone.classList.add('error'); // Add error state to drop zone
+                     } else if (file.size > maxSizeBytes) {
+                          // File is too large
+                          fileInput.value = '';
+                          fileInfo.innerHTML = `<span style="color: var(--color-error-text);">Error: File size exceeds ${maxSizeMB}MB. Please upload a smaller image.</span>`;
+                          fileInfo.classList.add('error-message');
+                          dropZone.classList.add('error');
+                     }
+                      else {
+                         // File is a valid image and size, proceed
+                         fileInput.files = files; // Set the file to the input
+                         fileInfo.innerHTML = `Selected file: <strong>${file.name}</strong> (${(file.size / 1024).toFixed(2)} KB)`; // Display file info
                      }
                  } else {
-                      // Handle case where no file was selected or drop was cancelled
-                      // Do nothing, keep previous state or reset if needed
+                      // Handle case where no file was selected or drop was cancelled (user cancelled file dialog)
+                      // Do nothing, keep previous state or reset if needed. Don't show error just because user cancelled.
                       // fileInput.value = '';
                       // fileInfo.innerHTML = '';
                  }
+                 dropZone.classList.remove('dragover'); // Remove dragover class after handling
             }
         }
+
 
         // Form Submission Validation (Check for required file)
         if (contactForm && fileInput && fileInfo && dropZone) {
@@ -1264,7 +1287,7 @@
                     // File is present (or not required), remove any previous error states and allow submission
                     fileInfo.classList.remove('error-message');
                     dropZone.classList.remove('error');
-                    // Form will now submit normally
+                    // Form will now submit normally via FormSubmit
                     // Note: Server-side validation is also crucial!
                 }
             });
@@ -1281,17 +1304,19 @@
 
 
         /* Adjusted pricing slightly for better spread - These are just examples, adjust as needed */
-        const basePrices = { 'A5': 200, 'A4': 400, 'A3': 700 };
+        const basePrices = { 'A5': 250, 'A4': 500, 'A3': 800 }; // Slightly increased base prices
         const complexityCosts = { 'low': 50, 'medium': 200, 'high': 400 };
-        const subjectCosts = { '1': 0, '2': 200, '3': 400 }; // Cost per *additional* subject? Or total cost based on count? Assuming total cost added.
-        const backgroundCosts = { 'none': 0, 'simple': 100, 'detailed': 300 };
-        const generalMinPrice = 250; // Slightly increased min price
+        // Re-evaluating subject costs for clarity
+        const subjectCosts = { '1': 0, '2': 200, '3': 400 }; // Cost added *based on the number of subjects*
+        const backgroundCosts = { 'none': 0, 'simple': 150, 'detailed': 350 }; // Slightly adjusted background costs
+        const generalMinPrice = 250; // Min price matches A5 low complexity none background
+
 
         function calculateEstimate() {
             // Get selected values
             const size = sizeSelect.value;
             const complexity = complexitySelect.value;
-            const subjects = subjectsSelect.value;
+            const subjects = subjectsSelect.value; // Get the string value '1', '2', or '3'
             const background = backgroundSelect.value;
 
             let currentPrice = basePrices[size] || 0; // Get base price by size, default to 0 if not found
@@ -1299,24 +1324,13 @@
             // Add costs based on selections
             currentPrice += complexityCosts[complexity] || 0;
 
-            // Handle subjects cost - Assuming cost *per* additional subject beyond the first
-            let subjectMultiplier = parseInt(subjects); // 1, 2, or 3+
-             if (subjectMultiplier === 2) currentPrice += 200; // Example: +200 for 2 subjects
-             if (subjectMultiplier === 3) currentPrice += 400; // Example: +400 for 3+ subjects (could be cumulative or fixed)
-             // Let's refine this: maybe it's a cost added *per* subject beyond the first?
-             // For 1 subject: +0
-             // For 2 subjects: base + complexity + background + (cost_per_subject * 1)
-             // For 3 subjects: base + complexity + background + (cost_per_subject * 2)
-             // Let's keep it simple with fixed options for now as per current HTML:
-             // currentPrice += subjectCosts[subjects] || 0; // Use this if 'subjectCosts' keys map directly to the *total* subject count cost
-
-             // Let's use a simpler tiered cost for subjects based on your current select options
-             if (subjects === '2') {
-                 currentPrice += 200; // Example cost for 2 subjects total
-             } else if (subjects === '3') { // This assumes '3' means 3 or more. Adjust logic if needed.
-                 currentPrice += 400; // Example cost for 3+ subjects total
+            // Add subject cost based on the selected tier (1, 2, or 3+)
+            if (subjects === '2') {
+                 currentPrice += subjectCosts['2']; // Add cost for 2 subjects
+             } else if (subjects === '3') {
+                 currentPrice += subjectCosts['3']; // Add cost for 3+ subjects
              }
-
+             // No cost added for '1' subject as per subjectCosts['1'] = 0
 
             currentPrice += backgroundCosts[background] || 0;
 
@@ -1325,7 +1339,8 @@
 
             // Update the displayed price and the hidden input field
             estimatedPriceDiv.innerHTML = `Estimated Price: **₹${currentPrice}/-**`; // Use bold for price
-            hiddenEstimatedPriceInput.value = `${currentPrice}/- (Estimate based on selections)`; // Store estimate in hidden field for form submission
+            // Update the value in the hidden input field
+            hiddenEstimatedPriceInput.value = `${currentPrice}/- (Estimate: Size=${size}, Complexity=${complexity}, Subjects=${subjects}, Background=${background})`;
         }
 
         // Add event listeners to recalculate estimate whenever a dropdown changes
@@ -1451,12 +1466,11 @@
                  if (heroFallbackMessage) heroFallbackMessage.style.display = 'block';
                  if (heroCanvas) heroCanvas.style.display = 'none';
 
-                 // Apply a static background image as a fallback if needed
-                 // hero3dContainer.style.backgroundImage = "url('path/to/your/fallback-image.jpg')"; // Replace with a suitable image
+                 // Apply a static background color/image as a fallback
+                 // hero3dContainer.style.backgroundImage = "url('path/to/your/fallback-image.jpg')"; // Optional: Add a fallback image
                  hero3dContainer.style.backgroundSize = "cover";
                  hero3dContainer.style.backgroundPosition = "center center";
-                 // Correcting the fallback background color assignment
-                 hero3dContainer.style.backgroundColor = 'var(--color-bg-dark)';
+                 hero3dContainer.style.backgroundColor = 'var(--color-bg-dark)'; // Ensure background color is set
             }
         }
          // --- End Three.js Setup ---
