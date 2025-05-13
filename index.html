@@ -145,7 +145,8 @@
             transition: width 0.4s ease-out; /* Slower underline animation */
         }
         nav ul li a:hover, nav ul li a.active { color: var(--color-text-light); transform: translateY(-2px); }
-        nav ul li a:hover::after, nav ul li a.active::after { width: 100%; }
+        nav ul li a.active { color: var(--color-text-light); } /* Ensure active stays light */
+
         .menu-toggle { display: none; font-size: 2rem; cursor: pointer; color: var(--color-text-light); transition: transform 0.3s ease, color 0.3s ease; }
         .menu-toggle:hover { transform: rotate(90deg); color: var(--color-highlight); }
 
@@ -915,10 +916,7 @@
                   <img src="20250105_015608.jpg" alt="Harry potter sketch">
                   <img src="IMG_20241122_193303_736.jpg" alt="Sample Sketch 2">
                   <img src="IMG_20241008_190133(1).jpg" alt="Sample Sketch 3">
-                   <img src="sample4.jpg" alt="Sample Sketch 4">
-                   <img src="sample5.jpg" alt="Sample Sketch 5">
-                   <img src="sample6.jpg" alt="Sample Sketch 6">
-                  </div>
+                   </div>
           </div>
       </section>
 
@@ -926,6 +924,7 @@
         <div class="container">
             <h2>About Naman Lumbhani</h2>
             <p>Hello! I'm Naman Lumbhani, the artist and creator behind NSL Forge. Sketching has been a profound passion of mine for many years. I am continuously inspired by the expressive power held within simple lines and careful shading, transforming blank surfaces into vivid depictions of ideas and emotions.</p>
+            <p>NSL Forge is the evolution of my previous artistic endeavor, known as Nsl_creates (or Nsl creates). This new name reflects a refined focus and dedication to forging unique artistic pieces.</p>
             <p>Outside of the studio... You can also find me on <a href="https://www.instagram.com/nslforge" target="_blank" rel="noopener noreferrer">Instagram (@nslforge)</a> and check out my <a href="https://www.youtube.com/@nslforgeofficial" target="_blank" rel="noopener noreferrer">YouTube channel (@nslforgeofficial)</a>. Through NSL Forge, my aspiration is to share my artistic vision and craft meaningful pieces that deeply resonate with you. I eagerly anticipate the opportunity to collaborate with you on your next unique sketch project!</p>
              </div>
     </section>
@@ -1075,8 +1074,11 @@
                  const scrollPosition = window.pageYOffset + headerHeight + 80; // Adjust offset
 
                  if (window.pageYOffset <= 0 || (sections.length > 1 && scrollPosition < sections[1].offsetTop)) {
-                      navLi.forEach(a => a.classList.remove('active'));
-                      document.querySelector('nav ul li a[href="#hero"]').classList.add('active');
+                      navLi.forEach(a => navLi.classList.remove('active')); // Fix: Iterate over navLi correctly
+                      const heroLink = document.querySelector('nav ul li a[href="#hero"]');
+                      if (heroLink) {
+                          heroLink.classList.add('active');
+                      }
                  } else {
                      // Let the IntersectionObserver handle it for other sections
                  }
