@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NSL Forge by Naman Lumbhani - Sketch Artist</title>
+    <title>NSL Forge by Naman Lumbhani - Exquisite Sketch Artwork & Commissions</title>
+    <meta name="description" content="Explore the sketch artwork of Naman Lumbhani (NSL Forge). Offering custom hand-drawn portraits, character sketches, and conceptual art. Request a commission in Navsari, Gujarat.">
 
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -44,7 +45,7 @@
             color: var(--color-text-dark);
             background-color: var(--color-bg-dark);
             scroll-behavior: smooth;
-            perspective: 1200px; /* Increased perspective */
+            perspective: 1200px; /* Increased perspective for 3D effects */
             overflow-x: hidden; /* Prevent horizontal scroll issues with 3D */
         }
 
@@ -55,29 +56,30 @@
             padding: 120px 0;
             border-bottom: 1px solid var(--color-border);
             background-color: var(--color-bg-dark);
-            min-height: 80vh;
+            min-height: 80vh; /* Ensure sections are tall enough to trigger visibility */
             position: relative;
             overflow: hidden; /* Keep section content contained */
-             transform-style: preserve-3d; /* Ensure children participate in 3D */
-             /* Initial state controlled by JavaScript adding .section-hidden */
-             /* Transition applies when .section-hidden is removed and .is-visible is added */
-             transition: opacity 1s ease-out, transform 1s ease-out;
+            transform-style: preserve-3d; /* Ensure children participate in 3D */
+
+            /* Initial state for scroll-in animation */
+            opacity: 0;
+            transform: translateY(50px) rotateX(5deg);
+            transition: opacity 1s ease-out, transform 1s ease-out;
         }
 
-        /* --- NEW: Hidden state for sections animated in --- */
-        section:not(#hero).section-hidden {
-             opacity: 0;
-             transform: translateY(50px) rotateX(5deg);
-        }
-        /* --- END NEW --- */
+         /* Sections that should start visible (like Hero) */
+         #hero {
+             opacity: 1;
+             transform: none;
+             transition: none; /* No transition on hero visibility */
+         }
 
 
-        /* The 'is-visible' class overrides the hidden state */
+        /* The 'is-visible' class overrides the initial state */
         section.is-visible {
             opacity: 1;
             transform: translateY(0) rotateX(0deg);
         }
-
 
         section:last-of-type { border-bottom: none; }
         #pricing, #gallery { background-color: var(--color-bg-light); }
@@ -145,7 +147,9 @@
             transition: width 0.4s ease-out; /* Slower underline animation */
         }
         nav ul li a:hover, nav ul li a.active { color: var(--color-text-light); transform: translateY(-2px); }
+        nav ul li a:hover::after, nav ul li a.active::after { width: 100%; } /* Underline animation on hover/active */
         nav ul li a.active { color: var(--color-text-light); } /* Ensure active stays light */
+
 
         .menu-toggle { display: none; font-size: 2rem; cursor: pointer; color: var(--color-text-light); transition: transform 0.3s ease, color 0.3s ease; }
         .menu-toggle:hover { transform: rotate(90deg); color: var(--color-highlight); }
@@ -161,9 +165,6 @@
             align-items: center;
             text-align: center;
             padding-top: 80px;
-            opacity: 1; /* Hero is always visible */
-            transform: none; /* Hero is always visible */
-            transition: none; /* No transition on hero visibility */
             position: relative;
             overflow: hidden;
         }
@@ -353,7 +354,7 @@
 
         #pricing { background-color: var(--color-bg-light); }
         .pricing-info p { text-align: center; font-size: 1.1rem; margin-bottom: 30px; color: var(--color-text-dark); max-width: 1000px; margin: auto; line-height: 1.7; }
-        #pricing .important-note { margin-bottom: 25px; color: var(--color-alert); }
+         #pricing .important-note { margin-bottom: 25px; color: var(--color-alert); }
          #pricing .policy-note { margin-top: 25px; font-size: 1rem; }
         .pricing-info ul { list-style: none; padding: 0; text-align: center; margin-bottom: 25px; }
 
@@ -468,7 +469,7 @@
          }
 
         .drop-zone.dragover { background-color: rgba(187, 134, 252, 0.15); border-color: var(--color-primary-button); border-style: solid; box-shadow: 0 0 18px rgba(187, 134, 252, 0.5); /* More prominent dragover style */ }
-        .drop-zone.error { border-color: var(--color-error-text); background-color: rgba(207, 102, 121, 0.15); border-style: dashed; box-shadow: none; }
+        .drop-zone.error { border-color: var(--color-error-text); background-color: rgba(207, 102, 121, 0.15); border-style: solid; box-shadow: none; } /* Changed to solid border for clarity */
         .drop-zone p { margin: 0; font-size: 1rem; color: var(--color-text-dark); z-index: 2; position: relative; }
         .file-info { margin-top: 15px; font-size: 0.95rem; color: var(--color-text-dark); font-weight: 500; z-index: 2; position: relative; }
         .file-info.error-message { color: var(--color-error-text); font-weight: bold; }
@@ -552,8 +553,8 @@
 
         @media (max-width: 1024px) {
              .container { width: 95%; padding: 0 15px; }
-             section { padding: 80px 0; } /* Removed initial transform here */
-              section:not(#hero).section-hidden { /* Apply hidden transform in hidden state */
+             section { padding: 80px 0; }
+              section:not(#hero) { /* Adjust initial transform on smaller screens */
                  transform: translateY(40px) rotateX(4deg);
               }
               section.is-visible { transform: translateY(0) rotateX(0deg); }
@@ -580,6 +581,8 @@
              .service-process h3 { font-size: 2rem; margin-bottom: 25px; }
              .service-process ol, .service-process ul { padding-left: 25px; margin: 20px auto; font-size: 1rem; line-height: 1.7;}
              .service-process li { margin-bottom: 12px; }
+             .service-process ol li::marker { font-size: 1.1em; } /* Slightly smaller marker on smaller screen */
+             .service-process ul li::before { font-size: 1.1em; } /* Slightly smaller bullet on smaller screen */
              .important-note { font-size: 0.95rem; margin-top: 15px; }
               .policy-note { font-size: 0.95rem; padding: 20px; margin-top: 30px; border-left-width: 4px; }
              .pricing-info p { font-size: 1rem; margin-bottom: 25px; }
@@ -622,7 +625,7 @@
             nav ul li { margin: 6px 0; width: 100%; }
             nav ul li a { color: var(--color-text-light); font-size: 1rem; padding: 8px 15px; display: block; width: 100%; letter-spacing: 0.3px;}
             nav ul li a:hover, nav ul li a.active { color: var(--color-secondary-accent); background-color: rgba(255, 255, 255, 0.08); }
-            nav ul li a::after { display: none; }
+            nav ul li a::after { display: none; } /* Hide underline on mobile */
             .menu-toggle { display: block; position: static; font-size: 1.8rem; }
             header .container .header-top-row { display: flex; justify-content: space-between; align-items: center; width: 100%; }
             header .container .logo, header .container .menu-toggle { margin: 0; }
@@ -630,8 +633,8 @@
             #hero .hero-content { padding: 0 10px; }
             #hero h1 { font-size: 3rem; margin-bottom: 15px; letter-spacing: 1px;}
             #hero p { font-size: 1.1rem; margin-bottom: 30px; line-height: 1.6;}
-            section { padding: 50px 10px; } /* Removed initial transform here */
-             section:not(#hero).section-hidden { /* Apply hidden transform in hidden state */
+            section { padding: 50px 10px; }
+             section:not(#hero) { /* Adjust initial transform on smaller screens */
                 transform: translateY(30px) rotateX(3deg);
              }
              section.is-visible { transform: translateY(0) rotateX(0deg); }
@@ -710,7 +713,6 @@
 
          }
 
-
     </style>
 </head>
 <body>
@@ -721,7 +723,7 @@
                 <div class="logo">
                     <a href="#hero">NSL Forge</a>
                 </div>
-                <div class="menu-toggle" id="mobile-menu">
+                <div class="menu-toggle" id="mobile-menu" aria-label="Toggle navigation menu">
                     ☰
                 </div>
             </div>
@@ -831,7 +833,7 @@
                         <label for="phone">Your Phone Number:</label>
                          <div class="phone-input-container">
                              <span class="country-code">🇮🇳 +91</span>
-                             <input type="tel" id="phone" name="Phone Number" required pattern="[0-9]{10}">
+                             <input type="tel" id="phone" name="Phone Number" required pattern="[0-9]{10}" title="Please enter a 10-digit phone number">
                          </div>
                          <small style="color:var(--color-text-dark); display: block; margin-top: -15px; margin-bottom: 20px;">(Please enter a 10-digit number)</small>
                     </div>
@@ -896,7 +898,7 @@
 
                     <input type="text" name="_honey" style="display:none">
                     <input type="hidden" name="_captcha" value="false">
-                     <input type="hidden" name="Estimated Price" id="hiddenEstimatedPrice" value="">
+                    <input type="hidden" name="Estimated Price" id="hiddenEstimatedPrice" value="Estimate N/A">
 
 
                     <button type="submit">Send Message & Commission Request</button>
@@ -913,9 +915,9 @@
               <h2>My Sketch Samples</h2>
               <p style="text-align:center; margin-bottom: 40px; color: var(--color-text-dark); font-size: 1.1rem;">Browse through some examples of my work to get a feel for my style and quality.</p>
               <div class="sketch-gallery">
-                  <img src="20250105_015608.jpg" alt="Harry potter sketch">
-                  <img src="IMG_20241122_193303_736.jpg" alt="Sample Sketch 2">
-                  <img src="IMG_20241008_190133(1).jpg" alt="Sample Sketch 3">
+                  <img src="20250105_015608.jpg" alt="Detailed sketch of Harry Potter with Hedwig, ink on paper.">
+                  <img src="IMG_20241122_193303_736.jpg" alt="A sketch of a character wearing a hat and glasses, detailed shading.">
+                  <img src="IMG_20241008_190133(1).jpg" alt="Close-up sketch of a figure with strong shadows and textures.">
                    </div>
           </div>
       </section>
@@ -925,7 +927,7 @@
             <h2>About Naman Lumbhani</h2>
             <p>Hello! I'm Naman Lumbhani, the artist and creator behind NSL Forge. Sketching has been a profound passion of mine for many years. I am continuously inspired by the expressive power held within simple lines and careful shading, transforming blank surfaces into vivid depictions of ideas and emotions.</p>
             <p>NSL Forge is the evolution of my previous artistic endeavor, known as Nsl_creates (or Nsl creates). This new name reflects a refined focus and dedication to forging unique artistic pieces.</p>
-            <p>Outside of the studio... You can also find me on <a href="https://www.instagram.com/nslforge" target="_blank" rel="noopener noreferrer">Instagram (@nslforge)</a> and check out my <a href="https://www.youtube.com/@nslforgeofficial" target="_blank" rel="noopener noreferrer">YouTube channel (@nslforgeofficial)</a>. Through NSL Forge, my aspiration is to share my artistic vision and craft meaningful pieces that deeply resonate with you. I eagerly anticipate the opportunity to collaborate with you on your next unique sketch project!</p>
+            <p>Outside of the studio... You can also find me on <a href="https://www.instagram.com/nslforge" target="_blank" rel="noopener noreferrer" aria-label="Follow NSL Forge on Instagram"><i class="fab fa-instagram" aria-hidden="true"></i> Instagram (@nslforge)</a> and check out my <a href="https://www.youtube.com/@nslforgeofficial" target="_blank" rel="noopener noreferrer" aria-label="Subscribe to NSL Forge on YouTube"><i class="fab fa-youtube" aria-hidden="true"></i> YouTube channel (@nslforgeofficial)</a>. Through NSL Forge, my aspiration is to share my artistic vision and craft meaningful pieces that deeply resonate with you. I eagerly anticipate the opportunity to collaborate with you on your next unique sketch project!</p>
              </div>
     </section>
 
@@ -941,7 +943,7 @@
              <p>© NSL Forge. All rights reserved.</p> </div>
     </footer>
 
-     <div class="scroll-to-top" id="scrollToTopBtn">
+     <div class="scroll-to-top" id="scrollToTopBtn" aria-label="Scroll to top">
          <i class="fas fa-arrow-up"></i>
      </div>
 
@@ -955,6 +957,9 @@
         if (menuToggle && navMenu) {
             menuToggle.addEventListener('click', () => {
                 navMenu.classList.toggle('active');
+                 // Optional: Toggle ARIA expanded state
+                 const isExpanded = navMenu.classList.contains('active');
+                 menuToggle.setAttribute('aria-expanded', isExpanded);
             });
             document.querySelectorAll('#nav-menu a').forEach(link => {
                 link.addEventListener('click', function() {
@@ -963,11 +968,12 @@
                         // Small delay to allow click animation/ripple if any
                         setTimeout(() => {
                            navMenu.classList.remove('active');
+                           menuToggle.setAttribute('aria-expanded', 'false'); // Update ARIA
                         }, 300);
                     }
-                    // Update active class for navigation
-                    document.querySelectorAll('#nav-menu a').forEach(navLink => navLink.classList.remove('active'));
-                    this.classList.add('active');
+                    // Handled by IntersectionObserver now for active class
+                    // document.querySelectorAll('#nav-menu a').forEach(navLink => navLink.classList.remove('active'));
+                    // this.classList.add('active');
                 });
             });
              // Close menu if clicked outside (optional but good for UX)
@@ -975,118 +981,181 @@
                 const isClickInside = navMenu.contains(event.target) || menuToggle.contains(event.target);
                 if (!isClickInside && navMenu.classList.contains('active')) {
                      navMenu.classList.remove('active');
+                     menuToggle.setAttribute('aria-expanded', 'false'); // Update ARIA
                 }
             });
+            // Initial ARIA state
+             menuToggle.setAttribute('aria-expanded', 'false');
+             // Link mobile menu toggle to the nav menu it controls
+             menuToggle.setAttribute('aria-controls', 'nav-menu');
+             // Set role for navigation region for accessibility
+             navMenu.setAttribute('role', 'navigation');
         }
 
-        // Smooth Scrolling & Active Nav Link
-        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => { // Ensure it only applies to internal links
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault(); // Prevent default jump
-
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-
-                if (targetElement) {
-                    const headerHeight = document.querySelector('header').offsetHeight;
-                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight - 10; // Offset for fixed header
-
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth' // Smooth scroll effect
-                    });
-
-                     // Mobile menu specific: close menu after clicking a link
-                    if (navMenu && navMenu.classList.contains('active')) {
-                        setTimeout(() => { // Small delay
-                           navMenu.classList.remove('active');
-                        }, 300);
-                    }
-                }
-
-                 // Update active class immediately after click for visual feedback
-                 document.querySelectorAll('nav ul li a').forEach(navLink => navLink.classList.remove('active'));
-                 this.classList.add('active');
-            });
-        });
-
+        // Smooth Scrolling & Active Nav Link + Scroll-in Animation
         const sections = document.querySelectorAll('section');
         const navLi = document.querySelectorAll('nav ul li a');
         const header = document.querySelector('header');
 
 
-        // --- NEW: Add 'section-hidden' class to sections initially ---
-        // Run this after the DOM is loaded
-        document.addEventListener('DOMContentLoaded', () => {
-             sections.forEach(section => {
-                 if (section.id !== 'hero') { // Do not hide the hero section
-                     section.classList.add('section-hidden');
-                 }
-             });
-        });
-        // --- END NEW ---
-
-
+        // Intersection Observer for scroll-in animation and active nav links
         if (header && sections.length > 0 && navLi.length > 0) {
+             const headerHeight = header.offsetHeight; // Get header height dynamically
+
              const observerOptions = {
                  root: null, // relative to the viewport
-                 rootMargin: '0px 0px -20% 0px', // Trigger when 20% of the section is visible from the bottom
+                 rootMargin: `-${headerHeight}px 0px -30% 0px`, // Adjust threshold based on header height
                  threshold: 0.1 // Trigger when 10% of the section is visible
              };
 
              const sectionObserver = new IntersectionObserver((entries, observer) => {
                  entries.forEach(entry => {
-                     // When a section intersects and has the 'section-hidden' class
-                     if (entry.isIntersecting && entry.target.classList.contains('section-hidden')) {
-                         entry.target.classList.remove('section-hidden');
-                         entry.target.classList.add('is-visible');
-                         // Optional: Stop observing once it's visible if you don't need to track it leaving
-                         // observer.unobserve(entry.target);
-                     } else if (!entry.isIntersecting && entry.target.classList.contains('is-visible') && entry.target.id !== 'hero') {
-                         // Optional: Add 'section-hidden' back if it leaves the viewport, excluding hero
-                         // entry.target.classList.remove('is-visible');
-                         // entry.target.classList.add('section-hidden');
+                     const section = entry.target;
+                     const sectionId = section.getAttribute('id');
+                     const navLink = document.querySelector(`nav ul li a[href="#${sectionId}"]`);
+
+                     // Scroll-in Animation
+                     if (entry.isIntersecting) {
+                         section.classList.add('is-visible');
+                         // Remove initial animation class if it exists
+                         section.classList.remove('section-hidden');
+                     } else {
+                          // Optional: remove is-visible when it leaves the viewport
+                          // This makes the animation run again if you scroll back up
+                          // section.classList.remove('is-visible');
+                          // section.classList.add('section-hidden'); // Re-add hidden class for re-triggering
                      }
 
-                     // Update active navigation link based on intersection
-                      if (entry.isIntersecting) {
-                          const currentSectionId = entry.target.getAttribute('id');
-                          navLi.forEach(a => {
+                     // Active Nav Link (More reliable method)
+                     // Find the section that is currently most visible or closest to the top
+                      const visibleSection = sections.reduce((prev, current) => {
+                          const prevRect = prev.getBoundingClientRect();
+                          const currentRect = current.getBoundingClientRect();
+
+                          // Prioritize sections whose top is just below the header
+                          const prevTop = prevRect.top + window.scrollY;
+                          const currentTop = currentRect.top + window.scrollY;
+
+                          // Check if the current section is within the viewport and higher up (closer to header) than the previous best
+                          if (currentRect.top <= headerHeight && currentRect.bottom > headerHeight) {
+                              if (!prev || prevRect.top > currentRect.top) {
+                                  return current;
+                              }
+                          }
+                           // Fallback: If no section top is below header, take the one whose center is closest to the viewport center
+                          if (!prev || Math.abs(currentRect.top + currentRect.height / 2 - window.innerHeight / 2) < Math.abs(prevRect.top + prevRect.height / 2 - window.innerHeight / 2)) {
+                               // return current; // This makes it jump - less intuitive
+                          }
+
+                          return prev;
+                      }, null);
+
+
+                     // Update active class based on the most visible section
+                     if (visibleSection) {
+                         navLi.forEach(a => {
                               a.classList.remove('active');
-                              if (a.getAttribute('href') && a.getAttribute('href').substring(1) === currentSectionId) {
+                              if (a.getAttribute('href') && a.getAttribute('href').substring(1) === visibleSection.getAttribute('id')) {
                                   a.classList.add('active');
                               }
                           });
-                      }
+                     } else {
+                          // If somehow no section is visible (e.g., between sections),
+                          // default to the first or hero link
+                          if (window.scrollY < sections[0].offsetTop + sections[0].offsetHeight / 2) {
+                               navLi.forEach(a => a.classList.remove('active'));
+                               const heroLink = document.querySelector('nav ul li a[href="#hero"]');
+                               if (heroLink) {
+                                   heroLink.classList.add('active');
+                               }
+                          }
+                     }
                  });
              }, observerOptions);
 
-             // Observe each section (including hero, though its visibility is not controlled by observer)
+             // Add the initial animation class to sections (except hero) on DOM load
+             document.addEventListener('DOMContentLoaded', () => {
+                 sections.forEach(section => {
+                     if (section.id !== 'hero') {
+                         section.classList.add('section-hidden');
+                     }
+                      // Also ensure the hero section is visible initially
+                      if (section.id === 'hero') {
+                           section.classList.add('is-visible');
+                      }
+                 });
+             });
+
+
+             // Observe each section
              sections.forEach(section => {
                  sectionObserver.observe(section);
              });
 
 
-             // Special handling for Hero and the section immediately following it
-             // To ensure the active class is correct when at the very top
-             const handleInitialActive = () => {
-                 const headerHeight = header.offsetHeight;
-                 const scrollPosition = window.pageYOffset + headerHeight + 80; // Adjust offset
+             // Smooth scrolling for nav links
+            document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault(); // Prevent default jump
 
-                 if (window.pageYOffset <= 0 || (sections.length > 1 && scrollPosition < sections[1].offsetTop)) {
-                      navLi.forEach(a => navLi.classList.remove('active')); // Fix: Iterate over navLi correctly
-                      const heroLink = document.querySelector('nav ul li a[href="#hero"]');
-                      if (heroLink) {
-                          heroLink.classList.add('active');
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+
+                    if (targetElement) {
+                        const headerHeight = document.querySelector('header').offsetHeight;
+                        // Calculate target position considering header height and adding a small offset
+                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight - 10;
+
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+
+                         // Close mobile menu after clicking a link
+                        if (navMenu && navMenu.classList.contains('active')) {
+                            setTimeout(() => {
+                               navMenu.classList.remove('active');
+                               menuToggle.setAttribute('aria-expanded', 'false');
+                            }, 300);
+                        }
+                         // Let IntersectionObserver handle the active class update during scroll
+                    }
+                });
+            });
+
+             // Handle active class on initial load and resize if observer isn't enough
+              const updateActiveOnLoad = () => {
+                  const headerHeight = header.offsetHeight;
+                  // Find which section is currently at the top of the viewport below the header
+                  let currentActiveSectionId = null;
+                  for (let i = 0; i < sections.length; i++) {
+                      const section = sections[i];
+                       const rect = section.getBoundingClientRect();
+                       // Check if the section's top is above or at the bottom of the header height offset,
+                       // AND its bottom is below the header height offset.
+                       if (rect.top <= headerHeight + 10 && rect.bottom > headerHeight + 10) {
+                           currentActiveSectionId = section.getAttribute('id');
+                           break; // Found the section at the top
+                       }
+                       // If we are above the first section, make Hero active
+                       if (i === 0 && rect.top > headerHeight) {
+                            currentActiveSectionId = 'hero';
+                            break;
+                       }
+                  }
+
+                  navLi.forEach(a => {
+                      a.classList.remove('active');
+                       const linkSectionId = a.getAttribute('href').substring(1);
+                      if (linkSectionId === currentActiveSectionId) {
+                          a.classList.add('active');
                       }
-                 } else {
-                     // Let the IntersectionObserver handle it for other sections
-                 }
-             };
+                  });
+              };
 
-             // Run handleInitialActive on scroll and page load
-             window.addEventListener('scroll', handleInitialActive);
-             window.addEventListener('load', handleInitialActive); // Also check on full page load
+              // Add listener for initial load and resize
+              window.addEventListener('load', updateActiveOnLoad);
+              window.addEventListener('resize', updateActiveOnLoad); // Recalculate on resize
 
         }
 
@@ -1101,7 +1170,9 @@
             // Prevent default drag behaviors
             ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
                 dropZone.addEventListener(eventName, preventDefaults, false);
-                document.body.addEventListener(eventName, preventDefaults, false); // Prevent default for entire body
+                // Don't prevent default for the entire body unless absolutely necessary,
+                // it can break other drag/drop interactions on the page or extensions.
+                // document.body.addEventListener(eventName, preventDefaults, false);
             });
 
             // Highlight drop zone on drag over
@@ -1111,8 +1182,14 @@
 
             // Remove highlight on drag leave or drop
             ['dragleave', 'drop'].forEach(eventName => {
-                dropZone.classList.remove('dragover');
+                 // Use a slight delay for dragleave to avoid flickering
+                 if (eventName === 'dragleave') {
+                      dropZone.addEventListener(eventName, () => setTimeout(() => dropZone.classList.remove('dragover'), 50), false);
+                 } else {
+                      dropZone.addEventListener(eventName, () => dropZone.classList.remove('dragover'), false);
+                 }
             });
+
 
             // Handle dropped files
             dropZone.addEventListener('drop', handleDrop, false);
@@ -1129,7 +1206,7 @@
                 dropZone.classList.add('dragover');
                 dropZone.classList.remove('error'); // Remove error state on new drag
                 fileInfo.classList.remove('error-message');
-                fileInfo.innerHTML = ''; // Clear previous file info/errors
+                // fileInfo.innerHTML = ''; // Clear previous file info/errors - maybe keep it until new file is selected
             }
 
             function handleDrop(e) {
@@ -1147,26 +1224,26 @@
                  const file = files[0]; // We only expect one file
                  dropZone.classList.remove('error'); // Clear previous error states
                  fileInfo.classList.remove('error-message');
+                 fileInfo.innerHTML = ''; // Clear previous message immediately
 
                  if (file) {
                      if (file.type.startsWith('image/')) {
                          // File is an image, proceed
-                         // Use DataTransfer to set the file correctly for form submission (necessary for some older methods)
-                         const dataTransfer = new DataTransfer();
-                         dataTransfer.items.add(file);
-                         fileInput.files = dataTransfer.files; // Set the file to the input
+                         // No need for DataTransfer for modern forms, just setting fileInput.files is enough
+                         fileInput.files = files; // Set the file to the input
                          fileInfo.innerHTML = `Selected file: <strong>${file.name}</strong> (${(file.size / 1024).toFixed(2)} KB)`; // Display file info
                      } else {
                          // File is not an image
                          fileInput.value = ''; // Clear the file input
-                         fileInfo.innerHTML = '<span style="color: var(--color-error-text);">Please drop/select an image file.</span>';
+                         fileInfo.innerHTML = '<span style="color: var(--color-error-text);">Please drop/select an **image file**.</span>';
                          fileInfo.classList.add('error-message');
                          dropZone.classList.add('error'); // Add error state to drop zone
                      }
                  } else {
                       // Handle case where no file was selected or drop was cancelled
-                      fileInput.value = ''; // Ensure input is empty
-                      fileInfo.innerHTML = ''; // Clear file info display
+                      // Do nothing, keep previous state or reset if needed
+                      // fileInput.value = '';
+                      // fileInfo.innerHTML = '';
                  }
             }
         }
@@ -1174,20 +1251,21 @@
         // Form Submission Validation (Check for required file)
         if (contactForm && fileInput && fileInfo && dropZone) {
             contactForm.addEventListener('submit', function(event) {
-                // Check if the file input has any files selected
-                if (fileInput.files.length === 0) {
+                // Check if the file input has any files selected AND if it's required (which it is)
+                if (fileInput.required && fileInput.files.length === 0) {
                     event.preventDefault(); // Stop the form from submitting
                     // Display error message and highlight the drop zone
-                    fileInfo.innerHTML = 'A reference image is required. Please upload a file.';
+                    fileInfo.innerHTML = 'A reference image is **required**. Please upload a file.';
                     fileInfo.classList.add('error-message');
                     dropZone.classList.add('error');
                     // Scroll to the drop zone to make the error visible
                     dropZone.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 } else {
-                    // File is present, remove any previous error states and allow submission
+                    // File is present (or not required), remove any previous error states and allow submission
                     fileInfo.classList.remove('error-message');
                     dropZone.classList.remove('error');
                     // Form will now submit normally
+                    // Note: Server-side validation is also crucial!
                 }
             });
         }
@@ -1199,14 +1277,15 @@
         const subjectsSelect = document.getElementById('num-subjects');
         const backgroundSelect = document.getElementById('background');
         const estimatedPriceDiv = document.getElementById('estimatedPrice');
-        const hiddenEstimatedPriceInput = document.getElementById('hiddenEstimatedPrice');
+        const hiddenEstimatedPriceInput = document.getElementById('hiddenEstimatedPrice'); // Get the hidden input
 
-        /* Adjusted pricing slightly for better spread */
+
+        /* Adjusted pricing slightly for better spread - These are just examples, adjust as needed */
         const basePrices = { 'A5': 200, 'A4': 400, 'A3': 700 };
         const complexityCosts = { 'low': 50, 'medium': 200, 'high': 400 };
-        const subjectCosts = { '1': 0, '2': 200, '3': 400 };
+        const subjectCosts = { '1': 0, '2': 200, '3': 400 }; // Cost per *additional* subject? Or total cost based on count? Assuming total cost added.
         const backgroundCosts = { 'none': 0, 'simple': 100, 'detailed': 300 };
-        const generalMinPrice = 200;
+        const generalMinPrice = 250; // Slightly increased min price
 
         function calculateEstimate() {
             // Get selected values
@@ -1219,14 +1298,33 @@
 
             // Add costs based on selections
             currentPrice += complexityCosts[complexity] || 0;
-            currentPrice += subjectCosts[subjects] || 0;
+
+            // Handle subjects cost - Assuming cost *per* additional subject beyond the first
+            let subjectMultiplier = parseInt(subjects); // 1, 2, or 3+
+             if (subjectMultiplier === 2) currentPrice += 200; // Example: +200 for 2 subjects
+             if (subjectMultiplier === 3) currentPrice += 400; // Example: +400 for 3+ subjects (could be cumulative or fixed)
+             // Let's refine this: maybe it's a cost added *per* subject beyond the first?
+             // For 1 subject: +0
+             // For 2 subjects: base + complexity + background + (cost_per_subject * 1)
+             // For 3 subjects: base + complexity + background + (cost_per_subject * 2)
+             // Let's keep it simple with fixed options for now as per current HTML:
+             // currentPrice += subjectCosts[subjects] || 0; // Use this if 'subjectCosts' keys map directly to the *total* subject count cost
+
+             // Let's use a simpler tiered cost for subjects based on your current select options
+             if (subjects === '2') {
+                 currentPrice += 200; // Example cost for 2 subjects total
+             } else if (subjects === '3') { // This assumes '3' means 3 or more. Adjust logic if needed.
+                 currentPrice += 400; // Example cost for 3+ subjects total
+             }
+
+
             currentPrice += backgroundCosts[background] || 0;
 
             // Ensure minimum price is met
             currentPrice = Math.max(currentPrice, generalMinPrice);
 
             // Update the displayed price and the hidden input field
-            estimatedPriceDiv.innerHTML = `Estimated Price: ₹${currentPrice}/-`;
+            estimatedPriceDiv.innerHTML = `Estimated Price: **₹${currentPrice}/-**`; // Use bold for price
             hiddenEstimatedPriceInput.value = `${currentPrice}/- (Estimate based on selections)`; // Store estimate in hidden field for form submission
         }
 
@@ -1246,7 +1344,8 @@
              window.addEventListener('scroll', () => {
                  // Show button if scrolled past the height of the hero section
                  const heroHeight = heroSection.offsetHeight;
-                 scrollToTopBtn.classList.toggle('visible', window.pageYOffset > heroHeight * 0.8); // Show after 80% of hero height
+                 // Show button if scrolled past 80% of the hero section's height
+                 scrollToTopBtn.classList.toggle('visible', window.pageYOffset > heroHeight * 0.8);
              });
 
              // Smooth scroll to top on click
@@ -1278,37 +1377,45 @@
 
                 // 1. Create Scene, Camera, Renderer
                 const scene = new THREE.Scene();
-                const camera = new THREE.PerspectiveCamera(75, hero3dContainer.clientWidth / hero3dContainer.clientHeight, 0.1, 1000);
+                // Adjust camera FOV or position if needed to frame the object better
+                const camera = new THREE.PerspectiveCamera(60, hero3dContainer.clientWidth / hero3dContainer.clientHeight, 0.1, 1000);
                 const renderer = new THREE.WebGLRenderer({ canvas: heroCanvas, antialias: true, alpha: true }); // alpha: true for transparency
 
                 renderer.setSize(hero3dContainer.clientWidth, hero3dContainer.clientHeight);
                 renderer.setPixelRatio(window.devicePixelRatio); // Handle high DPI screens
 
                 // 2. Add a Simple Geometry (e.g., a Box)
-                const geometry = new THREE.BoxGeometry(3, 3, 3); // Adjust size as needed
+                 // Create a slightly more interesting shape, e.g., a Tetrahedron
+                const geometry = new THREE.TetrahedronGeometry(2.5); // Adjust size
+
                 // Using a more stylized material
                 const material = new THREE.MeshPhongMaterial({
                     color: 0xbb86fc, // Primary color
-                    shininess: 100, // Higher shininess
+                    shininess: 150, // Higher shininess
                     specular: 0xffffff, // White specular highlight
-                    flatShading: false // Smooth shading
+                    flatShading: true // Flat shading for geometric look
                 });
 
                 // 4. Create Mesh and Add to Scene
-                const cube = new THREE.Mesh(geometry, material);
-                scene.add(cube);
+                const shape = new THREE.Mesh(geometry, material);
+                scene.add(shape); // Add the shape instead of cube
 
                 // 5. Add Lighting
-                const ambientLight = new THREE.AmbientLight(0x404040); // Soft white light
+                // Adjust lighting for better effect
+                const ambientLight = new THREE.AmbientLight(0x404040, 0.8); // Softer ambient light
                 scene.add(ambientLight);
 
-                const directionalLight = new THREE.DirectionalLight(0xffffff, 1); // White light
+                const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5); // Main white light
                 directionalLight.position.set(5, 5, 5).normalize();
                 scene.add(directionalLight);
 
-                 const pointLight = new THREE.PointLight(0x03dac6, 0.5); // Highlight color point light
-                 pointLight.position.set(-5, 5, -5);
-                 scene.add(pointLight);
+                 const pointLight1 = new THREE.PointLight(0x03dac6, 0.6); // Highlight color point light 1
+                 pointLight1.position.set(-5, 5, -5);
+                 scene.add(pointLight1);
+
+                 const pointLight2 = new THREE.PointLight(0xbb86fc, 0.6); // Primary color point light 2
+                 pointLight2.position.set(5, -5, 5);
+                 scene.add(pointLight2);
 
 
                 // 6. Position Camera
@@ -1319,8 +1426,8 @@
                     requestAnimationFrame(animate);
 
                     // Rotate the object slightly slower or with more variation
-                    cube.rotation.x += 0.002;
-                    cube.rotation.y += 0.003;
+                    shape.rotation.x += 0.003; // Slightly faster rotation
+                    shape.rotation.y += 0.004; // Slightly faster rotation
 
                     renderer.render(scene, camera);
                 };
@@ -1340,7 +1447,7 @@
                 animate();
 
             } else {
-                // WebGL is not supported, show fallback message and remove canvas
+                // WebGL is not supported, show fallback message and hide canvas
                  if (heroFallbackMessage) heroFallbackMessage.style.display = 'block';
                  if (heroCanvas) heroCanvas.style.display = 'none';
 
@@ -1353,6 +1460,14 @@
             }
         }
          // --- End Three.js Setup ---
+
+         // Add class for initial section animation
+         document.addEventListener('DOMContentLoaded', () => {
+             // Add section-hidden to all sections except the first one (#hero)
+             document.querySelectorAll('section:not(#hero)').forEach(section => {
+                 section.classList.add('section-hidden');
+             });
+         });
 
 
     </script>
