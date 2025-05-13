@@ -141,7 +141,7 @@
             opacity: 0.6; /* Optional: reduce opacity */
         }
 
-        /* Style for the fallback message */
+         /* Style for the fallback message */
         #hero-fallback-message {
             position: absolute;
             top: 50%;
@@ -447,43 +447,6 @@
         .scroll-to-top.visible { opacity: 1; visibility: visible; }
         .scroll-to-top:hover { background-color: var(--color-highlight); transform: scale(1.1); }
 
-        /* Sticky CTA Button Styles */
-        .sticky-cta-button {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: var(--color-primary-button);
-            color: var(--color-bg-dark);
-            padding: 12px 25px;
-            text-decoration: none;
-            border-radius: 25px;
-            font-size: 1.1rem;
-            font-weight: 500;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
-            z-index: 999;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.2s ease-out;
-             transform: translateY(20px);
-             cursor: pointer;
-        }
-
-        .sticky-cta-button.visible {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-         .sticky-cta-button:hover {
-             background: var(--color-highlight);
-             transform: translateY(-3px);
-         }
-
-         .sticky-cta-button:active {
-             transform: translateY(-1px);
-             box-shadow: 0 3px 6px rgba(0,0,0,0.3);
-         }
-
         /* Responsive adjustments */
         @media (max-width: 1024px) {
              .container { padding: 0 15px; }
@@ -631,52 +594,7 @@
             .scroll-to-top { width: 30px; height: 30px; line-height: 30px; font-size: 1rem; bottom: 15px; right: 15px; }
         }
 
-        /* Sticky CTA Button Styles */
-        .sticky-cta-button {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: var(--color-primary-button);
-            color: var(--color-bg-dark);
-            padding: 12px 25px;
-            text-decoration: none;
-            border-radius: 25px;
-            font-size: 1.1rem;
-            font-weight: 500;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
-            z-index: 999;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.2s ease-out;
-             transform: translateY(20px);
-             cursor: pointer;
-        }
-
-        .sticky-cta-button.visible {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-         .sticky-cta-button:hover {
-             background: var(--color-highlight);
-             transform: translateY(-3px);
-         }
-
-         .sticky-cta-button:active {
-             transform: translateY(-1px);
-             box-shadow: 0 3px 6px rgba(0,0,0,0.3);
-         }
-
-        /* Responsive adjustments for sticky button */
-        @media (max-width: 1024px) {
-             .sticky-cta-button { bottom: 25px; right: 25px; padding: 10px 20px; font-size: 1rem; border-radius: 20px; }
-        }
-        @media (max-width: 768px) {
-            .sticky-cta-button { bottom: 20px; right: 20px; padding: 8px 18px; font-size: 0.9rem; border-radius: 18px; }
-             .sticky-cta-button:hover { transform: translateY(-2px); }
-             .sticky-cta-button:active { transform: translateY(-1px); }
-        }
+        /* Removed sticky CTA button styles */
 
 
     </style>
@@ -696,10 +614,11 @@
             <nav id="nav-menu">
                 <ul>
                     <li><a href="#hero" class="active">Home</a></li>
-                     <li><a href="#gallery">Sketch Samples</a></li><li><a href="#services">Services & Commissions</a></li>
+                    <li><a href="#services">Services & Commissions</a></li>
                     <li><a href="#pricing">Pricing</a></li>
-                    <li><a href="#about">About Me</a></li>
                     <li><a href="#contact">Contact</a></li>
+                    <li><a href="#gallery">Sketch Samples</a></li>
+                    <li><a href="#about">About Me</a></li>
                 </ul>
             </nav>
         </div>
@@ -726,19 +645,6 @@
              <p><i class="fas fa-info-circle"></i> Please note: This website is currently run by a 15-year-old for learning and experimental purposes. A significant portion of the website's code and design was developed with the assistance of AI tools. While every effort has been made to ensure accuracy and functionality, please understand that this site serves as a portfolio and learning project. Your understanding is appreciated.</p>
          </div>
      </section>
-
-    <section id="gallery">
-        <div class="container">
-             <h2>My Sketch Samples</h2>
-             <p style="text-align:center; margin-bottom: 40px; color: var(--color-text-dark); font-size: 1.1rem;">Browse through some examples of my work to get a feel for my style and quality.</p>
-             <div class="sketch-gallery">
-                 <img src="20250105_015608.jpg" alt="Harry potter">
-                 <img src="IMG_20241122_193303_736.jpg" alt="Sample Sketch 2">
-                 <img src="IMG_20241008_190133(1).jpg" alt="Sample Sketch 3">
-                 </div>
-         </div>
-     </section>
-
 
     <section id="services">
         <div class="container">
@@ -792,14 +698,6 @@
             <p style="font-size: 1.1rem; margin-top: 20px; color: var(--color-text-dark);">For a guiding estimate tailored to your specific requirements, please utilize the estimator provided in the <a href="#contact" style="color: var(--color-primary-button); font-weight: bold; text-decoration: underline;">Contact Section</a> below.</p>
              <p style="text-align:center; margin-top: 15px; font-size: 0.9rem; color: var(--color-medium-grey);"><em>Note: The estimate provides an initial guide. The final, precise quote will be confirmed after I personally review your specific request details and any reference images provided.</em></p>
             </div>
-    </section>
-
-    <section id="about">
-        <div class="container">
-            <h2>About Naman Lumbhani</h2>
-            <p>Hello! I'm Naman Lumbhani, the artist and creator behind NSL Forge. Sketching has been a profound passion of mine for many years. I am continuously inspired by the expressive power held within simple lines and careful shading, transforming blank surfaces into vivid depictions of ideas and emotions.</p>
-            <p>Outside of the studio... You can also find me on <a href="https://www.instagram.com/nslforge" target="_blank" style="color: var(--color-primary-button); text-decoration: none;">Instagram (@nslforge)</a> and check out my <a href="https://youtube.com/@nslcreatesofficial?si=D62UGYhSgte30f5I" target="_blank" style="color: var(--color-primary-button); text-decoration: none;">YouTube channel (@nslforgeofficial)</a>. Through NSL Forge, my aspiration is to share my artistic vision and craft meaningful pieces that deeply resonate with you. I eagerly anticipate the opportunity to collaborate with you on your next unique sketch project!</p>
-             </div>
     </section>
 
     <section id="contact">
@@ -899,6 +797,27 @@
         </div>
     </section>
 
+     <section id="gallery">
+         <div class="container">
+              <h2>My Sketch Samples</h2>
+              <p style="text-align:center; margin-bottom: 40px; color: var(--color-text-dark); font-size: 1.1rem;">Browse through some examples of my work to get a feel for my style and quality.</p>
+              <div class="sketch-gallery">
+                  <img src="20250105_015608.jpg" alt="Harry potter">
+                  <img src="IMG_20241122_193303_736.jpg" alt="Sample Sketch 2">
+                  <img src="IMG_20241008_190133(1).jpg" alt="Sample Sketch 3">
+                  </div>
+          </div>
+      </section>
+
+    <section id="about">
+        <div class="container">
+            <h2>About Naman Lumbhani</h2>
+            <p>Hello! I'm Naman Lumbhani, the artist and creator behind NSL Forge. Sketching has been a profound passion of mine for many years. I am continuously inspired by the expressive power held within simple lines and careful shading, transforming blank surfaces into vivid depictions of ideas and emotions.</p>
+            <p>Outside of the studio... You can also find me on <a href="https://www.instagram.com/nslforge" target="_blank" style="color: var(--color-primary-button); text-decoration: none;">Instagram (@nslforge)</a> and check out my <a href="https://youtube.com/@nslcreatesofficial?si=D62UGYhSgte30f5I" target="_blank" style="color: var(--color-primary-button); text-decoration: none;">YouTube channel (@nslforgeofficial)</a>. Through NSL Forge, my aspiration is to share my artistic vision and craft meaningful pieces that deeply resonate with you. I eagerly anticipate the opportunity to collaborate with you on your next unique sketch project!</p>
+             </div>
+    </section>
+
+
     <footer>
         <div class="container">
              <p class="footer-note">This website is for learning purposes and was built with AI assistance. Payments for commissions are accepted in cash.</p>
@@ -914,8 +833,6 @@
      <div class="scroll-to-top" id="scrollToTopBtn">
          <i class="fas fa-arrow-up"></i>
      </div>
-
-    <a href="#contact" class="sticky-cta-button" id="stickyCtaBtn">Request Commission</a>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r163/three.min.js"></script>
 
@@ -1023,10 +940,12 @@
              let lastScrollTop = 0;
              const scrollHandler = () => {
                  const st = window.pageYOffset || document.documentElement.scrollTop;
+                 // Only trigger complex logic if scroll is significant or section changes
                  if (Math.abs(st - lastScrollTop) > 50 || getCurrentSectionBasedOnScroll() !== getLastActiveSection()) {
                       requestAnimationFrame(handleScrollLogic);
                      lastScrollTop = st <= 0 ? 0 : st;
                  } else {
+                      // Quick update for nav active class on minor scrolls within a section
                       const currentSectionId = getCurrentSectionBasedOnScroll();
                        navLi.forEach(a => {
                             a.classList.remove('active');
@@ -1076,7 +995,7 @@
         if (dropZone && fileInput && fileInfo) {
             ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
                 dropZone.addEventListener(eventName, preventDefaults, false);
-                document.body.addEventListener(eventName, preventDefaults, false);
+                document.body.addEventListener(eventName, preventDefaults, false); // Prevent default for entire body
             });
             ['dragenter', 'dragover'].forEach(eventName => {
                 dropZone.addEventListener(eventName, highlight, false);
@@ -1103,16 +1022,18 @@
                  fileInfo.classList.remove('error-message');
                  if (file) {
                      if (file.type.startsWith('image/')) {
+                         // Use DataTransfer to set the file correctly for form submission
                          const dataTransfer = new DataTransfer();
                          dataTransfer.items.add(file);
                          fileInput.files = dataTransfer.files;
                          fileInfo.innerHTML = `Selected file: <strong>${file.name}</strong> (${(file.size / 1024).toFixed(2)} KB)`;
                      } else {
-                         fileInput.value = '';
+                         fileInput.value = ''; // Clear the file input
                          fileInfo.innerHTML = '<span style="color: var(--color-error-text);">Please drop/select an image file.</span>';
                          fileInfo.classList.add('error-message');
                      }
                  } else {
+                      // Handle case where no file was selected or drop was cancelled
                       fileInput.value = '';
                       fileInfo.innerHTML = '';
                  }
@@ -1126,13 +1047,16 @@
                     fileInfo.innerHTML = 'A reference image is required. Please upload a file.';
                     fileInfo.classList.add('error-message');
                     dropZone.classList.add('error');
+                    // Scroll to the drop zone to make the error visible
                     dropZone.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 } else {
                     fileInfo.classList.remove('error-message');
                     dropZone.classList.remove('error');
+                     // Proceed with form submission
                 }
             });
         }
+
 
         // Pricing Estimator Logic
         const sizeSelect = document.getElementById('sketch-size');
@@ -1143,57 +1067,52 @@
         const hiddenEstimatedPriceInput = document.getElementById('hiddenEstimatedPrice');
         const basePrices = { 'A5': 180, 'A4': 380, 'A3': 650 };
         const complexityCosts = { 'low': 50, 'medium': 150, 'high': 300 };
-        const subjectCosts = { '1': 0, '2': 150, '3': 350 };
+        const subjectCosts = { '1': 0, '2': 150, '3': 350 }; // Assuming cost increases significantly with more subjects
         const backgroundCosts = { 'none': 0, 'simple': 100, 'detailed': 300 };
-        const generalMinPrice = 150;
+        const generalMinPrice = 150; // Minimum price for any commission
 
         function calculateEstimate() {
             const size = sizeSelect.value;
             const complexity = complexitySelect.value;
             const subjects = subjectsSelect.value;
             const background = backgroundSelect.value;
-            let currentPrice = basePrices[size] || 0;
+
+            let currentPrice = basePrices[size] || 0; // Get base price by size
+
+            // Add costs based on selections
             currentPrice += complexityCosts[complexity] || 0;
             currentPrice += subjectCosts[subjects] || 0;
             currentPrice += backgroundCosts[background] || 0;
+
+            // Ensure minimum price
             currentPrice = Math.max(currentPrice, generalMinPrice);
+
+            // Update the displayed price and the hidden input
             estimatedPriceDiv.innerHTML = `Estimated Price: ₹${currentPrice}/-`;
             hiddenEstimatedPriceInput.value = `${currentPrice}/- (Estimate based on selections)`;
         }
 
+        // Add event listeners and calculate initial estimate on page load
         if (sizeSelect && complexitySelect && subjectsSelect && backgroundSelect && estimatedPriceDiv && hiddenEstimatedPriceInput) {
             [sizeSelect, complexitySelect, subjectsSelect, backgroundSelect].forEach(el => el.addEventListener('change', calculateEstimate));
-            calculateEstimate();
+            calculateEstimate(); // Calculate initial estimate on page load
         }
+
 
         // Scroll to Top Button Logic
         const scrollToTopBtn = document.getElementById('scrollToTopBtn');
         if (scrollToTopBtn) {
              window.addEventListener('scroll', () => {
-                 scrollToTopBtn.classList.toggle('visible', window.pageYOffset > 400);
+                 // Show button if scrolled past the hero section height
+                 scrollToTopBtn.classList.toggle('visible', window.pageYOffset > document.getElementById('hero').offsetHeight);
              });
              scrollToTopBtn.addEventListener('click', () => {
                  window.scrollTo({ top: 0, behavior: 'smooth' });
              });
         }
 
-        // Sticky CTA Button Visibility Logic
-        const stickyCtaBtn = document.getElementById('stickyCtaBtn');
-        const heroSection = document.getElementById('hero');
+        // Removed Sticky CTA Button Visibility Logic
 
-        if (stickyCtaBtn && heroSection) {
-             const showButton = () => {
-                 // Show button if scrolled past the hero section height + a buffer
-                 if (window.pageYOffset > heroSection.offsetHeight - 50) {
-                     stickyCtaBtn.classList.add('visible');
-                 } else {
-                     stickyCtaBtn.classList.remove('visible');
-                 }
-             };
-
-             window.addEventListener('scroll', showButton);
-             showButton(); // Check visibility on page load
-        }
 
         // --- Three.js Hero Section Setup ---
         const heroCanvas = document.getElementById('hero-canvas');
@@ -1278,7 +1197,8 @@
                  if (heroCanvas) heroCanvas.style.display = 'none';
 
                  // Optional: Apply the original background image as a true fallback
-                 hero3dContainer.style.backgroundImage = "url('https://googleusercontent.com/image_generation_content/0')";
+                 // Make sure the image URL is valid or remove this line if not needed
+                 // hero3dContainer.style.backgroundImage = "url('https://googleusercontent.com/image_generation_content/0')";
                  hero3dContainer.style.backgroundSize = "cover";
                  hero3dContainer.style.backgroundPosition = "center center";
             }
