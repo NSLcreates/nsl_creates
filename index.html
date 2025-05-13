@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NSL Forge by Naman Lumbhani - Sketch Artist</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght=300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
@@ -260,10 +260,27 @@
         .service-process li strong { color: var(--color-text-light); font-weight: 500; }
         .important-note { text-align: center; font-size: 0.95rem; color: var(--color-alert); margin-top: 15px; font-weight: 500; }
         .important-note i { margin-right: 5px; }
+        .policy-note {
+             text-align: center;
+             font-size: 1rem;
+             color: var(--color-alert); /* Using alert color for important policy */
+             margin-top: 30px;
+             font-weight: 500;
+             padding: 20px;
+             background-color: rgba(207, 102, 121, 0.1); /* Subtle background */
+             border-left: 4px solid var(--color-alert);
+             border-radius: 6px;
+             max-width: 900px;
+             margin-left: auto;
+             margin-right: auto;
+        }
+        .policy-note i { margin-right: 8px; }
+
 
         #pricing { background-color: var(--color-bg-light); }
         .pricing-info p { text-align: center; font-size: 1.1rem; margin-bottom: 25px; color: var(--color-text-dark); max-width: 1000px; margin: auto; line-height: 1.7; }
         #pricing .important-note { margin-bottom: 20px; color: var(--color-alert); }
+         #pricing .policy-note { margin-top: 20px; font-size: 0.95rem; }
         .pricing-info ul { list-style: none; padding: 0; text-align: center; margin-bottom: 20px; }
 
         #about .container { display: flex; flex-direction: column; align-items: center; text-align: center; }
@@ -479,6 +496,7 @@
              .service-process li { margin-bottom: 10px; padding-left: 6px; }
              .service-process ul li::before { width: 0.9em; margin-left: -0.9em; }
              .important-note { font-size: 0.9rem; margin-top: 10px; }
+              .policy-note { font-size: 0.9rem; padding: 15px; }
              .pricing-info p { font-size: 1rem; margin-bottom: 20px; }
              #about p { font-size: 1rem; margin-bottom: 20px; }
              .contact-form { max-width: 500px; margin: 40px auto; padding: 30px; border-radius: 8px; }
@@ -559,6 +577,7 @@
             .service-process li { margin-bottom: 8px; padding-left: 4px; }
             .service-process ul li::before { width: 0.7em; margin-left: -0.7em; }
             .important-note { font-size: 0.8rem; margin-top: 8px; }
+             .policy-note { font-size: 0.85rem; padding: 10px; }
             .pricing-info p { font-size: 0.95rem; margin-bottom: 15px; }
             #about p { font-size: 0.95rem; margin-bottom: 15px; }
             .contact-form { max-width: 95%; margin: 30px auto; padding: 20px; border-radius: 6px; }
@@ -672,17 +691,12 @@
                 <ol>
                     <li><strong>Inquiry:</strong> Begin by reaching out with your detailed idea, including any reference photos (required for portraits/characters), preferred style, and desired dimensions.</li>
                     <li><strong>Discussion & Quote:</strong> We will have a thorough discussion about your project's specifics. Following this, I will provide a personalized quote and an estimated timeline for completion.</li>
-                    <li><strong>Deposit:</strong> To confirm your commission slot and begin work, a **20% non-refundable deposit is required and can be paid via cash.** The remaining balance can be paid offline (cash) or as per your preference upon completion.</li>
+                    <li><strong>Deposit:</strong> To confirm your commission slot and begin work, a **20% non-refundable deposit is required and can be paid via cash.**</li>
                     <li><strong>Creation:</strong> I will dedicate my attention to creating your sketch. Work-in-progress updates can be provided at key stages if you wish to follow along.</li>
                     <li><strong>Review & Final Payment:</strong> Once complete, you will receive a watermarked preview for approval. After approval, the final payment (80%) is due as arranged (cash payment preferred for local delivery).</li>
                     <li><strong>Delivery:</strong> After receiving the final payment, you will receive the high-resolution digital file of your artwork (available in formats like JPG, PNG, or PDF). **Physical artwork delivery is currently only available within Navsari, Gujarat.**</li>
                 </ol>
-                <h3>What's Included:</h3>
-                <ul>
-                    <li>A high-resolution digital file of your completed sketch (available in formats like JPG, PNG, or PDF).</li>
-                    <li>One round of minor revisions is included during the sketching phase to ensure your satisfaction.</li>
-                    <li>Personal usage rights are granted by default (discussions regarding commercial rights are welcome).</li>
-                </ul>
+                 <p class="policy-note"><i class="fas fa-exclamation-triangle"></i> **Important Refund Policy:** Please understand that the 20% deposit is non-refundable. After the full payment is made and the final high-resolution sketch is delivered, no refunds can be issued if the customer is not satisfied with the completed work. If, after reviewing the watermarked preview, you choose not to proceed with the final payment, the watermarked sketch will not be delivered.</p>
             </div>
             <div style="text-align: center; margin-top: 50px;">
                  <a href="#contact" class="cta-button">Request a Commission</a>
@@ -695,6 +709,7 @@
             <h2>Pricing</h2>
             <p style="font-size: 1.1rem; margin-bottom: 25px; color: var(--color-text-dark);">The cost of each sketch is unique and depends on several factors, including the size, level of complexity, the number of main subjects, and the detail in the background. Please ensure you can provide clear reference photos, especially for portraits.</p>
              <p class="important-note"><i class="fas fa-shipping-fast"></i> Please note: Physical artwork delivery is currently limited to **Navsari, Gujarat**. All payments are preferred in cash.</p>
+             <p class="policy-note"><i class="fas fa-cash-register"></i> Reminder on Payments: A **20% non-refundable deposit** is required to start the commission. The remaining 80% is due upon approval of the watermarked preview. No refunds can be issued after the full payment and delivery of the final sketch.</p>
             <p style="font-size: 1.1rem; margin-top: 20px; color: var(--color-text-dark);">For a guiding estimate tailored to your specific requirements, please utilize the estimator provided in the <a href="#contact" style="color: var(--color-primary-button); font-weight: bold; text-decoration: underline;">Contact Section</a> below.</p>
              <p style="text-align:center; margin-top: 15px; font-size: 0.9rem; color: var(--color-medium-grey);"><em>Note: The estimate provides an initial guide. The final, precise quote will be confirmed after I personally review your specific request details and any reference images provided.</em></p>
             </div>
