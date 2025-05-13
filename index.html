@@ -3,56 +3,399 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mahadev Gems - Exquisite Ruby Gemstone</title>
+    <title>Product Page - Mahadev Gems</title>
     <style>
-        body { font-family: sans-serif; margin: 0; padding: 20px; }
-        .container { max-width: 900px; margin: auto; }
-        .product-details { display: flex; flex-wrap: wrap; }
-        .product-image { flex: 1; min-width: 300px; margin-right: 20px; }
-        .product-image img { max-width: 100%; height: auto; }
-        .product-info { flex: 2; }
-        .product-info h1 { margin-top: 0; }
-        .price { font-size: 1.5em; color: #333; margin-bottom: 15px; }
-        .add-to-cart-btn { background-color: #4CAF50; color: white; padding: 10px 20px; border: none; cursor: pointer; font-size: 1em; }
-        .add-to-cart-btn:hover { background-color: #45a049; }
-        .description h2 { margin-top: 20px; }
-        .cart-icon { float: right; font-size: 1.2em; } /* Very basic placeholder */
+        /* style.css content goes here */
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            /* Add some padding at the bottom to make space for the footer */
+            padding-bottom: 60px; /* Adjust based on footer height */
+        }
+
+        header {
+            background: #333;
+            color: #fff;
+            padding: 1em 0;
+            position: fixed; /* Fix header to the top */
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000; /* Ensure header is above other content */
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            max-width: 1200px; /* Limit content width */
+            margin: 0 auto; /* Center navigation */
+            padding: 0 20px; /* Add some padding on sides */
+        }
+
+        nav h1 {
+            margin: 0;
+            font-size: 1.8em;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin-left: 20px; /* Adjust spacing */
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1em;
+            transition: color 0.3s ease; /* Smooth color transition on hover */
+        }
+
+        nav a:hover {
+            color: #008CBA; /* Highlight color on hover */
+        }
+
+        /* Basic styling for a potential search input in header */
+        nav input[type="text"] {
+            padding: 5px;
+            border: none;
+            border-radius: 3px;
+        }
+
+        nav button {
+             background-color: #008CBA;
+             color: white;
+             padding: 5px 10px;
+             border: none;
+             border-radius: 3px;
+             cursor: pointer;
+             margin-left: 5px;
+        }
+
+         nav button:hover {
+            background-color: #005f7a;
+         }
+
+
+        main {
+            padding: 2em 20px; /* Add padding and adjust for fixed header */
+            margin-top: 80px; /* Space for fixed header */
+            max-width: 1200px; /* Limit content width */
+            margin: 80px auto 0 auto; /* Center main content and space for header */
+        }
+
+        .product-details {
+            display: flex;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            gap: 2em;
+            background-color: #fff; /* White background for product details */
+            padding: 2em;
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow */
+        }
+
+        .product-image {
+            flex: 1; /* Allow image container to grow */
+            min-width: 300px; /* Minimum width before wrapping */
+            text-align: center; /* Center image if container is wider */
+        }
+
+        .product-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px; /* Rounded corners for image */
+        }
+
+        .product-info {
+            flex: 2; /* Allow info section to take more space */
+        }
+
+        .product-info h2 {
+            margin-top: 0;
+            font-size: 2em;
+            color: #333;
+        }
+
+        .product-description {
+            margin-bottom: 1.5em;
+            line-height: 1.6; /* Improved readability */
+        }
+
+        .product-price {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #008CBA; /* Highlight price */
+            margin-bottom: 1.5em;
+        }
+
+        /* Style for potential product options */
+        .product-options label {
+            display: block; /* Each option on a new line */
+            margin-bottom: 0.5em;
+            font-weight: bold;
+        }
+
+        .product-options select {
+            padding: 8px;
+            margin-bottom: 1em;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+
+        .add-to-cart-btn {
+            background-color: #4CAF50; /* Green button */
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: #45a049;
+        }
+
+        .related-products {
+            margin-top: 3em;
+        }
+
+        .related-products h2 {
+            text-align: center;
+            margin-bottom: 1.5em;
+            color: #333;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid for related products */
+            gap: 2em;
+        }
+
+        .product-item {
+             background-color: #fff;
+             padding: 1em;
+             border-radius: 8px;
+             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+             text-align: center;
+        }
+
+         .product-item img {
+             max-width: 100%;
+             height: 150px; /* Fixed height for related product images */
+             object-fit: cover; /* Crop images to fit */
+             border-radius: 5px;
+             margin-bottom: 1em;
+         }
+
+         .product-item h3 {
+             font-size: 1.2em;
+             margin-top: 0;
+             margin-bottom: 0.5em;
+         }
+
+         .product-item p {
+             font-size: 1em;
+             color: #555;
+             margin-bottom: 1em;
+         }
+
+         .product-item .price {
+             font-size: 1.1em;
+             font-weight: bold;
+             color: #008CBA;
+         }
+
+
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1.5em 0;
+            position: relative; /* Use relative positioning or remove position fixed from header */
+            width: 100%;
+            /* If header is fixed, footer needs to be below main content */
+            /* Consider a sticky footer implementation if needed */
+        }
+
+        footer p {
+            margin: 0.5em 0;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+         footer a:hover {
+             text-decoration: underline;
+         }
+
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+            }
+
+            nav ul {
+                margin-top: 1em;
+            }
+
+            nav ul li {
+                margin: 0 10px;
+            }
+
+            .product-details {
+                flex-direction: column;
+            }
+
+             .product-image {
+                 margin-right: 0;
+             }
+        }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="cart-icon">🛒 Cart (0)</div>
+    <header>
+        <nav>
+            <h1>Mahadev Gems</h1>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Products</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <form>
+                <input type="text" placeholder="Search...">
+                <button type="submit">Search</button>
+            </form>
+             <a href="#" class="cart-icon" style="color: white; text-decoration: none; font-size: 1.2em;">🛒 Cart (0)</a>
+        </nav>
+    </header>
 
-        <div class="product-details">
+    <main>
+        <section class="product-details">
             <div class="product-image">
-                <img src="placeholder_ruby.jpg" alt="Exquisite Ruby Gemstone">
+                <img src="placeholder_gem.jpg" alt="Exquisite Gemstone">
             </div>
             <div class="product-info">
-                <h1>Exquisite Ruby Gemstone</h1>
-                <p>A stunning natural ruby with exceptional color and clarity.</p>
-                <div class="price">$1500.00</div>
-                <button class="add-to-cart-btn">Add to Cart</button>
+                <h2>Exquisite Gemstone Name</h2>
+                <p class="product-description">Discover the beauty and rarity of this hand-selected gemstone. Perfect for creating unique jewelry pieces.</p>
+
+                <div class="product-options">
+                    <label for="gem-type">Gemstone Type:</label>
+                    <select id="gem-type">
+                        <option value="ruby">Ruby</option>
+                        <option value="sapphire">Sapphire</option>
+                        <option value="emerald">Emerald</option>
+                         <option value="diamond">Diamond</option>
+                         <option value="other">Other</option>
+                    </select>
+
+                    <label for="carat-weight">Carat Weight:</label>
+                    <select id="carat-weight">
+                        <option value="1">1.0 ct</option>
+                        <option value="1.5">1.5 ct</option>
+                        <option value="2">2.0 ct</option>
+                         <option value="2.5">2.5 ct</option>
+                         <option value="3+">3.0+ ct</option>
+                    </select>
+                     </div>
+
+                <p class="product-price">$999.99</p>
+
+                <button class="add-to-cart-btn" onclick="addToCart()">Add to Cart</button>
 
                 <div class="description">
-                    <h2>Product Description</h2>
+                    <h3>Product Description</h3>
                     <p>
-                        This exquisite ruby gemstone boasts a vibrant red hue and remarkable transparency,
-                        making it a perfect center stone for a ring or pendant. Sourced ethically,
-                        this ruby has a brilliant cut that maximizes its sparkle.
+                        Detailed information about the gemstone, including its origin,
+                        certification (if any), dimensions, and unique characteristics.
+                        This section would be populated with actual product data from a database.
                     </p>
-                    <ul>
-                        <li>**Gemstone Type:** Natural Ruby</li>
-                        <li>**Carat Weight:** 1.5 carats</li>
-                        <li>**Cut:** Brilliant</li>
-                        <li>**Color:** Vibrant Red</li>
-                        <li>**Clarity:** VVS</li>
-                        <li>**Origin:** Mozambique (Example)</li>
-                    </ul>
+                     <ul>
+                         <li>**Origin:** (e.g., Madagascar)</li>
+                         <li>**Certification:** (e.g., GIA Certified)</li>
+                         <li>**Dimensions:** (e.g., 7mm x 5mm)</li>
+                     </ul>
                 </div>
             </div>
+        </section>
+
+        <section class="related-products">
+            <h2>You might also like</h2>
+            <div class="product-grid">
+                <div class="product-item">
+                    <img src="placeholder_related1.jpg" alt="Related Product 1">
+                    <h3>Related Gem 1</h3>
+                    <p>Brief description.</p>
+                    <p class="price">$150.00</p>
+                     <button>View Details</button>
+                </div>
+                 <div class="product-item">
+                    <img src="placeholder_related2.jpg" alt="Related Product 2">
+                    <h3>Related Gem 2</h3>
+                    <p>Brief description.</p>
+                    <p class="price">$250.00</p>
+                     <button>View Details</button>
+                </div>
+                <div class="product-item">
+                    <img src="placeholder_related3.jpg" alt="Related Product 3">
+                    <h3>Related Gem 3</h3>
+                    <p>Brief description.</p>
+                    <p class="price">$500.00</p>
+                     <button>View Details</button>
+                </div>
+                </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Mahadev Gems. All rights reserved.</p>
+        <div>
+            <a href="#">Privacy Policy</a> |
+            <a href="#">Terms of Service</a> |
+            <a href="#">Shipping & Returns</a>
         </div>
-    </div>
+    </footer>
+
+    <script>
+        // This is a placeholder for JavaScript functionality.
+        // A real e-commerce site would have complex JavaScript here
+        // to handle things like:
+        // - Adding items to the shopping cart dynamically
+        // - Updating the cart count
+        // - Handling product options and variations
+        // - User authentication and account management
+        // - Integrating with payment gateways (usually done on the backend)
+        // - Form validation
+        // - Dynamic content loading
+
+        function addToCart() {
+            alert("Add to Cart button clicked! (Functionality not implemented in this basic code)");
+            // In a real site, this would involve:
+            // 1. Getting product details and selected options
+            // 2. Sending this information to the backend server
+            // 3. Updating the shopping cart (server-side and potentially client-side)
+            // 4. Providing feedback to the user (e.g., "Item added to cart!")
+        }
+
+        // You would add more JavaScript functions here for other interactions
+        // like updating the cart icon, handling checkout, etc.
+    </script>
 
 </body>
 </html>
