@@ -54,19 +54,30 @@
         section {
             padding: 120px 0;
             border-bottom: 1px solid var(--color-border);
-            opacity: 0;
-            transform: translateY(50px) rotateX(5deg); /* More distinct initial state */
-            transition: opacity 1s ease-out, transform 1s ease-out; /* Slower, smoother transition */
             background-color: var(--color-bg-dark);
             min-height: 80vh;
             position: relative;
             overflow: hidden; /* Keep section content contained */
              transform-style: preserve-3d; /* Ensure children participate in 3D */
+             /* Initial state controlled by JavaScript adding .section-hidden */
+             /* Transition applies when .section-hidden is removed and .is-visible is added */
+             transition: opacity 1s ease-out, transform 1s ease-out;
         }
+
+        /* --- NEW: Hidden state for sections animated in --- */
+        section:not(#hero).section-hidden {
+             opacity: 0;
+             transform: translateY(50px) rotateX(5deg);
+        }
+        /* --- END NEW --- */
+
+
+        /* The 'is-visible' class overrides the hidden state */
         section.is-visible {
             opacity: 1;
             transform: translateY(0) rotateX(0deg);
         }
+
 
         section:last-of-type { border-bottom: none; }
         #pricing, #gallery { background-color: var(--color-bg-light); }
@@ -149,9 +160,9 @@
             align-items: center;
             text-align: center;
             padding-top: 80px;
-            opacity: 1;
-            transform: none; /* No initial animation on hero */
-            transition: none;
+            opacity: 1; /* Hero is always visible */
+            transform: none; /* Hero is always visible */
+            transition: none; /* No transition on hero visibility */
             position: relative;
             overflow: hidden;
         }
@@ -540,7 +551,10 @@
 
         @media (max-width: 1024px) {
              .container { width: 95%; padding: 0 15px; }
-             section { padding: 80px 0; transform: translateY(40px) rotateX(4deg); }
+             section { padding: 80px 0; } /* Removed initial transform here */
+              section:not(#hero).section-hidden { /* Apply hidden transform in hidden state */
+                 transform: translateY(40px) rotateX(4deg);
+              }
               section.is-visible { transform: translateY(0) rotateX(0deg); }
              section h2 { font-size: 2.5rem; margin-bottom: 40px; }
              section h2::after { width: 70px; }
@@ -615,7 +629,10 @@
             #hero .hero-content { padding: 0 10px; }
             #hero h1 { font-size: 3rem; margin-bottom: 15px; letter-spacing: 1px;}
             #hero p { font-size: 1.1rem; margin-bottom: 30px; line-height: 1.6;}
-            section { padding: 50px 10px; transform: translateY(30px) rotateX(3deg); }
+            section { padding: 50px 10px; } /* Removed initial transform here */
+             section:not(#hero).section-hidden { /* Apply hidden transform in hidden state */
+                transform: translateY(30px) rotateX(3deg);
+             }
              section.is-visible { transform: translateY(0) rotateX(0deg); }
             section h2 { font-size: 2rem; margin-bottom: 35px; padding-bottom: 10px; }
             section h2::after { height: 2px; width: 50px; }
@@ -922,7 +939,7 @@
                  <a href="https://www.instagram.com/nslforge" target="_blank" aria-label="Instagram" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
                  <a href="https://www.youtube.com/@nslforgeofficial" target="_blank" aria-label="YouTube" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
                  </div>
-             <p>&copy; NSL Forge. All rights reserved.</p> </div>
+             <p>© NSL Forge. All rights reserved.</p> </div>
     </footer>
 
      <div class="scroll-to-top" id="scrollToTopBtn">
@@ -997,10 +1014,21 @@
         const sections = document.querySelectorAll('section');
         const navLi = document.querySelectorAll('nav ul li a');
         const header = document.querySelector('header');
-        const visibleSections = Array.from(sections).filter(section => section.id);
 
 
-        if (header && visibleSections.length > 0 && navLi.length > 0) {
+        // --- NEW: Add 'section-hidden' class to sections initially ---
+        // Run this after the DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+             sections.forEach(section => {
+                 if (section.id !== 'hero') { // Do not hide the hero section
+                     section.classList.add('section-hidden');
+                 }
+             });
+        });
+        // --- END NEW ---
+
+
+        if (header && sections.length > 0 && navLi.length > 0) {
              const observerOptions = {
                  root: null, // relative to the viewport
                  rootMargin: '0px 0px -20% 0px', // Trigger when 20% of the section is visible from the bottom
@@ -1009,12 +1037,16 @@
 
              const sectionObserver = new IntersectionObserver((entries, observer) => {
                  entries.forEach(entry => {
-                     // Add/remove 'is-visible' class for animation
-                     if (entry.target.id !== 'hero') { // Exclude hero from initial animation
-                         entry.target.classList.toggle('is-visible', entry.isIntersecting);
-                     } else {
-                         // Hero is always visible on page load, so just add the class
+                     // When a section intersects and has the 'section-hidden' class
+                     if (entry.isIntersecting && entry.target.classList.contains('section-hidden')) {
+                         entry.target.classList.remove('section-hidden');
                          entry.target.classList.add('is-visible');
+                         // Optional: Stop observing once it's visible if you don't need to track it leaving
+                         // observer.unobserve(entry.target);
+                     } else if (!entry.isIntersecting && entry.target.classList.contains('is-visible') && entry.target.id !== 'hero') {
+                         // Optional: Add 'section-hidden' back if it leaves the viewport, excluding hero
+                         // entry.target.classList.remove('is-visible');
+                         // entry.target.classList.add('section-hidden');
                      }
 
                      // Update active navigation link based on intersection
@@ -1030,10 +1062,11 @@
                  });
              }, observerOptions);
 
-             // Observe each section
-             visibleSections.forEach(section => {
+             // Observe each section (including hero, though its visibility is not controlled by observer)
+             sections.forEach(section => {
                  sectionObserver.observe(section);
              });
+
 
              // Special handling for Hero and the section immediately following it
              // To ensure the active class is correct when at the very top
@@ -1049,14 +1082,10 @@
                  }
              };
 
-             window.addEventListener('scroll', () => {
-                 // This scroll listener can be simplified now that IO handles most active class updates
-                 // It's primarily needed for the 'hero' state when scrolling back to the top.
-                 handleInitialActive();
-             });
+             // Run handleInitialActive on scroll and page load
+             window.addEventListener('scroll', handleInitialActive);
+             window.addEventListener('load', handleInitialActive); // Also check on full page load
 
-             // Call on page load to set initial active link (usually 'hero')
-             handleInitialActive();
         }
 
 
@@ -1170,16 +1199,12 @@
         const estimatedPriceDiv = document.getElementById('estimatedPrice');
         const hiddenEstimatedPriceInput = document.getElementById('hiddenEstimatedPrice');
 
-        // Base prices for sizes in INR
-        const basePrices = { 'A5': 180, 'A4': 380, 'A3': 650 };
-        // Additional costs based on complexity
-        const complexityCosts = { 'low': 50, 'medium': 150, 'high': 300 };
-        // Additional costs based on number of subjects
-        const subjectCosts = { '1': 0, '2': 150, '3': 350 }; // Assuming cost increases significantly with more subjects
-        // Additional costs based on background detail
+        /* Adjusted pricing slightly for better spread */
+        const basePrices = { 'A5': 200, 'A4': 400, 'A3': 700 };
+        const complexityCosts = { 'low': 50, 'medium': 200, 'high': 400 };
+        const subjectCosts = { '1': 0, '2': 200, '3': 400 };
         const backgroundCosts = { 'none': 0, 'simple': 100, 'detailed': 300 };
-        // Minimum price for any commission
-        const generalMinPrice = 150;
+        const generalMinPrice = 200;
 
         function calculateEstimate() {
             // Get selected values
@@ -1321,7 +1346,8 @@
                  // hero3dContainer.style.backgroundImage = "url('path/to/your/fallback-image.jpg')"; // Replace with a suitable image
                  hero3dContainer.style.backgroundSize = "cover";
                  hero3dContainer.style.backgroundPosition = "center center";
-                 hero3dContainer.style.backgroundColor = var(--color-bg-dark); // Fallback background color
+                 // Correcting the fallback background color assignment
+                 hero3dContainer.style.backgroundColor = 'var(--color-bg-dark)';
             }
         }
          // --- End Three.js Setup ---
