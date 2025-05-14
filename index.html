@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NSL Forge by Naman Lumbhani - Exquisite Sketch Artwork & Commissions</title>
-    <meta name="description" content="Explore the sketch artwork of Naman Lumbhani (NSL Forge). Offering custom hand-drawn portraits, character sketches, and conceptual art. Request a commission in Navsari, Gujarat.">
+    <title>NSL Forge by Naman Lumbhani - Exquisite Sketch Artwork & Samples</title>
+    <meta name="description" content="Explore the sketch artwork of Naman Lumbhani (NSL Forge). Showcasing hand-drawn portraits, character sketches, and conceptual art. Connect for collaborations in Navsari, Gujarat.">
 
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -82,7 +82,7 @@
         }
 
         section:last-of-type { border-bottom: none; }
-        #pricing, #gallery { background-color: var(--color-bg-light); }
+        #gallery { background-color: var(--color-bg-light); } /* Only gallery and disclaimer use light background */
         #disclaimer { padding: 60px 0; background-color: var(--color-bg-light); border-bottom: 1px solid var(--color-border); min-height: auto; }
 
         /* Section Headings */
@@ -292,7 +292,7 @@
              filter: brightness(1.1); /* Brighter on hover */
         }
 
-        /* Services */
+        /* Services/Collaborations */
         .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 50px; margin-top: 40px; } /* Increased gap and min-width */
         .service-card {
             background: var(--color-bg-light);
@@ -335,29 +335,6 @@
         .important-note { text-align: center; font-size: 1rem; color: var(--color-alert); margin-top: 20px; font-weight: 500; }
         .important-note i { margin-right: 8px; }
 
-        .policy-note {
-             text-align: center;
-             font-size: 1rem;
-             color: var(--color-alert); /* Using alert color for important policy */
-             margin-top: 40px; /* Increased margin */
-             font-weight: 500;
-             padding: 25px; /* Increased padding */
-             background-color: rgba(207, 102, 121, 0.1); /* Subtle background */
-             border-left: 5px solid var(--color-alert); /* Thicker border */
-             border-radius: 8px; /* Larger radius */
-             max-width: 900px;
-             margin-left: auto;
-             margin-right: auto;
-             line-height: 1.7;
-        }
-        .policy-note i { margin-right: 10px; }
-
-
-        #pricing { background-color: var(--color-bg-light); }
-        .pricing-info p { text-align: center; font-size: 1.1rem; margin-bottom: 30px; color: var(--color-text-dark); max-width: 1000px; margin: auto; line-height: 1.7; }
-         #pricing .important-note { margin-bottom: 25px; color: var(--color-alert); }
-         #pricing .policy-note { margin-top: 25px; font-size: 1rem; }
-        .pricing-info ul { list-style: none; padding: 0; text-align: center; margin-bottom: 25px; }
 
         #about .container { display: flex; flex-direction: column; align-items: center; text-align: center; }
         #about p { max-width: 900px; margin-bottom: 30px; font-size: 1.1rem; color: var(--color-text-dark); line-height: 1.8; } /* Increased line height */
@@ -379,19 +356,13 @@
         /* Styles for standard inputs */
         .contact-form input[type="text"],
         .contact-form input[type="email"],
-        .contact-form textarea,
-        .contact-form select {
+        .contact-form textarea {
             width: 100%; padding: 15px; margin-bottom: 25px; /* Increased margin */
             border: 1px solid var(--color-border);
             border-radius: 8px; font-size: 1rem; color: var(--color-text-light);
             background-color: var(--color-bg-dark);
             box-sizing: border-box; appearance: none;
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
-            /* Style for select dropdown arrow */
-            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23A0AEC0%22%20d%3D%22M287%2C114.7L159.2%2C28.9c-9.2-9.5-24.2-9.5-33.4%2C0L5.4%2C114.7c-9.2%2C9.5-9.2%2C25%2C0%2C34.5l127.8%2C85.8c9.2%2C9.5%2C24.2%2C9.5%2C33.4%2C0l127.8-85.8C296.2%2C139.7%2C296.2%2C124.2%2C287%2C114.7z%22%2F%3E%3C%2Fsvg%3E');
-            background-repeat: no-repeat; background-position: right 15px center; /* Centered vertically */
-            background-size: 16px auto;
-            padding-right: 40px;
         }
 
          /* Styling for the phone input prefix container - make it look like a single input */
@@ -445,15 +416,12 @@
         .contact-form input[type="text"]:focus,
         .contact-form input[type="email"]:focus,
         .contact-form textarea:focus,
-        .contact-form select:focus,
          .phone-input-container:focus-within { /* Apply focus style to container */
             border-color: var(--color-primary-button); box-shadow: 0 0 10px rgba(187, 134, 252, 0.6); /* More prominent shadow */
             outline: none;
         }
         .contact-form textarea { min-height: 200px; resize: vertical; padding: 15px; /* Ensure textarea has padding */ }
-        .price-estimator { margin-bottom: 30px; padding-top: 30px; border-top: 1px solid var(--color-border); }
-        .price-estimator h3 { font-family: 'Playfair Display', serif; text-align: center; margin-bottom: 25px; font-size: 1.8rem; color: var(--color-text-light); font-weight: 600; letter-spacing: 0.4px; }
-        .price-estimator > div { margin-bottom: 20px; } /* Increased margin */
+
 
         .drop-zone {
             border: 2px dashed var(--color-border); border-radius: 8px; padding: 40px; text-align: center;
@@ -509,13 +477,6 @@
         }
         .contact-form button[type="submit"]:active { transform: translateY(-1px); box-shadow: var(--shadow-light); }
 
-        .price-estimate {
-            margin-top: 30px; padding: 25px; background-color: #282828; /* Increased padding and margin */
-            border: 1px solid var(--color-border); border-left: 8px solid var(--color-primary-button); /* Thicker border */
-            border-radius: 8px; font-size: 1.5rem; font-weight: 700; color: var(--color-text-light);
-            text-align: center; margin-bottom: 20px; box-shadow: 0 3px 10px rgba(0,0,0,0.3); /* Subtle shadow */
-             transition: transform 0.3s ease;
-        }
 
         .contact-info p { text-align: center; font-size: 1.1rem; margin-top: 50px; color: var(--color-text-dark); } /* Increased margin */
         .contact-info p a { color: var(--color-primary-button); text-decoration: none; font-weight: bold; transition: color 0.3s ease, text-decoration 0.3s ease; }
@@ -585,8 +546,7 @@
              .service-process ol li::marker { font-size: 1.1em; } /* Slightly smaller marker on smaller screen */
              .service-process ul li::before { font-size: 1.1em; } /* Slightly smaller bullet on smaller screen */
              .important-note { font-size: 0.95rem; margin-top: 15px; }
-              .policy-note { font-size: 0.95rem; padding: 20px; margin-top: 30px; border-left-width: 4px; }
-             .pricing-info p { font-size: 1rem; margin-bottom: 25px; }
+
              #about p { font-size: 1rem; margin-bottom: 25px; }
              .contact-form { max-width: 600px; margin: 50px auto; padding: 40px; border-radius: 10px; }
              .contact-form label { font-size: 1rem; margin-bottom: 10px; }
@@ -596,14 +556,12 @@
              .phone-input-container .country-code .flag { font-size: 1.2rem; margin-right: 5px; }
              .contact-form input[type="tel"] { padding: 14px 0; font-size: 0.95rem; }
 
-             .contact-form input[type="text"], .contact-form input[type="email"], .contact-form textarea, .contact-form select { padding: 14px; font-size: 0.95rem; margin-bottom: 20px; border-radius: 7px; }
-              .contact-form select { background-position: right 12px center; background-size: 15px auto; padding-right: 38px; }
-             .price-estimator h3 { font-size: 1.6rem; margin-bottom: 20px; }
-             .price-estimator > div { margin-bottom: 15px; }
+             .contact-form input[type="text"], .contact-form input[type="email"], .contact-form textarea { padding: 14px; font-size: 0.95rem; margin-bottom: 20px; border-radius: 7px; }
+
              .drop-zone { padding: 35px; margin-bottom: 20px; border-radius: 7px; }
              .drop-zone p { font-size: 0.95rem; }
              .file-info { font-size: 0.9rem; margin-top: 12px; }
-             .price-estimate { font-size: 1.3rem; padding: 20px; margin-top: 25px; margin-bottom: 20px; border-radius: 7px; border-left-width: 6px; }
+
              .contact-form button[type="submit"] { padding: 14px 30px; font-size: 1.2rem; margin-top: 30px; }
              .contact-info p { font-size: 1rem; margin-top: 40px; }
              footer { padding: 3rem 0 1rem; }
@@ -661,8 +619,7 @@
             .service-process ol li::marker { font-size: 1.1em; }
              .service-process ul li::before { font-size: 1.1em; }
             .important-note { font-size: 0.9rem; margin-top: 10px; }
-             .policy-note { font-size: 0.9rem; padding: 15px; margin-top: 20px; border-left-width: 3px; }
-            .pricing-info p { font-size: 0.95rem; margin-bottom: 20px; }
+
             #about p { font-size: 0.95rem; margin-bottom: 20px; }
             .contact-form { max-width: 95%; margin: 40px auto; padding: 30px; border-radius: 8px; }
             .contact-form label { font-size: 0.95rem; margin-bottom: 8px; }
@@ -672,14 +629,12 @@
              .phone-input-container .country-code .flag { font-size: 1.1rem; margin-right: 4px; }
              .contact-form input[type="tel"] { padding: 12px 0; font-size: 0.9rem; }
 
-            .contact-form input[type="text"], .contact-form input[type="email"], .contact-form textarea, .contact-form select { padding: 12px; font-size: 0.9rem; margin-bottom: 20px; border-radius: 6px; }
-            .contact-form select { background-position: right 10px center; background-size: 12px auto; padding-right: 35px; }
-            .price-estimator h3 { font-size: 1.4rem; margin-bottom: 15px; }
-            .price-estimator > div { margin-bottom: 12px; }
+            .contact-form input[type="text"], .contact-form input[type="email"], .contact-form textarea { padding: 12px; font-size: 0.9rem; margin-bottom: 20px; border-radius: 6px; }
+
             .drop-zone { padding: 30px; margin-bottom: 15px; border-radius: 6px; }
             .drop-zone p { font-size: 0.9rem; }
             .file-info { font-size: 0.85rem; margin-top: 10px; }
-            .price-estimate { font-size: 1.2rem; padding: 15px; margin-top: 20px; margin-bottom: 20px; border-radius: 6px; border-left-width: 5px; }
+
             .contact-form button[type="submit"] { padding: 12px 25px; font-size: 1.1rem; margin-top: 25px; }
              .contact-info p { font-size: 0.95rem; margin-top: 30px; }
             footer { padding: 2rem 0 0.8rem; }
@@ -703,11 +658,10 @@
              .service-process h3 { font-size: 1.6rem; }
              .service-process ol, .service-process ul { font-size: 0.9rem; line-height: 1.5; }
              .contact-form { padding: 20px; }
-             .contact-form input, .contact-form textarea, .contact-form select, .phone-input-container { font-size: 0.85rem; padding: 10px; margin-bottom: 15px;}
+             .contact-form input, .contact-form textarea, .phone-input-container { font-size: 0.85rem; padding: 10px; margin-bottom: 15px;}
              .phone-input-container .country-code { font-size: 0.85rem; padding: 10px 0; }
-             .contact-form select { padding-right: 30px; background-size: 10px auto; }
-             .price-estimator h3 { font-size: 1.2rem; }
-             .price-estimate { font-size: 1.1rem; padding: 12px; }
+
+             .drop-zone { padding: 25px; }
              .contact-form button[type="submit"] { font-size: 1rem; padding: 10px 20px; }
              footer .social-links a { font-size: 1.6rem; margin: 0 8px; }
              /* Removed the copyright paragraph from here in media query */
@@ -732,8 +686,7 @@
             <nav id="nav-menu">
                 <ul>
                     <li><a href="#hero" class="active">Home</a></li>
-                    <li><a href="#services">Services & Commissions</a></li>
-                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#services">Services & Collaborations</a></li>
                     <li><a href="#contact">Contact</a></li>
                     <li><a href="#gallery">Sketch Samples</a></li>
                     <li><a href="#about">About Me</a></li>
@@ -752,27 +705,27 @@
 
         <div class="container hero-content">
             <h1>Welcome to <span class="site-title">NSL Forge</span></h1>
-            <p>Exquisite sketches crafted with passion by Naman Lumbhani. Let's bring your unique vision to life!</p>
-            <a href="#contact" class="cta-button">Request a Commission</a>
+            <p>Exquisite sketches crafted with passion by Naman Lumbhani. Let's explore bringing your unique vision to life!</p>
+            <a href="#contact" class="cta-button">Start a Project Discussion</a>
         </div>
     </section>
 
      <section id="disclaimer">
          <div class="container">
              <h2>Disclaimer</h2>
-             <p><i class="fas fa-info-circle"></i> Please note: This website is currently run by a 15-year-old for learning and experimental purposes. A significant portion of the website's code and design was developed with the assistance of AI tools. While every effort has been made to ensure accuracy and functionality, please understand that this site serves as a portfolio and learning project. Your understanding is appreciated.</p>
+             <p><i class="fas fa-info-circle"></i> Please note: This website is currently run by a **14-year-old** for learning and experimental purposes. A significant portion of the website's code and design was developed with the assistance of AI tools. While every effort has been made to ensure accuracy and functionality, please understand that this site serves as a portfolio and learning project. Your understanding is appreciated.</p>
          </div>
      </section>
 
     <section id="services">
         <div class="container">
-            <h2>Services & Commissions</h2>
-            <p style="text-align:center; margin-bottom: 40px; color: var(--color-text-dark); font-size: 1.1rem;">I offer custom sketch artwork tailored to your unique needs and vision. Here's what I specialize in and how the process works:</p>
+            <h2>Services & Collaborations</h2>
+            <p style="text-align:center; margin-bottom: 40px; color: var(--color-text-dark); font-size: 1.1rem;">I offer custom sketch artwork tailored to your unique needs and vision. Here's what I specialize in and how we can collaborate:</p>
             <div class="services-grid">
                 <div class="service-card">
                     <div class="icon"><i class="fas fa-pencil-ruler"></i></div>
-                    <h3>Custom Portraits</h3>
-                    <p>Capture the true essence and personality of a person or beloved pet with a detailed and expressive hand-drawn sketch. Perfect for cherished gifts or personal collections. **A clear reference photo is essential for portraits.**</p>
+                    <h3>Custom Artwork</h3>
+                    <p>Let's work together to create unique, hand-drawn sketches. Whether it's a portrait, a character, or a conceptual piece, I aim to bring your ideas to life.</p>
                 </div>
                 <div class="service-card">
                     <div class="icon"><i class="fas fa-user-friends"></i></div>
@@ -786,40 +739,27 @@
                 </div>
             </div>
             <div class="service-process">
-                <h3>The Commission Process:</h3>
+                <h3>The Collaboration Process:</h3>
                 <ol>
                     <li><strong>Inquiry:</strong> Begin by reaching out with your detailed idea, including any reference photos (required for portraits/characters), preferred style, and desired dimensions.</li>
-                    <li><strong>Discussion & Quote:</strong> We will have a thorough discussion about your project's specifics. Following this, I will provide a personalized quote and an estimated timeline for completion.</li>
-                    <li><strong>Deposit:</strong> To confirm your commission slot and begin work, a **20% non-refundable deposit is required and can be paid via cash.**</li>
+                    <li><strong>Discussion & Timeline:</strong> We will have a thorough discussion about your project's specifics. Following this, I will provide an estimated timeline for completion.</li>
+                    <li><strong>Confirmation:</strong> If we decide to collaborate on the artwork, we'll confirm the details before I begin work.</li>
                     <li><strong>Creation:</strong> I will dedicate my attention to creating your sketch. Work-in-progress updates can be provided at key stages if you wish to follow along.</li>
-                    <li><strong>Review & Final Payment:</strong> Once complete, you will receive a watermarked preview for approval. After approval, the final payment (80%) is due as arranged (cash payment preferred for local delivery).</li>
-                    <li><strong>Delivery:</strong> After receiving the final payment, you will receive the high-resolution digital file of your artwork (available in formats like JPG, PNG, or PDF). **Physical artwork delivery is currently only available within Navsari, Gujarat.**</li>
+                    <li><strong>Review & Finalization:</strong> Once complete, you will receive a watermarked preview for review. We can discuss any minor adjustments at this stage.</li>
+                    <li><strong>Delivery:</strong> Upon finalization, you will receive the high-resolution digital file of your artwork (available in formats like JPG, PNG, or PDF). **Physical artwork delivery might be possible within Navsari, Gujarat, depending on the project and discussion.**</li>
                 </ol>
-                 <p class="policy-note"><i class="fas fa-exclamation-triangle"></i> **Important Refund Policy:** Please understand that the 20% deposit is non-refundable. After the full payment is made and the final high-resolution sketch is delivered, no refunds can be issued if the customer is not satisfied with the completed work. If, after reviewing the watermarked preview, you choose not to proceed with the final payment, the watermarked sketch will not be delivered.</p>
             </div>
             <div style="text-align: center; margin-top: 50px;">
-                 <a href="#contact" class="cta-button">Request a Commission</a>
+                 <a href="#contact" class="cta-button">Connect to Collaborate</a>
             </div>
         </div>
     </section>
 
-    <section id="pricing">
-        <div class="container pricing-info">
-            <h2>Pricing</h2>
-            <p style="font-size: 1.1rem; margin-bottom: 25px; color: var(--color-text-dark);">The cost of each sketch is unique and depends on several factors, including the size, level of complexity, the number of main subjects, and the detail in the background. Please ensure you can provide clear reference photos, especially for portraits.</p>
-             <p class="important-note"><i class="fas fa-shipping-fast"></i> Please note: Physical artwork delivery is currently limited to **Navsari, Gujarat**. All payments are preferred in cash.</p>
-             <p class="policy-note"><i class="fas fa-cash-register"></i> Reminder on Payments: A **20% non-refundable deposit** is required to start the commission. The remaining 80% is due upon approval of the watermarked preview. No refunds can be issued after the full payment and delivery of the final sketch.</p>
-            <p style="font-size: 1.1rem; margin-top: 20px; color: var(--color-text-dark);">For a guiding estimate tailored to your specific requirements, please utilize the estimator provided in the <a href="#contact" style="color: var(--color-primary-button); font-weight: bold; text-decoration: underline;">Contact Section</a> below.</p>
-             <p style="text-align:center; margin-top: 15px; font-size: 0.9rem; color: var(--color-medium-grey);"><em>Note: The estimate provides an initial guide. The final, precise quote will be confirmed after I personally review your specific request details and any reference images provided.</em></p>
-            </div>
-    </section>
 
     <section id="contact">
         <div class="container">
-            <h2>Get In Touch & Request an Estimate</h2>
-            <p style="text-align:center; margin-bottom:30px; color: var(--color-text-dark); font-size: 1.1rem;">Have a question regarding a potential project or wish to initiate a commission? Please fill out the form below. You can also receive an instant estimated price based on your selected options. **Remember to upload a reference image, especially for portraits and character sketches.**</p>
-
-            <p class="important-note"><i class="fas fa-shipping-fast"></i> Physical artwork delivery is currently only available within **Navsari, Gujarat**. Cash payment is preferred for all transactions.</p>
+            <h2>Get In Touch & Collaborate</h2>
+            <p style="text-align:center; margin-bottom:30px; color: var(--color-text-dark); font-size: 1.1rem;">Have a question about a potential art project or wish to discuss a collaboration? Please fill out the form below. **Remember to upload a reference image, especially for portraits and character sketches, as it helps me understand your vision.**</p>
 
             <div class="contact-form">
                 <form action="https://formsubmit.co/nslforgeofficial@gmail.com" method="post" enctype="multipart/form-data" id="contactForm">
@@ -844,66 +784,24 @@
                         <input type="text" id="subject" name="subject" required>
                     </div>
 
-                    <div class="price-estimator">
-                         <h3>Estimated Commission Price:</h3>
-                         <div>
-                             <label for="sketch-size">Approximate Size:</label>
-                             <select id="sketch-size" name="Sketch Size">
-                                 <option value="A5">A5 (148 x 210 mm)</option>
-                                 <option value="A4">A4 (210 x 297 mm)</option>
-                                 <option value="A3">A3 (297 x 420 mm)</option>
-                             </select>
-                         </div>
-                         <div>
-                             <label for="complexity">Complexity Level:</label>
-                             <select id="complexity" name="Complexity Level">
-                                 <option value="low">Low (Simple lines, minimal shading)</option>
-                                 <option value="medium">Medium (Moderate detail, standard shading)</option>
-                                 <option value="high">High (Intricate detail, complex shading/textures)</option>
-                             </select>
-                         </div>
-                          <div>
-                             <label for="num-subjects">Number of Main Subjects:</label>
-                             <select id="num-subjects" name="Number of Subjects">
-                                 <option value="1">1 Subject</option>
-                                 <option value="2">2 Subjects</option>
-                                 <option value="3">3+ Subjects</option>
-                             </select>
-                         </div>
-                         <div>
-                             <label for="background">Background Detail:</label>
-                             <select id="background" name="Background">
-                                 <option value="none">None (Blank or simple wash)</option>
-                                 <option value="simple">Simple (Subtle abstract background)</option>
-                                 <option value="detailed">Detailed (Specific scene or complex elements)</option>
-                             </select>
-                         </div>
-
-                         <div class="price-estimate" id="estimatedPrice">
-                             Estimated Price: Select options above
-                         </div>
-                    </div>
-
                     <div>
-                        <label for="message">Your Message / Commission Details:</label>
+                        <label for="message">Your Message / Collaboration Details:</label>
                         <textarea id="message" name="message" required></textarea>
                     </div>
 
                     <div>
-                         <label for="file">Upload Reference Image (Required):</label>
+                         <label for="file">Upload Reference Image (Required for certain projects):</label>
                          <div class="drop-zone" id="dropZone">
                             <p>Drag & Drop your image file here, or click to select file</p>
-                            <input type="file" id="file" name="image" accept="image/*" style="display: none;" required>
-                            <div class="file-info" id="fileInfo"></div>
+                            <input type="file" id="file" name="image" accept="image/*" style="display: none;"> <div class="file-info" id="fileInfo"></div>
                          </div>
+                         <small style="color:var(--color-text-dark); display: block; margin-top: -15px;">(Required for portraits, characters, or specific concepts)</small>
                     </div>
 
                     <input type="text" name="_honey" style="display:none">
                     <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" name="Estimated Price" id="hiddenEstimatedPrice" value="Estimate N/A">
 
-
-                    <button type="submit">Send Message & Commission Request</button>
+                    <button type="submit">Send Message</button>
                 </form>
             </div>
             <div class="contact-info">
@@ -936,7 +834,7 @@
 
     <footer>
         <div class="container">
-             <p class="footer-note">This website is for learning purposes and was built with AI assistance. Payments for commissions are accepted in cash.</p>
+             <p class="footer-note">This website is for learning and experimental purposes and was built with AI assistance.</p>
 
             <div class="social-links">
                  <a href="https://www.instagram.com/nslforge" target="_blank" aria-label="Instagram" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
@@ -1275,79 +1173,30 @@
         if (contactForm && fileInput && fileInfo && dropZone) {
             contactForm.addEventListener('submit', function(event) {
                 // Check if the file input has any files selected AND if it's required (which it is)
-                if (fileInput.required && fileInput.files.length === 0) {
+                // Update validation based on the text hint, not just the 'required' attribute
+                // We need to check if it's a type of project where an image is required (portrait, character, specific concept)
+                // Since we don't have dropdowns anymore, we can't know the project type directly.
+                // For simplicity, let's make the file upload required for ALL inquiries via the form,
+                // or add a message that makes it clear it's required for the types mentioned in the text.
+                // Let's revert to making the input required via JS check.
+
+                // Check if the file input has any files selected
+                if (fileInput.files.length === 0) {
                     event.preventDefault(); // Stop the form from submitting
                     // Display error message and highlight the drop zone
-                    fileInfo.innerHTML = 'A reference image is **required**. Please upload a file.';
+                    fileInfo.innerHTML = 'A reference image is required for inquiry via this form. Please upload a file.';
                     fileInfo.classList.add('error-message');
                     dropZone.classList.add('error');
                     // Scroll to the drop zone to make the error visible
                     dropZone.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 } else {
-                    // File is present (or not required), remove any previous error states and allow submission
+                    // File is present, remove any previous error states and allow submission
                     fileInfo.classList.remove('error-message');
                     dropZone.classList.remove('error');
                     // Form will now submit normally via FormSubmit
                     // Note: Server-side validation is also crucial!
                 }
             });
-        }
-
-
-        // Pricing Estimator Logic
-        const sizeSelect = document.getElementById('sketch-size');
-        const complexitySelect = document.getElementById('complexity');
-        const subjectsSelect = document.getElementById('num-subjects');
-        const backgroundSelect = document.getElementById('background');
-        const estimatedPriceDiv = document.getElementById('estimatedPrice');
-        const hiddenEstimatedPriceInput = document.getElementById('hiddenEstimatedPrice'); // Get the hidden input
-
-
-        /* Adjusted pricing slightly for better spread - These are just examples, adjust as needed */
-        const basePrices = { 'A5': 250, 'A4': 500, 'A3': 800 }; // Slightly increased base prices
-        const complexityCosts = { 'low': 50, 'medium': 200, 'high': 400 };
-        // Re-evaluating subject costs for clarity
-        const subjectCosts = { '1': 0, '2': 200, '3': 400 }; // Cost added *based on the number of subjects*
-        const backgroundCosts = { 'none': 0, 'simple': 150, 'detailed': 350 }; // Slightly adjusted background costs
-        const generalMinPrice = 250; // Min price matches A5 low complexity none background
-
-
-        function calculateEstimate() {
-            // Get selected values
-            const size = sizeSelect.value;
-            const complexity = complexitySelect.value;
-            const subjects = subjectsSelect.value; // Get the string value '1', '2', or '3'
-            const background = backgroundSelect.value;
-
-            let currentPrice = basePrices[size] || 0; // Get base price by size, default to 0 if not found
-
-            // Add costs based on selections
-            currentPrice += complexityCosts[complexity] || 0;
-
-            // Add subject cost based on the selected tier (1, 2, or 3+)
-            if (subjects === '2') {
-                 currentPrice += subjectCosts['2']; // Add cost for 2 subjects
-             } else if (subjects === '3') {
-                 currentPrice += subjectCosts['3']; // Add cost for 3+ subjects
-             }
-             // No cost added for '1' subject as per subjectCosts['1'] = 0
-
-            currentPrice += backgroundCosts[background] || 0;
-
-            // Ensure minimum price is met
-            currentPrice = Math.max(currentPrice, generalMinPrice);
-
-            // Update the displayed price and the hidden input field
-            estimatedPriceDiv.innerHTML = `Estimated Price: **₹${currentPrice}/-**`; // Use bold for price
-            // Update the value in the hidden input field
-            hiddenEstimatedPriceInput.value = `${currentPrice}/- (Estimate: Size=${size}, Complexity=${complexity}, Subjects=${subjects}, Background=${background})`;
-        }
-
-        // Add event listeners to recalculate estimate whenever a dropdown changes
-        if (sizeSelect && complexitySelect && subjectsSelect && backgroundSelect && estimatedPriceDiv && hiddenEstimatedPriceInput) {
-            [sizeSelect, complexitySelect, subjectsSelect, backgroundSelect].forEach(el => el.addEventListener('change', calculateEstimate));
-            // Calculate the initial estimate when the page loads
-            calculateEstimate();
         }
 
 
