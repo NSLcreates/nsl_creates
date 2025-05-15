@@ -13,7 +13,7 @@
         :root {
             /* Defined Palette Colors */
             --color-tan: #B68D40;
-            --color-cream: #F4EBD0; /* Corrected typo from original #F4EBDO */
+            --color-cream: #F4EBD0;
             --color-charcoal: #122620;
             --color-gold: #D6AD60;
 
@@ -59,7 +59,6 @@
             color: var(--color-text-medium); /* Use Cream for main body text */
             background-color: var(--color-bg-dark); /* Use Charcoal for dark background */
             scroll-behavior: smooth;
-            /* perspective removed - less need without heavy 3D rotation on sections */
             overflow-x: hidden; /* Prevent horizontal scroll issues */
         }
 
@@ -73,7 +72,6 @@
             min-height: 80vh; /* Ensure sections are tall enough to trigger visibility */
             position: relative;
             overflow: hidden; /* Keep section content contained */
-            /* transform-style removed - less need without heavy 3D rotation */
 
             /* Initial state for scroll-in animation - Simpler fade/slide */
             opacity: 0;
@@ -203,7 +201,6 @@
             padding-top: 80px;
             position: relative;
             overflow: hidden;
-            /* perspective removed */
         }
 
         /* Container for the 3D element or fallback */
@@ -260,14 +257,12 @@
             position: relative;
             max-width: 1000px;
             padding: 0 20px;
-            /* transform-style removed */
         }
         #hero h1 {
             font-family: 'Playfair Display', serif; font-size: 5rem; margin-bottom: 20px;
             text-shadow: 2px 2px 10px rgba(0,0,0,0.8); /* Stronger shadow */
             font-weight: 700; letter-spacing: 1.5px; line-height: 1.1; /* Increased letter spacing */
             color: var(--color-text-light); /* Use Cream */
-            /* transform: translateZ(20px); removed 3D depth on static content */
         }
         #hero h1 .site-title { font-weight: 700; color: var(--color-primary-button); } /* Use Gold */
         #hero p {
@@ -276,7 +271,6 @@
             font-weight: 300;
             color: var(--color-text-light); /* Use Cream for hero description */
             line-height: 1.7;
-            /* transform: translateZ(10px); removed 3D depth on static content */
         }
 
         /* Call to Action Button */
@@ -366,16 +360,8 @@
             border: 1px solid var(--color-border); /* Use dark border color */
             display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
             cursor: default;
-            /* transform-style removed */
             transform: translateZ(0); /* Ensure it's on its own layer for initial state */
-             /* Added focus state for keyboard navigation if cards were interactive - currently not interactive */
-             /* outline: none; */
         }
-         /* Custom focus style (commented out as cards are not links/buttons) */
-         /* .service-card:focus-within {
-             outline: 3px solid var(--color-highlight);
-             outline-offset: 4px;
-         } */
 
         .service-card:hover {
             transform: translateY(-10px); /* Simpler lift, removed translateZ */
@@ -434,7 +420,6 @@
             border-radius: 12px; box-shadow: var(--shadow-deep); /* Deeper shadow */
             border: 1px solid var(--color-border); /* Use dark border color */
             position: relative;
-             /* transform-style removed */
         }
 
         .contact-form label { display: block; margin-bottom: 12px; font-weight: 500; color: var(--color-text-light); font-size: 1.1rem; letter-spacing: 0.3px;} /* Use Cream */
@@ -469,7 +454,6 @@
 
           .phone-input-container:focus-within { /* Style container when input inside is focused */
              border-color: var(--color-primary-button); box-shadow: 0 0 10px rgba(214, 173, 96, 0.6); /* More prominent shadow using Gold */
-             /* outline: none; removed - focus-within doesn't remove outline from the input itself */
          }
 
          .phone-input-container .country-code {
@@ -517,7 +501,6 @@
             transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
             background-color: #283D36; /* Background matching bg-light hover */
             position: relative;
-             /* transform-style removed */
              /* Added focus state for keyboard navigation */
              outline: none;
         }
@@ -581,11 +564,11 @@
             transition: left 0.4s ease-out; /* Smoother transition */
             z-index: -1;
         }
-        .contact-form button[type="submit"] :hover {
+        .contact-form button[type="submit"]:hover {
             background: transparent; /* Transparent background on hover */
             color: var(--color-text-light); /* Text color changes to Cream on hover */
             transform: translateY(-4px); /* More pronounced lift */
-            box-shadow: var(--shadow-deep); /* Deeper shadow */
+            box-shadow: var(--shadow-deep); /* Deeper shadow on hover */
         }
         .contact-form button[type="submit"]:active { transform: translateY(-1px); box-shadow: var(--shadow-light); }
 
@@ -648,14 +631,356 @@
         .scroll-to-top.visible { opacity: 1; visibility: visible; }
         .scroll-to-top:hover { background-color: var(--color-highlight); transform: scale(1.15); } /* Use Gold */
 
+        /* --- Mobile Navigation --- */
+        /* Adjust nav display for smaller screens */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: row; /* Keep logo and toggle on one row */
+                justify-content: space-between;
+                align-items: center;
+            }
 
-        /* --- Three.js Hero Section Setup --- */
+            nav {
+                position: absolute;
+                top: 100%; /* Position below header */
+                left: 0;
+                width: 100%;
+                background: var(--color-header-footer); /* Match header background */
+                box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+                display: none; /* Hidden by default */
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                opacity: 0;
+                transform: translateY(-20px);
+                transition: opacity 0.3s ease, transform 0.3s ease;
+                z-index: 999; /* Ensure it's above content but below fixed header */
+            }
+
+            nav.active {
+                display: flex;
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+            }
+
+            nav ul li {
+                margin: 10px 0; /* Adjust vertical margin */
+                width: 100%;
+                text-align: center;
+            }
+
+            nav ul li a {
+                 font-size: 1.2rem; /* Larger font for mobile */
+                 padding: 12px 0; /* More vertical padding */
+                 color: var(--color-text-light); /* Use Cream for mobile links */
+                 border-bottom: 1px solid var(--color-border); /* Subtle separator */
+                 width: 80%; /* Link takes up most of the width */
+                 margin: auto; /* Center the link */
+            }
+
+            nav ul li:last-child a {
+                 border-bottom: none; /* No border on the last link */
+            }
+
+            nav ul li a::after {
+                content: none; /* Remove underline animation on mobile */
+            }
+
+            nav ul li a:hover, nav ul li a.active {
+                 color: var(--color-primary-button); /* Use Gold on hover/active */
+                 transform: none; /* Remove translateY effect */
+            }
+
+            .menu-toggle {
+                display: block; /* Show toggle button on mobile */
+            }
+
+            /* Adjust section padding when header is active */
+            body.menu-open {
+                 overflow: hidden; /* Prevent scrolling when menu is open (optional) */
+            }
+
+            section {
+                 padding: 80px 0; /* Reduce section padding on mobile */
+            }
+
+             #hero {
+                 padding-top: 100px; /* Adjust hero padding */
+             }
+
+            section h2 {
+                font-size: 2.2rem; /* Adjust heading size */
+                margin-bottom: 30px;
+            }
+
+            #disclaimer h2 {
+                 font-size: 1.6rem;
+            }
+
+             /* Adjust form padding on mobile */
+             .contact-form {
+                 padding: 30px;
+                 margin: 40px auto;
+             }
+
+             .drop-zone {
+                 padding: 30px;
+             }
+
+             .contact-form input,
+             .contact-form textarea,
+             .phone-input-container {
+                 padding: 12px; /* Reduce input padding */
+             }
+
+             .phone-input-container .country-code {
+                 padding: 12px 0; /* Match vertical padding */
+             }
+
+             .contact-form input[type="tel"] {
+                 padding: 12px 0; /* Match vertical padding */
+             }
+
+             .contact-form button[type="submit"] {
+                 padding: 14px 25px; /* Reduce button padding */
+                 font-size: 1.2rem;
+                 margin-top: 30px;
+             }
+
+             footer {
+                 padding: 3rem 0 1rem; /* Adjust footer padding */
+             }
+
+             footer .social-links a {
+                 font-size: 1.8rem; /* Adjust social icon size */
+             }
+
+             .scroll-to-top {
+                 bottom: 20px;
+                 right: 20px;
+                 width: 50px;
+                 height: 50px;
+                 line-height: 50px;
+                 font-size: 1.5rem;
+             }
+        }
+
+         /* Accessibility: Highlighting interactive elements on focus */
+         a:focus,
+         button:focus,
+         input:focus,
+         textarea:focus,
+         select:focus,
+         [tabindex]:focus {
+             outline: 2px dashed var(--color-highlight);
+             outline-offset: 3px;
+             border-radius: 3px; /* Basic border-radius, specific elements override this */
+         }
+
+          /* Override for elements with custom focus styles */
+         nav ul li a:focus,
+         .menu-toggle:focus,
+         .cta-button:focus,
+         .sketch-gallery img:focus,
+         #about p a:focus,
+         .contact-form input:focus,
+         .contact-form textarea:focus,
+         .phone-input-container:focus-within, /* Use focus-within for the container */
+         .drop-zone:focus,
+         .contact-form button[type="submit"]:focus,
+         .contact-info p a:focus,
+         footer .social-links a:focus,
+         .scroll-to-top:focus {
+             outline: none; /* Remove default outline */
+             /* Custom focus styles are defined above for these specific elements */
+         }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="#hero">NSL Forge</a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="menu-toggle" aria-label="Toggle navigation menu" role="button" tabindex="0">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <section id="hero">
+        <div class="hero-3d-container">
+            <canvas id="hero-canvas"></canvas>
+            <div id="hero-fallback-message">
+                Your browser does not support the interactive background.<br>
+                Experience the art of <span style="color: var(--color-primary-button);">NSL Forge</span>.
+            </div>
+        </div>
+        <div class="hero-content">
+            <h1>Crafting Visions in Sketch at <span class="site-title">NSL Forge</span></h1>
+            <p>Experience the unique artistry of Naman Lumbhani. Specializing in detailed sketch commissions that bring your ideas to life.</p>
+            <a href="#contact" class="cta-button">Commission Your Sketch</a>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <div class="container">
+            <h2>Sketch Gallery</h2>
+            <div class="sketch-gallery">
+                <img src="https://via.placeholder.com/400x500?text=Sketch+Sample+1" alt="Sample Sketch Artwork 1 by NSL Forge" tabindex="0">
+                <img src="https://via.placeholder.com/400x500?text=Sketch+Sample+2" alt="Sample Sketch Artwork 2 by NSL Forge" tabindex="0">
+                <img src="https://via.placeholder.com/400x500?text=Sketch+Sample+3" alt="Sample Sketch Artwork 3 by NSL Forge" tabindex="0">
+                <img src="https://via.placeholder.com/400x500?text=Sketch+Sample+4" alt="Sample Sketch Artwork 4 by NSL Forge" tabindex="0">
+                <img src="https://via.placeholder.com/400x500?text=Sketch+Sample+5" alt="Sample Sketch Artwork 5 by NSL Forge" tabindex="0">
+                <img src="https://via.placeholder.com/400x500?text=Sketch+Sample+6" alt="Sample Sketch Artwork 6 by NSL Forge" tabindex="0">
+                </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="container">
+            <h2>Services & Collaborations</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <span class="icon"><i class="fas fa-palette"></i></span>
+                    <h3>Custom Commissions</h3>
+                    <p>Bring your personal vision to life with a bespoke sketch artwork, tailored specifically to your request.</p>
+                </div>
+                <div class="service-card">
+                     <span class="icon"><i class="fas fa-user-edit"></i></span>
+                    <h3>Character Design</h3>
+                    <p>Develop unique characters for stories, games, or personal projects with detailed concept sketches.</p>
+                </div>
+                <div class="service-card">
+                    <span class="icon"><i class="fas fa-lightbulb"></i></span>
+                    <h3>Conceptual Art</h3>
+                    <p>Visualize complex ideas, scenes, or environments through compelling and expressive conceptual sketches.</p>
+                </div>
+                 <div class="service-card">
+                     <span class="icon"><i class="fas fa-handshake"></i></span>
+                    <h3>Collaborations</h3>
+                    <p>Open to collaborative projects with writers, designers, and other artists to create something exceptional.</p>
+                </div>
+            </div>
+
+            <div class="service-process">
+                <h3>How Commissions Work</h3>
+                <ol>
+                    <li><strong>Consultation:</strong> We discuss your idea, requirements, size, medium, and reference images.</li>
+                    <li><strong>Quotation & Agreement:</strong> Based on the complexity, a quote is provided. Upon agreement, a deposit may be required.</li>
+                    <li><strong>Sketching Phase:</strong> I begin the artwork, providing updates or initial drafts for your feedback.</li>
+                    <li><strong>Revisions:</strong> Minor revisions are incorporated based on your input (scope for major changes might be limited after a certain stage).</li>
+                    <li><strong>Completion & Delivery:</strong> Once finalized and approved, the remaining payment is made. The finished physical artwork is prepared for delivery or pickup (if local).</li>
+                </ol>
+                <p class="important-note"><i class="fas fa-info-circle"></i> Digital copies can also be provided upon request.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2>About NSL Forge</h2>
+            <p>NSL Forge is the creative outlet of Naman Lumbhani, an artist based in Navsari, Gujarat, specializing in traditional sketch artwork. With a passion for capturing detail and emotion through pencil and paper, Naman creates unique pieces ranging from realistic portraits to imaginative conceptual designs.</p>
+            <p>Each sketch is crafted with dedication, aiming to resonate with the viewer and the subject. Whether it's a cherished memory captured in a portrait or a brand new character brought to life, NSL Forge is where visions are meticulously forged into tangible art.</p>
+             <p>Connect with Naman Lumbhani:</p>
+             <p>
+                <a href="mailto:your.email@example.com" aria-label="Send an email"><i class="fas fa-envelope"></i> Email</a> |
+                <a href="https://www.instagram.com/your_instagram" target="_blank" rel="noopener noreferrer" aria-label="Visit Instagram profile"><i class="fab fa-instagram"></i> Instagram</a> |
+                <a href="tel:+919876543210" aria-label="Call Naman Lumbhani"><i class="fas fa-phone"></i> Phone</a>
+             </p>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2>Get in Touch</h2>
+            <form class="contact-form" action="your_form_processor_script.php" method="POST" enctype="multipart/form-data">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="phone">Phone (Optional):</label>
+                <div class="phone-input-container">
+                    <span class="country-code"><span class="flag">🇮🇳</span> +91</span>
+                    <input type="tel" id="phone" name="phone" pattern="[0-9]{10}">
+                </div>
+
+
+                <label for="subject">Subject:</label>
+                <input type="text" id="subject" name="subject">
+
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="6" required></textarea>
+
+                <label for="reference-image">Upload Reference Image (Optional):</label>
+                <div class="drop-zone" id="drop-zone" role="button" tabindex="0" aria-labelledby="reference-image-label">
+                    <input type="file" id="reference-image" name="reference_image" accept="image/*" style="display: none;">
+                    <p id="drop-zone-text">Drag & Drop your image here or Click to Browse</p>
+                    <div class="file-info" id="file-info"></div>
+                </div>
+                 <span class="drop-zone-help-text" id="reference-image-label">Accepted formats: JPG, PNG. Max size: 5MB.</span>
+
+
+                <button type="submit">Send Message</button>
+            </form>
+            <div class="contact-info">
+                <p>You can also reach out directly:</p>
+                <p>Email: <a href="mailto:your.email@example.com">your.email@example.com</a></p>
+                <p>Phone: <a href="tel:+919876543210">+91 98765 43210</a></p>
+                 <p>Location: Navsari, Gujarat, India</p>
+            </div>
+        </div>
+    </section>
+
+     <section id="disclaimer">
+         <div class="container">
+             <h2>Disclaimer</h2>
+             <p>All artwork showcased on this website is the original creation of Naman Lumbhani (NSL Forge) and is protected by copyright. Reproduction, distribution, or unauthorized use of any artwork without explicit written permission is strictly prohibited. Custom commissioned artworks are for personal use unless a commercial license is explicitly agreed upon. Prices for commissions vary based on complexity, size, and medium, and will be quoted individually after consultation. NSL Forge reserves the right to refuse commissions based on content or capacity.</p>
+         </div>
+     </section>
+
+    <footer>
+        <div class="container">
+            <p class="footer-note">Forge your vision into art.</p>
+            <div class="social-links">
+                <a href="https://www.instagram.com/your_instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://twitter.com/your_twitter" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                 <a href="https://www.linkedin.com/in/your_linkedin" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+             </div>
+    </footer>
+
+     <a href="#" class="scroll-to-top" aria-label="Scroll to top"><i class="fas fa-arrow-up"></i></a>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <script>
+        // --- Three.js Hero Section Setup ---
         const heroCanvas = document.getElementById('hero-canvas');
         const hero3dContainer = document.querySelector('.hero-3d-container');
         const heroFallbackMessage = document.getElementById('hero-fallback-message');
 
-        if (heroCanvas && hero3dContainer && heroFallbackMessage) { // Check all elements exist
-            // Check for WebGL support
+        // Ensure all necessary elements for Three.js are present
+        if (heroCanvas && hero3dContainer && heroFallbackMessage) {
             const isWebGLAvailable = (function () {
                 try {
                     const canvas = document.createElement('canvas');
@@ -666,69 +991,51 @@
             })();
 
             if (isWebGLAvailable) {
-                // WebGL is supported: Hide fallback, show canvas
                 heroFallbackMessage.style.display = 'none';
-                heroCanvas.style.display = 'block'; // Ensure canvas is block
+                heroCanvas.style.display = 'block';
 
-                // 1. Create Scene, Camera, Renderer
                 const scene = new THREE.Scene();
-                // Adjusted camera FOV or position slightly
                 const camera = new THREE.PerspectiveCamera(60, hero3dContainer.clientWidth / hero3dContainer.clientHeight, 0.1, 1000);
-                // alpha: true for transparency, helps if body background shows through
                 const renderer = new THREE.WebGLRenderer({ canvas: heroCanvas, antialias: true, alpha: true });
 
                 renderer.setSize(hero3dContainer.clientWidth, hero3dContainer.clientHeight);
-                renderer.setPixelRatio(window.devicePixelRatio); // Handle high DPI screens
+                renderer.setPixelRatio(window.devicePixelRatio);
 
-                // 2. Add a Simple Geometry (e.g., a Box)
-                 // Using a slightly more complex shape, e.g., an Icosahedron or Octahedron for visual interest
-                const geometry = new THREE.OctahedronGeometry(2.8); // Adjust size
-
-                // Using a more stylized material
+                const geometry = new THREE.OctahedronGeometry(2.8);
                 const material = new THREE.MeshPhongMaterial({
-                    color: 0xD6AD60, // Gold color
-                    shininess: 150, // Higher shininess
-                    specular: 0xffffff, // White specular highlight
-                    flatShading: true // Flat shading for geometric look
+                    color: 0xD6AD60,
+                    shininess: 150,
+                    specular: 0xffffff,
+                    flatShading: true
                 });
 
-                // 4. Create Mesh and Add to Scene
                 const shape = new THREE.Mesh(geometry, material);
                 scene.add(shape);
 
-                // 5. Add Lighting
-                // Adjusted lighting for better effect
-                const ambientLight = new THREE.AmbientLight(0x404040, 0.8); // Softer ambient light
+                const ambientLight = new THREE.AmbientLight(0x404040, 0.8);
                 scene.add(ambientLight);
 
-                const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5); // Main white light
+                const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
                 directionalLight.position.set(5, 5, 5).normalize();
                 scene.add(directionalLight);
 
-                 const pointLight1 = new THREE.PointLight(0xB68D40, 0.6); // Tan point light 1
-                 pointLight1.position.set(-5, 5, -5);
-                 scene.add(pointLight1);
+                const pointLight1 = new THREE.PointLight(0xB68D40, 0.6);
+                pointLight1.position.set(-5, 5, -5);
+                scene.add(pointLight1);
 
-                 const pointLight2 = new THREE.PointLight(0xD6AD60, 0.6); // Gold point light 2
-                 pointLight2.position.set(5, -5, 5);
-                 scene.add(pointLight2);
+                const pointLight2 = new THREE.PointLight(0xD6AD60, 0.6);
+                pointLight2.position.set(5, -5, 5);
+                scene.add(pointLight2);
 
+                camera.position.z = 5;
 
-                // 6. Position Camera
-                camera.position.z = 5; // Move camera back
-
-                // 7. Animation Loop
                 const animate = () => {
                     requestAnimationFrame(animate);
-
-                    // Rotate the object slightly slower or with more variation
-                    shape.rotation.x += 0.002; // Adjusted rotation speed
-                    shape.rotation.y += 0.003; // Adjusted rotation speed
-
+                    shape.rotation.x += 0.002;
+                    shape.rotation.y += 0.003;
                     renderer.render(scene, camera);
                 };
 
-                // 8. Handle Window Resize
                 const onWindowResize = () => {
                     const width = hero3dContainer.clientWidth;
                     const height = hero3dContainer.clientHeight;
@@ -738,34 +1045,253 @@
                 };
 
                 window.addEventListener('resize', onWindowResize);
-
-                // Start the animation
                 animate();
 
-                 // Optional: Add a class to the canvas container or body when Three.js loads
-                 // hero3dContainer.classList.add('threejs-loaded'); // Use this for CSS transitions if needed
-                 // Or add to the canvas itself: heroCanvas.classList.add('loaded');
-
             } else {
-                // WebGL is NOT supported: Show fallback, hide canvas
-                 heroFallbackMessage.style.display = 'block';
-                 heroCanvas.style.display = 'none';
-
-                 // Apply a static background color/image as a fallback via CSS
-                 // This is already handled in the CSS for .hero-3d-container now.
+                // WebGL NOT supported
+                heroFallbackMessage.style.display = 'block';
+                heroCanvas.style.display = 'none';
             }
         }
          // --- End Three.js Setup ---
 
-         // Add class for initial section animation - Removed.
-         // The initial opacity/transform is set in the CSS for section:not(#hero).
-         // The 'is-visible' class is added by the IntersectionObserver.
-         // The 'section-hidden' class isn't used in the CSS animations.
-         // document.addEventListener('DOMContentLoaded', () => {
-         //     document.querySelectorAll('section:not(#hero)').forEach(section => {
-         //         section.classList.add('section-hidden'); // This class is not needed for the CSS animation
-         //     });
-         // });
+
+        // --- Section Scroll Animation (IntersectionObserver) ---
+        // Ensure this runs after the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('section:not(#hero)');
+
+            const observerOptions = {
+                root: null, // viewport as the root
+                rootMargin: '0px',
+                threshold: 0.1 // 10% of the section must be visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        // Optional: Stop observing once it's visible
+                        // observer.unobserve(entry.target);
+                    } else {
+                         // Optional: Remove class when it goes out of view for re-animation on scroll back up
+                         // entry.target.classList.remove('is-visible');
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+         // --- End Section Scroll Animation ---
+
+
+        // --- Scroll to Top Button Logic ---
+        const scrollToTopButton = document.querySelector('.scroll-to-top');
+
+        // Check if button exists before adding listeners
+        if (scrollToTopButton) {
+             window.addEventListener('scroll', () => {
+                 if (window.scrollY > 400) { // Show button after scrolling down 400px
+                     scrollToTopButton.classList.add('visible');
+                 } else {
+                     scrollToTopButton.classList.remove('visible');
+                 }
+             });
+
+             scrollToTopButton.addEventListener('click', (e) => {
+                 e.preventDefault(); // Prevent default anchor link behavior
+                 window.scrollTo({
+                     top: 0,
+                     behavior: 'smooth'
+                 });
+             });
+        }
+        // --- End Scroll to Top Button Logic ---
+
+
+         // --- Mobile Menu Toggle ---
+        const menuToggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('header nav'); // Select the nav element itself
+        const body = document.body; // Get the body element
+
+        // Check if elements exist before adding event listeners
+        if (menuToggle && nav && body) {
+            menuToggle.addEventListener('click', () => {
+                nav.classList.toggle('active');
+                menuToggle.classList.toggle('active'); // Optional: add active class to toggle button
+                body.classList.toggle('menu-open'); // Optional: add class to body for overflow control
+            });
+
+            // Optional: Close menu when a link is clicked (for single-page sites)
+             nav.querySelectorAll('a').forEach(link => {
+                 link.addEventListener('click', () => {
+                     if (nav.classList.contains('active')) {
+                          nav.classList.remove('active');
+                          menuToggle.classList.remove('active'); // Optional: remove active class from toggle
+                          body.classList.remove('menu-open'); // Optional: remove class from body
+                     }
+                 });
+             });
+        }
+         // --- End Mobile Menu Toggle ---
+
+         // --- Contact Form File Drop Zone Logic ---
+        const dropZone = document.getElementById('drop-zone');
+        const fileInput = document.getElementById('reference-image');
+        const fileInfo = document.getElementById('file-info');
+        const dropZoneText = document.getElementById('drop-zone-text');
+
+         // Check if elements exist
+        if (dropZone && fileInput && fileInfo && dropZoneText) {
+
+             // Prevent default drag behaviors
+             ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                 dropZone.addEventListener(eventName, preventDefaults, false);
+                 document.body.addEventListener(eventName, preventDefaults, false); // Prevent default on body as well
+             });
+
+             function preventDefaults (e) {
+                 e.preventDefault();
+                 e.stopPropagation();
+             }
+
+             // Highlight drop zone when dragging over
+             ['dragenter', 'dragover'].forEach(eventName => {
+                 dropZone.addEventListener(eventName, highlight, false);
+             });
+
+             ['dragleave', 'drop'].forEach(eventName => {
+                 dropZone.addEventListener(eventName, unhighlight, false);
+             });
+
+             function highlight() {
+                 dropZone.classList.add('dragover');
+                 dropZone.classList.remove('error'); // Remove error state on drag over
+                 fileInfo.classList.remove('error-message');
+                 fileInfo.textContent = ''; // Clear previous error message
+             }
+
+             function unhighlight() {
+                 dropZone.classList.remove('dragover');
+             }
+
+             // Handle dropped files
+             dropZone.addEventListener('drop', handleDrop, false);
+
+             function handleDrop(e) {
+                 const dt = e.dataTransfer;
+                 const files = dt.files;
+                 handleFiles(files);
+             }
+
+             // Handle file input change
+             fileInput.addEventListener('change', function(e) {
+                 handleFiles(this.files);
+             });
+
+             // Handle click on drop zone to open file dialog
+             dropZone.addEventListener('click', function() {
+                 fileInput.click();
+             });
+
+             // Process files
+             function handleFiles(files) {
+                 const file = files[0]; // Only allow one file
+                 const maxSizeBytes = 5 * 1024 * 1024; // 5MB
+
+                 if (!file) {
+                     resetDropZone(); // Reset if no file selected/dropped
+                     return;
+                 }
+
+                 if (file.size > maxSizeBytes) {
+                     displayError(`File "${file.name}" is too large (max 5MB).`);
+                     // Clear the file input value so the same file can be selected again
+                     fileInput.value = '';
+                     return;
+                 }
+
+                 const acceptedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp']; // Add other image types if needed
+                 if (!acceptedTypes.includes(file.type)) {
+                     displayError(`File "${file.name}" has an invalid format. Accepted: JPG, PNG, GIF, WebP.`);
+                      // Clear the file input value
+                     fileInput.value = '';
+                     return;
+                 }
+
+
+                 // If file is valid
+                 dropZoneText.textContent = `Selected File:`;
+                 fileInfo.textContent = `${file.name} (${formatBytes(file.size)})`;
+                 dropZone.classList.remove('error'); // Ensure no error class is left
+                 fileInfo.classList.remove('error-message');
+                 // The file is automatically attached to the fileInput element
+             }
+
+             function displayError(message) {
+                 dropZone.classList.add('error');
+                 dropZoneText.textContent = `Error:`;
+                 fileInfo.classList.add('error-message');
+                 fileInfo.textContent = message;
+                 // The file input should have been cleared already in handleFiles
+             }
+
+             function resetDropZone() {
+                 dropZoneText.textContent = 'Drag & Drop your image here or Click to Browse';
+                 fileInfo.textContent = '';
+                 dropZone.classList.remove('dragover', 'error');
+                 fileInfo.classList.remove('error-message');
+                  // Ensure the actual file input is clear
+                 fileInput.value = '';
+             }
+
+
+             // Helper function to format file size
+             function formatBytes(bytes, decimals = 2) {
+                 if (bytes === 0) return '0 Bytes';
+                 const k = 1024;
+                 const dm = decimals < 0 ? 0 : decimals;
+                 const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+                 const i = Math.floor(Math.log(bytes) / Math.log(k));
+                 return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+             }
+
+              // Add accessibility for keyboard users on the drop zone
+              dropZone.addEventListener('keydown', function(e) {
+                  // If Enter or Spacebar is pressed
+                  if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault(); // Prevent default spacebar scroll
+                      fileInput.click(); // Trigger the file input click
+                  }
+              });
+         }
+          // --- End Contact Form File Drop Zone Logic ---
+
+
+           // --- Smooth Scrolling for Navigation Links ---
+           document.querySelectorAll('nav ul li a[href^="#"]').forEach(anchor => {
+               anchor.addEventListener('click', function (e) {
+                   e.preventDefault(); // Prevent default jump
+
+                   const targetId = this.getAttribute('href');
+                   const targetElement = document.querySelector(targetId);
+
+                   if (targetElement) {
+                       // Calculate the position, taking into account the fixed header height
+                       const headerHeight = document.querySelector('header').offsetHeight;
+                       const elementPosition = targetElement.getBoundingClientRect().top;
+                       const offsetPosition = elementPosition + window.scrollY - headerHeight;
+
+                       window.scrollTo({
+                           top: offsetPosition,
+                           behavior: 'smooth'
+                       });
+                   }
+               });
+           });
+           // --- End Smooth Scrolling ---
 
 
     </script>
