@@ -437,54 +437,6 @@
             outline: none;
         }
 
-         /* Styling for the phone input prefix container - make it look like a single input */
-         .phone-input-container {
-             display: flex; /* Use flexbox for alignment */
-             align-items: center; /* Vertically center items */
-             margin-bottom: 25px; /* Match other input margin bottom */
-             border: 1px solid var(--color-border); /* Match other input border - Use dark border color */
-             border-radius: 8px; /* Match other input border-radius */
-             background-color: var(--color-bg-dark); /* Match other input background - Use Charcoal */
-             padding: 0 15px; /* Match horizontal padding of other inputs */
-             transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Match other input transition */
-             box-sizing: border-box; /* Include padding and border in element's total width and height */
-             width: 100%; /* Make it fill the container like other inputs */
-             /* Added focus state via :focus-within */
-         }
-
-          .phone-input-container:focus-within { /* Style container when input inside is focused */
-             border-color: var(--color-primary-button); box-shadow: 0 0 10px rgba(214, 173, 96, 0.6); /* More prominent shadow using Gold */
-         }
-
-         .phone-input-container .country-code {
-             color: var(--color-text-dark); /* Use Tan for prefix */
-             font-size: 1rem; /* Match input font size */
-             margin-right: 10px; /* Increased space */
-             flex-shrink: 0; /* Prevent shrinking */
-             flex-grow: 0; /* Prevent growing */
-             padding: 15px 0; /* Match vertical padding of the input text */
-         }
-
-          .phone-input-container .country-code .flag {
-             margin-right: 6px; /* Increased space between flag and +91 */
-             font-size: 1.3rem; /* Slightly larger flag */
-         }
-
-         .contact-form input[type="tel"] {
-             flex-grow: 1; /* Allow input to take remaining space */
-             border: none; /* Remove border from input itself */
-             padding: 15px 0; /* Match vertical padding, no horizontal padding here */
-             margin: 0; /* Remove margin */
-             background-color: transparent; /* Transparent background */
-             color: var(--color-text-light); /* Use Cream */
-             font-size: 1rem;
-             outline: none; /* Remove default input outline */
-             box-shadow: none; /* Remove box shadow */
-             transition: none; /* Remove transition */
-             width: auto; /* Allow flex-grow to control width */
-         }
-
-
         .contact-form input[type="text"]:focus,
         .contact-form input[type="email"]:focus,
         .contact-form textarea:focus {
@@ -734,18 +686,10 @@
              }
 
              .contact-form input,
-             .contact-form textarea,
-             .phone-input-container {
+             .contact-form textarea {
                  padding: 12px; /* Reduce input padding */
              }
 
-             .phone-input-container .country-code {
-                 padding: 12px 0; /* Match vertical padding */
-             }
-
-             .contact-form input[type="tel"] {
-                 padding: 12px 0; /* Match vertical padding */
-             }
 
              .contact-form button[type="submit"] {
                  padding: 14px 25px; /* Reduce button padding */
@@ -791,7 +735,6 @@
          #about p a:focus,
          .contact-form input:focus,
          .contact-form textarea:focus,
-         .phone-input-container:focus-within, /* Use focus-within for the container */
          .drop-zone:focus,
          .contact-form button[type="submit"]:focus,
          .contact-info p a:focus,
@@ -843,12 +786,9 @@
         <div class="container">
             <h2>Sketch Gallery</h2>
             <div class="sketch-gallery">
-                <img src="https://via.placeholder.com/400x500?text=Sketch+Sample+1" alt="Sample Sketch Artwork 1 by NSL Forge" tabindex="0">
-                <img src="https://via.placeholder.com/400x500?text=Sketch+Sample+2" alt="Sample Sketch Artwork 2 by NSL Forge" tabindex="0">
-                <img src="https://via.placeholder.com/400x500?text=Sketch+Sample+3" alt="Sample Sketch Artwork 3 by NSL Forge" tabindex="0">
-                <img src="https://via.placeholder.com/400x500?text=Sketch+Sample+4" alt="Sample Sketch Artwork 4 by NSL Forge" tabindex="0">
-                <img src="https://via.placeholder.com/400x500?text=Sketch+Sample+5" alt="Sample Sketch Artwork 5 by NSL Forge" tabindex="0">
-                <img src="https://via.placeholder.com/400x500?text=Sketch+Sample+6" alt="Sample Sketch Artwork 6 by NSL Forge" tabindex="0">
+                <img src="20250105_015608.jpg" alt="Sketch Artwork 1 by NSL Forge" tabindex="0">
+                <img src="IMG_20241122_193303_736.jpg" alt="Sketch Artwork 2 by NSL Forge" tabindex="0">
+                <img src="IMG_20241008_190133(1).jpg" alt="Sketch Artwork 3 by NSL Forge" tabindex="0">
                 </div>
         </div>
     </section>
@@ -900,9 +840,9 @@
             <p>Each sketch is crafted with dedication, aiming to resonate with the viewer and the subject. Whether it's a cherished memory captured in a portrait or a brand new character brought to life, NSL Forge is where visions are meticulously forged into tangible art.</p>
              <p>Connect with Naman Lumbhani:</p>
              <p>
-                <a href="mailto:your.email@example.com" aria-label="Send an email"><i class="fas fa-envelope"></i> Email</a> |
-                <a href="https://www.instagram.com/your_instagram" target="_blank" rel="noopener noreferrer" aria-label="Visit Instagram profile"><i class="fab fa-instagram"></i> Instagram</a> |
-                <a href="tel:+919876543210" aria-label="Call Naman Lumbhani"><i class="fas fa-phone"></i> Phone</a>
+                <a href="mailto:nslcreatesofficial@gmail.com" aria-label="Send an email"><i class="fas fa-envelope"></i> Email</a> |
+                <a href="https://www.instagram.com/nslforge" target="_blank" rel="noopener noreferrer" aria-label="Visit Instagram profile (@nslforge)"><i class="fab fa-instagram"></i> Instagram</a> |
+                <a href="https://www.youtube.com/c/nsl_creates" target="_blank" rel="noopener noreferrer" aria-label="Visit YouTube channel (nsl_creates)"><i class="fab fa-youtube"></i> YouTube</a>
              </p>
         </div>
     </section>
@@ -916,13 +856,6 @@
 
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required>
-
-                <label for="phone">Phone (Optional):</label>
-                <div class="phone-input-container">
-                    <span class="country-code"><span class="flag">🇮🇳</span> +91</span>
-                    <input type="tel" id="phone" name="phone" pattern="[0-9]{10}">
-                </div>
-
 
                 <label for="subject">Subject:</label>
                 <input type="text" id="subject" name="subject">
@@ -943,17 +876,15 @@
             </form>
             <div class="contact-info">
                 <p>You can also reach out directly:</p>
-                <p>Email: <a href="mailto:your.email@example.com">your.email@example.com</a></p>
-                <p>Phone: <a href="tel:+919876543210">+91 98765 43210</a></p>
-                 <p>Location: Navsari, Gujarat, India</p>
-            </div>
+                <p>Email: <a href="mailto:nslcreatesofficial@gmail.com">nslcreatesofficial@gmail.com</a></p>
+                 </div>
         </div>
     </section>
 
      <section id="disclaimer">
          <div class="container">
              <h2>Disclaimer</h2>
-             <p>All artwork showcased on this website is the original creation of Naman Lumbhani (NSL Forge) and is protected by copyright. Reproduction, distribution, or unauthorized use of any artwork without explicit written permission is strictly prohibited. Custom commissioned artworks are for personal use unless a commercial license is explicitly agreed upon. Prices for commissions vary based on complexity, size, and medium, and will be quoted individually after consultation. NSL Forge reserves the right to refuse commissions based on content or capacity.</p>
+             <p>All artwork showcased on this website is the original creation of Naman Lumbhani (NSL Forge). Any reproduction, distribution, or use of the artwork requires explicit written permission from the artist. Custom commissioned artworks are for personal use unless a commercial license is specifically agreed upon. Prices for commissions vary based on complexity, size, and medium, and will be quoted individually after consultation. NSL Forge reserves the right to refuse commissions based on content or capacity.</p>
          </div>
      </section>
 
@@ -961,9 +892,8 @@
         <div class="container">
             <p class="footer-note">Forge your vision into art.</p>
             <div class="social-links">
-                <a href="https://www.instagram.com/your_instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="https://twitter.com/your_twitter" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                 <a href="https://www.linkedin.com/in/your_linkedin" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.instagram.com/nslforge" target="_blank" rel="noopener noreferrer" aria-label="Instagram (@nslforge)"><i class="fab fa-instagram"></i></a>
+                 <a href="https://www.youtube.com/c/nsl_creates" target="_blank" rel="noopener noreferrer" aria-label="YouTube (nsl_creates)"><i class="fab fa-youtube"></i></a>
                 </div>
              </div>
     </footer>
