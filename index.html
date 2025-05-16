@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=1280, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NSL Forge by Naman Lumbhani - Exquisite Sketch Artwork & Commissions</title>
     <meta name="description" content="Commission custom sketch artwork from Naman Lumbhani (NSL Forge). Specializing in portraits, character sketches, and conceptual art. Explore samples and connect for collaborations in Navsari, Gujarat.">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -585,29 +585,28 @@
 
         /* --- Mobile Navigation --- */
         /* Adjust nav display for smaller screens */
-        /*
         @media (max-width: 768px) {
             header .container {
-                flex-direction: row; 
+                flex-direction: row; /* Keep logo and toggle on one row */
                 justify-content: space-between;
                 align-items: center;
             }
 
             nav {
                 position: absolute;
-                top: 100%; 
+                top: 100%; /* Position below header */
                 left: 0;
                 width: 100%;
-                background: var(--color-header-footer); 
+                background: var(--color-header-footer); /* Match header background */
                 box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-                display: none; 
+                display: none; /* Hidden by default */
                 flex-direction: column;
                 align-items: center;
                 padding: 20px 0;
                 opacity: 0;
                 transform: translateY(-20px);
                 transition: opacity 0.3s ease, transform 0.3s ease;
-                z-index: 999; 
+                z-index: 999; /* Ensure it's above content but below fixed header */
             }
 
             nav.active {
@@ -623,57 +622,59 @@
             }
 
             nav ul li {
-                margin: 10px 0; 
+                margin: 10px 0; /* Adjust vertical margin */
                 width: 100%;
                 text-align: center;
             }
 
             nav ul li a {
-                 font-size: 1.2rem; 
-                 padding: 12px 0; 
-                 color: var(--color-text-light); 
-                 border-bottom: 1px solid var(--color-border); 
-                 width: 80%; 
-                 margin: auto; 
+                 font-size: 1.2rem; /* Larger font for mobile */
+                 padding: 12px 0; /* More vertical padding */
+                 color: var(--color-text-light); /* Use Cream for mobile links */
+                 border-bottom: 1px solid var(--color-border); /* Subtle separator */
+                 width: 80%; /* Link takes up most of the width */
+                 margin: auto; /* Center the link */
             }
 
             nav ul li:last-child a {
-                 border-bottom: none; 
+                 border-bottom: none; /* No border on the last link */
             }
 
             nav ul li a::after {
-                content: none; 
+                content: none; /* Remove underline animation on mobile */
             }
 
             nav ul li a:hover, nav ul li a.active {
-                 color: var(--color-primary-button); 
-                 transform: none; 
+                 color: var(--color-primary-button); /* Use Gold on hover/active */
+                 transform: none; /* Remove translateY effect */
             }
 
             .menu-toggle {
-                display: block; 
+                display: block; /* Show toggle button on mobile */
             }
 
+            /* Adjust section padding when header is active */
             body.menu-open {
-                 overflow: hidden; 
+                 overflow: hidden; /* Prevent scrolling when menu is open (optional) */
             }
 
             section {
-                 padding: 80px 0; 
+                 padding: 80px 0; /* Reduce section padding on mobile */
             }
 
              #hero {
-                 padding-top: 100px; 
+                 padding-top: 100px; /* Adjust hero padding */
              }
 
+            /* Adjust Hero H1 font size for mobile */
             #hero h1 {
-                 font-size: 3.5rem; 
-                 margin-bottom: 15px; 
+                 font-size: 3.5rem; /* Smaller font size for mobile */
+                 margin-bottom: 15px; /* Adjust margin if needed */
             }
 
 
             section h2 {
-                font-size: 2.2rem; 
+                font-size: 2.2rem; /* Adjust heading size */
                 margin-bottom: 30px;
             }
 
@@ -681,6 +682,7 @@
                  font-size: 1.6rem;
             }
 
+             /* Adjust form padding on mobile */
              .contact-form {
                  padding: 30px;
                  margin: 40px auto;
@@ -692,22 +694,22 @@
 
              .contact-form input,
              .contact-form textarea {
-                 padding: 12px; 
+                 padding: 12px; /* Reduce input padding */
              }
 
 
              .contact-form button[type="submit"] {
-                 padding: 14px 25px; 
+                 padding: 14px 25px; /* Reduce button padding */
                  font-size: 1.2rem;
                  margin-top: 30px;
              }
 
              footer {
-                 padding: 3rem 0 1rem; 
+                 padding: 3rem 0 1rem; /* Adjust footer padding */
              }
 
              footer .social-links a {
-                 font-size: 1.8rem; 
+                 font-size: 1.8rem; /* Adjust social icon size */
              }
 
              .scroll-to-top {
@@ -719,7 +721,6 @@
                  font-size: 1.5rem;
              }
         }
-        */
 
          /* Accessibility: Highlighting interactive elements on focus */
          a:focus,
@@ -1053,23 +1054,20 @@
         const body = document.body; // Get the body element
 
         // Check if elements exist before adding event listeners
-        // Note: Since the mobile-specific CSS for the menu toggle and nav.active is commented out,
-        // this JavaScript will still run but the visual effect of the menu opening/closing
-        // will not occur as per the original mobile design. The .menu-toggle itself will be hidden
-        // by the default CSS (.menu-toggle { display: none; }).
         if (menuToggle && nav && body) {
             menuToggle.addEventListener('click', () => {
                 nav.classList.toggle('active');
-                menuToggle.classList.toggle('active'); 
-                body.classList.toggle('menu-open'); 
+                menuToggle.classList.toggle('active'); // Optional: add active class to toggle button
+                body.classList.toggle('menu-open'); // Optional: add class to body for overflow control
             });
 
+            // Optional: Close menu when a link is clicked (for single-page sites)
              nav.querySelectorAll('a').forEach(link => {
                  link.addEventListener('click', () => {
                      if (nav.classList.contains('active')) {
                           nav.classList.remove('active');
-                          menuToggle.classList.remove('active'); 
-                          body.classList.remove('menu-open'); 
+                          menuToggle.classList.remove('active'); // Optional: remove active class from toggle
+                          body.classList.remove('menu-open'); // Optional: remove class from body
                      }
                  });
              });
