@@ -3,1237 +3,610 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NSL Forge by Naman Lumbhani - Exquisite Sketch Artwork & Commissions</title>
-    <meta name="description" content="Commission custom sketch artwork from Naman Lumbhani (NSL Forge). Specializing in portraits, character sketches, and conceptual art. Explore samples and connect for collaborations in Navsari, Gujarat.">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <title>J.K Gems - Exquisite Gemstones & Spiritual Items</title> <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;600;700&family=Lora:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
     <style>
-        /* --- CSS Variables: Custom Palette (Tan, Cream, Charcoal, Gold) --- */
+        /* --- Variables and Base Styles --- */
         :root {
-            /* Defined Palette Colors */
-            --color-tan: #B68D40;
-            --color-cream: #F4EBD0;
-            --color-charcoal: #122620;
-            --color-gold: #D6AD60;
+            /* A Thoughtful Color Palette: Defined here */
+            --color-palette-1: #F7E6CA; /* Lightest: Background, Nav Link Color, Social Icon Hover */
+            --color-palette-2: #E8D59E; /* Light Accent: Secondary, Icons, Search Focus, Social Icon Color */
+            --color-palette-3: #D9BBB0; /* Medium: Border Color */
+            --color-palette-4: #AD9C8E; /* Darkest: Primary, Text, Footer Background/Text, Link Hover */
 
-            /* Semantic Mapping to Palette Colors */
-            --color-bg-dark: var(--color-charcoal); /* Charcoal for main dark backgrounds */
-            /* Using a slightly lighter charcoal derivative for subtle background variation */
-            --color-bg-light: #182D26;
-            --color-text-light: var(--color-cream); /* Cream for main text on dark background (Headings, prominent text) */
-            --color-text-dark: var(--color-tan); /* Tan for secondary or less prominent text (Disclaimer, muted text) */
-            --color-text-medium: var(--color-cream); /* Cream for general body text (Paragraphs) */
-            --color-header-footer: var(--color-charcoal);
-            --color-primary-button: var(--color-gold); /* Gold for primary calls to action and buttons */
-            --color-highlight: var(--color-gold); /* Gold for key highlights (focus outlines, hover effects) */
-            --color-secondary-accent: var(--color-tan); /* Tan for secondary accents or gradients */
-            /* Using a dark charcoal derivative for subtle borders */
-            --color-border: #2A3C36;
+            /* Mapping to semantic variable names used in the CSS */
+            --primary-color: var(--color-palette-4);
+            --secondary-color: var(--color-palette-2);
+            --bg-color: var(--color-palette-1);
+            --text-color: var(--color-palette-4);
+            --card-bg: #ffffff; /* Keeping product cards white */
+            --border-color: var(--color-palette-3);
+            --button-whatsapp: #25D366; /* Standard WhatsApp green */
+            --button-whatsapp-hover: #1DA851;
+            --footer-text-color: var(--color-palette-1); /* Footer text color contrasting with dark footer background */
 
-            /* Mapping old grey/white variables for compatibility (can be removed if unused) */
-            --color-dark-grey: var(--color-tan);
-            --color-medium-grey: var(--color-cream);
-            --color-white: var(--color-cream);
-
-            /* Keeping alert/error color distinct for visibility */
-            --color-alert: #cf6679; /* Reddish for warnings */
-            --color-error-text: #cf6679;
-
-            /* Subtle gradients using the new palette colors */
-            --gradient-primary: linear-gradient(90deg, var(--color-primary-button), var(--color-secondary-accent)); /* Gold to Tan gradient */
-            --gradient-highlight: linear-gradient(90deg, var(--color-highlight), var(--color-tan)); /* Gold to Tan gradient */
-
-            /* Added for subtle depth */
-            --shadow-deep: 0 12px 24px rgba(0,0,0,0.7); /* Slightly larger/darker shadows */
-            --shadow-medium: 0 8px 16px rgba(0,0,0,0.6);
-            --shadow-light: 0 4px 8px rgba(0,0,0,0.5);
+            --section-padding-vertical: 60px; /* Vertical padding for sections - Intentional Layout/Whitespace */
+            --section-padding-horizontal: 20px; /* Horizontal padding for sections - Intentional Layout/Whitespace */
         }
-
-        /* --- Base Styles --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Roboto', sans-serif;
-            line-height: 1.7; /* Slightly increased for readability */
-            color: var(--color-text-medium); /* Use Cream for main body text */
-            background-color: var(--color-bg-dark); /* Use Charcoal for dark background */
-            scroll-behavior: smooth;
-            overflow-x: hidden; /* Prevent horizontal scroll issues */
+            font-family: 'Lato', sans-serif; /* Effective Typography: Body font */
+            font-weight: 600; /* Effective Typography: Body font weight for better visibility */
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color); /* Background color from palette */
+            color: var(--text-color); /* Main body text color from palette */
+            line-height: 1.7; /* Effective Typography: Line height for readability */
+            overflow-x: hidden;
         }
 
-        .container { width: 90%; max-width: 1400px; margin: auto; overflow: hidden; padding: 0 20px; }
-
-        /* --- General Section Styling --- */
-        section {
-            padding: 120px 0;
-            border-bottom: 1px solid var(--color-border);
-            background-color: var(--color-bg-dark);
-            min-height: 80vh; /* Ensure sections are tall enough to trigger visibility */
-            position: relative;
-            overflow: hidden; /* Keep section content contained */
-
-            /* Initial state for scroll-in animation - Simpler fade/slide */
-            opacity: 0;
-            transform: translateY(30px); /* Simpler translation */
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Adjusted transition duration */
-            will-change: transform, opacity; /* Hint to browser for performance */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Lora', serif; /* Effective Typography: Heading font */
+            color: var(--primary-color); /* Headings color from palette */
+            line-height: 1.2;
         }
 
-        /* Sections that should start visible (like Hero) */
-        #hero {
-            opacity: 1;
-            transform: none;
-            transition: none; /* No transition on hero visibility */
-            min-height: 100vh; /* Ensure hero is full height */
+        h2 {
+            font-size: 2.8em; /* Visual Hierarchy: Heading size */
+            margin-bottom: 40px; /* Intentional Layout/Whitespace */
+            text-align: center;
+            font-weight: 700; /* Visual Hierarchy: Heading weight */
         }
 
-        /* The 'is-visible' class overrides the initial state */
-        section.is-visible {
-            opacity: 1;
-            transform: translateY(0);
+        h3 {
+            font-size: 1.8em; /* Visual Hierarchy: Heading size */
+            margin-bottom: 20px; /* Intentional Layout/Whitespace */
+            font-weight: 600; /* Visual Hierarchy: Heading weight */
         }
 
-        section:last-of-type { border-bottom: none; }
-        #gallery { background-color: var(--color-bg-light); } /* Gallery uses slightly lighter background */
-        #disclaimer { padding: 60px 0; background-color: var(--color-bg-light); border-bottom: 1px solid var(--color-border); min-height: auto; } /* Disclaimer uses slightly lighter background */
-
-        /* Section Headings */
-        section h2 {
-            font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 700;
-            color: var(--color-text-light); text-align: center; margin-bottom: 50px; /* Use Cream */
-            position: relative;
-            padding-bottom: 15px;
-            letter-spacing: 0.8px;
-        }
-        section h2::after {
-            content: ''; position: absolute; bottom: 0; left: 50%;
-            transform: translateX(-50%); height: 3px; width: 80px;
-            background: var(--gradient-primary); border-radius: 2px; /* Gold to Tan gradient */
+        p {
+            margin-bottom: 1em; /* Intentional Layout/Whitespace */
+            color: var(--text-color); /* Paragraph text color from palette */
         }
 
-        #disclaimer h2 {
-            font-size: 2rem;
-            margin-bottom: 30px;
-            padding-bottom: 10px;
-        }
-        #disclaimer h2::after {
-            height: 2px; width: 50px;
-        }
-        #disclaimer p { /* Added styling for disclaimer paragraph */
-            max-width: 900px; margin: 20px auto; font-size: 1.05rem; color: var(--color-text-dark); /* Use Tan for disclaimer text */ line-height: 1.7; text-align: center;
-        }
-
-
-        /* --- Header --- */
-        header {
-            background: var(--color-header-footer); /* Use Charcoal */
-            padding: 0.8rem 0;
-            position: fixed; width: 100%; top: 0; left: 0; z-index: 1000;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            transition: background-color 0.3s ease;
-        }
-        header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-direction: row;
-            padding: 0 20px;
-        }
-        header .logo a {
+        a {
+            color: var(--primary-color); /* Default link color from palette */
             text-decoration: none;
-            color: var(--color-primary-button); /* Use Gold */
+            transition: color 0.3s ease; /* Attention to Detail: Smooth transition */
+        }
+
+        a:hover {
+            color: var(--secondary-color); /* Link hover color from palette - Attention to Detail */
+        }
+
+        .container {
+            max-width: 1200px; /* Intentional Layout: Max width for content */
+            margin: 0 auto; /* Intentional Layout: Center container */
+            padding: 0 var(--section-padding-horizontal); /* Intentional Layout/Whitespace */
+        }
+
+        .section {
+            padding: var(--section-padding-vertical) var(--section-padding-horizontal); /* Intentional Layout/Whitespace */
+            text-align: center;
+        }
+
+        /* --- Header/Navigation --- */
+        .header {
+            background-color: var(--primary-color); /* Darkest color for header background - Thoughtful Color Palette */
+            padding: 20px var(--section-padding-horizontal); /* Intentional Layout/Whitespace */
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Attention to Detail: Subtle shadow */
+        }
+
+        .header .container {
+             display: flex; /* Intentional Layout: Flexbox for logo and nav */
+             justify-content: space-between; /* Intentional Layout: Space between logo and nav */
+             align-items: center;
+             flex-wrap: wrap; /* Responsiveness */
+        }
+
+        .header img {
+            max-width: 180px; /* Professional/On-Brand Design: Logo size */
+            height: auto;
             display: block;
-            font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700;
-            transition: color 0.3s ease, transform 0.3s ease;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-        }
-        header .logo a:hover { color: var(--color-highlight); transform: scale(1.05); } /* Use Gold for highlight */
-        nav ul { list-style: none; padding: 0; margin: 0; display: flex; }
-        nav ul li { margin-left: 35px; } /* Increased spacing */
-        nav ul li a {
-            color: var(--color-text-dark); /* Use Tan for standard nav links */
-            text-decoration: none; font-weight: 400;
-            padding: 10px 0; position: relative; transition: color 0.3s ease, transform 0.2s ease; letter-spacing: 0.6px; /* Increased letter spacing */
-            font-size: 1.05rem; /* Slightly larger font */
-            /* Added focus state for keyboard navigation */
-            outline: none; /* Remove default outline */
-        }
-         /* Custom focus style */
-        nav ul li a:focus {
-            color: var(--color-text-light); /* Use Cream on focus */
-            outline: 2px solid var(--color-highlight); /* Use Gold for outline */
-            outline-offset: 3px;
-            border-radius: 2px;
+            margin: 0;
         }
 
-        nav ul li a::after {
-            content: ''; position: absolute; left: 0; bottom: -3px; height: 2px; width: 0;
-            background: var(--gradient-primary); /* Use gradient for underline */
-            transition: width 0.4s ease-out; /* Slower underline animation */
-        }
-        nav ul li a:hover, nav ul li a.active { color: var(--color-text-light); transform: translateY(-2px); } /* Use Cream on hover/active */
-        nav ul li a:hover::after, nav ul li a.active::after { width: 100%; } /* Underline animation on hover/active */
-        nav ul li a.active { color: var(--color-text-light); } /* Ensure active stays Cream */
-
-
-        .menu-toggle { display: none; font-size: 2rem; cursor: pointer; color: var(--color-text-light); transition: transform 0.3s ease, color 0.3s ease; } /* Use Cream */
-        .menu-toggle:hover { transform: rotate(90deg); color: var(--color-highlight); } /* Use Gold for highlight */
-        /* Added focus state for menu toggle */
-        .menu-toggle:focus {
-             color: var(--color-highlight); /* Use Gold for highlight */
-             outline: 2px solid var(--color-highlight); /* Use Gold for outline */
-             outline-offset: 3px;
-             border-radius: 2px;
+        .nav {
+            margin-top: 0;
         }
 
+        .nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex; /* User-Friendly Navigation: Flexbox for nav items */
+             flex-wrap: wrap; /* Responsiveness */
+             justify-content: center;
+        }
 
-        /* --- Hero Section - Enhanced 3D Integration & Fallback --- */
-        #hero {
-            background: linear-gradient(rgba(18, 38, 32, 0.9), rgba(18, 38, 32, 0.9)); /* Darker overlay matching Charcoal */
-            color: var(--color-text-light); /* Use Cream */
-            height: 100vh; /* Ensure full viewport height */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding-top: 80px;
+        .nav li {
+            margin-left: 30px; /* Intentional Layout/Whitespace */
+        }
+
+        .nav a {
+            color: var(--color-palette-1); /* Lightest color for nav links on dark header - Thoughtful Color Palette */
+            font-family: 'Lato', sans-serif; /* Effective Typography */
+            font-weight: 600; /* Effective Typography */
+            font-size: 1.1em;
+            padding: 5px 0;
             position: relative;
-            overflow: hidden;
         }
 
-        /* Container for the 3D element or fallback */
-        #hero .hero-3d-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1; /* Place behind hero content */
-            /* Fallback background color if canvas is hidden/fails */
-            background-color: var(--color-bg-dark); /* Use Charcoal */
-            /* Optional: Add a fallback image */
-            /* background-image: url('path/to/your/static-fallback-image.jpg'); */
-            background-size: cover;
-            background-position: center center;
-        }
-
-        /* Style for the Three.js canvas */
-        #hero-canvas {
-            display: block; /* Remove extra space below canvas */
-            width: 100% !important; /* Important to override potential inline styles */
-            height: 100% !important; /* Important to override potential inline styles */
-            filter: blur(3px) brightness(0.7); /* Increased blur and reduced brightness */
-            opacity: 0.5; /* Reduced opacity */
-            transition: filter 0.5s ease, opacity 0.5s ease;
-        }
-        /* Optional: Hover effect on the canvas area */
-        #hero .hero-3d-container:hover #hero-canvas {
-            filter: blur(2px) brightness(0.8);
-            opacity: 0.7;
-        }
-
-        /* Style for the fallback message */
-        #hero-fallback-message {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: var(--color-text-dark); /* Use Tan */
-            font-size: 1.1rem;
-            text-align: center;
-            z-index: 2; /* Ensure fallback message is above container but below hero content */
-            display: none; /* Hidden by default */
-            padding: 20px;
-            background-color: rgba(0,0,0,0.5);
-            border-radius: 8px;
-        }
-
-
-        /* Ensure hero content is above the 3D/fallback */
-        #hero .hero-content {
-            z-index: 3; /* Ensure hero content is highest */
-            position: relative;
-            max-width: 1000px;
-            padding: 0 20px;
-        }
-        #hero h1 {
-            font-family: 'Playfair Display', serif; font-size: 5rem; margin-bottom: 20px;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.8); /* Stronger shadow */
-            font-weight: 700; letter-spacing: 1.5px; line-height: 1.1; /* Increased letter spacing */
-            color: var(--color-text-light); /* Use Cream */
-        }
-        #hero h1 .site-title { font-weight: 700; color: var(--color-primary-button); } /* Use Gold */
-        #hero p {
-            font-size: 1.5rem; margin-bottom: 50px; max-width: 800px; /* Increased margin */
-            text-shadow: 1px 1px 6px rgba(0,0,0,0.6); /* Stronger shadow */
-            font-weight: 300;
-            color: var(--color-text-light); /* Use Cream for hero description */
-            line-height: 1.7;
-        }
-
-        /* Call to Action Button */
-        .cta-button {
-            display: inline-block;
-            background: var(--gradient-primary); /* Use gradient as initial background (Gold to Tan) */
-            color: var(--color-charcoal); /* Text color that contrasts with Gold/Tan gradient */
-            padding: 16px 40px; /* Increased padding */
-            text-decoration: none; border-radius: 30px; font-size: 1.3rem; font-weight: 500;
-            transition: background-color 0.4s ease, transform 0.3s ease-out, box-shadow 0.4s ease, color 0.4s ease; /* Added color to transition */
-            border: none; cursor: pointer; box-shadow: var(--shadow-medium);
-            overflow: hidden;
-            position: relative;
-            z-index: 1;
-             /* Added focus state for keyboard navigation */
-             outline: none;
-        }
-        /* Custom focus style */
-        .cta-button:focus {
-            outline: 2px solid var(--color-highlight); /* Use Gold for outline */
-            outline-offset: 3px;
-            border-radius: 30px; /* Match button shape */
-        }
-        /* Pseudo-element for hover gradient effect */
-        .cta-button::before {
+        .nav a::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: var(--gradient-highlight); /* Use gradient (Gold to Tan) */
-            transition: left 0.4s ease-out; /* Smoother transition */
-            z-index: -1;
-        }
-        .cta-button:hover::before {
             left: 0;
-        }
-        .cta-button:hover {
-            background: transparent; /* Transparent background on hover */
-            color: var(--color-text-light); /* Text color changes to Cream on hover */
-            transform: translateY(-4px); /* More pronounced lift */
-            box-shadow: var(--shadow-deep); /* Deeper shadow on hover */
-        }
-        .cta-button:active { transform: translateY(-1px); box-shadow: var(--shadow-light); }
-
-
-        /* --- Gallery --- */
-        .sketch-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 30px; }
-        .sketch-gallery img {
-            display: block; width: 100%; height: auto; /* THESE LINES MAINTAIN ASPECT RATIO */
-            border-radius: 8px; /* Slightly larger radius */
-            box-shadow: var(--shadow-medium); /* Medium shadow */
-            border: 1px solid var(--color-border); /* Use dark border color */
-            transition: transform 0.5s ease-out, box-shadow 0.4s ease, border-color 0.3s ease; /* Slower transform */
-            cursor: pointer;
-            transform-style: preserve-3d; /* Kept for image hover effect */
-            transform-origin: center center;
-            filter: brightness(0.9); /* Slightly dimmed initially */
-             /* Added focus state for keyboard navigation */
-             outline: none;
-        }
-         /* Custom focus style */
-        .sketch-gallery img:focus {
-             outline: 3px solid var(--color-highlight); /* Use Gold for outline */
-             outline-offset: 3px;
-             border-color: var(--color-primary-button); /* Use Gold for border */
-             filter: brightness(1.1);
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary-color); /* Light accent for hover underline - Attention to Detail */
+            transition: width 0.3s ease-in-out; /* Attention to Detail: Smooth transition */
         }
 
-        /* 3D Hover effect for gallery images */
-        .sketch-gallery img:hover {
-            transform: scale(1.08) rotateY(10deg) rotateX(6deg) translateZ(20px); /* More pronounced 3D */
-            box-shadow: var(--shadow-deep); /* Deeper shadow */
-            border-color: var(--color-primary-button); /* Use Gold for border */
-            filter: brightness(1.1); /* Brighter on hover */
+        .nav a:hover::after {
+            width: 100%;
         }
 
-        /* --- Services/Collaborations --- */
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 50px; margin-top: 40px; } /* Increased gap and min-width */
-        .service-card {
-            background: var(--color-bg-light); /* Use slightly lighter background */
-            padding: 40px; border-radius: 12px; /* Larger radius */
-            box-shadow: var(--shadow-medium); /* Medium shadow */
-            text-align: center;
-            transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.3s ease, border-color 0.3s ease; /* Added border transition */
-            border: 1px solid var(--color-border); /* Use dark border color */
-            display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
-            cursor: default;
-            transform: translateZ(0); /* Ensure it's on its own layer for initial state */
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px); /* Simpler lift, removed translateZ */
-            box-shadow: var(--shadow-deep); /* Deeper shadow */
-            background-color: #283D36; /* Slightly different background on hover */
-            border-color: var(--color-primary-button); /* Highlight border with Gold on hover */
-        }
-        .service-card .icon { font-size: 4rem; color: var(--color-primary-button); margin-bottom: 25px; display: block; /* Larger icon *//* Use Gold */
-            transition: transform 0.3s ease;
-        }
-        .service-card:hover .icon {
-            transform: scale(1.1) rotate(5deg); /* Subtle icon animation on card hover */
-        }
-        .service-card h3 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 15px; color: var(--color-text-light); font-weight: 600; letter-spacing: 0.5px;} /* Use Cream */
-        .service-card p { font-size: 1rem; color: var(--color-text-medium); /* Use Cream for service descriptions */ margin-bottom: 0; line-height: 1.7; }
-
-        .service-process { margin-top: 80px; padding-top: 40px; border-top: 1px dashed var(--color-border); text-align: left; }
-        .service-process h3 {
-            font-family: 'Playfair Display', serif; color: var(--color-text-light); margin-top: 0; margin-bottom: 30px; /* Increased margin */ /* Use Cream */
-            font-size: 2.2rem; text-align: center; font-weight: 600;
-        }
-        .service-process ol, .service-process ul { list-style-position: outside; padding-left: 30px; margin: 25px auto; max-width: 900px; color: var(--color-text-medium); /* Use Cream for process steps */ font-size: 1.05rem; line-height: 1.8; /* Increased line height */ }
-        .service-process li { margin-bottom: 15px; padding-left: 8px; position: relative; } /* Increased margin */
-        .service-process ol li::marker { font-weight: bold; color: var(--color-primary-button); font-size: 1.2em; } /* Use Gold for marker */
-        .service-process ul li::before { content: '•'; color: var(--color-primary-button); font-weight: bold; display: inline-block; width: 1em; margin-left: -1em; font-size: 1.2em; } /* Use Gold for bullet */
-        .service-process li strong { color: var(--color-text-light); font-weight: 500; } /* Use Cream for bold text */
-        .important-note { text-align: center; font-size: 1rem; color: var(--color-alert); margin-top: 20px; font-weight: 500; } /* Keep error color */
-        .important-note i { margin-right: 8px; }
-
-
-        /* --- About Section --- */
-        #about .container { display: flex; flex-direction: column; align-items: center; text-align: center; }
-        #about p { max-width: 900px; margin-bottom: 30px; font-size: 1.1rem; color: var(--color-text-medium); /* Use Cream for about text */ line-height: 1.8; } /* Increased line height */
-        #about p:last-of-type { margin-bottom: 0; }
-        #about p a { color: var(--color-primary-button); text-decoration: none; transition: color 0.3s ease, text-decoration 0.3s ease; font-weight: 500; /* Use Gold */
-             /* Added focus state for keyboard navigation */
-             outline: none;
-        }
-         /* Custom focus style */
-        #about p a:focus {
-             color: var(--color-highlight); /* Use Gold */
-             outline: 2px solid var(--color-highlight); /* Use Gold */
-             outline-offset: 2px;
-             border-radius: 2px;
-        }
-        #about p a:hover { color: var(--color-highlight); text-decoration: underline; } /* Use Gold */
-         /* Style for social icons within about text */
-         #about p a i { margin-right: 5px; }
-
-
-        /* --- Contact Section --- */
-        #contact { background: var(--color-bg-dark); } /* Use Charcoal */
-        .contact-form {
-            max-width: 650px; margin: 60px auto; padding: 50px; /* Increased padding and margin */
-            background: var(--color-bg-light); /* Use slightly lighter background */
-            border-radius: 12px; box-shadow: var(--shadow-deep); /* Deeper shadow */
-            border: 1px solid var(--color-border); /* Use dark border color */
-            position: relative;
-        }
-
-        .contact-form label { display: block; margin-bottom: 12px; font-weight: 500; color: var(--color-text-light); font-size: 1.1rem; letter-spacing: 0.3px;} /* Use Cream */
-        /* Styles for standard inputs */
-        .contact-form input[type="text"],
-        .contact-form input[type="email"],
-        .contact-form textarea {
-            width: 100%; padding: 15px; margin-bottom: 25px; /* Increased margin */
-            border: 1px solid var(--color-border); /* Use dark border color */
-            border-radius: 8px; font-size: 1rem; color: var(--color-text-light); /* Use Cream */
-            background-color: var(--color-bg-dark); /* Use Charcoal */
-            box-sizing: border-box; appearance: none;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-             /* Added focus state for keyboard navigation */
-            outline: none;
-        }
-
-        .contact-form input[type="text"]:focus,
-        .contact-form input[type="email"]:focus,
-        .contact-form textarea:focus {
-            border-color: var(--color-primary-button); box-shadow: 0 0 10px rgba(214, 173, 96, 0.6); /* More prominent shadow using Gold */
-            outline: none; /* Remove default outline */
-        }
-        .contact-form textarea { min-height: 200px; resize: vertical; padding: 15px; /* Ensure textarea has padding */ }
-
-
-        /* Drop Zone for File Upload */
-        .drop-zone {
-            border: 2px dashed var(--color-border); border-radius: 8px; padding: 40px; text-align: center; /* Use dark border color */
-            cursor: pointer; margin-bottom: 15px; /* Reduced margin to accommodate help text */
-            transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-            background-color: #283D36; /* Background matching bg-light hover */
-            position: relative;
-             /* Added focus state for keyboard navigation */
-             outline: none;
-        }
-        /* Custom focus style */
-         .drop-zone:focus {
-             outline: 2px solid var(--color-highlight); /* Use Gold */
-             outline-offset: 3px;
-             border-radius: 8px;
+         /* Responsiveness: Adjustments for Header/Navigation */
+         @media (max-width: 768px) {
+             .header .container {
+                 flex-direction: column;
+             }
+             .header img {
+                 margin-bottom: 15px; /* Reduced margin */
+             }
+             .nav ul {
+                 flex-direction: column;
+                 align-items: center;
+             }
+             .nav li {
+                 margin: 8px 0; /* Reduced margin */
+             }
          }
 
-        .drop-zone:hover {
-            background-color: #334841; /* Slightly lighter charcoal on hover */
-            border-color: var(--color-primary-button); /* Highlight border with Gold */
-            box-shadow: 0 0 8px rgba(214, 173, 96, 0.4); /* Shadow using Gold */
-        }
 
-        .drop-zone.dragover { background-color: rgba(214, 173, 96, 0.15); border-color: var(--color-primary-button); border-style: solid; box-shadow: 0 0 18px rgba(214, 173, 96, 0.5); } /* Highlight with Gold */
-        .drop-zone.error { border-color: var(--color-error-text); background-color: rgba(207, 102, 121, 0.15); border-style: solid; box-shadow: none; } /* Keep error color */
-        .drop-zone p { margin: 0; font-size: 1rem; color: var(--color-text-dark); z-index: 2; position: relative; } /* Use Tan */
-        .file-info { margin-top: 10px; font-size: 0.95rem; color: var(--color-text-medium); font-weight: 500; z-index: 2; position: relative; } /* Use Cream */
-        .file-info.error-message { color: var(--color-error-text); font-weight: bold; } /* Keep error color */
-
-         /* Added help text for the drop zone */
-        .drop-zone-help-text {
-             color: var(--color-text-dark); /* Use Tan */
-             display: block;
-             margin-top: -15px; /* Pulls it up slightly */
-             margin-bottom: 20px;
-             font-size: 0.9rem;
-             text-align: center; /* Center the help text */
-        }
-
-        .contact-form button[type="submit"] {
-            background: var(--gradient-primary); /* Use gradient initially (Gold to Tan) */
-            color: var(--color-charcoal); /* Text color that contrasts with Gold/Tan gradient */
-            padding: 16px 35px; /* Increased padding */
-            border: none; border-radius: 30px; font-size: 1.3rem; font-weight: 600;
-            transition: background-color 0.4s ease, transform 0.3s ease-out, box-shadow 0.4s ease, color 0.4s ease; /* Added color transition */
-            width: 100%; margin-top: 40px; /* Increased margin */
-            cursor: pointer; box-shadow: var(--shadow-medium);
-            overflow: hidden;
+        /* --- Hero Section --- */
+        .hero {
             position: relative;
-            z-index: 1;
-             /* Added focus state for keyboard navigation */
+            height: 500px; /* Adjusted hero height */
+            /* High-Quality Visuals: Placeholder for your hero background image */
+            background: url('YOUR_HERO_IMAGE_URL.jpg') no-repeat center center/cover;
+            /* Removed flex properties as content is hidden */
+        }
+
+        .hero-content {
+             /* This div is now effectively just an anchor point if needed, not a visible box */
+             display: none; /* Ensure it doesn't take up space if empty */
+        }
+
+        /* --- About Us & Contact Section (Consolidated) --- */
+        /* High-Quality, Relevant Content: This section's purpose is to hold your story and contact info */
+        /* Contact Information and Location: Displayed here */
+        .about-contact .container {
+            text-align: left;
+             display: flex; /* Intentional Layout: Flexbox for content columns */
+             flex-wrap: wrap; /* Responsiveness */
+             align-items: flex-start;
+             gap: 30px; /* Intentional Layout/Whitespace */
+        }
+
+         .about-content, .contact-info {
+             flex: 1; /* Intentional Layout: Allow columns to grow */
+             min-width: 280px; /* Intentional Layout: Min width before stacking - Responsiveness */
+         }
+
+        .about-contact h2 {
+            text-align: center;
+            width: 100%;
+             margin-bottom: 30px; /* Intentional Layout/Whitespace */
+        }
+
+         .about-content h3, .contact-info h3 {
+             text-align: left;
+             margin-bottom: 15px; /* Intentional Layout/Whitespace */
+             font-size: 1.6em; /* Visual Hierarchy */
+             color: var(--primary-color); /* Subheadings color from palette */
+         }
+
+
+        .about-contact p {
+            font-size: 1.1em; /* Effective Typography */
+            margin-bottom: 1em;
+            color: var(--text-color); /* Text color from palette */
+        }
+
+        .about-contact address {
+             font-style: normal;
+             margin-top: 15px; /* Intentional Layout/Whitespace */
+             font-size: 1.1em; /* Effective Typography */
+             line-height: 1.6;
+             color: var(--text-color); /* Text color from palette */
+             margin-bottom: 15px;
+         }
+
+         .contact-info p {
+             margin-bottom: 10px; /* Reduced margin for contact lines */
+             color: var(--text-color); /* Text color from palette */
+         }
+
+         .contact-info p i {
+             margin-right: 10px;
+             color: var(--secondary-color); /* Icons color from palette */
+         }
+
+
+        /* --- Products Section --- */
+        /* High-Quality, Relevant Content: This section displays your products */
+        .products .container {
+            display: grid; /* Intentional Layout: Grid for product listing */
+            /* Visual Hierarchy, Intentional Layout: Adjusts columns responsively */
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px; /* Intentional Layout/Whitespace */
+        }
+
+        .product {
+            border: 1px solid var(--border-color); /* Attention to Detail: Border color from palette */
+            padding: 20px; /* Intentional Layout/Whitespace */
+            text-align: center;
+            background-color: var(--card-bg); /* Card background color */
+            border-radius: 10px; /* Attention to Detail */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Attention to Detail: Subtle shadow */
+            transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out; /* Attention to Detail: Smooth animation */
+            display: flex; /* Intentional Layout */
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+        }
+
+        .product:hover {
+            transform: translateY(-8px); /* Attention to Detail: Hover effect */
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); /* Attention to Detail: Hover effect */
+        }
+
+        .product img {
+            max-width: 100%;
+            height: 260px; /* Adjusted height - Visuals */
+            object-fit: cover; /* Visuals: Ensures images cover the space */
+            margin-bottom: 15px; /* Intentional Layout/Whitespace */
+            border-radius: 8px; /* Attention to Detail */
+            border: 1px solid var(--border-color); /* Attention to Detail: Image border */
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Attention to Detail: Subtle shadow */
+            transition: transform 0.3s ease; /* Attention to Detail: Smooth animation */
+        }
+
+         .product:hover img {
+             transform: scale(1.02); /* Attention to Detail: Hover effect */
+         }
+
+        .product h3 {
+            margin-top: 0;
+            margin-bottom: 15px; /* Intentional Layout/Whitespace */
+            font-size: 1.6em; /* Visual Hierarchy */
+            color: var(--primary-color); /* Product title color from palette */
+            flex-grow: 1;
+            font-weight: 700;
+            font-family: 'Lora', serif;
+        }
+
+        /* Clear Calls to Action: WhatsApp button */
+        /* Attention to Detail: Button styling */
+        .whatsapp-button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: var(--button-whatsapp); /* Standard WhatsApp green */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            margin-top: auto;
+            transition: background-color 0.3s ease, transform 0.1s ease; /* Attention to Detail: Smooth animation */
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .whatsapp-button i {
+            margin-right: 8px;
+        }
+
+        .whatsapp-button:hover {
+            background-color: var(--button-whatsapp-hover);
+            transform: translateY(-1px); /* Attention to Detail: Hover effect */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+         /* User-Friendly Navigation: Search function layout */
+         .search-container {
+             margin-bottom: 40px; /* Intentional Layout/Whitespace */
+             text-align: center;
+         }
+
+         .search-container input::placeholder {
+             color: #777;
+         }
+
+         .search-container input::-webkit-input-placeholder {
+             color: #777;
+         }
+
+         .search-container input::-moz-placeholder {
+             color: #777;
+         }
+
+         .search-container input:-ms-input-placeholder {
+             color: #777;
+         }
+
+         .search-container input::input-placeholder {
+             color: #777;
+         }
+
+         .search-container input::selection {
+             background-color: rgba(232, 213, 158, 0.5); /* Selection highlight with Light Accent */
+         }
+
+         .search-container input::-moz-selection {
+             background-color: rgba(232, 213, 158, 0.5);
+         }
+
+
+         .search-container input {
+            width: calc(100% - 40px);
+            max-width: 500px; /* Slightly reduced max width */
+            padding: 12px 20px; /* Reduced padding */
+            border: 1px solid var(--border-color); /* Border color from palette */
+            border-radius: 25px; /* Attention to Detail */
+            font-size: 1em; /* Slightly reduced font size */
+            box-sizing: border-box;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+         }
+
+        .search-container input:focus {
+            border-color: var(--secondary-color); /* Focus border with Light Accent */
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1), 0 0 6px rgba(232, 213, 158, 0.6); /* Focus shadow with Light Accent */
             outline: none;
         }
-         /* Custom focus style */
-        .contact-form button[type="submit"]:focus {
-             outline: 2px solid var(--color-highlight); /* Use Gold */
-             outline-offset: 3px;
-             border-radius: 30px; /* Match button shape */
-        }
-        .contact-form button[type="submit"]::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: var(--gradient-highlight); /* Use gradient (Gold to Tan) */
-            transition: left 0.4s ease-out; /* Smoother transition */
-            z-index: -1;
-        }
-        .contact-form button[type="submit"]:hover {
-            background: transparent; /* Transparent background on hover */
-            color: var(--color-text-light); /* Text color changes to Cream on hover */
-            transform: translateY(-4px); /* More pronounced lift */
-            box-shadow: var(--shadow-deep); /* Deeper shadow on hover */
-        }
-        .contact-form button[type="submit"]:active { transform: translateY(-1px); box-shadow: var(--shadow-light); }
 
-
-        .contact-info p { text-align: center; font-size: 1.1rem; margin-top: 50px; color: var(--color-text-medium); } /* Use Cream, Increased margin */
-        .contact-info p a { color: var(--color-primary-button); text-decoration: none; font-weight: bold; transition: color 0.3s ease, text-decoration 0.3s ease; /* Use Gold */
-             /* Added focus state for keyboard navigation */
-             outline: none;
-        }
-         /* Custom focus style */
-        .contact-info p a:focus {
-             color: var(--color-highlight); /* Use Gold */
-             outline: 2px solid var(--color-highlight); /* Use Gold */
-             outline-offset: 2px;
-             border-radius: 2px;
-        }
-        .contact-info p a:hover { color: var(--color-highlight); text-decoration: underline; } /* Use Gold */
 
         /* --- Footer --- */
-        footer {
-            background: var(--color-header-footer); color: var(--color-text-dark); /* Use Charcoal and Tan */
-            text-align: center; padding: 4rem 0 1.5rem; /* Increased padding */
+        /* Professional and On-Brand Design, Contact Information, Integration with Tools */
+        .footer {
+            background-color: var(--primary-color); /* Darkest color for footer background */
+            color: var(--footer-text-color); /* Lightest color for footer text */
+            text-align: center;
+            padding: 30px var(--section-padding-horizontal); /* Intentional Layout/Whitespace */
+            margin-top: 50px; /* Intentional Layout/Whitespace */
+            box-shadow: 0 -4趟8px rgba(0, 0, 0, 0.2);
         }
-        footer .footer-note { font-size: 0.85em; color: rgba(182, 141, 64, 0.6); margin-bottom: 20px; } /* Use Tan with transparency */
-        footer .social-links { margin-bottom: 25px; } /* Increased margin */
-        footer .social-links a { color: rgba(182, 141, 64, 0.8); margin: 0 15px; font-size: 2.2rem; text-decoration: none; transition: color 0.3s ease, transform 0.3s ease; /* Use Tan with transparency */
-             /* Added focus state for keyboard navigation */
-            outline: none;
+
+        /* Removed the copyright paragraph */
+
+
+        .social-links {
+            margin-top: 0;
         }
-        /* Custom focus style */
-         footer .social-links a:focus {
-             color: var(--color-primary-button); /* Use Gold */
-             outline: 2px solid var(--color-primary-button); /* Use Gold */
-             outline-offset: 3px;
-             border-radius: 50%; /* Match icon shape */
-         }
-        footer .social-links a:hover { color: var(--color-primary-button); transform: scale(1.3); } /* Use Gold */
-        /* Removed the copyright paragraph from the footer - as per original code provided */
 
-        /* --- Scroll to Top Button --- */
-        .scroll-to-top {
-            position: fixed; bottom: 30px; right: 30px; background-color: var(--color-primary-button); /* Use Gold */
-            color: var(--color-charcoal); /* Use Charcoal for text/icon */
-            width: 55px; height: 55px; border-radius: 50%; /* Slightly larger button */
-            text-align: center; line-height: 55px; font-size: 1.8rem; /* Increased icon size */
-            box-shadow: var(--shadow-medium);
-            z-index: 900; opacity: 0; visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
-            cursor: pointer;
-             /* Added focus state for keyboard navigation */
-            outline: none;
+        .social-links a {
+            display: inline-block;
+            margin: 0 12px; /* Intentional Layout/Whitespace */
+            color: var(--secondary-color); /* Social icons color from palette */
+            font-size: 30px; /* Attention to Detail */
+            transition: color 0.3s ease, transform 0.2s ease; /* Attention to Detail: Smooth animation */
         }
-         /* Custom focus style */
-         .scroll-to-top:focus {
-             background-color: var(--color-highlight); /* Use Gold */
-             outline: 2px solid var(--color-highlight); /* Use Gold */
-             outline-offset: 3px;
-         }
 
-        .scroll-to-top.visible { opacity: 1; visibility: visible; }
-        .scroll-to-top:hover { background-color: var(--color-highlight); transform: scale(1.15); } /* Use Gold */
+        .social-links a:hover {
+            color: var(--color-palette-1); /* Social icon hover color from palette */
+            transform: scale(1.08); /* Attention to Detail: Hover effect */
+        }
 
-        /* --- Mobile Navigation --- */
-        /* Adjust nav display for smaller screens */
+        /* --- Responsive Adjustments --- */
+        /* Mobile Responsiveness: Adjustments for different screen sizes */
+        @media (max-width: 1024px) {
+             .section h2 {
+                 font-size: 2.2em;
+             }
+             .hero {
+                 height: 450px;
+             }
+              .products .container {
+                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); /* Adjusted minmax for more columns */
+                gap: 20px;
+            }
+             .product img {
+                 height: 220px;
+             }
+             .product h3 {
+                 font-size: 1.5em;
+             }
+        }
+
         @media (max-width: 768px) {
-            header .container {
-                flex-direction: row; /* Keep logo and toggle on one row */
-                justify-content: space-between;
-                align-items: center;
-            }
-
-            nav {
-                position: absolute;
-                top: 100%; /* Position below header */
-                left: 0;
-                width: 100%;
-                background: var(--color-header-footer); /* Match header background */
-                box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-                display: none; /* Hidden by default */
-                flex-direction: column;
-                align-items: center;
-                padding: 20px 0;
-                opacity: 0;
-                transform: translateY(-20px);
-                transition: opacity 0.3s ease, transform 0.3s ease;
-                z-index: 999; /* Ensure it's above content but below fixed header */
-            }
-
-            nav.active {
-                display: flex;
-                opacity: 1;
-                transform: translateY(0);
-            }
-
-            nav ul {
-                flex-direction: column;
-                align-items: center;
-                width: 100%;
-            }
-
-            nav ul li {
-                margin: 10px 0; /* Adjust vertical margin */
-                width: 100%;
-                text-align: center;
-            }
-
-            nav ul li a {
-                 font-size: 1.2rem; /* Larger font for mobile */
-                 padding: 12px 0; /* More vertical padding */
-                 color: var(--color-text-light); /* Use Cream for mobile links */
-                 border-bottom: 1px solid var(--color-border); /* Subtle separator */
-                 width: 80%; /* Link takes up most of the width */
-                 margin: auto; /* Center the link */
-            }
-
-            nav ul li:last-child a {
-                 border-bottom: none; /* No border on the last link */
-            }
-
-            nav ul li a::after {
-                content: none; /* Remove underline animation on mobile */
-            }
-
-            nav ul li a:hover, nav ul li a.active {
-                 color: var(--color-primary-button); /* Use Gold on hover/active */
-                 transform: none; /* Remove translateY effect */
-            }
-
-            .menu-toggle {
-                display: block; /* Show toggle button on mobile */
-            }
-
-            /* Adjust section padding when header is active */
-            body.menu-open {
-                 overflow: hidden; /* Prevent scrolling when menu is open (optional) */
-            }
-
-            section {
-                 padding: 80px 0; /* Reduce section padding on mobile */
-            }
-
-             #hero {
-                 padding-top: 100px; /* Adjust hero padding */
+             .section {
+                 padding: 40px 15px; /* Further reduced padding */
              }
-
-            /* Adjust Hero H1 font size for mobile */
-            #hero h1 {
-                 font-size: 3.5rem; /* Smaller font size for mobile */
-                 margin-bottom: 15px; /* Adjust margin if needed */
+            .section h2 {
+                font-size: 2em;
             }
-
-
-            section h2 {
-                font-size: 2.2rem; /* Adjust heading size */
-                margin-bottom: 30px;
+             .hero {
+                 height: 300px; /* Further reduced height */
+             }
+             .about-contact .container {
+                 flex-direction: column;
+                 gap: 20px; /* Reduced gap */
+             }
+             .about-contact h2, .about-content h3, .contact-info h3 {
+                 text-align: center;
+             }
+              .products .container {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjusted minmax for smaller screens */
+                gap: 15px;
             }
-
-            #disclaimer h2 {
-                 font-size: 1.6rem;
+             .product {
+                 padding: 15px; /* Reduced padding */
+             }
+             .product img {
+                 height: 180px; /* Reduced height */
+             }
+             .product h3 {
+                 font-size: 1.3em;
+             }
+            .whatsapp-button {
+                font-size: 1em;
+                padding: 10px; /* Reduced padding */
             }
-
-             /* Adjust form padding on mobile */
-             .contact-form {
-                 padding: 30px;
-                 margin: 40px auto;
-             }
-
-             .drop-zone {
-                 padding: 30px;
-             }
-
-             .contact-form input,
-             .contact-form textarea {
-                 padding: 12px; /* Reduce input padding */
-             }
-
-
-             .contact-form button[type="submit"] {
-                 padding: 14px 25px; /* Reduce button padding */
-                 font-size: 1.2rem;
-                 margin-top: 30px;
-             }
-
-             footer {
-                 padding: 3rem 0 1rem; /* Adjust footer padding */
-             }
-
-             footer .social-links a {
-                 font-size: 1.8rem; /* Adjust social icon size */
-             }
-
-             .scroll-to-top {
-                 bottom: 20px;
-                 right: 20px;
-                 width: 50px;
-                 height: 50px;
-                 line-height: 50px;
-                 font-size: 1.5rem;
-             }
+             .social-links a {
+                font-size: 24px; /* Reduced icon size */
+                margin: 0 10px;
+            }
         }
 
-         /* Accessibility: Highlighting interactive elements on focus */
-         a:focus,
-         button:focus,
-         input:focus,
-         textarea:focus,
-         select:focus,
-         [tabindex]:focus {
-             outline: 2px dashed var(--color-highlight);
-             outline-offset: 3px;
-             border-radius: 3px; /* Basic border-radius, specific elements override this */
-         }
-
-          /* Override for elements with custom focus styles */
-         nav ul li a:focus,
-         .menu-toggle:focus,
-         .cta-button:focus,
-         .sketch-gallery img:focus,
-         #about p a:focus,
-         .contact-form input:focus,
-         .contact-form textarea:focus,
-         .drop-zone:focus,
-         .contact-form button[type="submit"]:focus,
-         .contact-info p a:focus,
-         footer .social-links a:focus,
-         .scroll-to-top:focus {
-             outline: none; /* Remove default outline */
-             /* Custom focus styles are defined above for these specific elements */
+         @media (max-width: 480px) {
+              .section {
+                 padding: 25px 10px; /* Further reduced padding */
+             }
+             .section h2 {
+                 font-size: 1.6em;
+             }
+             .hero {
+                 height: 250px; /* Further reduced height */
+             }
+             .products .container {
+                grid-template-columns: 1fr;
+                gap: 10px; /* Reduced gap */
+            }
+             .product {
+                 padding: 10px; /* Reduced padding */
+             }
+            .product img {
+                height: 160px; /* Reduced height */
+            }
+             .product h3 {
+                 font-size: 1.2em;
+             }
+            .whatsapp-button {
+                font-size: 0.9em; /* Reduced font size */
+                padding: 8px; /* Reduced padding */
+            }
+             .social-links a {
+                font-size: 22px; /* Reduced icon size */
+                margin: 0 8px;
+            }
          }
 
     </style>
 </head>
 <body>
 
-    <header>
+    <header class="header">
         <div class="container">
-            <div class="logo">
-                <a href="#hero">NSL Forge</a>
-            </div>
-            <nav>
+            <img src="GridArt_20250516_180656516.png" alt="J.K Gems Logo">
+            <nav class="nav">
                 <ul>
-                    <li><a href="#gallery">Gallery</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
+                    <li><a href="#about">About & Visit Us</a></li>
+                    <li><a href="#products">Products</a></li>
+                    </ul>
             </nav>
-            <div class="menu-toggle" aria-label="Toggle navigation menu" role="button" tabindex="0">
-                <i class="fas fa-bars"></i>
-            </div>
         </div>
     </header>
 
-    <section id="hero">
-        <div class="hero-3d-container">
-            <canvas id="hero-canvas"></canvas>
-            <div id="hero-fallback-message">
-                Your browser does not support the interactive background.<br>
-                Experience the art of <span style="color: var(--color-primary-button);">NSL Forge</span>.
-            </div>
-        </div>
-        <div class="hero-content">
-            <h1>Crafting Visions in Sketch at <span class="site-title">NSL Forge</span></h1>
-            <p>Experience the unique artistry of Naman Lumbhani. Specializing in detailed sketch commissions that bring your ideas to life.</p>
-            <a href="#contact" class="cta-button">Commission Your Sketch</a>
-        </div>
-    </section>
+    <section class="hero">
+        </section>
 
-    <section id="gallery">
+    <section id="about" class="section about-contact">
         <div class="container">
-            <h2>Sketch Gallery</h2>
-            <div class="sketch-gallery">
-                <img src="20250105_015608.jpg" alt="Sketch Artwork 1 by NSL Forge" tabindex="0">
-                <img src="IMG_20241122_193303_736.jpg" alt="Sketch Artwork 2 by NSL Forge" tabindex="0">
-                <img src="IMG_20241008_190133(1).jpg" alt="Sketch Artwork 3 by NSL Forge" tabindex="0">
-                </div>
-        </div>
-    </section>
-
-    <section id="services">
-        <div class="container">
-            <h2>Services & Collaborations</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <span class="icon"><i class="fas fa-palette"></i></span>
-                    <h3>Custom Commissions</h3>
-                    <p>Bring your personal vision to life with a bespoke sketch artwork, tailored specifically to your request.</p>
-                </div>
-                <div class="service-card">
-                     <span class="icon"><i class="fas fa-user-edit"></i></span>
-                    <h3>Character Design</h3>
-                    <p>Develop unique characters for stories, games, or personal projects with detailed concept sketches.</p>
-                </div>
-                <div class="service-card">
-                    <span class="icon"><i class="fas fa-lightbulb"></i></span>
-                    <h3>Conceptual Art</h3>
-                    <p>Visualize complex ideas, scenes, or environments through compelling and expressive conceptual sketches.</p>
-                </div>
-                 <div class="service-card">
-                     <span class="icon"><i class="fas fa-handshake"></i></span>
-                    <h3>Collaborations</h3>
-                    <p>Open to collaborative projects with writers, designers, and other artists to create something exceptional.</p>
-                </div>
+            <h2>About J.K Gems & Visit Us</h2> <div class="about-content">
+                <h3>Our Story</h3> <p>J.K Gems is a well-known and trusted firm, serving customers with exquisite gemstones and spiritual products since 1965. Founded on principles of quality, authenticity, and integrity, we have built a reputation as a cornerstone in Junagadh's Soni Bajar.</p>
+                <p>For generations, we have been dedicated to sourcing the finest gemstones and authentic spiritual items, offering expert guidance and personalized service to our valued customers. Our legacy is built on trust, and our commitment to providing genuine products remains unwavering.</p>
             </div>
 
-            <div class="service-process">
-                <h3>How Commissions Work</h3>
-                <ol>
-                    <li><strong>Consultation:</strong> We discuss your idea, requirements, size, medium, and reference images.</li>
-                    <li><strong>Quotation & Agreement:</strong> Based on the complexity, a quote is provided. Upon agreement, a deposit may be required.</li>
-                    <li><strong>Sketching Phase:</strong> I begin the artwork, providing updates or initial drafts for your feedback.</li>
-                    <li><strong>Revisions:</strong> Minor revisions are incorporated based on your input (scope for major changes might be limited after a certain stage).</li>
-                    <li><strong>Completion & Delivery:</strong> Once finalized and approved, the remaining payment is made. The finished physical artwork is prepared for delivery or pickup (if local).</li>
-                </ol>
-                <p class="important-note"><i class="fas fa-info-circle"></i> Digital copies can also be provided upon request.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="about">
-        <div class="container">
-            <h2>About NSL Forge</h2>
-            <p>NSL Forge is the creative outlet of Naman Lumbhani, an artist based in Navsari, Gujarat, specializing in traditional sketch artwork. With a passion for capturing detail and emotion through pencil and paper, Naman creates unique pieces ranging from realistic portraits to imaginative conceptual designs.</p>
-            <p>Each sketch is crafted with dedication, aiming to resonate with the viewer and the subject. Whether it's a cherished memory captured in a portrait or a brand new character brought to life, NSL Forge is where visions are meticulously forged into tangible art.</p>
-             <p>Connect with Naman Lumbhani:</p>
-             <p>
-                <a href="mailto:nslcreatesofficial@gmail.com" aria-label="Send an email"><i class="fas fa-envelope"></i> Email</a> |
-                <a href="https://www.instagram.com/nslforge" target="_blank" rel="noopener noreferrer" aria-label="Visit Instagram profile (@nslforge)"><i class="fab fa-instagram"></i> Instagram</a> |
-                <a href="http://www.youtube.com/channel/UCFZirq7vOXnxKzdPaQYZyRA" target="_blank" rel="noopener noreferrer" aria-label="Visit YouTube channel (nsl_creates)"><i class="fab fa-youtube"></i> YouTube</a>
-             </p>
-        </div>
-    </section>
-
-    <section id="contact">
-        <div class="container">
-            <h2>Request a Commission</h2>
-            <form class="contact-form" action="your_form_processor_script.php" method="POST" enctype="multipart/form-data">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
-
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-
-                <label for="subject">Subject:</label>
-                <input type="text" id="subject" name="subject">
-
-                <label for="message">Message:</label>
-                <textarea id="message" name="message" rows="6" required></textarea>
-
-                <label for="reference-image">Upload Reference Image (Optional):</label>
-                <div class="drop-zone" id="drop-zone" role="button" tabindex="0" aria-labelledby="reference-image-label">
-                    <input type="file" id="reference-image" name="reference_image" accept="image/*" style="display: none;">
-                    <p id="drop-zone-text">Drag & Drop your image here or Click to Browse</p>
-                    <div class="file-info" id="file-info"></div>
-                </div>
-                 <span class="drop-zone-help-text" id="reference-image-label">Accepted formats: JPG, PNG. Max size: 5MB.</span>
-
-
-                <button type="submit">Send Message</button>
-            </form>
             <div class="contact-info">
-                <p>You can also reach out directly:</p>
-                <p>Email: <a href="mailto:nslcreatesofficial@gmail.com">nslcreatesofficial@gmail.com</a></p>
-                 </div>
+                 <h3>Contact & Location</h3> <p><i class="fas fa-map-marker-alt"></i> Jk gems<br>Balakrishna market, Haveli gali<br>Soni bajar, Junagadh<br>Gujarat 362001</p>
+                 <p><i class="fas fa-phone"></i> +91 9723197899</p>
+                 <p><i class="far fa-clock"></i> Business Hours: 10 am to 3 pm and 4 pm to 9 pm</p>
+                 <p>You can also inquire directly via WhatsApp using the buttons on our product listings.</p>
+            </div>
         </div>
     </section>
 
-     <section id="disclaimer">
-         <div class="container">
-             <h2>Disclaimer</h2>
-             <p>All artwork showcased in the gallery on this website is created by Naman Lumbhani (NSL Forge). Please note that some pieces are fan art or inspired by existing characters, movies, or public figures (such as Harry Potter, Thor, Cristiano Ronaldo). These specific artworks are **unofficial**, **not endorsed by**, and **not affiliated with** the original creators, rights holders, or the individuals depicted. They are shared here as examples of artistic skill and interpretation.</p>
-             <p>Custom commissions requested through this site are intended for personal, non-commercial use only, unless a specific commercial licensing agreement is reached. Prices for commissions vary based on complexity, size, and medium, and will be quoted individually after consultation. NSL Forge reserves the right to refuse commissions based on content or capacity.</p>
-             <p>This website itself was created by a 14-year-old artist as a personal portfolio and for learning and experimental purposes, with assistance.</p>
-             <p>Any reproduction, distribution, or unauthorized use of the artwork (beyond standard web Browse display) requires explicit written permission from the artist.</p>
-         </div>
-     </section>
-
-    <footer>
+    <section id="products" class="section products">
         <div class="container">
-            <p class="footer-note">Forge your vision into art.</p>
-            <div class="social-links">
-                <a href="https://www.instagram.com/nslforge" target="_blank" rel="noopener noreferrer" aria-label="Instagram (@nslforge)"><i class="fab fa-instagram"></i></a>
-                 <a href="http://www.youtube.com/channel/UCFZirq7vOXnxKzdPaQYZyRA" target="_blank" rel="noopener noreferrer" aria-label="YouTube (nsl_creates)"><i class="fab fa-youtube"></i></a>
-                </div>
+             <h2>Our Products</h2> <div class="search-container">
+                 <input type="text" id="searchInput" onkeyup="searchProducts()" placeholder="Search for products...">
              </div>
+            <div class="product-grid" id="productContainer">
+                <div class="product">
+                    <img src="IMG-20250516-WA0015.jpg" alt="Gem stones">
+                    <h3>Gem Stones</h3> <a href="https://wa.me/919723197899?text=Hello,%20I'm%20interested%20in%20Gem%20stones.%20Could%20you%20provide%20more%20details%20and%20pricing?" class="whatsapp-button" target="_blank"><i class="fab fa-whatsapp"></i> Inquire on WhatsApp</a>
+                </div>
+
+                <div class="product">
+                    <img src="IMG-20250516-WA0003.jpg" alt="Rudraksh">
+                    <h3>Rudraksh</h3> <a href="https://wa.me/919723197899?text=Hello,%20I'm%20interested%20in%20Rudraksh.%20Could%20you%20provide%20more%20details%20and%20pricing?" class="whatsapp-button" target="_blank"><i class="fab fa-whatsapp"></i> Inquire on WhatsApp</a>
+                </div>
+
+                <div class="product">
+                    <img src="IMG-20250516-WA0001.jpg" alt="Yantra">
+                    <h3>Yantra</h3> <a href="https://wa.me/919723197899?text=Hello,%20I'm%20interested%20in%20Yantra.%20Could%20you%20provide%20more%20details%20and%20pricing?" class="whatsapp-button" target="_blank"><i class="fab fa-whatsapp"></i> Inquire on WhatsApp</a>
+                </div>
+
+                 <div class="product">
+                     <img src="IMG-20250516-WA0016.jpg" alt="Rudraksh Bracelet">
+                     <h3>Rudraksh Bracelet</h3> <a href="https://wa.me/919723197899?text=Hello,%20I'm%20interested%20in%20Rudraksh%20Bracelet.%20Could%20you%20provide%20more%20details%20and%20pricing?" class="whatsapp-button" target="_blank"><i class="fab fa-whatsapp"></i> Inquire on WhatsApp</a>
+                 </div>
+
+                </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="social-links">
+                <a href="https://www.instagram.com/j_k_gems" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/YOUR_FACEBOOK_PAGE_ID" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a> <a href="YOUR_YOUTUBE_CHANNEL_LINK" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a> </div>
+        </div>
     </footer>
 
-     <a href="#" class="scroll-to-top" aria-label="Scroll to top"><i class="fas fa-arrow-up"></i></a>
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
     <script>
-        // --- Three.js Hero Section Setup ---
-        const heroCanvas = document.getElementById('hero-canvas');
-        const hero3dContainer = document.querySelector('.hero-3d-container');
-        const heroFallbackMessage = document.getElementById('hero-fallback-message');
+        // User-Friendly Navigation: Simple product search functionality
+        function searchProducts() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toUpperCase();
+            const container = document.getElementById('productContainer');
+            const products = container.getElementsByClassName('product');
 
-        // Ensure all necessary elements for Three.js are present
-        if (heroCanvas && hero3dContainer && heroFallbackMessage) {
-            const isWebGLAvailable = (function () {
-                try {
-                    const canvas = document.createElement('canvas');
-                    return !!(window.WebGLRenderingContext && (canvas.getContext('webgl') || canvas.getContext('experimental-webgl')));
-                } catch (e) {
-                    return false;
+            for (let i = 0; i < products.length; i++) {
+                const h3 = products[i].getElementsByTagName('h3')[0];
+                const textValue = h3.textContent || h3.innerText;
+                if (textValue.toUpperCase().indexOf(filter) > -1) {
+                    products[i].style.display = "";
+                } else {
+                    products[i].style.display = "none";
                 }
-            })();
-
-            if (isWebGLAvailable) {
-                heroFallbackMessage.style.display = 'none';
-                heroCanvas.style.display = 'block';
-
-                const scene = new THREE.Scene();
-                const camera = new THREE.PerspectiveCamera(60, hero3dContainer.clientWidth / hero3dContainer.clientHeight, 0.1, 1000);
-                const renderer = new THREE.WebGLRenderer({ canvas: heroCanvas, antialias: true, alpha: true });
-
-                renderer.setSize(hero3dContainer.clientWidth, hero3dContainer.clientHeight);
-                renderer.setPixelRatio(window.devicePixelRatio);
-
-                const geometry = new THREE.OctahedronGeometry(2.8);
-                const material = new THREE.MeshPhongMaterial({
-                    color: 0xD6AD60,
-                    shininess: 150,
-                    specular: 0xffffff,
-                    flatShading: true
-                });
-
-                const shape = new THREE.Mesh(geometry, material);
-                scene.add(shape);
-
-                const ambientLight = new THREE.AmbientLight(0x404040, 0.8);
-                scene.add(ambientLight);
-
-                const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
-                directionalLight.position.set(5, 5, 5).normalize();
-                scene.add(directionalLight);
-
-                const pointLight1 = new THREE.PointLight(0xB68D40, 0.6);
-                pointLight1.position.set(-5, 5, -5);
-                scene.add(pointLight1);
-
-                const pointLight2 = new THREE.PointLight(0xD6AD60, 0.6);
-                pointLight2.position.set(5, -5, 5);
-                scene.add(pointLight2);
-
-                camera.position.z = 5;
-
-                const animate = () => {
-                    requestAnimationFrame(animate);
-                    shape.rotation.x += 0.002;
-                    shape.rotation.y += 0.003;
-                    renderer.render(scene, camera);
-                };
-
-                const onWindowResize = () => {
-                    const width = hero3dContainer.clientWidth;
-                    const height = hero3dContainer.clientHeight;
-                    camera.aspect = width / height;
-                    camera.updateProjectionMatrix();
-                    renderer.setSize(width, height);
-                };
-
-                window.addEventListener('resize', onWindowResize);
-                animate();
-
-            } else {
-                // WebGL NOT supported
-                heroFallbackMessage.style.display = 'block';
-                heroCanvas.style.display = 'none';
             }
         }
-         // --- End Three.js Setup ---
 
+        // Attention to Detail: Smooth scrolling for navigation links
+        document.querySelectorAll('.nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
 
-        // --- Section Scroll Animation (IntersectionObserver) ---
-        // Ensure this runs after the DOM is fully loaded
-        document.addEventListener('DOMContentLoaded', () => {
-            const sections = document.querySelectorAll('section:not(#hero)');
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
 
-            const observerOptions = {
-                root: null, // viewport as the root
-                rootMargin: '0px',
-                threshold: 0.1 // 10% of the section must be visible
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                        // Optional: Stop observing once it's visible
-                        // observer.unobserve(entry.target);
-                    } else {
-                         // Optional: Remove class when it goes out of view for re-animation on scroll back up
-                         // entry.target.classList.remove('is-visible');
-                    }
-                });
-            }, observerOptions);
-
-            sections.forEach(section => {
-                observer.observe(section);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80, // Adjust for fixed header height if needed
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
-         // --- End Section Scroll Animation ---
-
-
-        // --- Scroll to Top Button Logic ---
-        const scrollToTopButton = document.querySelector('.scroll-to-top');
-
-        // Check if button exists before adding listeners
-        if (scrollToTopButton) {
-             window.addEventListener('scroll', () => {
-                 if (window.scrollY > 400) { // Show button after scrolling down 400px
-                     scrollToTopButton.classList.add('visible');
-                 } else {
-                     scrollToTopButton.classList.remove('visible');
-                 }
-             });
-
-             scrollToTopButton.addEventListener('click', (e) => {
-                 e.preventDefault(); // Prevent default anchor link behavior
-                 window.scrollTo({
-                     top: 0,
-                     behavior: 'smooth'
-                 });
-             });
-        }
-        // --- End Scroll to Top Button Logic ---
-
-
-         // --- Mobile Menu Toggle ---
-        const menuToggle = document.querySelector('.menu-toggle');
-        const nav = document.querySelector('header nav'); // Select the nav element itself
-        const body = document.body; // Get the body element
-
-        // Check if elements exist before adding event listeners
-        if (menuToggle && nav && body) {
-            menuToggle.addEventListener('click', () => {
-                nav.classList.toggle('active');
-                menuToggle.classList.toggle('active'); // Optional: add active class to toggle button
-                body.classList.toggle('menu-open'); // Optional: add class to body for overflow control
-            });
-
-            // Optional: Close menu when a link is clicked (for single-page sites)
-             nav.querySelectorAll('a').forEach(link => {
-                 link.addEventListener('click', () => {
-                     if (nav.classList.contains('active')) {
-                          nav.classList.remove('active');
-                          menuToggle.classList.remove('active'); // Optional: remove active class from toggle
-                          body.classList.remove('menu-open'); // Optional: remove class from body
-                     }
-                 });
-             });
-        }
-         // --- End Mobile Menu Toggle ---
-
-         // --- Contact Form File Drop Zone Logic ---
-        const dropZone = document.getElementById('drop-zone');
-        const fileInput = document.getElementById('reference-image');
-        const fileInfo = document.getElementById('file-info');
-        const dropZoneText = document.getElementById('drop-zone-text');
-
-         // Check if elements exist
-        if (dropZone && fileInput && fileInfo && dropZoneText) {
-
-             // Prevent default drag behaviors
-             ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-                 dropZone.addEventListener(eventName, preventDefaults, false);
-                 document.body.addEventListener(eventName, preventDefaults, false); // Prevent default on body as well
-             });
-
-             function preventDefaults (e) {
-                 e.preventDefault();
-                 e.stopPropagation();
-             }
-
-             // Highlight drop zone when dragging over
-             ['dragenter', 'dragover'].forEach(eventName => {
-                 dropZone.addEventListener(eventName, highlight, false);
-             });
-
-             ['dragleave', 'drop'].forEach(eventName => {
-                 dropZone.addEventListener(eventName, unhighlight, false);
-             });
-
-             function highlight() {
-                 dropZone.classList.add('dragover');
-                 dropZone.classList.remove('error'); // Remove error state on drag over
-                 fileInfo.classList.remove('error-message');
-                 fileInfo.textContent = ''; // Clear previous error message
-             }
-
-             function unhighlight() {
-                 dropZone.classList.remove('dragover');
-             }
-
-             // Handle dropped files
-             dropZone.addEventListener('drop', handleDrop, false);
-
-             function handleDrop(e) {
-                 const dt = e.dataTransfer;
-                 const files = dt.files;
-                 handleFiles(files);
-             }
-
-             // Handle file input change
-             fileInput.addEventListener('change', function(e) {
-                 handleFiles(this.files);
-             });
-
-             // Handle click on drop zone to open file dialog
-             dropZone.addEventListener('click', function() {
-                 fileInput.click();
-             });
-
-             // Process files
-             function handleFiles(files) {
-                 const file = files[0]; // Only allow one file
-                 const maxSizeBytes = 5 * 1024 * 1024; // 5MB
-
-                 if (!file) {
-                     resetDropZone(); // Reset if no file selected/dropped
-                     return;
-                 }
-
-                 if (file.size > maxSizeBytes) {
-                     displayError(`File "${file.name}" is too large (max 5MB).`);
-                     // Clear the file input value so the same file can be selected again
-                     fileInput.value = '';
-                     return;
-                 }
-
-                 const acceptedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp']; // Add other image types if needed
-                 if (!acceptedTypes.includes(file.type)) {
-                     displayError(`File "${file.name}" has an invalid format. Accepted: JPG, PNG, GIF, WebP.`);
-                      // Clear the file input value
-                     fileInput.value = '';
-                     return;
-                 }
-
-
-                 // If file is valid
-                 dropZoneText.textContent = `Selected File:`;
-                 fileInfo.textContent = `${file.name} (${formatBytes(file.size)})`;
-                 dropZone.classList.remove('error'); // Ensure no error class is left
-                 fileInfo.classList.remove('error-message');
-                 // The file is automatically attached to the fileInput element
-             }
-
-             function displayError(message) {
-                 dropZone.classList.add('error');
-                 dropZoneText.textContent = `Error:`;
-                 fileInfo.classList.add('error-message');
-                 fileInfo.textContent = message;
-                 // The file input should have been cleared already in handleFiles
-             }
-
-             function resetDropZone() {
-                 dropZoneText.textContent = 'Drag & Drop your image here or Click to Browse';
-                 fileInfo.textContent = '';
-                 dropZone.classList.remove('dragover', 'error');
-                 fileInfo.classList.remove('error-message');
-                  // Ensure the actual file input is clear
-                 fileInput.value = '';
-             }
-
-
-             // Helper function to format file size
-             function formatBytes(bytes, decimals = 2) {
-                 if (bytes === 0) return '0 Bytes';
-                 const k = 1024;
-                 const dm = decimals < 0 ? 0 : decimals;
-                 const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-                 const i = Math.floor(Math.log(bytes) / Math.log(k));
-                 return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
-             }
-
-              // Add accessibility for keyboard users on the drop zone
-              dropZone.addEventListener('keydown', function(e) {
-                  // If Enter or Spacebar is pressed
-                  if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault(); // Prevent default spacebar scroll
-                      fileInput.click(); // Trigger the file input click
-                  }
-              });
-         }
-          // --- End Contact Form File Drop Zone Logic ---
-
-
-           // --- Smooth Scrolling for Navigation Links ---
-           document.querySelectorAll('nav ul li a[href^="#"]').forEach(anchor => {
-               anchor.addEventListener('click', function (e) {
-                   e.preventDefault(); // Prevent default jump
-
-                   const targetId = this.getAttribute('href');
-                   const targetElement = document.querySelector(targetId);
-
-                   if (targetElement) {
-                       // Calculate the position, taking into account the fixed header height
-                       const headerHeight = document.querySelector('header').offsetHeight;
-                       const elementPosition = targetElement.getBoundingClientRect().top;
-                       const offsetPosition = elementPosition + window.scrollY - headerHeight;
-
-                       window.scrollTo({
-                           top: offsetPosition,
-                           behavior: 'smooth'
-                       });
-                   }
-               });
-           });
-           // --- End Smooth Scrolling ---
-
-
     </script>
 
 </body>
