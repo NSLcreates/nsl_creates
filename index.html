@@ -9,43 +9,41 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
-        /* --- CSS Variables: Custom Palette (Tan, Cream, Charcoal, Gold) --- */
+        /* --- CSS Variables: Custom Palette (New Palette) --- */
         :root {
-            /* Defined Palette Colors */
-            --color-tan: #B68D40;
-            --color-cream: #F4EBD0;
-            --color-charcoal: #122620;
-            --color-gold: #D6AD60;
+            /* New Defined Palette Colors */
+            --palette-white: #F2F2F2;
+            --palette-light-beige: #EAE4D5;
+            --palette-mid-grey: #B6B09F;
+            --palette-black: #000000;
 
-            /* Semantic Mapping to Palette Colors */
-            --color-bg-dark: var(--color-charcoal); /* Charcoal for main dark backgrounds */
-            /* Using a slightly lighter charcoal derivative for subtle background variation */
-            --color-bg-light: #182D26;
-            --color-text-light: var(--color-cream); /* Cream for main text on dark background (Headings, prominent text) */
-            --color-text-dark: var(--color-tan); /* Tan for secondary or less prominent text (Disclaimer, muted text) */
-            --color-text-medium: var(--color-cream); /* Cream for general body text (Paragraphs) */
-            --color-header-footer: var(--color-charcoal);
-            --color-primary-button: var(--color-gold); /* Gold for primary calls to action and buttons */
-            --color-highlight: var(--color-gold); /* Gold for key highlights (focus outlines, hover effects) */
-            --color-secondary-accent: var(--color-tan); /* Tan for secondary accents or gradients */
-            /* Using a dark charcoal derivative for subtle borders */
-            --color-border: #2A3C36;
+            /* Semantic Mapping to New Palette Colors */
+            --color-bg-dark: var(--palette-black); /* Black for main dark backgrounds */
+            --color-bg-light: #111111; /* Very dark grey, slightly lighter than pure black for subtle background variation */
+            --color-text-light: var(--palette-white); /* White for main text on dark background (Headings, prominent text) */
+            --color-text-dark: var(--palette-mid-grey); /* Mid-grey for secondary or less prominent text (Disclaimer, muted text) */
+            --color-text-medium: var(--palette-light-beige); /* Light beige for general body text (Paragraphs) */
+            --color-header-footer: var(--palette-black); /* Black for header/footer */
+            --color-primary-button: var(--palette-light-beige); /* Light beige for primary calls to action and buttons */
+            --color-highlight: var(--palette-white); /* White for key highlights (focus outlines, hover effects, etc.) */
+            --color-secondary-accent: var(--palette-mid-grey); /* Mid-grey for secondary accents or gradients */
+            --color-border: #333333; /* Dark grey for subtle borders on black background */
 
             /* Mapping old grey/white variables for compatibility (can be removed if unused) */
-            --color-dark-grey: var(--color-tan);
-            --color-medium-grey: var(--color-cream);
-            --color-white: var(--color-cream);
+            --color-dark-grey: var(--palette-mid-grey);
+            --color-medium-grey: var(--palette-light-beige);
+            --color-white: var(--palette-white);
 
             /* Keeping alert/error color distinct for visibility */
             --color-alert: #cf6679; /* Reddish for warnings */
             --color-error-text: #cf6679;
 
             /* Subtle gradients using the new palette colors */
-            --gradient-primary: linear-gradient(90deg, var(--color-primary-button), var(--color-secondary-accent)); /* Gold to Tan gradient */
-            --gradient-highlight: linear-gradient(90deg, var(--color-highlight), var(--color-tan)); /* Gold to Tan gradient */
+            --gradient-primary: linear-gradient(90deg, var(--color-primary-button), var(--color-secondary-accent)); /* Light Beige to Mid Grey */
+            --gradient-highlight: linear-gradient(90deg, var(--color-highlight), var(--color-secondary-accent)); /* White to Mid Grey */
 
-            /* Added for subtle depth */
-            --shadow-deep: 0 12px 24px rgba(0,0,0,0.7); /* Slightly larger/darker shadows */
+            /* Shadows remain based on black, which is fine with a black background */
+            --shadow-deep: 0 12px 24px rgba(0,0,0,0.7);
             --shadow-medium: 0 8px 16px rgba(0,0,0,0.6);
             --shadow-light: 0 4px 8px rgba(0,0,0,0.5);
         }
@@ -55,9 +53,9 @@
 
         body {
             font-family: 'Roboto', sans-serif;
-            line-height: 1.7; /* Slightly increased for readability */
-            color: var(--color-text-medium); /* Use Cream for main body text */
-            background-color: var(--color-bg-dark); /* Use Charcoal for dark background */
+            line-height: 1.7;
+            color: var(--color-text-medium); /* Use Light Beige for main body text */
+            background-color: var(--color-bg-dark); /* Use Black for dark background */
             scroll-behavior: smooth;
             overflow-x: hidden; /* Prevent horizontal scroll issues */
         }
@@ -69,39 +67,36 @@
             padding: 120px 0;
             border-bottom: 1px solid var(--color-border);
             background-color: var(--color-bg-dark);
-            min-height: 80vh; /* Ensure sections are tall enough to trigger visibility */
+            min-height: 80vh;
             position: relative;
-            overflow: hidden; /* Keep section content contained */
+            overflow: hidden;
 
-            /* Initial state for scroll-in animation - Simpler fade/slide */
             opacity: 0;
-            transform: translateY(30px); /* Simpler translation */
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Adjusted transition duration */
-            will-change: transform, opacity; /* Hint to browser for performance */
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            will-change: transform, opacity;
         }
 
-        /* Sections that should start visible (like Hero) */
         #hero {
             opacity: 1;
             transform: none;
-            transition: none; /* No transition on hero visibility */
-            min-height: 100vh; /* Ensure hero is full height */
+            transition: none;
+            min-height: 100vh;
         }
 
-        /* The 'is-visible' class overrides the initial state */
         section.is-visible {
             opacity: 1;
             transform: translateY(0);
         }
 
         section:last-of-type { border-bottom: none; }
-        #gallery { background-color: var(--color-bg-light); } /* Gallery uses slightly lighter background */
-        #disclaimer { padding: 60px 0; background-color: var(--color-bg-light); border-bottom: 1px solid var(--color-border); min-height: auto; } /* Disclaimer uses slightly lighter background */
+        #gallery { background-color: var(--color-bg-light); } /* Gallery uses very dark grey background */
+        #disclaimer { padding: 60px 0; background-color: var(--color-bg-light); border-bottom: 1px solid var(--color-border); min-height: auto; } /* Disclaimer uses very dark grey background */
 
         /* Section Headings */
         section h2 {
             font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 700;
-            color: var(--color-text-light); text-align: center; margin-bottom: 50px; /* Use Cream */
+            color: var(--color-text-light); text-align: center; margin-bottom: 50px; /* Use White */
             position: relative;
             padding-bottom: 15px;
             letter-spacing: 0.8px;
@@ -109,7 +104,7 @@
         section h2::after {
             content: ''; position: absolute; bottom: 0; left: 50%;
             transform: translateX(-50%); height: 3px; width: 80px;
-            background: var(--gradient-primary); border-radius: 2px; /* Gold to Tan gradient */
+            background: var(--gradient-primary); border-radius: 2px; /* Light Beige to Mid Grey gradient */
         }
 
         #disclaimer h2 {
@@ -120,14 +115,14 @@
         #disclaimer h2::after {
             height: 2px; width: 50px;
         }
-        #disclaimer p { /* Added styling for disclaimer paragraph */
-            max-width: 900px; margin: 20px auto; font-size: 1.05rem; color: var(--color-text-dark); /* Use Tan for disclaimer text */ line-height: 1.7; text-align: center;
+        #disclaimer p {
+            max-width: 900px; margin: 20px auto; font-size: 1.05rem; color: var(--color-text-dark); /* Use Mid-grey for disclaimer text */ line-height: 1.7; text-align: center;
         }
 
 
         /* --- Header --- */
         header {
-            background: var(--color-header-footer); /* Use Charcoal */
+            background: var(--color-header-footer); /* Use Black */
             padding: 0.8rem 0;
             position: fixed; width: 100%; top: 0; left: 0; z-index: 1000;
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
@@ -142,27 +137,25 @@
         }
         header .logo a {
             text-decoration: none;
-            color: var(--color-primary-button); /* Use Gold */
+            color: var(--color-primary-button); /* Use Light Beige */
             display: block;
             font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700;
             transition: color 0.3s ease, transform 0.3s ease;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
         }
-        header .logo a:hover { color: var(--color-highlight); transform: scale(1.05); } /* Use Gold for highlight */
+        header .logo a:hover { color: var(--color-highlight); transform: scale(1.05); } /* Use White for highlight */
         nav ul { list-style: none; padding: 0; margin: 0; display: flex; }
-        nav ul li { margin-left: 35px; } /* Increased spacing */
+        nav ul li { margin-left: 35px; }
         nav ul li a {
-            color: var(--color-text-dark); /* Use Tan for standard nav links */
+            color: var(--color-text-dark); /* Use Mid-grey for standard nav links */
             text-decoration: none; font-weight: 400;
-            padding: 10px 0; position: relative; transition: color 0.3s ease, transform 0.2s ease; letter-spacing: 0.6px; /* Increased letter spacing */
-            font-size: 1.05rem; /* Slightly larger font */
-            /* Added focus state for keyboard navigation */
-            outline: none; /* Remove default outline */
+            padding: 10px 0; position: relative; transition: color 0.3s ease, transform 0.2s ease; letter-spacing: 0.6px;
+            font-size: 1.05rem;
+            outline: none;
         }
-         /* Custom focus style */
         nav ul li a:focus {
-            color: var(--color-text-light); /* Use Cream on focus */
-            outline: 2px solid var(--color-highlight); /* Use Gold for outline */
+            color: var(--color-text-light); /* Use White on focus */
+            outline: 2px solid var(--color-highlight); /* Use White for outline */
             outline-offset: 3px;
             border-radius: 2px;
         }
@@ -170,19 +163,18 @@
         nav ul li a::after {
             content: ''; position: absolute; left: 0; bottom: -3px; height: 2px; width: 0;
             background: var(--gradient-primary); /* Use gradient for underline */
-            transition: width 0.4s ease-out; /* Slower underline animation */
+            transition: width 0.4s ease-out;
         }
-        nav ul li a:hover, nav ul li a.active { color: var(--color-text-light); transform: translateY(-2px); } /* Use Cream on hover/active */
-        nav ul li a:hover::after, nav ul li a.active::after { width: 100%; } /* Underline animation on hover/active */
-        nav ul li a.active { color: var(--color-text-light); } /* Ensure active stays Cream */
+        nav ul li a:hover, nav ul li a.active { color: var(--color-text-light); transform: translateY(-2px); } /* Use White on hover/active */
+        nav ul li a:hover::after, nav ul li a.active::after { width: 100%; }
+        nav ul li a.active { color: var(--color-text-light); }
 
 
-        .menu-toggle { display: none; font-size: 2rem; cursor: pointer; color: var(--color-text-light); transition: transform 0.3s ease, color 0.3s ease; } /* Use Cream */
-        .menu-toggle:hover { transform: rotate(90deg); color: var(--color-highlight); } /* Use Gold for highlight */
-        /* Added focus state for menu toggle */
+        .menu-toggle { display: none; font-size: 2rem; cursor: pointer; color: var(--color-text-light); transition: transform 0.3s ease, color 0.3s ease; } /* Use White */
+        .menu-toggle:hover { transform: rotate(90deg); color: var(--color-highlight); } /* Use White for highlight */
         .menu-toggle:focus {
-             color: var(--color-highlight); /* Use Gold for highlight */
-             outline: 2px solid var(--color-highlight); /* Use Gold for outline */
+             color: var(--color-highlight);
+             outline: 2px solid var(--color-highlight);
              outline-offset: 3px;
              border-radius: 2px;
         }
@@ -190,9 +182,9 @@
 
         /* --- Hero Section - Enhanced 3D Integration & Fallback --- */
         #hero {
-            background: linear-gradient(rgba(18, 38, 32, 0.9), rgba(18, 38, 32, 0.9)); /* Darker overlay matching Charcoal */
-            color: var(--color-text-light); /* Use Cream */
-            height: 100vh; /* Ensure full viewport height */
+            background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)); /* Darker overlay matching Black */
+            color: var(--color-text-light); /* Use White */
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -203,98 +195,90 @@
             overflow: hidden;
         }
 
-        /* Container for the 3D element or fallback */
         #hero .hero-3d-container {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 1; /* Place behind hero content */
-            /* Fallback background color if canvas is hidden/fails */
-            background-color: var(--color-bg-dark); /* Use Charcoal */
-            /* Optional: Add a fallback image */
+            z-index: 1;
+            background-color: var(--color-bg-dark); /* Use Black */
             /* background-image: url('path/to/your/static-fallback-image.jpg'); */
             background-size: cover;
             background-position: center center;
         }
 
-        /* Style for the Three.js canvas */
         #hero-canvas {
-            display: block; /* Remove extra space below canvas */
-            width: 100% !important; /* Important to override potential inline styles */
-            height: 100% !important; /* Important to override potential inline styles */
-            filter: blur(3px) brightness(0.7); /* Increased blur and reduced brightness */
-            opacity: 0.5; /* Reduced opacity */
+            display: block;
+            width: 100% !important;
+            height: 100% !important;
+            filter: blur(3px) brightness(0.7); /* Keep filter, may need adjustment based on new 3D object color */
+            opacity: 0.5;
             transition: filter 0.5s ease, opacity 0.5s ease;
         }
-        /* Optional: Hover effect on the canvas area */
         #hero .hero-3d-container:hover #hero-canvas {
             filter: blur(2px) brightness(0.8);
             opacity: 0.7;
         }
 
-        /* Style for the fallback message */
         #hero-fallback-message {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            color: var(--color-text-dark); /* Use Tan */
+            color: var(--color-text-dark); /* Use Mid-grey */
             font-size: 1.1rem;
             text-align: center;
-            z-index: 2; /* Ensure fallback message is above container but below hero content */
-            display: none; /* Hidden by default */
+            z-index: 2;
+            display: none;
             padding: 20px;
             background-color: rgba(0,0,0,0.5);
             border-radius: 8px;
         }
+        #hero-fallback-message span { /* Style for the highlighted text in fallback */
+             color: var(--color-primary-button); /* Use Light Beige */
+        }
 
 
-        /* Ensure hero content is above the 3D/fallback */
         #hero .hero-content {
-            z-index: 3; /* Ensure hero content is highest */
+            z-index: 3;
             position: relative;
             max-width: 1000px;
             padding: 0 20px;
         }
         #hero h1 {
             font-family: 'Playfair Display', serif; font-size: 5rem; margin-bottom: 20px;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.8); /* Stronger shadow */
-            font-weight: 700; letter-spacing: 1.5px; line-height: 1.1; /* Increased letter spacing */
-            color: var(--color-text-light); /* Use Cream */
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+            font-weight: 700; letter-spacing: 1.5px; line-height: 1.1;
+            color: var(--color-text-light); /* Use White */
         }
-        #hero h1 .site-title { font-weight: 700; color: var(--color-primary-button); } /* Use Gold */
+        #hero h1 .site-title { font-weight: 700; color: var(--color-primary-button); } /* Use Light Beige */
         #hero p {
-            font-size: 1.5rem; margin-bottom: 50px; max-width: 800px; /* Increased margin */
-            text-shadow: 1px 1px 6px rgba(0,0,0,0.6); /* Stronger shadow */
+            font-size: 1.5rem; margin-bottom: 50px; max-width: 800px;
+            text-shadow: 1px 1px 6px rgba(0,0,0,0.6);
             font-weight: 300;
-            color: var(--color-text-light); /* Use Cream for hero description */
+            color: var(--color-text-light); /* Use White for hero description */
             line-height: 1.7;
         }
 
-        /* Call to Action Button */
         .cta-button {
             display: inline-block;
-            background: var(--gradient-primary); /* Use gradient as initial background (Gold to Tan) */
-            color: var(--color-charcoal); /* Text color that contrasts with Gold/Tan gradient */
-            padding: 16px 40px; /* Increased padding */
+            background: var(--gradient-primary); /* Use gradient as initial background (Light Beige to Mid Grey) */
+            color: var(--palette-black); /* Text color black for contrast with Light Beige/Mid Grey gradient */
+            padding: 16px 40px;
             text-decoration: none; border-radius: 30px; font-size: 1.3rem; font-weight: 500;
-            transition: background-color 0.4s ease, transform 0.3s ease-out, box-shadow 0.4s ease, color 0.4s ease; /* Added color to transition */
+            transition: background-color 0.4s ease, transform 0.3s ease-out, box-shadow 0.4s ease, color 0.4s ease;
             border: none; cursor: pointer; box-shadow: var(--shadow-medium);
             overflow: hidden;
             position: relative;
             z-index: 1;
-             /* Added focus state for keyboard navigation */
-             outline: none;
+            outline: none;
         }
-        /* Custom focus style */
         .cta-button:focus {
-            outline: 2px solid var(--color-highlight); /* Use Gold for outline */
+            outline: 2px solid var(--color-highlight); /* Use White for outline */
             outline-offset: 3px;
-            border-radius: 30px; /* Match button shape */
+            border-radius: 30px;
         }
-        /* Pseudo-element for hover gradient effect */
         .cta-button::before {
             content: '';
             position: absolute;
@@ -302,18 +286,18 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: var(--gradient-highlight); /* Use gradient (Gold to Tan) */
-            transition: left 0.4s ease-out; /* Smoother transition */
+            background: var(--gradient-highlight); /* Use gradient (White to Mid Grey) */
+            transition: left 0.4s ease-out;
             z-index: -1;
         }
         .cta-button:hover::before {
             left: 0;
         }
         .cta-button:hover {
-            background: transparent; /* Transparent background on hover */
-            color: var(--color-text-light); /* Text color changes to Cream on hover */
-            transform: translateY(-4px); /* More pronounced lift */
-            box-shadow: var(--shadow-deep); /* Deeper shadow on hover */
+            background: transparent;
+            color: var(--color-text-light); /* Text color changes to White on hover */
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-deep);
         }
         .cta-button:active { transform: translateY(-1px); box-shadow: var(--shadow-light); }
 
@@ -321,189 +305,179 @@
         /* --- Gallery --- */
         .sketch-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 30px; }
         .sketch-gallery img {
-            display: block; width: 100%; height: auto; /* THESE LINES MAINTAIN ASPECT RATIO */
-            border-radius: 8px; /* Slightly larger radius */
-            box-shadow: var(--shadow-medium); /* Medium shadow */
-            border: 1px solid var(--color-border); /* Use dark border color */
-            transition: transform 0.5s ease-out, box-shadow 0.4s ease, border-color 0.3s ease; /* Slower transform */
+            display: block; width: 100%; height: auto;
+            border-radius: 8px;
+            box-shadow: var(--shadow-medium);
+            border: 1px solid var(--color-border); /* Use dark grey border color */
+            transition: transform 0.5s ease-out, box-shadow 0.4s ease, border-color 0.3s ease;
             cursor: pointer;
-            transform-style: preserve-3d; /* Kept for image hover effect */
+            transform-style: preserve-3d;
             transform-origin: center center;
-            filter: brightness(0.9); /* Slightly dimmed initially */
-             /* Added focus state for keyboard navigation */
-             outline: none;
+            filter: brightness(0.9);
+            outline: none;
         }
-         /* Custom focus style */
         .sketch-gallery img:focus {
-             outline: 3px solid var(--color-highlight); /* Use Gold for outline */
+             outline: 3px solid var(--color-highlight); /* Use White for outline */
              outline-offset: 3px;
-             border-color: var(--color-primary-button); /* Use Gold for border */
+             border-color: var(--color-primary-button); /* Use Light Beige for border */
              filter: brightness(1.1);
         }
-
-        /* 3D Hover effect for gallery images */
         .sketch-gallery img:hover {
-            transform: scale(1.08) rotateY(10deg) rotateX(6deg) translateZ(20px); /* More pronounced 3D */
-            box-shadow: var(--shadow-deep); /* Deeper shadow */
-            border-color: var(--color-primary-button); /* Use Gold for border */
-            filter: brightness(1.1); /* Brighter on hover */
+            transform: scale(1.08) rotateY(10deg) rotateX(6deg) translateZ(20px);
+            box-shadow: var(--shadow-deep);
+            border-color: var(--color-primary-button); /* Use Light Beige for border */
+            filter: brightness(1.1);
         }
 
         /* --- Services/Collaborations --- */
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 50px; margin-top: 40px; } /* Increased gap and min-width */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 50px; margin-top: 40px; }
         .service-card {
-            background: var(--color-bg-light); /* Use slightly lighter background */
-            padding: 40px; border-radius: 12px; /* Larger radius */
-            box-shadow: var(--shadow-medium); /* Medium shadow */
+            background: var(--color-bg-light); /* Use very dark grey background */
+            padding: 40px; border-radius: 12px;
+            box-shadow: var(--shadow-medium);
             text-align: center;
-            transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.3s ease, border-color 0.3s ease; /* Added border transition */
-            border: 1px solid var(--color-border); /* Use dark border color */
+            transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.3s ease, border-color 0.3s ease;
+            border: 1px solid var(--color-border); /* Use dark grey border color */
             display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
             cursor: default;
-            transform: translateZ(0); /* Ensure it's on its own layer for initial state */
+            transform: translateZ(0);
         }
-
         .service-card:hover {
-            transform: translateY(-10px); /* Simpler lift, removed translateZ */
-            box-shadow: var(--shadow-deep); /* Deeper shadow */
-            background-color: #283D36; /* Slightly different background on hover */
-            border-color: var(--color-primary-button); /* Highlight border with Gold on hover */
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-deep);
+            background-color: #1A1A1A; /* Slightly different dark background on hover */
+            border-color: var(--color-primary-button); /* Highlight border with Light Beige on hover */
         }
-        .service-card .icon { font-size: 4rem; color: var(--color-primary-button); margin-bottom: 25px; display: block; /* Larger icon *//* Use Gold */
+        .service-card .icon { font-size: 4rem; color: var(--color-primary-button); margin-bottom: 25px; display: block; /* Use Light Beige */
             transition: transform 0.3s ease;
         }
         .service-card:hover .icon {
-            transform: scale(1.1) rotate(5deg); /* Subtle icon animation on card hover */
+            transform: scale(1.1) rotate(5deg);
         }
-        .service-card h3 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 15px; color: var(--color-text-light); font-weight: 600; letter-spacing: 0.5px;} /* Use Cream */
-        .service-card p { font-size: 1rem; color: var(--color-text-medium); /* Use Cream for service descriptions */ margin-bottom: 0; line-height: 1.7; }
+        .service-card h3 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 15px; color: var(--color-text-light); font-weight: 600; letter-spacing: 0.5px;} /* Use White */
+        .service-card p { font-size: 1rem; color: var(--color-text-medium); /* Use Light Beige for service descriptions */ margin-bottom: 0; line-height: 1.7; }
 
         .service-process { margin-top: 80px; padding-top: 40px; border-top: 1px dashed var(--color-border); text-align: left; }
         .service-process h3 {
-            font-family: 'Playfair Display', serif; color: var(--color-text-light); margin-top: 0; margin-bottom: 30px; /* Increased margin */ /* Use Cream */
+            font-family: 'Playfair Display', serif; color: var(--color-text-light); margin-top: 0; margin-bottom: 30px; /* Use White */
             font-size: 2.2rem; text-align: center; font-weight: 600;
         }
-        .service-process ol, .service-process ul { list-style-position: outside; padding-left: 30px; margin: 25px auto; max-width: 900px; color: var(--color-text-medium); /* Use Cream for process steps */ font-size: 1.05rem; line-height: 1.8; /* Increased line height */ }
-        .service-process li { margin-bottom: 15px; padding-left: 8px; position: relative; } /* Increased margin */
-        .service-process ol li::marker { font-weight: bold; color: var(--color-primary-button); font-size: 1.2em; } /* Use Gold for marker */
-        .service-process ul li::before { content: '•'; color: var(--color-primary-button); font-weight: bold; display: inline-block; width: 1em; margin-left: -1em; font-size: 1.2em; } /* Use Gold for bullet */
-        .service-process li strong { color: var(--color-text-light); font-weight: 500; } /* Use Cream for bold text */
-        .important-note { text-align: center; font-size: 1rem; color: var(--color-alert); margin-top: 20px; font-weight: 500; } /* Keep error color */
+        .service-process ol, .service-process ul { list-style-position: outside; padding-left: 30px; margin: 25px auto; max-width: 900px; color: var(--color-text-medium); /* Use Light Beige for process steps */ font-size: 1.05rem; line-height: 1.8; }
+        .service-process li { margin-bottom: 15px; padding-left: 8px; position: relative; }
+        .service-process ol li::marker { font-weight: bold; color: var(--color-primary-button); font-size: 1.2em; } /* Use Light Beige for marker */
+        .service-process ul li::before { content: '•'; color: var(--color-primary-button); font-weight: bold; display: inline-block; width: 1em; margin-left: -1em; font-size: 1.2em; } /* Use Light Beige for bullet */
+        .service-process li strong { color: var(--color-text-light); font-weight: 500; } /* Use White for bold text */
+        .important-note { text-align: center; font-size: 1rem; color: var(--color-alert); margin-top: 20px; font-weight: 500; }
         .important-note i { margin-right: 8px; }
 
 
         /* --- About Section --- */
         #about .container { display: flex; flex-direction: column; align-items: center; text-align: center; }
-        #about p { max-width: 900px; margin-bottom: 30px; font-size: 1.1rem; color: var(--color-text-medium); /* Use Cream for about text */ line-height: 1.8; } /* Increased line height */
+        #about p { max-width: 900px; margin-bottom: 30px; font-size: 1.1rem; color: var(--color-text-medium); /* Use Light Beige for about text */ line-height: 1.8; }
         #about p:last-of-type { margin-bottom: 0; }
-        #about p a { color: var(--color-primary-button); text-decoration: none; transition: color 0.3s ease, text-decoration 0.3s ease; font-weight: 500; /* Use Gold */
-             /* Added focus state for keyboard navigation */
+        #about p a { color: var(--color-primary-button); text-decoration: none; transition: color 0.3s ease, text-decoration 0.3s ease; font-weight: 500; /* Use Light Beige */
              outline: none;
         }
-         /* Custom focus style */
         #about p a:focus {
-             color: var(--color-highlight); /* Use Gold */
-             outline: 2px solid var(--color-highlight); /* Use Gold */
+             color: var(--color-highlight); /* Use White */
+             outline: 2px solid var(--color-highlight); /* Use White */
              outline-offset: 2px;
              border-radius: 2px;
         }
-        #about p a:hover { color: var(--color-highlight); text-decoration: underline; } /* Use Gold */
-         /* Style for social icons within about text */
+        #about p a:hover { color: var(--color-highlight); text-decoration: underline; } /* Use White */
          #about p a i { margin-right: 5px; }
 
 
         /* --- Contact Section --- */
-        #contact { background: var(--color-bg-dark); } /* Use Charcoal */
+        #contact { background: var(--color-bg-dark); } /* Use Black */
         .contact-form {
-            max-width: 650px; margin: 60px auto; padding: 50px; /* Increased padding and margin */
-            background: var(--color-bg-light); /* Use slightly lighter background */
-            border-radius: 12px; box-shadow: var(--shadow-deep); /* Deeper shadow */
-            border: 1px solid var(--color-border); /* Use dark border color */
+            max-width: 650px; margin: 60px auto; padding: 50px;
+            background: var(--color-bg-light); /* Use very dark grey background */
+            border-radius: 12px; box-shadow: var(--shadow-deep);
+            border: 1px solid var(--color-border); /* Use dark grey border color */
             position: relative;
         }
 
-        .contact-form label { display: block; margin-bottom: 12px; font-weight: 500; color: var(--color-text-light); font-size: 1.1rem; letter-spacing: 0.3px;} /* Use Cream */
-        /* Styles for standard inputs */
+        .contact-form label { display: block; margin-bottom: 12px; font-weight: 500; color: var(--color-text-light); font-size: 1.1rem; letter-spacing: 0.3px;} /* Use White */
         .contact-form input[type="text"],
         .contact-form input[type="email"],
         .contact-form textarea {
-            width: 100%; padding: 15px; margin-bottom: 25px; /* Increased margin */
-            border: 1px solid var(--color-border); /* Use dark border color */
-            border-radius: 8px; font-size: 1rem; color: var(--color-text-light); /* Use Cream */
-            background-color: var(--color-bg-dark); /* Use Charcoal */
+            width: 100%; padding: 15px; margin-bottom: 25px;
+            border: 1px solid var(--color-border); /* Use dark grey border color */
+            border-radius: 8px; font-size: 1rem; color: var(--color-text-light); /* Use White for text input */
+            background-color: var(--color-bg-dark); /* Use Black for input background */
             box-sizing: border-box; appearance: none;
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
-             /* Added focus state for keyboard navigation */
             outline: none;
         }
 
         .contact-form input[type="text"]:focus,
         .contact-form input[type="email"]:focus,
         .contact-form textarea:focus {
-            border-color: var(--color-primary-button); box-shadow: 0 0 10px rgba(214, 173, 96, 0.6); /* More prominent shadow using Gold */
-            outline: none; /* Remove default outline */
+            border-color: var(--color-primary-button); /* Light Beige */
+            box-shadow: 0 0 10px rgba(234, 228, 213, 0.6); /* Shadow using Light Beige (RGB of #EAE4D5) */
+            outline: none;
         }
-        .contact-form textarea { min-height: 200px; resize: vertical; padding: 15px; /* Ensure textarea has padding */ }
+        .contact-form textarea { min-height: 200px; resize: vertical; padding: 15px; }
 
 
-        /* Drop Zone for File Upload */
         .drop-zone {
-            border: 2px dashed var(--color-border); border-radius: 8px; padding: 40px; text-align: center; /* Use dark border color */
-            cursor: pointer; margin-bottom: 15px; /* Reduced margin to accommodate help text */
+            border: 2px dashed var(--color-border); border-radius: 8px; padding: 40px; text-align: center; /* Use dark grey border color */
+            cursor: pointer; margin-bottom: 15px;
             transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-            background-color: #283D36; /* Background matching bg-light hover */
+            background-color: #1A1A1A; /* Dark background, similar to service card hover */
             position: relative;
-             /* Added focus state for keyboard navigation */
-             outline: none;
+            outline: none;
         }
-        /* Custom focus style */
          .drop-zone:focus {
-             outline: 2px solid var(--color-highlight); /* Use Gold */
+             outline: 2px solid var(--color-highlight); /* Use White */
              outline-offset: 3px;
              border-radius: 8px;
          }
 
         .drop-zone:hover {
-            background-color: #334841; /* Slightly lighter charcoal on hover */
-            border-color: var(--color-primary-button); /* Highlight border with Gold */
-            box-shadow: 0 0 8px rgba(214, 173, 96, 0.4); /* Shadow using Gold */
+            background-color: #282828; /* Slightly lighter on hover */
+            border-color: var(--color-primary-button); /* Highlight border with Light Beige */
+            box-shadow: 0 0 8px rgba(234, 228, 213, 0.4); /* Shadow using Light Beige */
         }
 
-        .drop-zone.dragover { background-color: rgba(214, 173, 96, 0.15); border-color: var(--color-primary-button); border-style: solid; box-shadow: 0 0 18px rgba(214, 173, 96, 0.5); } /* Highlight with Gold */
-        .drop-zone.error { border-color: var(--color-error-text); background-color: rgba(207, 102, 121, 0.15); border-style: solid; box-shadow: none; } /* Keep error color */
-        .drop-zone p { margin: 0; font-size: 1rem; color: var(--color-text-dark); z-index: 2; position: relative; } /* Use Tan */
-        .file-info { margin-top: 10px; font-size: 0.95rem; color: var(--color-text-medium); font-weight: 500; z-index: 2; position: relative; } /* Use Cream */
-        .file-info.error-message { color: var(--color-error-text); font-weight: bold; } /* Keep error color */
+        .drop-zone.dragover {
+            background-color: rgba(234, 228, 213, 0.15); /* Highlight with Light Beige transparent */
+            border-color: var(--color-primary-button); /* Light Beige */
+            border-style: solid;
+            box-shadow: 0 0 18px rgba(234, 228, 213, 0.5); /* Shadow with Light Beige */
+        }
+        .drop-zone.error { border-color: var(--color-error-text); background-color: rgba(207, 102, 121, 0.15); border-style: solid; box-shadow: none; }
+        .drop-zone p { margin: 0; font-size: 1rem; color: var(--color-text-dark); z-index: 2; position: relative; } /* Use Mid-grey */
+        .file-info { margin-top: 10px; font-size: 0.95rem; color: var(--color-text-medium); font-weight: 500; z-index: 2; position: relative; } /* Use Light Beige */
+        .file-info.error-message { color: var(--color-error-text); font-weight: bold; }
 
-         /* Added help text for the drop zone */
         .drop-zone-help-text {
-             color: var(--color-text-dark); /* Use Tan */
+             color: var(--color-text-dark); /* Use Mid-grey */
              display: block;
-             margin-top: -15px; /* Pulls it up slightly */
+             margin-top: -15px;
              margin-bottom: 20px;
              font-size: 0.9rem;
-             text-align: center; /* Center the help text */
+             text-align: center;
         }
 
         .contact-form button[type="submit"] {
-            background: var(--gradient-primary); /* Use gradient initially (Gold to Tan) */
-            color: var(--color-charcoal); /* Text color that contrasts with Gold/Tan gradient */
-            padding: 16px 35px; /* Increased padding */
+            background: var(--gradient-primary); /* Use gradient (Light Beige to Mid Grey) */
+            color: var(--palette-black); /* Text color Black */
+            padding: 16px 35px;
             border: none; border-radius: 30px; font-size: 1.3rem; font-weight: 600;
-            transition: background-color 0.4s ease, transform 0.3s ease-out, box-shadow 0.4s ease, color 0.4s ease; /* Added color transition */
-            width: 100%; margin-top: 40px; /* Increased margin */
+            transition: background-color 0.4s ease, transform 0.3s ease-out, box-shadow 0.4s ease, color 0.4s ease;
+            width: 100%; margin-top: 40px;
             cursor: pointer; box-shadow: var(--shadow-medium);
             overflow: hidden;
             position: relative;
             z-index: 1;
-             /* Added focus state for keyboard navigation */
             outline: none;
         }
-         /* Custom focus style */
         .contact-form button[type="submit"]:focus {
-             outline: 2px solid var(--color-highlight); /* Use Gold */
+             outline: 2px solid var(--color-highlight); /* Use White */
              outline-offset: 3px;
-             border-radius: 30px; /* Match button shape */
+             border-radius: 30px;
         }
         .contact-form button[type="submit"]::before {
             content: '';
@@ -512,101 +486,93 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: var(--gradient-highlight); /* Use gradient (Gold to Tan) */
-            transition: left 0.4s ease-out; /* Smoother transition */
+            background: var(--gradient-highlight); /* Use gradient (White to Mid Grey) */
+            transition: left 0.4s ease-out;
             z-index: -1;
         }
         .contact-form button[type="submit"]:hover {
-            background: transparent; /* Transparent background on hover */
-            color: var(--color-text-light); /* Text color changes to Cream on hover */
-            transform: translateY(-4px); /* More pronounced lift */
-            box-shadow: var(--shadow-deep); /* Deeper shadow on hover */
+            background: transparent;
+            color: var(--color-text-light); /* Text color changes to White on hover */
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-deep);
         }
         .contact-form button[type="submit"]:active { transform: translateY(-1px); box-shadow: var(--shadow-light); }
 
 
-        .contact-info p { text-align: center; font-size: 1.1rem; margin-top: 50px; color: var(--color-text-medium); } /* Use Cream, Increased margin */
-        .contact-info p a { color: var(--color-primary-button); text-decoration: none; font-weight: bold; transition: color 0.3s ease, text-decoration 0.3s ease; /* Use Gold */
-             /* Added focus state for keyboard navigation */
+        .contact-info p { text-align: center; font-size: 1.1rem; margin-top: 50px; color: var(--color-text-medium); } /* Use Light Beige */
+        .contact-info p a { color: var(--color-primary-button); text-decoration: none; font-weight: bold; transition: color 0.3s ease, text-decoration 0.3s ease; /* Use Light Beige */
              outline: none;
         }
-         /* Custom focus style */
         .contact-info p a:focus {
-             color: var(--color-highlight); /* Use Gold */
-             outline: 2px solid var(--color-highlight); /* Use Gold */
+             color: var(--color-highlight); /* Use White */
+             outline: 2px solid var(--color-highlight); /* Use White */
              outline-offset: 2px;
              border-radius: 2px;
         }
-        .contact-info p a:hover { color: var(--color-highlight); text-decoration: underline; } /* Use Gold */
+        .contact-info p a:hover { color: var(--color-highlight); text-decoration: underline; } /* Use White */
 
         /* --- Footer --- */
         footer {
-            background: var(--color-header-footer); color: var(--color-text-dark); /* Use Charcoal and Tan */
-            text-align: center; padding: 4rem 0 1.5rem; /* Increased padding */
+            background: var(--color-header-footer); color: var(--color-text-dark); /* Use Black and Mid-grey */
+            text-align: center; padding: 4rem 0 1.5rem;
         }
-        footer .footer-note { font-size: 0.85em; color: rgba(182, 141, 64, 0.6); margin-bottom: 20px; } /* Use Tan with transparency */
-        footer .social-links { margin-bottom: 25px; } /* Increased margin */
-        footer .social-links a { color: rgba(182, 141, 64, 0.8); margin: 0 15px; font-size: 2.2rem; text-decoration: none; transition: color 0.3s ease, transform 0.3s ease; /* Use Tan with transparency */
-             /* Added focus state for keyboard navigation */
+        footer .footer-note { font-size: 0.85em; color: rgba(182, 176, 159, 0.6); margin-bottom: 20px; } /* Use Mid-grey with transparency (RGB of #B6B09F is 182,176,159) */
+        footer .social-links { margin-bottom: 25px; }
+        footer .social-links a { color: rgba(182, 176, 159, 0.8); margin: 0 15px; font-size: 2.2rem; text-decoration: none; transition: color 0.3s ease, transform 0.3s ease; /* Use Mid-grey with transparency */
             outline: none;
         }
-        /* Custom focus style */
          footer .social-links a:focus {
-             color: var(--color-primary-button); /* Use Gold */
-             outline: 2px solid var(--color-primary-button); /* Use Gold */
+             color: var(--color-primary-button); /* Use Light Beige */
+             outline: 2px solid var(--color-primary-button); /* Use Light Beige */
              outline-offset: 3px;
-             border-radius: 50%; /* Match icon shape */
+             border-radius: 50%;
          }
-        footer .social-links a:hover { color: var(--color-primary-button); transform: scale(1.3); } /* Use Gold */
-        /* Removed the copyright paragraph from the footer - as per original code provided */
+        footer .social-links a:hover { color: var(--color-primary-button); transform: scale(1.3); } /* Use Light Beige */
 
         /* --- Scroll to Top Button --- */
         .scroll-to-top {
-            position: fixed; bottom: 30px; right: 30px; background-color: var(--color-primary-button); /* Use Gold */
-            color: var(--color-charcoal); /* Use Charcoal for text/icon */
-            width: 55px; height: 55px; border-radius: 50%; /* Slightly larger button */
-            text-align: center; line-height: 55px; font-size: 1.8rem; /* Increased icon size */
+            position: fixed; bottom: 30px; right: 30px; background-color: var(--color-primary-button); /* Use Light Beige */
+            color: var(--palette-black); /* Use Black for icon */
+            width: 55px; height: 55px; border-radius: 50%;
+            text-align: center; line-height: 55px; font-size: 1.8rem;
             box-shadow: var(--shadow-medium);
             z-index: 900; opacity: 0; visibility: hidden;
             transition: opacity 0.3s ease, visibility 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
             cursor: pointer;
-             /* Added focus state for keyboard navigation */
             outline: none;
         }
-         /* Custom focus style */
          .scroll-to-top:focus {
-             background-color: var(--color-highlight); /* Use Gold */
-             outline: 2px solid var(--color-highlight); /* Use Gold */
+             background-color: var(--color-highlight); /* Use White */
+             outline: 2px solid var(--color-highlight); /* Use White */
              outline-offset: 3px;
          }
 
         .scroll-to-top.visible { opacity: 1; visibility: visible; }
-        .scroll-to-top:hover { background-color: var(--color-highlight); transform: scale(1.15); } /* Use Gold */
+        .scroll-to-top:hover { background-color: var(--color-highlight); transform: scale(1.15); } /* Use White, icon remains black */
 
         /* --- Mobile Navigation --- */
-        /* Adjust nav display for smaller screens */
         @media (max-width: 768px) {
             header .container {
-                flex-direction: row; /* Keep logo and toggle on one row */
+                flex-direction: row;
                 justify-content: space-between;
                 align-items: center;
             }
 
             nav {
                 position: absolute;
-                top: 100%; /* Position below header */
+                top: 100%;
                 left: 0;
                 width: 100%;
-                background: var(--color-header-footer); /* Match header background */
+                background: var(--color-header-footer); /* Match header background (Black) */
                 box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-                display: none; /* Hidden by default */
+                display: none;
                 flex-direction: column;
                 align-items: center;
                 padding: 20px 0;
                 opacity: 0;
                 transform: translateY(-20px);
                 transition: opacity 0.3s ease, transform 0.3s ease;
-                z-index: 999; /* Ensure it's above content but below fixed header */
+                z-index: 999;
             }
 
             nav.active {
@@ -622,59 +588,56 @@
             }
 
             nav ul li {
-                margin: 10px 0; /* Adjust vertical margin */
+                margin: 10px 0;
                 width: 100%;
                 text-align: center;
             }
 
             nav ul li a {
-                 font-size: 1.2rem; /* Larger font for mobile */
-                 padding: 12px 0; /* More vertical padding */
-                 color: var(--color-text-light); /* Use Cream for mobile links */
-                 border-bottom: 1px solid var(--color-border); /* Subtle separator */
-                 width: 80%; /* Link takes up most of the width */
-                 margin: auto; /* Center the link */
+                 font-size: 1.2rem;
+                 padding: 12px 0;
+                 color: var(--color-text-light); /* Use White for mobile links */
+                 border-bottom: 1px solid var(--color-border); /* Subtle separator (dark grey) */
+                 width: 80%;
+                 margin: auto;
             }
 
             nav ul li:last-child a {
-                 border-bottom: none; /* No border on the last link */
+                 border-bottom: none;
             }
 
             nav ul li a::after {
-                content: none; /* Remove underline animation on mobile */
+                content: none;
             }
 
             nav ul li a:hover, nav ul li a.active {
-                 color: var(--color-primary-button); /* Use Gold on hover/active */
-                 transform: none; /* Remove translateY effect */
+                 color: var(--color-primary-button); /* Use Light Beige on hover/active */
+                 transform: none;
             }
 
             .menu-toggle {
-                display: block; /* Show toggle button on mobile */
+                display: block;
             }
 
-            /* Adjust section padding when header is active */
             body.menu-open {
-                 overflow: hidden; /* Prevent scrolling when menu is open (optional) */
+                 overflow: hidden;
             }
 
             section {
-                 padding: 80px 0; /* Reduce section padding on mobile */
+                 padding: 80px 0;
             }
 
              #hero {
-                 padding-top: 100px; /* Adjust hero padding */
+                 padding-top: 100px;
              }
 
-            /* Adjust Hero H1 font size for mobile */
             #hero h1 {
-                 font-size: 3.5rem; /* Smaller font size for mobile */
-                 margin-bottom: 15px; /* Adjust margin if needed */
+                 font-size: 3.5rem;
+                 margin-bottom: 15px;
             }
 
-
             section h2 {
-                font-size: 2.2rem; /* Adjust heading size */
+                font-size: 2.2rem;
                 margin-bottom: 30px;
             }
 
@@ -682,7 +645,6 @@
                  font-size: 1.6rem;
             }
 
-             /* Adjust form padding on mobile */
              .contact-form {
                  padding: 30px;
                  margin: 40px auto;
@@ -694,22 +656,22 @@
 
              .contact-form input,
              .contact-form textarea {
-                 padding: 12px; /* Reduce input padding */
+                 padding: 12px;
              }
 
 
              .contact-form button[type="submit"] {
-                 padding: 14px 25px; /* Reduce button padding */
+                 padding: 14px 25px;
                  font-size: 1.2rem;
                  margin-top: 30px;
              }
 
              footer {
-                 padding: 3rem 0 1rem; /* Adjust footer padding */
+                 padding: 3rem 0 1rem;
              }
 
              footer .social-links a {
-                 font-size: 1.8rem; /* Adjust social icon size */
+                 font-size: 1.8rem;
              }
 
              .scroll-to-top {
@@ -729,9 +691,9 @@
          textarea:focus,
          select:focus,
          [tabindex]:focus {
-             outline: 2px dashed var(--color-highlight);
+             outline: 2px dashed var(--color-highlight); /* Use White */
              outline-offset: 3px;
-             border-radius: 3px; /* Basic border-radius, specific elements override this */
+             border-radius: 3px;
          }
 
           /* Override for elements with custom focus styles */
@@ -747,8 +709,7 @@
          .contact-info p a:focus,
          footer .social-links a:focus,
          .scroll-to-top:focus {
-             outline: none; /* Remove default outline */
-             /* Custom focus styles are defined above for these specific elements */
+             outline: none;
          }
 
     </style>
@@ -779,7 +740,7 @@
             <canvas id="hero-canvas"></canvas>
             <div id="hero-fallback-message">
                 Your browser does not support the interactive background.<br>
-                Experience the art of <span style="color: var(--color-primary-button);">NSL Forge</span>.
+                Experience the art of <span>NSL Forge</span>.
             </div>
         </div>
         <div class="hero-content">
@@ -919,7 +880,6 @@
         const hero3dContainer = document.querySelector('.hero-3d-container');
         const heroFallbackMessage = document.getElementById('hero-fallback-message');
 
-        // Ensure all necessary elements for Three.js are present
         if (heroCanvas && hero3dContainer && heroFallbackMessage) {
             const isWebGLAvailable = (function () {
                 try {
@@ -943,27 +903,27 @@
 
                 const geometry = new THREE.OctahedronGeometry(2.8);
                 const material = new THREE.MeshPhongMaterial({
-                    color: 0xD6AD60,
+                    color: 0xEAE4D5, // New Color: --palette-light-beige
                     shininess: 150,
-                    specular: 0xffffff,
+                    specular: 0xffffff, // Kept white specular for metallic feel
                     flatShading: true
                 });
 
                 const shape = new THREE.Mesh(geometry, material);
                 scene.add(shape);
 
-                const ambientLight = new THREE.AmbientLight(0x404040, 0.8);
+                const ambientLight = new THREE.AmbientLight(0x404040, 0.8); // Kept generic grey ambient
                 scene.add(ambientLight);
 
-                const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+                const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5); // Kept white directional
                 directionalLight.position.set(5, 5, 5).normalize();
                 scene.add(directionalLight);
 
-                const pointLight1 = new THREE.PointLight(0xB68D40, 0.6);
+                const pointLight1 = new THREE.PointLight(0xB6B09F, 0.6); // New Color: --palette-mid-grey
                 pointLight1.position.set(-5, 5, -5);
                 scene.add(pointLight1);
 
-                const pointLight2 = new THREE.PointLight(0xD6AD60, 0.6);
+                const pointLight2 = new THREE.PointLight(0xEAE4D5, 0.6); // New Color: --palette-light-beige
                 pointLight2.position.set(5, -5, 5);
                 scene.add(pointLight2);
 
@@ -988,7 +948,6 @@
                 animate();
 
             } else {
-                // WebGL NOT supported
                 heroFallbackMessage.style.display = 'block';
                 heroCanvas.style.display = 'none';
             }
@@ -997,25 +956,19 @@
 
 
         // --- Section Scroll Animation (IntersectionObserver) ---
-        // Ensure this runs after the DOM is fully loaded
         document.addEventListener('DOMContentLoaded', () => {
             const sections = document.querySelectorAll('section:not(#hero)');
 
             const observerOptions = {
-                root: null, // viewport as the root
+                root: null,
                 rootMargin: '0px',
-                threshold: 0.1 // 10% of the section must be visible
+                threshold: 0.1
             };
 
             const observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('is-visible');
-                        // Optional: Stop observing once it's visible
-                        // observer.unobserve(entry.target);
-                    } else {
-                         // Optional: Remove class when it goes out of view for re-animation on scroll back up
-                         // entry.target.classList.remove('is-visible');
                     }
                 });
             }, observerOptions);
@@ -1029,19 +982,16 @@
 
         // --- Scroll to Top Button Logic ---
         const scrollToTopButton = document.querySelector('.scroll-to-top');
-
-        // Check if button exists before adding listeners
         if (scrollToTopButton) {
              window.addEventListener('scroll', () => {
-                 if (window.scrollY > 400) { // Show button after scrolling down 400px
+                 if (window.scrollY > 400) {
                      scrollToTopButton.classList.add('visible');
                  } else {
                      scrollToTopButton.classList.remove('visible');
                  }
              });
-
              scrollToTopButton.addEventListener('click', (e) => {
-                 e.preventDefault(); // Prevent default anchor link behavior
+                 e.preventDefault();
                  window.scrollTo({
                      top: 0,
                      behavior: 'smooth'
@@ -1053,24 +1003,22 @@
 
          // --- Mobile Menu Toggle ---
         const menuToggle = document.querySelector('.menu-toggle');
-        const nav = document.querySelector('header nav'); // Select the nav element itself
-        const body = document.body; // Get the body element
+        const nav = document.querySelector('header nav');
+        const body = document.body;
 
-        // Check if elements exist before adding event listeners
         if (menuToggle && nav && body) {
             menuToggle.addEventListener('click', () => {
                 nav.classList.toggle('active');
-                menuToggle.classList.toggle('active'); // Optional: add active class to toggle button
-                body.classList.toggle('menu-open'); // Optional: add class to body for overflow control
+                menuToggle.classList.toggle('active');
+                body.classList.toggle('menu-open');
             });
 
-            // Optional: Close menu when a link is clicked (for single-page sites)
              nav.querySelectorAll('a').forEach(link => {
                  link.addEventListener('click', () => {
                      if (nav.classList.contains('active')) {
                           nav.classList.remove('active');
-                          menuToggle.classList.remove('active'); // Optional: remove active class from toggle
-                          body.classList.remove('menu-open'); // Optional: remove class from body
+                          menuToggle.classList.remove('active');
+                          body.classList.remove('menu-open');
                      }
                  });
              });
@@ -1083,13 +1031,10 @@
         const fileInfo = document.getElementById('file-info');
         const dropZoneText = document.getElementById('drop-zone-text');
 
-         // Check if elements exist
         if (dropZone && fileInput && fileInfo && dropZoneText) {
-
-             // Prevent default drag behaviors
              ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
                  dropZone.addEventListener(eventName, preventDefaults, false);
-                 document.body.addEventListener(eventName, preventDefaults, false); // Prevent default on body as well
+                 document.body.addEventListener(eventName, preventDefaults, false);
              });
 
              function preventDefaults (e) {
@@ -1097,7 +1042,6 @@
                  e.stopPropagation();
              }
 
-             // Highlight drop zone when dragging over
              ['dragenter', 'dragover'].forEach(eventName => {
                  dropZone.addEventListener(eventName, highlight, false);
              });
@@ -1108,16 +1052,15 @@
 
              function highlight() {
                  dropZone.classList.add('dragover');
-                 dropZone.classList.remove('error'); // Remove error state on drag over
+                 dropZone.classList.remove('error');
                  fileInfo.classList.remove('error-message');
-                 fileInfo.textContent = ''; // Clear previous error message
+                 fileInfo.textContent = '';
              }
 
              function unhighlight() {
                  dropZone.classList.remove('dragover');
              }
 
-             // Handle dropped files
              dropZone.addEventListener('drop', handleDrop, false);
 
              function handleDrop(e) {
@@ -1126,48 +1069,40 @@
                  handleFiles(files);
              }
 
-             // Handle file input change
              fileInput.addEventListener('change', function(e) {
                  handleFiles(this.files);
              });
 
-             // Handle click on drop zone to open file dialog
              dropZone.addEventListener('click', function() {
                  fileInput.click();
              });
 
-             // Process files
              function handleFiles(files) {
-                 const file = files[0]; // Only allow one file
+                 const file = files[0];
                  const maxSizeBytes = 5 * 1024 * 1024; // 5MB
 
                  if (!file) {
-                     resetDropZone(); // Reset if no file selected/dropped
+                     resetDropZone();
                      return;
                  }
 
                  if (file.size > maxSizeBytes) {
                      displayError(`File "${file.name}" is too large (max 5MB).`);
-                     // Clear the file input value so the same file can be selected again
                      fileInput.value = '';
                      return;
                  }
 
-                 const acceptedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp']; // Add other image types if needed
+                 const acceptedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
                  if (!acceptedTypes.includes(file.type)) {
                      displayError(`File "${file.name}" has an invalid format. Accepted: JPG, PNG, GIF, WebP.`);
-                      // Clear the file input value
                      fileInput.value = '';
                      return;
                  }
 
-
-                 // If file is valid
                  dropZoneText.textContent = `Selected File:`;
                  fileInfo.textContent = `${file.name} (${formatBytes(file.size)})`;
-                 dropZone.classList.remove('error'); // Ensure no error class is left
+                 dropZone.classList.remove('error');
                  fileInfo.classList.remove('error-message');
-                 // The file is automatically attached to the fileInput element
              }
 
              function displayError(message) {
@@ -1175,7 +1110,6 @@
                  dropZoneText.textContent = `Error:`;
                  fileInfo.classList.add('error-message');
                  fileInfo.textContent = message;
-                 // The file input should have been cleared already in handleFiles
              }
 
              function resetDropZone() {
@@ -1183,12 +1117,9 @@
                  fileInfo.textContent = '';
                  dropZone.classList.remove('dragover', 'error');
                  fileInfo.classList.remove('error-message');
-                  // Ensure the actual file input is clear
                  fileInput.value = '';
              }
 
-
-             // Helper function to format file size
              function formatBytes(bytes, decimals = 2) {
                  if (bytes === 0) return '0 Bytes';
                  const k = 1024;
@@ -1198,12 +1129,10 @@
                  return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
              }
 
-              // Add accessibility for keyboard users on the drop zone
               dropZone.addEventListener('keydown', function(e) {
-                  // If Enter or Spacebar is pressed
                   if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault(); // Prevent default spacebar scroll
-                      fileInput.click(); // Trigger the file input click
+                      e.preventDefault();
+                      fileInput.click();
                   }
               });
          }
@@ -1213,13 +1142,12 @@
            // --- Smooth Scrolling for Navigation Links ---
            document.querySelectorAll('nav ul li a[href^="#"]').forEach(anchor => {
                anchor.addEventListener('click', function (e) {
-                   e.preventDefault(); // Prevent default jump
+                   e.preventDefault();
 
                    const targetId = this.getAttribute('href');
                    const targetElement = document.querySelector(targetId);
 
                    if (targetElement) {
-                       // Calculate the position, taking into account the fixed header height
                        const headerHeight = document.querySelector('header').offsetHeight;
                        const elementPosition = targetElement.getBoundingClientRect().top;
                        const offsetPosition = elementPosition + window.scrollY - headerHeight;
@@ -1232,8 +1160,6 @@
                });
            });
            // --- End Smooth Scrolling ---
-
-
     </script>
 
 </body>
