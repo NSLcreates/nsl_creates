@@ -9,40 +9,45 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
-        /* --- CSS Variables: Custom Palette (New Palette) --- */
+        /* --- CSS Variables: Custom Palette (Pastel Light Theme) --- */
         :root {
-            /* New Defined Palette Colors - Adjusted for better contrast on a darker theme */
-            --palette-gray: #b0a9a1; /* Lighter Gray for secondary text */
-            --palette-light-gray: #e0e0e0; /* Very light gray/off-white for main body text */
-            --palette-brown: #8e6e53; /* Retained */
-            --palette-tan: #c69c72; /* Retained */
-            --palette-black: #1a1a1a; /* Darker black for backgrounds */
-            --palette-true-black: #000000; /* For absolute black elements */
+            /* Pastel Defined Palette Colors */
+            --palette-off-white: #f5f0ed; /* Soft, warm off-white for main bg */
+            --palette-light-beige: #e9e3df; /* Slightly darker pastel for secondary bg */
+            --palette-soft-gray: #c9c3bd; /* Soft gray for borders/subtle accents */
+            --palette-dark-gray: #5e544e; /* Darker, muted gray for general text */
+            --palette-deep-brown: #3a322e; /* Very dark brown for high contrast text/elements */
 
-            /* Semantic Mapping to New Palette Colors */
-            --color-bg-dark: var(--palette-true-black); /* True Black for main dark backgrounds */
-            --color-bg-light: #2c2c2c; /* Dark grey, subtly lighter than true black for subtle background variation */
-            --color-text-light: var(--palette-tan); /* Tan for main headings, prominent text */
-            --color-text-dark: var(--palette-gray); /* Lighter Gray for secondary or less prominent text (Disclaimer, muted text) */
-            --color-text-medium: var(--palette-light-gray); /* Off-white for general body text (Paragraphs) - IMPROVED CONTRAST */
-            --color-header-footer: var(--palette-true-black); /* True Black for header/footer */
-            --color-primary-button: var(--palette-tan); /* Tan for primary calls to action and buttons */
-            --color-highlight: var(--palette-light-gray); /* Off-white for key highlights (focus outlines, hover effects, etc.) */
-            --color-secondary-accent: var(--palette-brown); /* Brown for secondary accents or gradients */
-            --color-border: #444444; /* Darker grey for subtle borders on dark background */
+            /* Original Accent Colors (adjusted for contrast on light theme) */
+            --palette-brown-accent: #8e6e53; /* Retained brown accent */
+            --palette-tan-accent: #c69c72; /* Retained tan accent */
+
+            /* Semantic Mapping to New Pastel Palette Colors */
+            --color-bg-light: var(--palette-off-white); /* Main light background */
+            --color-bg-medium: var(--palette-light-beige); /* Slightly darker light background */
+            --color-text-dark: var(--palette-deep-brown); /* Darkest text for headings, main buttons */
+            --color-text-medium: var(--palette-dark-gray); /* General body text */
+            --color-text-light: var(--palette-soft-gray); /* Muted/secondary text, placeholder */
+
+            --color-header-footer: var(--palette-light-beige); /* Header/footer background */
+            --color-primary-button-bg: var(--palette-tan-accent); /* Button background */
+            --color-primary-button-text: var(--palette-deep-brown); /* Button text color */
+            --color-highlight: var(--palette-brown-accent); /* Highlight/hover color */
+            --color-secondary-accent: var(--palette-brown-accent); /* Secondary accent (for gradients) */
+            --color-border: var(--palette-soft-gray); /* Border color */
 
             /* Keeping alert/error color distinct for visibility */
-            --color-alert: #cf6679; /* Reddish for warnings */
-            --color-error-text: #cf6679;
+            --color-alert: #d9534f; /* Soft red for warnings */
+            --color-error-text: #d9534f;
 
             /* Subtle gradients using the new palette colors */
-            --gradient-primary: linear-gradient(90deg, var(--palette-tan), var(--palette-brown));
-            --gradient-highlight: linear-gradient(90deg, var(--palette-light-gray), var(--palette-brown));
+            --gradient-primary: linear-gradient(90deg, var(--palette-tan-accent), var(--palette-brown-accent));
+            --gradient-highlight: linear-gradient(90deg, var(--palette-brown-accent), var(--palette-tan-accent)); /* Reversed for subtle hover effect */
 
-            /* Shadows remain based on black, which is fine with a black background */
-            --shadow-deep: 0 12px 24px rgba(0,0,0,0.7);
-            --shadow-medium: 0 8px 16px rgba(0,0,0,0.6);
-            --shadow-light: 0 4px 8px rgba(0,0,0,0.5);
+            /* Shadows adjusted for light theme */
+            --shadow-deep: 0 8px 16px rgba(0,0,0,0.15);
+            --shadow-medium: 0 5px 10px rgba(0,0,0,0.1);
+            --shadow-light: 0 2px 4px rgba(0,0,0,0.08);
         }
 
         /* --- Base Styles --- */
@@ -51,8 +56,8 @@
         body {
             font-family: 'Roboto', sans-serif;
             line-height: 1.7;
-            color: var(--color-text-medium); /* Now explicitly Light Gray for main body text */
-            background-color: var(--color-bg-dark); /* Use Black for dark background */
+            color: var(--color-text-medium); /* General body text */
+            background-color: var(--color-bg-light); /* Main light background */
             scroll-behavior: smooth;
             overflow-x: hidden; /* Prevent horizontal scroll issues */
         }
@@ -63,7 +68,7 @@
         section {
             padding: 120px 0;
             border-bottom: 1px solid var(--color-border);
-            background-color: var(--color-bg-dark);
+            background-color: var(--color-bg-light); /* Main light background */
             min-height: 80vh;
             position: relative;
             overflow: hidden;
@@ -79,6 +84,7 @@
             transform: none;
             transition: none;
             min-height: 100vh;
+            background-color: var(--color-bg-light); /* Ensure hero matches main background */
         }
 
         section.is-visible {
@@ -87,13 +93,13 @@
         }
 
         section:last-of-type { border-bottom: none; }
-        #gallery { background-color: var(--color-bg-light); } /* Gallery uses very dark grey background */
-        #disclaimer { padding: 60px 0; background-color: var(--color-bg-light); border-bottom: 1px solid var(--color-border); min-height: auto; } /* Disclaimer uses very dark grey background */
+        #gallery { background-color: var(--color-bg-medium); } /* Gallery uses slightly darker pastel background */
+        #disclaimer { padding: 60px 0; background-color: var(--color-bg-medium); border-bottom: 1px solid var(--color-border); min-height: auto; } /* Disclaimer uses slightly darker pastel background */
 
         /* Section Headings */
         section h2 {
             font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 700;
-            color: var(--color-text-light); text-align: center; margin-bottom: 50px; /* Use Tan */
+            color: var(--color-text-dark); text-align: center; margin-bottom: 50px; /* Darkest text */
             position: relative;
             padding-bottom: 15px;
             letter-spacing: 0.8px;
@@ -113,16 +119,16 @@
             height: 2px; width: 50px;
         }
         #disclaimer p {
-            max-width: 900px; margin: 20px auto; font-size: 1.05rem; color: var(--color-text-dark); /* Use Gray for disclaimer text */ line-height: 1.7; text-align: center;
+            max-width: 900px; margin: 20px auto; font-size: 1.05rem; color: var(--color-text-medium); /* General body text */ line-height: 1.7; text-align: center;
         }
 
 
         /* --- Header --- */
         header {
-            background: var(--color-header-footer); /* Use Black */
+            background: var(--color-header-footer); /* Header/footer background */
             padding: 0.8rem 0;
             position: fixed; width: 100%; top: 0; left: 0; z-index: 1000;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            box-shadow: var(--shadow-medium);
             transition: background-color 0.3s ease;
         }
         header .container {
@@ -134,41 +140,41 @@
         }
         header .logo a {
             text-decoration: none;
-            color: var(--color-primary-button); /* Use Tan for logo text */
+            color: var(--color-text-dark); /* Darkest text for logo */
             display: block;
             font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700;
             transition: color 0.3s ease, transform 0.3s ease;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
         }
-        header .logo a:hover { color: var(--color-highlight); transform: scale(1.05); } /* Use Light Gray for highlight */
+        header .logo a:hover { color: var(--color-highlight); transform: scale(1.05); } /* Highlight color */
         nav ul { list-style: none; padding: 0; margin: 0; display: flex; }
         nav ul li { margin-left: 35px; }
         nav ul li a {
-            color: var(--color-text-dark); /* Use Gray for standard nav links */
+            color: var(--color-text-medium); /* General body text for nav links */
             text-decoration: none; font-weight: 400;
             padding: 10px 0; position: relative; transition: color 0.3s ease, transform 0.2s ease; letter-spacing: 0.6px;
             font-size: 1.05rem;
             outline: none;
         }
         nav ul li a:focus {
-            color: var(--color-text-light); /* Use Tan on focus */
-            outline: 2px solid var(--color-highlight); /* Use Light Gray for outline */
+            color: var(--color-text-dark); /* Darkest text on focus */
+            outline: 2px solid var(--color-highlight); /* Highlight color for outline */
             outline-offset: 3px;
             border-radius: 2px;
         }
 
         nav ul li a::after {
             content: ''; position: absolute; left: 0; bottom: -3px; height: 2px; width: 0;
-            background: var(--gradient-primary); /* Use gradient for underline, starts with tan */
+            background: var(--gradient-primary); /* Use gradient for underline */
             transition: width 0.4s ease-out;
         }
-        nav ul li a:hover, nav ul li a.active { color: var(--color-text-light); transform: translateY(-2px); } /* Use Tan on hover/active */
+        nav ul li a:hover, nav ul li a.active { color: var(--color-text-dark); transform: translateY(-2px); } /* Darkest text on hover/active */
         nav ul li a:hover::after, nav ul li a.active::after { width: 100%; }
-        nav ul li a.active { color: var(--color-text-light); }
+        nav ul li a.active { color: var(--color-text-dark); }
 
 
-        .menu-toggle { display: none; font-size: 2rem; cursor: pointer; color: var(--color-text-light); transition: transform 0.3s ease, color 0.3s ease; } /* Use Tan */
-        .menu-toggle:hover { transform: rotate(90deg); color: var(--color-highlight); } /* Use Light Gray for highlight */
+        .menu-toggle { display: none; font-size: 2rem; cursor: pointer; color: var(--color-text-dark); transition: transform 0.3s ease, color 0.3s ease; } /* Darkest text */
+        .menu-toggle:hover { transform: rotate(90deg); color: var(--color-highlight); } /* Highlight color */
         .menu-toggle:focus {
              color: var(--color-highlight);
              outline: 2px solid var(--color-highlight);
@@ -179,8 +185,8 @@
 
         /* --- Hero Section - Enhanced 3D Integration & Fallback --- */
         #hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)); /* Darker overlay matching Black */
-            color: var(--color-text-light); /* Use Tan */
+            background: linear-gradient(rgba(245, 240, 237, 0.9), rgba(245, 240, 237, 0.9)); /* Lighter overlay matching main bg */
+            color: var(--color-text-dark); /* Darkest text for hero content */
             height: 100vh;
             display: flex;
             flex-direction: column;
@@ -199,7 +205,7 @@
             width: 100%;
             height: 100%;
             z-index: 1;
-            background-color: var(--color-bg-dark); /* Use Black */
+            background-color: var(--color-bg-light); /* Main light background */
             /* background-image: url('path/to/your/static-fallback-image.jpg'); */
             background-size: cover;
             background-position: center center;
@@ -209,13 +215,13 @@
             display: block;
             width: 100% !important;
             height: 100% !important;
-            filter: blur(3px) brightness(0.7); /* Keep filter, may need adjustment based on new 3D object color */
-            opacity: 0.5;
+            filter: blur(3px) brightness(1.1); /* Adjusted filter for light theme */
+            opacity: 0.8; /* Adjusted opacity for light theme */
             transition: filter 0.5s ease, opacity 0.5s ease;
         }
         #hero .hero-3d-container:hover #hero-canvas {
-            filter: blur(2px) brightness(0.8);
-            opacity: 0.7;
+            filter: blur(2px) brightness(1.2);
+            opacity: 0.9;
         }
 
         #hero-fallback-message {
@@ -223,17 +229,18 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            color: var(--color-text-dark); /* Use Gray */
+            color: var(--color-text-medium); /* General body text */
             font-size: 1.1rem;
             text-align: center;
             z-index: 2;
             display: none;
             padding: 20px;
-            background-color: rgba(0,0,0,0.5);
+            background-color: rgba(255,255,255,0.7); /* Light background for fallback */
             border-radius: 8px;
+            box-shadow: var(--shadow-medium);
         }
         #hero-fallback-message span { /* Style for the highlighted text in fallback */
-             color: var(--color-primary-button); /* Use Tan */
+             color: var(--color-primary-button-bg); /* Tan accent */
         }
 
 
@@ -245,23 +252,23 @@
         }
         #hero h1 {
             font-family: 'Playfair Display', serif; font-size: 5rem; margin-bottom: 20px;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.1);
             font-weight: 700; letter-spacing: 1.5px; line-height: 1.1;
-            color: var(--color-text-light); /* Use Tan */
+            color: var(--color-text-dark); /* Darkest text */
         }
-        #hero h1 .site-title { font-weight: 700; color: var(--color-primary-button); } /* Use Tan */
+        #hero h1 .site-title { font-weight: 700; color: var(--color-primary-button-bg); } /* Tan accent */
         #hero p {
             font-size: 1.5rem; margin-bottom: 50px; max-width: 800px;
-            text-shadow: 1px 1px 6px rgba(0,0,0,0.6);
+            text-shadow: 1px 1px 6px rgba(0,0,0,0.08);
             font-weight: 300;
-            color: var(--color-text-medium); /* Changed to medium text for better visibility */
+            color: var(--color-text-medium); /* General body text */
             line-height: 1.7;
         }
 
         .cta-button {
             display: inline-block;
             background: var(--gradient-primary); /* Uses Tan to Brown */
-            color: #ffffff; /* Changed to white for stronger contrast */
+            color: var(--color-primary-button-text); /* Dark brown for text */
             padding: 16px 40px;
             text-decoration: none; border-radius: 30px; font-size: 1.3rem; font-weight: 500;
             transition: background-color 0.4s ease, transform 0.3s ease-out, box-shadow 0.4s ease, color 0.4s ease;
@@ -272,7 +279,7 @@
             outline: none;
         }
         .cta-button:focus {
-            outline: 2px solid var(--color-highlight); /* Use Light Gray for outline */
+            outline: 2px solid var(--color-highlight); /* Highlight color for outline */
             outline-offset: 3px;
             border-radius: 30px;
         }
@@ -283,7 +290,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: var(--gradient-highlight); /* Use gradient (Light Gray to Brown) */
+            background: var(--gradient-highlight); /* Highlight gradient */
             transition: left 0.4s ease-out;
             z-index: -1;
         }
@@ -292,7 +299,7 @@
         }
         .cta-button:hover {
             background: transparent;
-            color: var(--color-text-light); /* Text color changes to Tan on hover */
+            color: var(--color-text-dark); /* Darkest text on hover */
             transform: translateY(-4px);
             box-shadow: var(--shadow-deep);
         }
@@ -305,36 +312,36 @@
             display: block; width: 100%; height: auto;
             border-radius: 8px;
             box-shadow: var(--shadow-medium);
-            border: 1px solid var(--color-border); /* Use dark grey border color */
+            border: 1px solid var(--color-border); /* Soft gray border color */
             transition: transform 0.5s ease-out, box-shadow 0.4s ease, border-color 0.3s ease;
             cursor: pointer;
             transform-style: preserve-3d;
             transform-origin: center center;
-            filter: brightness(0.9);
+            filter: brightness(1); /* No filter on light theme */
             outline: none;
         }
         .sketch-gallery img:focus {
-             outline: 3px solid var(--color-highlight); /* Use Light Gray for outline */
+             outline: 3px solid var(--color-highlight); /* Highlight color for outline */
              outline-offset: 3px;
-             border-color: var(--color-primary-button); /* Use Tan for border */
-             filter: brightness(1.1);
+             border-color: var(--color-primary-button-bg); /* Tan accent for border */
+             filter: brightness(1.05);
         }
         .sketch-gallery img:hover {
             transform: scale(1.08) rotateY(10deg) rotateX(6deg) translateZ(20px);
             box-shadow: var(--shadow-deep);
-            border-color: var(--color-primary-button); /* Use Tan for border */
-            filter: brightness(1.1);
+            border-color: var(--color-primary-button-bg); /* Tan accent for border */
+            filter: brightness(1.05);
         }
 
         /* --- Services/Collaborations --- */
         .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 50px; margin-top: 40px; }
         .service-card {
-            background: var(--color-bg-light); /* Use very dark grey background */
+            background: var(--color-bg-medium); /* Slightly darker pastel background */
             padding: 40px; border-radius: 12px;
             box-shadow: var(--shadow-medium);
             text-align: center;
             transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.3s ease, border-color 0.3s ease;
-            border: 1px solid var(--color-border); /* Use dark grey border color */
+            border: 1px solid var(--color-border); /* Soft gray border color */
             display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
             cursor: default;
             transform: translateZ(0);
@@ -342,67 +349,67 @@
         .service-card:hover {
             transform: translateY(-10px);
             box-shadow: var(--shadow-deep);
-            background-color: #3a3a3a; /* Slightly different dark background on hover - derived from #4c4748 */
-            border-color: var(--color-primary-button); /* Highlight border with Tan on hover */
+            background-color: #f0ebe8; /* Slightly lighter on hover */
+            border-color: var(--color-primary-button-bg); /* Highlight border with Tan accent on hover */
         }
-        .service-card .icon { font-size: 4rem; color: var(--color-primary-button); margin-bottom: 25px; display: block; /* Use Tan */
+        .service-card .icon { font-size: 4rem; color: var(--color-primary-button-bg); margin-bottom: 25px; display: block; /* Tan accent */
             transition: transform 0.3s ease;
         }
         .service-card:hover .icon {
             transform: scale(1.1) rotate(5deg);
         }
-        .service-card h3 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 15px; color: var(--color-text-light); font-weight: 600; letter-spacing: 0.5px;} /* Use Tan */
-        .service-card p { font-size: 1rem; color: var(--color-text-medium); /* Use Light Gray for service descriptions */ margin-bottom: 0; line-height: 1.7; }
+        .service-card h3 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 15px; color: var(--color-text-dark); font-weight: 600; letter-spacing: 0.5px;} /* Darkest text */
+        .service-card p { font-size: 1rem; color: var(--color-text-medium); /* General body text for service descriptions */ margin-bottom: 0; line-height: 1.7; }
 
         .service-process { margin-top: 80px; padding-top: 40px; border-top: 1px dashed var(--color-border); text-align: left; }
         .service-process h3 {
-            font-family: 'Playfair Display', serif; color: var(--color-text-light); margin-top: 0; margin-bottom: 30px; /* Use Tan */
+            font-family: 'Playfair Display', serif; color: var(--color-text-dark); margin-top: 0; margin-bottom: 30px; /* Darkest text */
             font-size: 2.2rem; text-align: center; font-weight: 600;
         }
-        .service-process ol, .service-process ul { list-style-position: outside; padding-left: 30px; margin: 25px auto; max-width: 900px; color: var(--color-text-medium); /* Use Light Gray for process steps */ font-size: 1.05rem; line-height: 1.8; }
+        .service-process ol, .service-process ul { list-style-position: outside; padding-left: 30px; margin: 25px auto; max-width: 900px; color: var(--color-text-medium); /* General body text for process steps */ font-size: 1.05rem; line-height: 1.8; }
         .service-process li { margin-bottom: 15px; padding-left: 8px; position: relative; }
-        .service-process ol li::marker { font-weight: bold; color: var(--color-primary-button); font-size: 1.2em; } /* Use Tan for marker */
-        .service-process ul li::before { content: '•'; color: var(--color-primary-button); font-weight: bold; display: inline-block; width: 1em; margin-left: -1em; font-size: 1.2em; } /* Use Tan for bullet */
-        .service-process li strong { color: var(--color-text-light); font-weight: 500; } /* Use Tan for bold text */
+        .service-process ol li::marker { font-weight: bold; color: var(--color-primary-button-bg); font-size: 1.2em; } /* Tan accent for marker */
+        .service-process ul li::before { content: '•'; color: var(--color-primary-button-bg); font-weight: bold; display: inline-block; width: 1em; margin-left: -1em; font-size: 1.2em; } /* Tan accent for bullet */
+        .service-process li strong { color: var(--color-text-dark); font-weight: 500; } /* Darkest text for bold text */
         .important-note { text-align: center; font-size: 1rem; color: var(--color-alert); margin-top: 20px; font-weight: 500; }
         .important-note i { margin-right: 8px; }
 
 
         /* --- About Section --- */
         #about .container { display: flex; flex-direction: column; align-items: center; text-align: center; }
-        #about p { max-width: 900px; margin-bottom: 30px; font-size: 1.1rem; color: var(--color-text-medium); /* Now explicitly Light Gray for about text */ line-height: 1.8; }
+        #about p { max-width: 900px; margin-bottom: 30px; font-size: 1.1rem; color: var(--color-text-medium); /* General body text for about text */ line-height: 1.8; }
         #about p:last-of-type { margin-bottom: 0; }
-        #about p a { color: var(--color-primary-button); text-decoration: none; transition: color 0.3s ease, text-decoration 0.3s ease; font-weight: 500; /* Use Tan */
+        #about p a { color: var(--color-primary-button-bg); text-decoration: none; transition: color 0.3s ease, text-decoration 0.3s ease; font-weight: 500; /* Tan accent */
              outline: none;
         }
         #about p a:focus {
-             color: var(--color-highlight); /* Use Light Gray */
-             outline: 2px solid var(--color-highlight); /* Use Light Gray */
+             color: var(--color-highlight); /* Highlight color */
+             outline: 2px solid var(--color-highlight); /* Highlight color */
              outline-offset: 2px;
              border-radius: 2px;
         }
-        #about p a:hover { color: var(--color-highlight); text-decoration: underline; } /* Use Light Gray */
+        #about p a:hover { color: var(--color-highlight); text-decoration: underline; } /* Highlight color */
          #about p a i { margin-right: 5px; }
 
 
         /* --- Contact Section --- */
-        #contact { background: var(--color-bg-dark); } /* Use Black */
+        #contact { background: var(--color-bg-light); } /* Main light background */
         .contact-form {
             max-width: 650px; margin: 60px auto; padding: 50px;
-            background: var(--color-bg-light); /* Use very dark grey background */
+            background: var(--color-bg-medium); /* Slightly darker pastel background */
             border-radius: 12px; box-shadow: var(--shadow-deep);
-            border: 1px solid var(--color-border); /* Use dark grey border color */
+            border: 1px solid var(--color-border); /* Soft gray border color */
             position: relative;
         }
 
-        .contact-form label { display: block; margin-bottom: 12px; font-weight: 500; color: var(--color-text-light); font-size: 1.1rem; letter-spacing: 0.3px;} /* Use Tan */
+        .contact-form label { display: block; margin-bottom: 12px; font-weight: 500; color: var(--color-text-dark); font-size: 1.1rem; letter-spacing: 0.3px;} /* Darkest text */
         .contact-form input[type="text"],
         .contact-form input[type="email"],
         .contact-form textarea {
             width: 100%; padding: 15px; margin-bottom: 25px;
-            border: 1px solid var(--color-border); /* Use dark grey border color */
-            border-radius: 8px; font-size: 1rem; color: var(--color-text-medium); /* Changed to medium text for better input contrast */
-            background-color: var(--palette-black); /* Use slightly lighter black for input background */
+            border: 1px solid var(--color-border); /* Soft gray border color */
+            border-radius: 8px; font-size: 1rem; color: var(--color-text-dark); /* Darkest text for input */
+            background-color: var(--color-bg-light); /* Main light background for input */
             box-sizing: border-box; appearance: none;
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
             outline: none;
@@ -411,46 +418,46 @@
         .contact-form input[type="text"]:focus,
         .contact-form input[type="email"]:focus,
         .contact-form textarea:focus {
-            border-color: var(--color-primary-button); /* Tan */
-            box-shadow: 0 0 10px rgba(198, 156, 114, 0.6); /* Shadow using Tan (RGB of #c69c72) */
+            border-color: var(--color-primary-button-bg); /* Tan accent */
+            box-shadow: 0 0 10px rgba(198, 156, 114, 0.3); /* Shadow using Tan accent */
             outline: none;
         }
         .contact-form textarea { min-height: 200px; resize: vertical; padding: 15px; }
 
 
         .drop-zone {
-            border: 2px dashed var(--color-border); border-radius: 8px; padding: 40px; text-align: center; /* Use dark grey border color */
+            border: 2px dashed var(--color-border); border-radius: 8px; padding: 40px; text-align: center; /* Soft gray border color */
             cursor: pointer; margin-bottom: 15px;
             transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-            background-color: #3a3a3a; /* Dark background, similar to service card hover */
+            background-color: var(--color-bg-light); /* Main light background */
             position: relative;
             outline: none;
         }
          .drop-zone:focus {
-             outline: 2px solid var(--color-highlight); /* Use Light Gray */
+             outline: 2px solid var(--color-highlight); /* Highlight color */
              outline-offset: 3px;
              border-radius: 8px;
          }
 
         .drop-zone:hover {
-            background-color: #444444; /* Slightly lighter on hover */
-            border-color: var(--color-primary-button); /* Highlight border with Tan */
-            box-shadow: 0 0 8px rgba(198, 156, 114, 0.4); /* Shadow using Tan */
+            background-color: var(--color-bg-medium); /* Slightly darker pastel on hover */
+            border-color: var(--color-primary-button-bg); /* Highlight border with Tan accent */
+            box-shadow: 0 0 8px rgba(198, 156, 114, 0.2); /* Shadow using Tan accent */
         }
 
         .drop-zone.dragover {
-            background-color: rgba(198, 156, 114, 0.15); /* Highlight with Tan transparent */
-            border-color: var(--color-primary-button); /* Tan */
+            background-color: rgba(198, 156, 114, 0.1); /* Highlight with Tan accent transparent */
+            border-color: var(--color-primary-button-bg); /* Tan accent */
             border-style: solid;
-            box-shadow: 0 0 18px rgba(198, 156, 114, 0.5); /* Shadow with Tan */
+            box-shadow: 0 0 18px rgba(198, 156, 114, 0.25); /* Shadow with Tan accent */
         }
-        .drop-zone.error { border-color: var(--color-error-text); background-color: rgba(207, 102, 121, 0.15); border-style: solid; box-shadow: none; }
-        .drop-zone p { margin: 0; font-size: 1rem; color: var(--color-text-dark); z-index: 2; position: relative; } /* Use Gray */
-        .file-info { margin-top: 10px; font-size: 0.95rem; color: var(--color-text-medium); font-weight: 500; z-index: 2; position: relative; } /* Use Light Gray */
+        .drop-zone.error { border-color: var(--color-error-text); background-color: rgba(217, 83, 79, 0.1); border-style: solid; box-shadow: none; }
+        .drop-zone p { margin: 0; font-size: 1rem; color: var(--color-text-medium); z-index: 2; position: relative; } /* General body text */
+        .file-info { margin-top: 10px; font-size: 0.95rem; color: var(--color-text-medium); font-weight: 500; z-index: 2; position: relative; } /* General body text */
         .file-info.error-message { color: var(--color-error-text); font-weight: bold; }
 
         .drop-zone-help-text {
-             color: var(--color-text-dark); /* Use Gray */
+             color: var(--color-text-medium); /* General body text */
              display: block;
              margin-top: -15px;
              margin-bottom: 20px;
@@ -460,7 +467,7 @@
 
         .contact-form button[type="submit"] {
             background: var(--gradient-primary); /* Uses Tan to Brown */
-            color: #ffffff; /* Changed to white for stronger contrast */
+            color: var(--color-primary-button-text); /* Dark brown for text */
             padding: 16px 35px;
             border: none; border-radius: 30px; font-size: 1.3rem; font-weight: 600;
             transition: background-color 0.4s ease, transform 0.3s ease-out, box-shadow 0.4s ease, color 0.4s ease;
@@ -472,7 +479,7 @@
             outline: none;
         }
         .contact-form button[type="submit"]:focus {
-             outline: 2px solid var(--color-highlight); /* Use Light Gray */
+             outline: 2px solid var(--color-highlight); /* Highlight color */
              outline-offset: 3px;
              border-radius: 30px;
         }
@@ -483,53 +490,53 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: var(--gradient-highlight); /* Use gradient (Light Gray to Brown) */
+            background: var(--gradient-highlight); /* Highlight gradient */
             transition: left 0.4s ease-out;
             z-index: -1;
         }
         .contact-form button[type="submit"]:hover {
             background: transparent;
-            color: var(--color-text-light); /* Text color changes to Tan on hover */
+            color: var(--color-text-dark); /* Darkest text on hover */
             transform: translateY(-4px);
             box-shadow: var(--shadow-deep);
         }
         .contact-form button[type="submit"]:active { transform: translateY(-1px); box-shadow: var(--shadow-light); }
 
 
-        .contact-info p { text-align: center; font-size: 1.1rem; margin-top: 50px; color: var(--color-text-medium); } /* Use Light Gray */
-        .contact-info p a { color: var(--color-primary-button); text-decoration: none; font-weight: bold; transition: color 0.3s ease, text-decoration 0.3s ease; /* Use Tan */
+        .contact-info p { text-align: center; font-size: 1.1rem; margin-top: 50px; color: var(--color-text-medium); } /* General body text */
+        .contact-info p a { color: var(--color-primary-button-bg); text-decoration: none; font-weight: bold; transition: color 0.3s ease, text-decoration 0.3s ease; /* Tan accent */
              outline: none;
         }
         .contact-info p a:focus {
-             color: var(--color-highlight); /* Use Light Gray */
-             outline: 2px solid var(--color-highlight); /* Use Light Gray */
+             color: var(--color-highlight); /* Highlight color */
+             outline: 2px solid var(--color-highlight); /* Highlight color */
              outline-offset: 2px;
              border-radius: 2px;
         }
-        .contact-info p a:hover { color: var(--color-highlight); text-decoration: underline; } /* Use Light Gray */
+        .contact-info p a:hover { color: var(--color-highlight); text-decoration: underline; } /* Highlight color */
 
         /* --- Footer --- */
         footer {
-            background: var(--color-header-footer); color: var(--color-text-dark); /* Use Black and Gray */
+            background: var(--color-header-footer); color: var(--color-text-medium); /* Header/footer background and general text color */
             text-align: center; padding: 4rem 0 1.5rem;
         }
-        footer .footer-note { font-size: 0.85em; color: rgba(176, 169, 161, 0.6); margin-bottom: 20px; } /* Use Gray with transparency */
+        footer .footer-note { font-size: 0.85em; color: var(--color-text-light); margin-bottom: 20px; } /* Muted text */
         footer .social-links { margin-bottom: 25px; }
-        footer .social-links a { color: rgba(176, 169, 161, 0.8); margin: 0 15px; font-size: 2.2rem; text-decoration: none; transition: color 0.3s ease, transform 0.3s ease; /* Use Gray with transparency */
+        footer .social-links a { color: var(--color-text-medium); margin: 0 15px; font-size: 2.2rem; text-decoration: none; transition: color 0.3s ease, transform 0.3s ease; /* General body text color */
             outline: none;
         }
          footer .social-links a:focus {
-             color: var(--color-primary-button); /* Use Tan */
-             outline: 2px solid var(--color-primary-button); /* Use Tan */
+             color: var(--color-primary-button-bg); /* Tan accent */
+             outline: 2px solid var(--color-primary-button-bg); /* Tan accent */
              outline-offset: 3px;
              border-radius: 50%;
          }
-        footer .social-links a:hover { color: var(--color-primary-button); transform: scale(1.3); } /* Use Tan */
+        footer .social-links a:hover { color: var(--color-primary-button-bg); transform: scale(1.3); } /* Tan accent */
 
         /* --- Scroll to Top Button --- */
         .scroll-to-top {
-            position: fixed; bottom: 30px; right: 30px; background-color: var(--color-primary-button); /* Use Tan */
-            color: #ffffff; /* Use white for icon for better contrast */
+            position: fixed; bottom: 30px; right: 30px; background-color: var(--color-primary-button-bg); /* Tan accent */
+            color: var(--color-primary-button-text); /* Dark brown for icon */
             width: 55px; height: 55px; border-radius: 50%;
             text-align: center; line-height: 55px; font-size: 1.8rem;
             box-shadow: var(--shadow-medium);
@@ -539,13 +546,13 @@
             outline: none;
         }
          .scroll-to-top:focus {
-             background-color: var(--color-highlight); /* Use Light Gray */
-             outline: 2px solid var(--color-highlight); /* Use Light Gray */
+             background-color: var(--color-highlight); /* Highlight color */
+             outline: 2px solid var(--color-highlight); /* Highlight color */
              outline-offset: 3px;
          }
 
         .scroll-to-top.visible { opacity: 1; visibility: visible; }
-        .scroll-to-top:hover { background-color: var(--color-highlight); transform: scale(1.15); } /* Use Light Gray, icon remains black */
+        .scroll-to-top:hover { background-color: var(--color-highlight); transform: scale(1.15); } /* Highlight color */
 
         /* --- Mobile Navigation --- */
         @media (max-width: 768px) {
@@ -560,8 +567,8 @@
                 top: 100%;
                 left: 0;
                 width: 100%;
-                background: var(--color-header-footer); /* Match header background (Black) */
-                box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+                background: var(--color-header-footer); /* Match header background */
+                box-shadow: var(--shadow-medium);
                 display: none;
                 flex-direction: column;
                 align-items: center;
@@ -593,8 +600,8 @@
             nav ul li a {
                  font-size: 1.2rem;
                  padding: 12px 0;
-                 color: var(--color-text-light); /* Use Tan for mobile links, ensures visibility */
-                 border-bottom: 1px solid var(--color-border); /* Subtle separator (dark grey) */
+                 color: var(--color-text-dark); /* Darkest text for mobile links */
+                 border-bottom: 1px solid var(--color-border); /* Subtle separator */
                  width: 80%;
                  margin: auto;
             }
@@ -608,7 +615,7 @@
             }
 
             nav ul li a:hover, nav ul li a.active {
-                 color: var(--color-primary-button); /* Use Tan on hover/active */
+                 color: var(--color-primary-button-bg); /* Tan accent on hover/active */
                  transform: none;
             }
 
@@ -688,7 +695,7 @@
          textarea:focus,
          select:focus,
          [tabindex]:focus {
-             outline: 2px dashed var(--color-highlight); /* Use Light Gray */
+             outline: 2px dashed var(--color-highlight); /* Highlight color */
              outline-offset: 3px;
              border-radius: 3px;
          }
@@ -900,27 +907,27 @@
 
                 const geometry = new THREE.OctahedronGeometry(2.8);
                 const material = new THREE.MeshPhongMaterial({
-                    color: 0xc69c72, // This is --palette-tan
+                    color: 0xc69c72, // This is --palette-tan-accent (or a complementary pastel for the object)
                     shininess: 150,
-                    specular: 0xffffff, // Kept white specular for metallic feel
+                    specular: 0x8e6e53, // Adjusted specular for a warmer, less metallic feel (brown accent)
                     flatShading: true
                 });
 
                 const shape = new THREE.Mesh(geometry, material);
                 scene.add(shape);
 
-                const ambientLight = new THREE.AmbientLight(0x404040, 0.8); // Kept generic grey ambient
+                const ambientLight = new THREE.AmbientLight(0xffffff, 0.6); // Brighter ambient light for pastel theme
                 scene.add(ambientLight);
 
-                const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5); // Kept white directional
+                const directionalLight = new THREE.DirectionalLight(0xffffff, 0.4); // Main directional light
                 directionalLight.position.set(5, 5, 5).normalize();
                 scene.add(directionalLight);
 
-                const pointLight1 = new THREE.PointLight(0x8e6e53, 0.6); // This is --palette-brown
+                const pointLight1 = new THREE.PointLight(0xc69c72, 0.5); // Tan accent light
                 pointLight1.position.set(-5, 5, -5);
                 scene.add(pointLight1);
 
-                const pointLight2 = new THREE.PointLight(0xc69c72, 0.6); // This is --palette-tan
+                const pointLight2 = new THREE.PointLight(0x8e6e53, 0.5); // Brown accent light
                 pointLight2.position.set(5, -5, 5);
                 scene.add(pointLight2);
 
