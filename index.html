@@ -9,40 +9,36 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
-        /* --- CSS Variables: Custom Palette (Pastel Light Theme) --- */
+        /* --- CSS Variables: Earthy Tones Palette --- */
         :root {
-            /* Pastel Defined Palette Colors (Updated) */
-            --palette-off-white: #FFE8D6; /* Lightest, for main bg */
-            --palette-light-beige: #DDBEA9; /* Slightly darker pastel for secondary bg */
-            --palette-soft-gray: #A5A58D; /* Muted green-gray for borders/subtle accents */
-            --palette-dark-gray: #6B705C; /* Darker green-gray for general text */
-            --palette-deep-brown: #3A322E; /* Retained dark brown for high contrast text/elements */
+            --primary-dark-olive: #556B2F; /* Darkest green/brown */
+            --secondary-sage-green: #8FBC8F; /* Lighter, muted green */
+            --background-light-beige: #F5F5DC; /* Main light background */
+            --medium-tan: #D2B48C; /* Medium earth tone, for secondary text/elements */
+            --text-dark-brown: #3E2723; /* Darkest text for headings, main buttons */
+            --accent-terracotta: #E07A5F; /* Warm, reddish-brown accent */
 
-            /* Original Accent Colors (adjusted for contrast on light theme) */
-            --palette-brown-accent: #CB997E; /* New warm brown accent */
-            --palette-tan-accent: #DDBEA9; /* New lighter, creamy brown accent */
+            /* Semantic Mapping to Earthy Tones Palette Colors */
+            --color-bg-light: var(--background-light-beige); /* Main light background */
+            --color-bg-medium: var(--medium-tan); /* Slightly darker background for cards/sections */
+            --color-text-dark: var(--text-dark-brown); /* Darkest text for headings, main buttons */
+            --color-text-medium: var(--primary-dark-olive); /* General body text, a rich green-brown */
+            --color-text-light: var(--secondary-sage-green); /* Muted/secondary text, placeholder */
 
-            /* Semantic Mapping to New Pastel Palette Colors */
-            --color-bg-light: var(--palette-off-white); /* Main light background */
-            --color-bg-medium: var(--palette-light-beige); /* Slightly darker light background */
-            --color-text-dark: var(--palette-deep-brown); /* Darkest text for headings, main buttons */
-            --color-text-medium: var(--palette-dark-gray); /* General body text */
-            --color-text-light: var(--palette-soft-gray); /* Muted/secondary text, placeholder */
-
-            --color-header-footer: var(--palette-light-beige); /* Header/footer background */
-            --color-primary-button-bg: var(--palette-tan-accent); /* Button background */
-            --color-primary-button-text: var(--palette-deep-brown); /* Button text color */
-            --color-highlight: var(--palette-brown-accent); /* Highlight/hover color */
-            --color-secondary-accent: var(--palette-brown-accent); /* Secondary accent (for gradients) */
-            --color-border: var(--palette-soft-gray); /* Border color */
+            --color-header-footer: var(--secondary-sage-green); /* Header/footer background */
+            --color-primary-button-bg: var(--primary-dark-olive); /* Button background */
+            --color-primary-button-text: var(--background-light-beige); /* Button text color (light beige for contrast) */
+            --color-highlight: var(--accent-terracotta); /* Highlight/hover color */
+            --color-secondary-accent: var(--medium-tan); /* Secondary accent (for gradients, etc.) */
+            --color-border: var(--secondary-sage-green); /* Border color */
 
             /* Keeping alert/error color distinct for visibility */
             --color-alert: #d9534f; /* Soft red for warnings */
             --color-error-text: #d9534f;
 
             /* Subtle gradients using the new palette colors */
-            --gradient-primary: linear-gradient(90deg, var(--palette-tan-accent), var(--palette-brown-accent));
-            --gradient-highlight: linear-gradient(90deg, var(--palette-brown-accent), var(--palette-tan-accent)); /* Reversed for subtle hover effect */
+            --gradient-primary: linear-gradient(90deg, var(--primary-dark-olive), var(--medium-tan)); /* Dark Olive to Medium Tan */
+            --gradient-highlight: linear-gradient(90deg, var(--accent-terracotta), var(--medium-tan)); /* Terracotta to Medium Tan */
 
             /* Shadows adjusted for light theme */
             --shadow-deep: 0 8px 16px rgba(0,0,0,0.15);
@@ -107,7 +103,8 @@
         section h2::after {
             content: ''; position: absolute; bottom: 0; left: 50%;
             transform: translateX(-50%); height: 3px; width: 80px;
-            background: var(--gradient-primary); border-radius: 2px; /* Tan to Brown gradient */
+            background: var(--gradient-primary); /* Dark Olive to Medium Tan gradient */
+            border-radius: 2px;
         }
 
         #disclaimer h2 {
@@ -185,7 +182,7 @@
 
         /* --- Hero Section - Enhanced 3D Integration & Fallback --- */
         #hero {
-            background: linear-gradient(rgba(255, 232, 214, 0.9), rgba(255, 232, 214, 0.9)); /* Lighter overlay matching main bg */
+            background: linear-gradient(rgba(245, 245, 220, 0.9), rgba(245, 245, 220, 0.9)); /* Lighter overlay matching main bg */
             color: var(--color-text-dark); /* Darkest text for hero content */
             height: 100vh;
             display: flex;
@@ -240,7 +237,7 @@
             box-shadow: var(--shadow-medium);
         }
         #hero-fallback-message span { /* Style for the highlighted text in fallback */
-             color: var(--color-primary-button-bg); /* Tan accent */
+             color: var(--color-primary-button-bg); /* Dark Olive */
         }
 
 
@@ -256,7 +253,7 @@
             font-weight: 700; letter-spacing: 1.5px; line-height: 1.1;
             color: var(--color-text-dark); /* Darkest text */
         }
-        #hero h1 .site-title { font-weight: 700; color: var(--color-primary-button-bg); } /* Tan accent */
+        #hero h1 .site-title { font-weight: 700; color: var(--color-primary-button-bg); } /* Dark Olive */
         #hero p {
             font-size: 1.5rem; margin-bottom: 50px; max-width: 800px;
             text-shadow: 1px 1px 6px rgba(0,0,0,0.08);
@@ -267,8 +264,8 @@
 
         .cta-button {
             display: inline-block;
-            background: var(--gradient-primary); /* Uses Tan to Brown */
-            color: var(--color-primary-button-text); /* Dark brown for text */
+            background: var(--gradient-primary); /* Uses Dark Olive to Medium Tan */
+            color: var(--color-primary-button-text); /* Light Beige for text */
             padding: 16px 40px;
             text-decoration: none; border-radius: 30px; font-size: 1.3rem; font-weight: 500;
             transition: background-color 0.4s ease, transform 0.3s ease-out, box-shadow 0.4s ease, color 0.4s ease;
@@ -279,7 +276,7 @@
             outline: none;
         }
         .cta-button:focus {
-            outline: 2px solid var(--color-highlight); /* Highlight color for outline */
+            outline: 2px solid var(--color-highlight); /* Terracotta highlight color for outline */
             outline-offset: 3px;
             border-radius: 30px;
         }
@@ -290,7 +287,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: var(--gradient-highlight); /* Highlight gradient */
+            background: var(--gradient-highlight); /* Terracotta to Medium Tan highlight gradient */
             transition: left 0.4s ease-out;
             z-index: -1;
         }
@@ -299,7 +296,7 @@
         }
         .cta-button:hover {
             background: transparent;
-            color: var(--color-text-dark); /* Darkest text on hover */
+            color: var(--color-text-dark); /* Dark Brown on hover */
             transform: translateY(-4px);
             box-shadow: var(--shadow-deep);
         }
@@ -312,7 +309,7 @@
             display: block; width: 100%; height: auto;
             border-radius: 8px;
             box-shadow: var(--shadow-medium);
-            border: 1px solid var(--color-border); /* Soft gray border color */
+            border: 1px solid var(--color-border); /* Sage Green border color */
             transition: transform 0.5s ease-out, box-shadow 0.4s ease, border-color 0.3s ease;
             cursor: pointer;
             transform-style: preserve-3d;
@@ -321,27 +318,27 @@
             outline: none;
         }
         .sketch-gallery img:focus {
-             outline: 3px solid var(--color-highlight); /* Highlight color for outline */
+             outline: 3px solid var(--color-highlight); /* Terracotta highlight color for outline */
              outline-offset: 3px;
-             border-color: var(--color-primary-button-bg); /* Tan accent for border */
+             border-color: var(--primary-dark-olive); /* Dark Olive for border */
              filter: brightness(1.05);
         }
         .sketch-gallery img:hover {
             transform: scale(1.08) rotateY(10deg) rotateX(6deg) translateZ(20px);
             box-shadow: var(--shadow-deep);
-            border-color: var(--color-primary-button-bg); /* Tan accent for border */
+            border-color: var(--primary-dark-olive); /* Dark Olive for border */
             filter: brightness(1.05);
         }
 
         /* --- Services/Collaborations --- */
         .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 50px; margin-top: 40px; }
         .service-card {
-            background: var(--color-bg-medium); /* Slightly darker pastel background */
+            background: var(--color-bg-medium); /* Medium Tan background */
             padding: 40px; border-radius: 12px;
             box-shadow: var(--shadow-medium);
             text-align: center;
             transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.3s ease, border-color 0.3s ease;
-            border: 1px solid var(--color-border); /* Soft gray border color */
+            border: 1px solid var(--color-border); /* Sage Green border color */
             display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
             cursor: default;
             transform: translateZ(0);
@@ -349,10 +346,10 @@
         .service-card:hover {
             transform: translateY(-10px);
             box-shadow: var(--shadow-deep);
-            background-color: #f0ebe8; /* Slightly lighter on hover */
-            border-color: var(--color-primary-button-bg); /* Highlight border with Tan accent on hover */
+            background-color: var(--background-light-beige); /* Slightly lighter on hover */
+            border-color: var(--primary-dark-olive); /* Dark Olive highlight border on hover */
         }
-        .service-card .icon { font-size: 4rem; color: var(--color-primary-button-bg); margin-bottom: 25px; display: block; /* Tan accent */
+        .service-card .icon { font-size: 4rem; color: var(--primary-dark-olive); margin-bottom: 25px; display: block; /* Dark Olive */
             transition: transform 0.3s ease;
         }
         .service-card:hover .icon {
@@ -368,8 +365,8 @@
         }
         .service-process ol, .service-process ul { list-style-position: outside; padding-left: 30px; margin: 25px auto; max-width: 900px; color: var(--color-text-medium); /* General body text for process steps */ font-size: 1.05rem; line-height: 1.8; }
         .service-process li { margin-bottom: 15px; padding-left: 8px; position: relative; }
-        .service-process ol li::marker { font-weight: bold; color: var(--color-primary-button-bg); font-size: 1.2em; } /* Tan accent for marker */
-        .service-process ul li::before { content: '•'; color: var(--color-primary-button-bg); font-weight: bold; display: inline-block; width: 1em; margin-left: -1em; font-size: 1.2em; } /* Tan accent for bullet */
+        .service-process ol li::marker { font-weight: bold; color: var(--primary-dark-olive); font-size: 1.2em; } /* Dark Olive for marker */
+        .service-process ul li::before { content: '•'; color: var(--primary-dark-olive); font-weight: bold; display: inline-block; width: 1em; margin-left: -1em; font-size: 1.2em; } /* Dark Olive for bullet */
         .service-process li strong { color: var(--color-text-dark); font-weight: 500; } /* Darkest text for bold text */
         .important-note { text-align: center; font-size: 1rem; color: var(--color-alert); margin-top: 20px; font-weight: 500; }
         .important-note i { margin-right: 8px; }
@@ -379,16 +376,16 @@
         #about .container { display: flex; flex-direction: column; align-items: center; text-align: center; }
         #about p { max-width: 900px; margin-bottom: 30px; font-size: 1.1rem; color: var(--color-text-medium); /* General body text for about text */ line-height: 1.8; }
         #about p:last-of-type { margin-bottom: 0; }
-        #about p a { color: var(--color-primary-button-bg); text-decoration: none; transition: color 0.3s ease, text-decoration 0.3s ease; font-weight: 500; /* Tan accent */
+        #about p a { color: var(--primary-dark-olive); text-decoration: none; transition: color 0.3s ease, text-decoration 0.3s ease; font-weight: 500; /* Dark Olive */
              outline: none;
         }
         #about p a:focus {
-             color: var(--color-highlight); /* Highlight color */
-             outline: 2px solid var(--color-highlight); /* Highlight color */
+             color: var(--color-highlight); /* Terracotta Highlight color */
+             outline: 2px solid var(--color-highlight); /* Terracotta Highlight color */
              outline-offset: 2px;
              border-radius: 2px;
         }
-        #about p a:hover { color: var(--color-highlight); text-decoration: underline; } /* Highlight color */
+        #about p a:hover { color: var(--color-highlight); text-decoration: underline; } /* Terracotta Highlight color */
          #about p a i { margin-right: 5px; }
 
 
@@ -396,9 +393,9 @@
         #contact { background: var(--color-bg-light); } /* Main light background */
         .contact-form {
             max-width: 650px; margin: 60px auto; padding: 50px;
-            background: var(--color-bg-medium); /* Slightly darker pastel background */
+            background: var(--color-bg-medium); /* Medium Tan background */
             border-radius: 12px; box-shadow: var(--shadow-deep);
-            border: 1px solid var(--color-border); /* Soft gray border color */
+            border: 1px solid var(--color-border); /* Sage Green border color */
             position: relative;
         }
 
@@ -407,7 +404,7 @@
         .contact-form input[type="email"],
         .contact-form textarea {
             width: 100%; padding: 15px; margin-bottom: 25px;
-            border: 1px solid var(--color-border); /* Soft gray border color */
+            border: 1px solid var(--color-border); /* Sage Green border color */
             border-radius: 8px; font-size: 1rem; color: var(--color-text-dark); /* Darkest text for input */
             background-color: var(--color-bg-light); /* Main light background for input */
             box-sizing: border-box; appearance: none;
@@ -418,15 +415,15 @@
         .contact-form input[type="text"]:focus,
         .contact-form input[type="email"]:focus,
         .contact-form textarea:focus {
-            border-color: var(--color-primary-button-bg); /* Tan accent */
-            box-shadow: 0 0 10px rgba(221, 190, 169, 0.3); /* Shadow using Tan accent */
+            border-color: var(--primary-dark-olive); /* Dark Olive */
+            box-shadow: 0 0 10px rgba(85, 107, 47, 0.3); /* Shadow using Dark Olive */
             outline: none;
         }
         .contact-form textarea { min-height: 200px; resize: vertical; padding: 15px; }
 
 
         .drop-zone {
-            border: 2px dashed var(--color-border); border-radius: 8px; padding: 40px; text-align: center; /* Soft gray border color */
+            border: 2px dashed var(--color-border); border-radius: 8px; padding: 40px; text-align: center; /* Sage Green border color */
             cursor: pointer; margin-bottom: 15px;
             transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
             background-color: var(--color-bg-light); /* Main light background */
@@ -434,22 +431,22 @@
             outline: none;
         }
          .drop-zone:focus {
-             outline: 2px solid var(--color-highlight); /* Highlight color */
+             outline: 2px solid var(--color-highlight); /* Terracotta highlight color */
              outline-offset: 3px;
              border-radius: 8px;
          }
 
         .drop-zone:hover {
-            background-color: var(--color-bg-medium); /* Slightly darker pastel on hover */
-            border-color: var(--color-primary-button-bg); /* Highlight border with Tan accent */
-            box-shadow: 0 0 8px rgba(221, 190, 169, 0.2); /* Shadow using Tan accent */
+            background-color: var(--color-bg-medium); /* Medium Tan on hover */
+            border-color: var(--primary-dark-olive); /* Dark Olive highlight border */
+            box-shadow: 0 0 8px rgba(85, 107, 47, 0.2); /* Shadow using Dark Olive */
         }
 
         .drop-zone.dragover {
-            background-color: rgba(221, 190, 169, 0.1); /* Highlight with Tan accent transparent */
-            border-color: var(--color-primary-button-bg); /* Tan accent */
+            background-color: rgba(85, 107, 47, 0.1); /* Highlight with Dark Olive transparent */
+            border-color: var(--primary-dark-olive); /* Dark Olive */
             border-style: solid;
-            box-shadow: 0 0 18px rgba(221, 190, 169, 0.25); /* Shadow with Tan accent */
+            box-shadow: 0 0 18px rgba(85, 107, 47, 0.25); /* Shadow with Dark Olive */
         }
         .drop-zone.error { border-color: var(--color-error-text); background-color: rgba(217, 83, 79, 0.1); border-style: solid; box-shadow: none; }
         .drop-zone p { margin: 0; font-size: 1rem; color: var(--color-text-medium); z-index: 2; position: relative; } /* General body text */
@@ -466,8 +463,8 @@
         }
 
         .contact-form button[type="submit"] {
-            background: var(--gradient-primary); /* Uses Tan to Brown */
-            color: var(--color-primary-button-text); /* Dark brown for text */
+            background: var(--gradient-primary); /* Uses Dark Olive to Medium Tan */
+            color: var(--color-primary-button-text); /* Light Beige for text */
             padding: 16px 35px;
             border: none; border-radius: 30px; font-size: 1.3rem; font-weight: 600;
             transition: background-color 0.4s ease, transform 0.3s ease-out, box-shadow 0.4s ease, color 0.4s ease;
@@ -479,7 +476,7 @@
             outline: none;
         }
         .contact-form button[type="submit"]:focus {
-             outline: 2px solid var(--color-highlight); /* Highlight color */
+             outline: 2px solid var(--color-highlight); /* Terracotta highlight color */
              outline-offset: 3px;
              border-radius: 30px;
         }
@@ -490,13 +487,13 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: var(--gradient-highlight); /* Highlight gradient */
+            background: var(--gradient-highlight); /* Terracotta to Medium Tan highlight gradient */
             transition: left 0.4s ease-out;
             z-index: -1;
         }
         .contact-form button[type="submit"]:hover {
             background: transparent;
-            color: var(--color-text-dark); /* Darkest text on hover */
+            color: var(--color-text-dark); /* Dark Brown on hover */
             transform: translateY(-4px);
             box-shadow: var(--shadow-deep);
         }
@@ -504,39 +501,39 @@
 
 
         .contact-info p { text-align: center; font-size: 1.1rem; margin-top: 50px; color: var(--color-text-medium); } /* General body text */
-        .contact-info p a { color: var(--color-primary-button-bg); text-decoration: none; font-weight: bold; transition: color 0.3s ease, text-decoration 0.3s ease; /* Tan accent */
+        .contact-info p a { color: var(--primary-dark-olive); text-decoration: none; font-weight: bold; transition: color 0.3s ease, text-decoration 0.3s ease; /* Dark Olive */
              outline: none;
         }
         .contact-info p a:focus {
-             color: var(--color-highlight); /* Highlight color */
-             outline: 2px solid var(--color-highlight); /* Highlight color */
+             color: var(--color-highlight); /* Terracotta highlight color */
+             outline: 2px solid var(--color-highlight); /* Terracotta highlight color */
              outline-offset: 2px;
              border-radius: 2px;
         }
-        .contact-info p a:hover { color: var(--color-highlight); text-decoration: underline; } /* Highlight color */
+        .contact-info p a:hover { color: var(--color-highlight); text-decoration: underline; } /* Terracotta highlight color */
 
         /* --- Footer --- */
         footer {
             background: var(--color-header-footer); color: var(--color-text-medium); /* Header/footer background and general text color */
             text-align: center; padding: 4rem 0 1.5rem;
         }
-        footer .footer-note { font-size: 0.85em; color: var(--color-text-light); margin-bottom: 20px; } /* Muted text */
+        footer .footer-note { font-size: 0.85em; color: var(--color-text-light); margin-bottom: 20px; } /* Sage Green for muted text */
         footer .social-links { margin-bottom: 25px; }
         footer .social-links a { color: var(--color-text-medium); margin: 0 15px; font-size: 2.2rem; text-decoration: none; transition: color 0.3s ease, transform 0.3s ease; /* General body text color */
             outline: none;
         }
          footer .social-links a:focus {
-             color: var(--color-primary-button-bg); /* Tan accent */
-             outline: 2px solid var(--color-primary-button-bg); /* Tan accent */
+             color: var(--primary-dark-olive); /* Dark Olive */
+             outline: 2px solid var(--primary-dark-olive); /* Dark Olive */
              outline-offset: 3px;
              border-radius: 50%;
          }
-        footer .social-links a:hover { color: var(--color-primary-button-bg); transform: scale(1.3); } /* Tan accent */
+        footer .social-links a:hover { color: var(--primary-dark-olive); transform: scale(1.3); } /* Dark Olive */
 
         /* --- Scroll to Top Button --- */
         .scroll-to-top {
-            position: fixed; bottom: 30px; right: 30px; background-color: var(--color-primary-button-bg); /* Tan accent */
-            color: var(--color-primary-button-text); /* Dark brown for icon */
+            position: fixed; bottom: 30px; right: 30px; background-color: var(--primary-dark-olive); /* Dark Olive */
+            color: var(--color-primary-button-text); /* Light Beige for icon */
             width: 55px; height: 55px; border-radius: 50%;
             text-align: center; line-height: 55px; font-size: 1.8rem;
             box-shadow: var(--shadow-medium);
@@ -546,13 +543,13 @@
             outline: none;
         }
          .scroll-to-top:focus {
-             background-color: var(--color-highlight); /* Highlight color */
-             outline: 2px solid var(--color-highlight); /* Highlight color */
+             background-color: var(--color-highlight); /* Terracotta highlight color */
+             outline: 2px solid var(--color-highlight); /* Terracotta highlight color */
              outline-offset: 3px;
          }
 
         .scroll-to-top.visible { opacity: 1; visibility: visible; }
-        .scroll-to-top:hover { background-color: var(--color-highlight); transform: scale(1.15); } /* Highlight color */
+        .scroll-to-top:hover { background-color: var(--color-highlight); transform: scale(1.15); } /* Terracotta highlight color */
 
         /* --- Mobile Navigation --- */
         @media (max-width: 768px) {
@@ -615,7 +612,7 @@
             }
 
             nav ul li a:hover, nav ul li a.active {
-                 color: var(--color-primary-button-bg); /* Tan accent on hover/active */
+                 color: var(--primary-dark-olive); /* Dark Olive on hover/active */
                  transform: none;
             }
 
@@ -744,7 +741,7 @@
             <canvas id="hero-canvas"></canvas>
             <div id="hero-fallback-message">
                 Your browser does not support the interactive background.<br>
-                Experience the art of <span>NSL Forge</span>.
+                Experience the art of <span class="site-title-fallback">NSL Forge</span>.
             </div>
         </div>
         <div class="hero-content">
@@ -907,9 +904,9 @@
 
                 const geometry = new THREE.OctahedronGeometry(2.8);
                 const material = new THREE.MeshPhongMaterial({
-                    color: 0xDDBEA9, // New: --palette-tan-accent
+                    color: 0x556B2F, // Updated: primary-dark-olive
                     shininess: 150,
-                    specular: 0xCB997E, // New: --palette-brown-accent
+                    specular: 0xD2B48C, // Updated: medium-tan (as a specular highlight)
                     flatShading: true
                 });
 
@@ -923,11 +920,11 @@
                 directionalLight.position.set(5, 5, 5).normalize();
                 scene.add(directionalLight);
 
-                const pointLight1 = new THREE.PointLight(0xDDBEA9, 0.5); // New: Tan accent light
+                const pointLight1 = new THREE.PointLight(0x8FBC8F, 0.5); // Updated: secondary-sage-green light
                 pointLight1.position.set(-5, 5, -5);
                 scene.add(pointLight1);
 
-                const pointLight2 = new THREE.PointLight(0xCB997E, 0.5); // New: Brown accent light
+                const pointLight2 = new THREE.PointLight(0xE07A5F, 0.5); // Updated: accent-terracotta light
                 pointLight2.position.set(5, -5, 5);
                 scene.add(pointLight2);
 
