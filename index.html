@@ -105,7 +105,7 @@
         section h2::after {
             content: ''; position: absolute; bottom: 0; left: 50%;
             transform: translateX(-50%); height: 3px; width: 80px;
-            background: var(--gradient-primary); /* Dark Olive to Medium Tan gradient */
+            background: var(--gradient-primary); /* Dark Green-Brown to Muted Terracotta gradient */
             border-radius: 2px;
         }
 
@@ -519,12 +519,15 @@
 
         /* --- Footer --- */
         footer {
-            background: var(--color-header-footer); color: var(--color-text-medium); /* Header/footer background and general text color */
+            background: var(--color-header-footer);
+            color: var(--primary-dark-olive); /* Changed to primary-dark-olive for better contrast */
             text-align: center; padding: 4rem 0 1.5rem;
         }
-        footer .footer-note { font-size: 0.85em; color: var(--color-text-light); margin-bottom: 20px; } /* Sage Green for muted text */
+        footer .footer-note { font-size: 0.85em; color: var(--primary-dark-olive); margin-bottom: 20px; } /* Changed to primary-dark-olive for better contrast */
         footer .social-links { margin-bottom: 25px; }
-        footer .social-links a { color: var(--color-text-medium); margin: 0 15px; font-size: 2.2rem; text-decoration: none; transition: color 0.3s ease, transform 0.3s ease; /* General body text color */
+        footer .social-links a {
+            color: var(--color-text-dark); /* Changed to text-dark-brown for better contrast on sage background */
+            margin: 0 15px; font-size: 2.2rem; text-decoration: none; transition: color 0.3s ease, transform 0.3s ease;
             outline: none;
         }
          footer .social-links a:focus {
@@ -800,7 +803,8 @@
                     <li><strong>Quotation & Agreement:</strong> Based on the complexity, a quote is provided. Upon agreement, a deposit may be required.</li>
                     <li><strong>Sketching Phase:</strong> I begin the artwork, providing updates or initial drafts for your feedback.</li>
                     <li><strong>Revisions:</strong> Minor revisions are incorporated based on your input (scope for major changes might be limited after a certain stage).</li>
-                    <li><strong>Completion & Delivery:</strong> Once finalized and approved, the remaining payment is made. The finished physical artwork is prepared for delivery or pickup (if local).</li>
+                    <li><strong>Completion & Delivery:
+                        </strong> Once finalized and approved, the remaining payment is made. The finished physical artwork is prepared for delivery or pickup (if local).</li>
                 </ol>
                 <p class="important-note"><i class="fas fa-info-circle"></i> Digital copies can also be provided upon request.</p>
             </div>
