@@ -24,6 +24,8 @@
             --color-text-dark: var(--text-dark-brown); /* Darkest text for headings, main buttons */
             --color-text-medium: var(--primary-dark-olive); /* General body text, a rich green-brown */
             --color-text-light: var(--secondary-sage-green); /* Muted/secondary text, placeholder */
+            --color-text-hero-light: var(--background-light-beige); /* Specific for hero text to be light beige */
+
 
             --color-header-footer: var(--secondary-sage-green); /* Header/footer background */
             --color-primary-button-bg: var(--primary-dark-olive); /* Button background */
@@ -236,7 +238,7 @@
             border-radius: 8px;
             box-shadow: var(--shadow-medium);
         }
-        #hero-fallback-message span { /* Style for the highlighted text in fallback */
+        #hero-fallback-message span.site-title-fallback { /* Style for the highlighted text in fallback */
              color: var(--color-primary-button-bg); /* Dark Olive */
         }
 
@@ -253,12 +255,15 @@
             font-weight: 700; letter-spacing: 1.5px; line-height: 1.1;
             color: var(--color-text-dark); /* Darkest text */
         }
-        #hero h1 .site-title { font-weight: 700; color: var(--color-primary-button-bg); } /* Dark Olive */
+        #hero h1 .site-title {
+            font-weight: 700;
+            color: var(--color-text-hero-light); /* Changed to Light Beige */
+        }
         #hero p {
             font-size: 1.5rem; margin-bottom: 50px; max-width: 800px;
             text-shadow: 1px 1px 6px rgba(0,0,0,0.08);
             font-weight: 300;
-            color: var(--color-text-medium); /* General body text */
+            color: var(--color-text-hero-light); /* Changed to Light Beige */
             line-height: 1.7;
         }
 
@@ -746,7 +751,7 @@
         </div>
         <div class="hero-content">
             <h1>Crafting Visions in Sketch at <span class="site-title">NSL Forge</span></h1>
-            <p>Experience the unique artistry of Naman Lumbhani. Specializing in detailed sketch commissions that bring your ideas to life.</p>
+            <p class="hero-subtext">Experience the unique artistry of Naman Lumbhani. Specializing in detailed sketch commissions that bring your ideas to life.</p>
             <a href="#contact" class="cta-button">Commission Your Sketch</a>
         </div>
     </section>
