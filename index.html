@@ -55,7 +55,12 @@
             font-family: 'Roboto', sans-serif;
             line-height: 1.7;
             color: var(--color-text-medium); /* General body text */
-            background-color: var(--color-bg-light); /* Main light background */
+            /* Updated background with a subtle radial gradient */
+            background: radial-gradient(at top left, var(--medium-tan) 0%, transparent 50%),
+                        radial-gradient(at bottom right, var(--secondary-sage-green) 0%, transparent 50%),
+                        var(--background-light-beige); /* Main light background as a base */
+            background-size: 100% 100%; /* Ensure gradients cover the whole body */
+            background-attachment: fixed; /* Keep background fixed while scrolling */
             scroll-behavior: smooth;
             overflow-x: hidden; /* Prevent horizontal scroll issues */
         }
@@ -66,7 +71,8 @@
         section {
             padding: 120px 0;
             border-bottom: 1px solid var(--color-border);
-            background-color: var(--color-bg-light); /* Main light background */
+            /* Ensure sections have their own background for contrast over body gradient */
+            background-color: var(--color-bg-light);
             min-height: 80vh;
             position: relative;
             overflow: hidden;
@@ -82,7 +88,8 @@
             transform: none;
             transition: none;
             min-height: 100vh;
-            background-color: var(--color-bg-light); /* Ensure hero matches main background */
+            /* Hero section should retain its own background as it has a 3D element */
+            background-color: var(--color-bg-light);
         }
 
         section.is-visible {
