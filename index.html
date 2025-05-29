@@ -12,36 +12,32 @@
         /* --- CSS Variables: Custom Palette (New Palette) --- */
         :root {
             /* New Defined Palette Colors */
-            --palette-white: #F2F2F2;
-            --palette-light-beige: #EAE4D5; /* This is the key beige color */
-            --palette-mid-grey: #B6B09F;
-            --palette-black: #000000;
+            --palette-gray: #7a7265;
+            --palette-light-gray: #cOb7b1;
+            --palette-brown: #8e6e53;
+            --palette-tan: #c69c72;
+            --palette-black: #433e3f;
 
             /* Semantic Mapping to New Palette Colors */
             --color-bg-dark: var(--palette-black); /* Black for main dark backgrounds */
-            --color-bg-light: #111111; /* Very dark grey, slightly lighter than pure black for subtle background variation */
-            --color-text-light: var(--palette-white); /* White for main headings, prominent text */
-            --color-text-dark: var(--palette-mid-grey); /* Mid-grey for secondary or less prominent text (Disclaimer, muted text) */
-            --color-text-medium: var(--palette-light-beige); /* Light beige for general body text (Paragraphs) - THIS IS WHERE IT NEEDS TO SHINE */
+            --color-bg-light: #4c4748; /* Very dark grey, slightly lighter than pure black for subtle background variation - derived from black */
+            --color-text-light: var(--palette-tan); /* Tan for main headings, prominent text */
+            --color-text-dark: var(--palette-gray); /* Gray for secondary or less prominent text (Disclaimer, muted text) */
+            --color-text-medium: var(--palette-light-gray); /* Light Gray for general body text (Paragraphs) - THIS IS WHERE IT NEEDS TO SHINE */
             --color-header-footer: var(--palette-black); /* Black for header/footer */
-            --color-primary-button: var(--palette-light-beige); /* Light beige for primary calls to action and buttons */
-            --color-highlight: var(--palette-white); /* White for key highlights (focus outlines, hover effects, etc.) */
-            --color-secondary-accent: var(--palette-mid-grey); /* Mid-grey for secondary accents or gradients */
-            --color-border: #333333; /* Dark grey for subtle borders on black background */
-
-            /* Mapping old grey/white variables for compatibility (can be removed if unused) */
-            --color-dark-grey: var(--palette-mid-grey);
-            --color-medium-grey: var(--palette-light-beige);
-            --color-white: var(--palette-white);
+            --color-primary-button: var(--palette-tan); /* Tan for primary calls to action and buttons */
+            --color-highlight: var(--palette-light-gray); /* Light Gray for key highlights (focus outlines, hover effects, etc.) */
+            --color-secondary-accent: var(--palette-brown); /* Brown for secondary accents or gradients */
+            --color-border: #5a5556; /* Dark grey for subtle borders on black background - derived from black */
 
             /* Keeping alert/error color distinct for visibility */
             --color-alert: #cf6679; /* Reddish for warnings */
             --color-error-text: #cf6679;
 
             /* Subtle gradients using the new palette colors */
-            /* Adjusted gradient to start with beige and transition to mid-grey for prominence */
-            --gradient-primary: linear-gradient(90deg, var(--palette-light-beige), var(--palette-mid-grey));
-            --gradient-highlight: linear-gradient(90deg, var(--palette-white), var(--palette-mid-grey));
+            /* Adjusted gradient to start with tan and transition to brown for prominence */
+            --gradient-primary: linear-gradient(90deg, var(--palette-tan), var(--palette-brown));
+            --gradient-highlight: linear-gradient(90deg, var(--palette-light-gray), var(--palette-brown));
 
             /* Shadows remain based on black, which is fine with a black background */
             --shadow-deep: 0 12px 24px rgba(0,0,0,0.7);
@@ -55,7 +51,7 @@
         body {
             font-family: 'Roboto', sans-serif;
             line-height: 1.7;
-            color: var(--color-text-medium); /* Now explicitly Light Beige for main body text */
+            color: var(--color-text-medium); /* Now explicitly Light Gray for main body text */
             background-color: var(--color-bg-dark); /* Use Black for dark background */
             scroll-behavior: smooth;
             overflow-x: hidden; /* Prevent horizontal scroll issues */
@@ -97,7 +93,7 @@
         /* Section Headings */
         section h2 {
             font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 700;
-            color: var(--color-text-light); text-align: center; margin-bottom: 50px; /* Use White */
+            color: var(--color-text-light); text-align: center; margin-bottom: 50px; /* Use Tan */
             position: relative;
             padding-bottom: 15px;
             letter-spacing: 0.8px;
@@ -105,7 +101,7 @@
         section h2::after {
             content: ''; position: absolute; bottom: 0; left: 50%;
             transform: translateX(-50%); height: 3px; width: 80px;
-            background: var(--gradient-primary); border-radius: 2px; /* Light Beige to Mid Grey gradient */
+            background: var(--gradient-primary); border-radius: 2px; /* Tan to Brown gradient */
         }
 
         #disclaimer h2 {
@@ -117,7 +113,7 @@
             height: 2px; width: 50px;
         }
         #disclaimer p {
-            max-width: 900px; margin: 20px auto; font-size: 1.05rem; color: var(--color-text-dark); /* Use Mid-grey for disclaimer text */ line-height: 1.7; text-align: center;
+            max-width: 900px; margin: 20px auto; font-size: 1.05rem; color: var(--color-text-dark); /* Use Gray for disclaimer text */ line-height: 1.7; text-align: center;
         }
 
 
@@ -138,41 +134,41 @@
         }
         header .logo a {
             text-decoration: none;
-            color: var(--color-primary-button); /* Use Light Beige for logo text */
+            color: var(--color-primary-button); /* Use Tan for logo text */
             display: block;
             font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700;
             transition: color 0.3s ease, transform 0.3s ease;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
         }
-        header .logo a:hover { color: var(--color-highlight); transform: scale(1.05); } /* Use White for highlight */
+        header .logo a:hover { color: var(--color-highlight); transform: scale(1.05); } /* Use Light Gray for highlight */
         nav ul { list-style: none; padding: 0; margin: 0; display: flex; }
         nav ul li { margin-left: 35px; }
         nav ul li a {
-            color: var(--color-text-dark); /* Use Mid-grey for standard nav links */
+            color: var(--color-text-dark); /* Use Gray for standard nav links */
             text-decoration: none; font-weight: 400;
             padding: 10px 0; position: relative; transition: color 0.3s ease, transform 0.2s ease; letter-spacing: 0.6px;
             font-size: 1.05rem;
             outline: none;
         }
         nav ul li a:focus {
-            color: var(--color-text-light); /* Use White on focus */
-            outline: 2px solid var(--color-highlight); /* Use White for outline */
+            color: var(--color-text-light); /* Use Tan on focus */
+            outline: 2px solid var(--color-highlight); /* Use Light Gray for outline */
             outline-offset: 3px;
             border-radius: 2px;
         }
 
         nav ul li a::after {
             content: ''; position: absolute; left: 0; bottom: -3px; height: 2px; width: 0;
-            background: var(--gradient-primary); /* Use gradient for underline, starts with beige */
+            background: var(--gradient-primary); /* Use gradient for underline, starts with tan */
             transition: width 0.4s ease-out;
         }
-        nav ul li a:hover, nav ul li a.active { color: var(--color-text-light); transform: translateY(-2px); } /* Use White on hover/active */
+        nav ul li a:hover, nav ul li a.active { color: var(--color-text-light); transform: translateY(-2px); } /* Use Tan on hover/active */
         nav ul li a:hover::after, nav ul li a.active::after { width: 100%; }
         nav ul li a.active { color: var(--color-text-light); }
 
 
-        .menu-toggle { display: none; font-size: 2rem; cursor: pointer; color: var(--color-text-light); transition: transform 0.3s ease, color 0.3s ease; } /* Use White */
-        .menu-toggle:hover { transform: rotate(90deg); color: var(--color-highlight); } /* Use White for highlight */
+        .menu-toggle { display: none; font-size: 2rem; cursor: pointer; color: var(--color-text-light); transition: transform 0.3s ease, color 0.3s ease; } /* Use Tan */
+        .menu-toggle:hover { transform: rotate(90deg); color: var(--color-highlight); } /* Use Light Gray for highlight */
         .menu-toggle:focus {
              color: var(--color-highlight);
              outline: 2px solid var(--color-highlight);
@@ -184,7 +180,7 @@
         /* --- Hero Section - Enhanced 3D Integration & Fallback --- */
         #hero {
             background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)); /* Darker overlay matching Black */
-            color: var(--color-text-light); /* Use White */
+            color: var(--color-text-light); /* Use Tan */
             height: 100vh;
             display: flex;
             flex-direction: column;
@@ -227,7 +223,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            color: var(--color-text-dark); /* Use Mid-grey */
+            color: var(--color-text-dark); /* Use Gray */
             font-size: 1.1rem;
             text-align: center;
             z-index: 2;
@@ -237,7 +233,7 @@
             border-radius: 8px;
         }
         #hero-fallback-message span { /* Style for the highlighted text in fallback */
-             color: var(--color-primary-button); /* Use Light Beige */
+             color: var(--color-primary-button); /* Use Tan */
         }
 
 
@@ -251,21 +247,21 @@
             font-family: 'Playfair Display', serif; font-size: 5rem; margin-bottom: 20px;
             text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
             font-weight: 700; letter-spacing: 1.5px; line-height: 1.1;
-            color: var(--color-text-light); /* Use White */
+            color: var(--color-text-light); /* Use Tan */
         }
-        #hero h1 .site-title { font-weight: 700; color: var(--color-primary-button); } /* Use Light Beige */
+        #hero h1 .site-title { font-weight: 700; color: var(--color-primary-button); } /* Use Tan */
         #hero p {
             font-size: 1.5rem; margin-bottom: 50px; max-width: 800px;
             text-shadow: 1px 1px 6px rgba(0,0,0,0.6);
             font-weight: 300;
-            color: var(--color-text-light); /* Use White for hero description, this makes it pop more than beige */
+            color: var(--color-text-light); /* Use Tan for hero description, this makes it pop more than beige */
             line-height: 1.7;
         }
 
         .cta-button {
             display: inline-block;
-            background: var(--gradient-primary); /* Uses Light Beige to Mid Grey */
-            color: var(--palette-black); /* Text color black for strong contrast with Light Beige */
+            background: var(--gradient-primary); /* Uses Tan to Brown */
+            color: var(--palette-black); /* Text color black for strong contrast with Tan */
             padding: 16px 40px;
             text-decoration: none; border-radius: 30px; font-size: 1.3rem; font-weight: 500;
             transition: background-color 0.4s ease, transform 0.3s ease-out, box-shadow 0.4s ease, color 0.4s ease;
@@ -276,7 +272,7 @@
             outline: none;
         }
         .cta-button:focus {
-            outline: 2px solid var(--color-highlight); /* Use White for outline */
+            outline: 2px solid var(--color-highlight); /* Use Light Gray for outline */
             outline-offset: 3px;
             border-radius: 30px;
         }
@@ -287,7 +283,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: var(--gradient-highlight); /* Use gradient (White to Mid Grey) */
+            background: var(--gradient-highlight); /* Use gradient (Light Gray to Brown) */
             transition: left 0.4s ease-out;
             z-index: -1;
         }
@@ -296,7 +292,7 @@
         }
         .cta-button:hover {
             background: transparent;
-            color: var(--color-text-light); /* Text color changes to White on hover */
+            color: var(--color-text-light); /* Text color changes to Tan on hover */
             transform: translateY(-4px);
             box-shadow: var(--shadow-deep);
         }
@@ -318,15 +314,15 @@
             outline: none;
         }
         .sketch-gallery img:focus {
-             outline: 3px solid var(--color-highlight); /* Use White for outline */
+             outline: 3px solid var(--color-highlight); /* Use Light Gray for outline */
              outline-offset: 3px;
-             border-color: var(--color-primary-button); /* Use Light Beige for border */
+             border-color: var(--color-primary-button); /* Use Tan for border */
              filter: brightness(1.1);
         }
         .sketch-gallery img:hover {
             transform: scale(1.08) rotateY(10deg) rotateX(6deg) translateZ(20px);
             box-shadow: var(--shadow-deep);
-            border-color: var(--color-primary-button); /* Use Light Beige for border */
+            border-color: var(--color-primary-button); /* Use Tan for border */
             filter: brightness(1.1);
         }
 
@@ -346,46 +342,46 @@
         .service-card:hover {
             transform: translateY(-10px);
             box-shadow: var(--shadow-deep);
-            background-color: #1A1A1A; /* Slightly different dark background on hover */
-            border-color: var(--color-primary-button); /* Highlight border with Light Beige on hover */
+            background-color: #554f50; /* Slightly different dark background on hover - derived from #4c4748 */
+            border-color: var(--color-primary-button); /* Highlight border with Tan on hover */
         }
-        .service-card .icon { font-size: 4rem; color: var(--color-primary-button); margin-bottom: 25px; display: block; /* Use Light Beige */
+        .service-card .icon { font-size: 4rem; color: var(--color-primary-button); margin-bottom: 25px; display: block; /* Use Tan */
             transition: transform 0.3s ease;
         }
         .service-card:hover .icon {
             transform: scale(1.1) rotate(5deg);
         }
-        .service-card h3 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 15px; color: var(--color-text-light); font-weight: 600; letter-spacing: 0.5px;} /* Use White */
-        .service-card p { font-size: 1rem; color: var(--color-text-medium); /* Use Light Beige for service descriptions */ margin-bottom: 0; line-height: 1.7; }
+        .service-card h3 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 15px; color: var(--color-text-light); font-weight: 600; letter-spacing: 0.5px;} /* Use Tan */
+        .service-card p { font-size: 1rem; color: var(--color-text-medium); /* Use Light Gray for service descriptions */ margin-bottom: 0; line-height: 1.7; }
 
         .service-process { margin-top: 80px; padding-top: 40px; border-top: 1px dashed var(--color-border); text-align: left; }
         .service-process h3 {
-            font-family: 'Playfair Display', serif; color: var(--color-text-light); margin-top: 0; margin-bottom: 30px; /* Use White */
+            font-family: 'Playfair Display', serif; color: var(--color-text-light); margin-top: 0; margin-bottom: 30px; /* Use Tan */
             font-size: 2.2rem; text-align: center; font-weight: 600;
         }
-        .service-process ol, .service-process ul { list-style-position: outside; padding-left: 30px; margin: 25px auto; max-width: 900px; color: var(--color-text-medium); /* Use Light Beige for process steps */ font-size: 1.05rem; line-height: 1.8; }
+        .service-process ol, .service-process ul { list-style-position: outside; padding-left: 30px; margin: 25px auto; max-width: 900px; color: var(--color-text-medium); /* Use Light Gray for process steps */ font-size: 1.05rem; line-height: 1.8; }
         .service-process li { margin-bottom: 15px; padding-left: 8px; position: relative; }
-        .service-process ol li::marker { font-weight: bold; color: var(--color-primary-button); font-size: 1.2em; } /* Use Light Beige for marker */
-        .service-process ul li::before { content: '•'; color: var(--color-primary-button); font-weight: bold; display: inline-block; width: 1em; margin-left: -1em; font-size: 1.2em; } /* Use Light Beige for bullet */
-        .service-process li strong { color: var(--color-text-light); font-weight: 500; } /* Use White for bold text */
+        .service-process ol li::marker { font-weight: bold; color: var(--color-primary-button); font-size: 1.2em; } /* Use Tan for marker */
+        .service-process ul li::before { content: '•'; color: var(--color-primary-button); font-weight: bold; display: inline-block; width: 1em; margin-left: -1em; font-size: 1.2em; } /* Use Tan for bullet */
+        .service-process li strong { color: var(--color-text-light); font-weight: 500; } /* Use Tan for bold text */
         .important-note { text-align: center; font-size: 1rem; color: var(--color-alert); margin-top: 20px; font-weight: 500; }
         .important-note i { margin-right: 8px; }
 
 
         /* --- About Section --- */
         #about .container { display: flex; flex-direction: column; align-items: center; text-align: center; }
-        #about p { max-width: 900px; margin-bottom: 30px; font-size: 1.1rem; color: var(--color-text-medium); /* Now explicitly Light Beige for about text */ line-height: 1.8; }
+        #about p { max-width: 900px; margin-bottom: 30px; font-size: 1.1rem; color: var(--color-text-medium); /* Now explicitly Light Gray for about text */ line-height: 1.8; }
         #about p:last-of-type { margin-bottom: 0; }
-        #about p a { color: var(--color-primary-button); text-decoration: none; transition: color 0.3s ease, text-decoration 0.3s ease; font-weight: 500; /* Use Light Beige */
+        #about p a { color: var(--color-primary-button); text-decoration: none; transition: color 0.3s ease, text-decoration 0.3s ease; font-weight: 500; /* Use Tan */
              outline: none;
         }
         #about p a:focus {
-             color: var(--color-highlight); /* Use White */
-             outline: 2px solid var(--color-highlight); /* Use White */
+             color: var(--color-highlight); /* Use Light Gray */
+             outline: 2px solid var(--color-highlight); /* Use Light Gray */
              outline-offset: 2px;
              border-radius: 2px;
         }
-        #about p a:hover { color: var(--color-highlight); text-decoration: underline; } /* Use White */
+        #about p a:hover { color: var(--color-highlight); text-decoration: underline; } /* Use Light Gray */
          #about p a i { margin-right: 5px; }
 
 
@@ -399,13 +395,13 @@
             position: relative;
         }
 
-        .contact-form label { display: block; margin-bottom: 12px; font-weight: 500; color: var(--color-text-light); font-size: 1.1rem; letter-spacing: 0.3px;} /* Use White */
+        .contact-form label { display: block; margin-bottom: 12px; font-weight: 500; color: var(--color-text-light); font-size: 1.1rem; letter-spacing: 0.3px;} /* Use Tan */
         .contact-form input[type="text"],
         .contact-form input[type="email"],
         .contact-form textarea {
             width: 100%; padding: 15px; margin-bottom: 25px;
             border: 1px solid var(--color-border); /* Use dark grey border color */
-            border-radius: 8px; font-size: 1rem; color: var(--color-text-light); /* Use White for text input */
+            border-radius: 8px; font-size: 1rem; color: var(--color-text-light); /* Use Tan for text input */
             background-color: var(--color-bg-dark); /* Use Black for input background */
             box-sizing: border-box; appearance: none;
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -415,8 +411,8 @@
         .contact-form input[type="text"]:focus,
         .contact-form input[type="email"]:focus,
         .contact-form textarea:focus {
-            border-color: var(--color-primary-button); /* Light Beige */
-            box-shadow: 0 0 10px rgba(234, 228, 213, 0.6); /* Shadow using Light Beige (RGB of #EAE4D5) */
+            border-color: var(--color-primary-button); /* Tan */
+            box-shadow: 0 0 10px rgba(198, 156, 114, 0.6); /* Shadow using Tan (RGB of #c69c72) */
             outline: none;
         }
         .contact-form textarea { min-height: 200px; resize: vertical; padding: 15px; }
@@ -426,35 +422,35 @@
             border: 2px dashed var(--color-border); border-radius: 8px; padding: 40px; text-align: center; /* Use dark grey border color */
             cursor: pointer; margin-bottom: 15px;
             transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-            background-color: #1A1A1A; /* Dark background, similar to service card hover */
+            background-color: #554f50; /* Dark background, similar to service card hover - derived from #4c4748 */
             position: relative;
             outline: none;
         }
          .drop-zone:focus {
-             outline: 2px solid var(--color-highlight); /* Use White */
+             outline: 2px solid var(--color-highlight); /* Use Light Gray */
              outline-offset: 3px;
              border-radius: 8px;
          }
 
         .drop-zone:hover {
-            background-color: #282828; /* Slightly lighter on hover */
-            border-color: var(--color-primary-button); /* Highlight border with Light Beige */
-            box-shadow: 0 0 8px rgba(234, 228, 213, 0.4); /* Shadow using Light Beige */
+            background-color: #635c5d; /* Slightly lighter on hover - derived from #554f50 */
+            border-color: var(--color-primary-button); /* Highlight border with Tan */
+            box-shadow: 0 0 8px rgba(198, 156, 114, 0.4); /* Shadow using Tan */
         }
 
         .drop-zone.dragover {
-            background-color: rgba(234, 228, 213, 0.15); /* Highlight with Light Beige transparent */
-            border-color: var(--color-primary-button); /* Light Beige */
+            background-color: rgba(198, 156, 114, 0.15); /* Highlight with Tan transparent */
+            border-color: var(--color-primary-button); /* Tan */
             border-style: solid;
-            box-shadow: 0 0 18px rgba(234, 228, 213, 0.5); /* Shadow with Light Beige */
+            box-shadow: 0 0 18px rgba(198, 156, 114, 0.5); /* Shadow with Tan */
         }
         .drop-zone.error { border-color: var(--color-error-text); background-color: rgba(207, 102, 121, 0.15); border-style: solid; box-shadow: none; }
-        .drop-zone p { margin: 0; font-size: 1rem; color: var(--color-text-dark); z-index: 2; position: relative; } /* Use Mid-grey */
-        .file-info { margin-top: 10px; font-size: 0.95rem; color: var(--color-text-medium); font-weight: 500; z-index: 2; position: relative; } /* Use Light Beige */
+        .drop-zone p { margin: 0; font-size: 1rem; color: var(--color-text-dark); z-index: 2; position: relative; } /* Use Gray */
+        .file-info { margin-top: 10px; font-size: 0.95rem; color: var(--color-text-medium); font-weight: 500; z-index: 2; position: relative; } /* Use Light Gray */
         .file-info.error-message { color: var(--color-error-text); font-weight: bold; }
 
         .drop-zone-help-text {
-             color: var(--color-text-dark); /* Use Mid-grey */
+             color: var(--color-text-dark); /* Use Gray */
              display: block;
              margin-top: -15px;
              margin-bottom: 20px;
@@ -463,7 +459,7 @@
         }
 
         .contact-form button[type="submit"] {
-            background: var(--gradient-primary); /* Uses Light Beige to Mid Grey */
+            background: var(--gradient-primary); /* Uses Tan to Brown */
             color: var(--palette-black); /* Text color Black */
             padding: 16px 35px;
             border: none; border-radius: 30px; font-size: 1.3rem; font-weight: 600;
@@ -476,7 +472,7 @@
             outline: none;
         }
         .contact-form button[type="submit"]:focus {
-             outline: 2px solid var(--color-highlight); /* Use White */
+             outline: 2px solid var(--color-highlight); /* Use Light Gray */
              outline-offset: 3px;
              border-radius: 30px;
         }
@@ -487,52 +483,52 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: var(--gradient-highlight); /* Use gradient (White to Mid Grey) */
+            background: var(--gradient-highlight); /* Use gradient (Light Gray to Brown) */
             transition: left 0.4s ease-out;
             z-index: -1;
         }
         .contact-form button[type="submit"]:hover {
             background: transparent;
-            color: var(--color-text-light); /* Text color changes to White on hover */
+            color: var(--color-text-light); /* Text color changes to Tan on hover */
             transform: translateY(-4px);
             box-shadow: var(--shadow-deep);
         }
         .contact-form button[type="submit"]:active { transform: translateY(-1px); box-shadow: var(--shadow-light); }
 
 
-        .contact-info p { text-align: center; font-size: 1.1rem; margin-top: 50px; color: var(--color-text-medium); } /* Use Light Beige */
-        .contact-info p a { color: var(--color-primary-button); text-decoration: none; font-weight: bold; transition: color 0.3s ease, text-decoration 0.3s ease; /* Use Light Beige */
+        .contact-info p { text-align: center; font-size: 1.1rem; margin-top: 50px; color: var(--color-text-medium); } /* Use Light Gray */
+        .contact-info p a { color: var(--color-primary-button); text-decoration: none; font-weight: bold; transition: color 0.3s ease, text-decoration 0.3s ease; /* Use Tan */
              outline: none;
         }
         .contact-info p a:focus {
-             color: var(--color-highlight); /* Use White */
-             outline: 2px solid var(--color-highlight); /* Use White */
+             color: var(--color-highlight); /* Use Light Gray */
+             outline: 2px solid var(--color-highlight); /* Use Light Gray */
              outline-offset: 2px;
              border-radius: 2px;
         }
-        .contact-info p a:hover { color: var(--color-highlight); text-decoration: underline; } /* Use White */
+        .contact-info p a:hover { color: var(--color-highlight); text-decoration: underline; } /* Use Light Gray */
 
         /* --- Footer --- */
         footer {
-            background: var(--color-header-footer); color: var(--color-text-dark); /* Use Black and Mid-grey */
+            background: var(--color-header-footer); color: var(--color-text-dark); /* Use Black and Gray */
             text-align: center; padding: 4rem 0 1.5rem;
         }
-        footer .footer-note { font-size: 0.85em; color: rgba(182, 176, 159, 0.6); margin-bottom: 20px; } /* Use Mid-grey with transparency */
+        footer .footer-note { font-size: 0.85em; color: rgba(122, 114, 101, 0.6); margin-bottom: 20px; } /* Use Gray with transparency */
         footer .social-links { margin-bottom: 25px; }
-        footer .social-links a { color: rgba(182, 176, 159, 0.8); margin: 0 15px; font-size: 2.2rem; text-decoration: none; transition: color 0.3s ease, transform 0.3s ease; /* Use Mid-grey with transparency */
+        footer .social-links a { color: rgba(122, 114, 101, 0.8); margin: 0 15px; font-size: 2.2rem; text-decoration: none; transition: color 0.3s ease, transform 0.3s ease; /* Use Gray with transparency */
             outline: none;
         }
          footer .social-links a:focus {
-             color: var(--color-primary-button); /* Use Light Beige */
-             outline: 2px solid var(--color-primary-button); /* Use Light Beige */
+             color: var(--color-primary-button); /* Use Tan */
+             outline: 2px solid var(--color-primary-button); /* Use Tan */
              outline-offset: 3px;
              border-radius: 50%;
          }
-        footer .social-links a:hover { color: var(--color-primary-button); transform: scale(1.3); } /* Use Light Beige */
+        footer .social-links a:hover { color: var(--color-primary-button); transform: scale(1.3); } /* Use Tan */
 
         /* --- Scroll to Top Button --- */
         .scroll-to-top {
-            position: fixed; bottom: 30px; right: 30px; background-color: var(--color-primary-button); /* Use Light Beige */
+            position: fixed; bottom: 30px; right: 30px; background-color: var(--color-primary-button); /* Use Tan */
             color: var(--palette-black); /* Use Black for icon */
             width: 55px; height: 55px; border-radius: 50%;
             text-align: center; line-height: 55px; font-size: 1.8rem;
@@ -543,13 +539,13 @@
             outline: none;
         }
          .scroll-to-top:focus {
-             background-color: var(--color-highlight); /* Use White */
-             outline: 2px solid var(--color-highlight); /* Use White */
+             background-color: var(--color-highlight); /* Use Light Gray */
+             outline: 2px solid var(--color-highlight); /* Use Light Gray */
              outline-offset: 3px;
          }
 
         .scroll-to-top.visible { opacity: 1; visibility: visible; }
-        .scroll-to-top:hover { background-color: var(--color-highlight); transform: scale(1.15); } /* Use White, icon remains black */
+        .scroll-to-top:hover { background-color: var(--color-highlight); transform: scale(1.15); } /* Use Light Gray, icon remains black */
 
         /* --- Mobile Navigation --- */
         @media (max-width: 768px) {
@@ -597,7 +593,7 @@
             nav ul li a {
                  font-size: 1.2rem;
                  padding: 12px 0;
-                 color: var(--color-text-light); /* Use White for mobile links, ensures visibility */
+                 color: var(--color-text-light); /* Use Tan for mobile links, ensures visibility */
                  border-bottom: 1px solid var(--color-border); /* Subtle separator (dark grey) */
                  width: 80%;
                  margin: auto;
@@ -612,7 +608,7 @@
             }
 
             nav ul li a:hover, nav ul li a.active {
-                 color: var(--color-primary-button); /* Use Light Beige on hover/active */
+                 color: var(--color-primary-button); /* Use Tan on hover/active */
                  transform: none;
             }
 
@@ -692,7 +688,7 @@
          textarea:focus,
          select:focus,
          [tabindex]:focus {
-             outline: 2px dashed var(--color-highlight); /* Use White */
+             outline: 2px dashed var(--color-highlight); /* Use Light Gray */
              outline-offset: 3px;
              border-radius: 3px;
          }
@@ -904,7 +900,7 @@
 
                 const geometry = new THREE.OctahedronGeometry(2.8);
                 const material = new THREE.MeshPhongMaterial({
-                    color: 0xEAE4D5, // This is --palette-light-beige
+                    color: 0xc69c72, // This is --palette-tan
                     shininess: 150,
                     specular: 0xffffff, // Kept white specular for metallic feel
                     flatShading: true
@@ -920,11 +916,11 @@
                 directionalLight.position.set(5, 5, 5).normalize();
                 scene.add(directionalLight);
 
-                const pointLight1 = new THREE.PointLight(0xB6B09F, 0.6); // This is --palette-mid-grey
+                const pointLight1 = new THREE.PointLight(0x8e6e53, 0.6); // This is --palette-brown
                 pointLight1.position.set(-5, 5, -5);
                 scene.add(pointLight1);
 
-                const pointLight2 = new THREE.PointLight(0xEAE4D5, 0.6); // This is --palette-light-beige
+                const pointLight2 = new THREE.PointLight(0xc69c72, 0.6); // This is --palette-tan
                 pointLight2.position.set(5, -5, 5);
                 scene.add(pointLight2);
 
@@ -987,7 +983,8 @@
              window.addEventListener('scroll', () => {
                  if (window.scrollY > 400) {
                      scrollToTopButton.classList.add('visible');
-                 } else {
+                 }
+                 else {
                      scrollToTopButton.classList.remove('visible');
                  }
              });
