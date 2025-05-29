@@ -9,16 +9,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
-        /* --- CSS Variables: Earthy Tones Palette --- */
+        /* --- CSS Variables: New Harmonious Palette --- */
         :root {
-            --primary-dark-olive: #556B2F; /* Darkest green/brown */
-            --secondary-sage-green: #8FBC8F; /* Lighter, muted green */
-            --background-light-beige: #F5F5DC; /* Main light background */
-            --medium-tan: #D2B48C; /* Medium earth tone, for secondary text/elements */
-            --text-dark-brown: #3E2723; /* Darkest text for headings, main buttons */
-            --accent-terracotta: #E07A5F; /* Warm, reddish-brown accent */
+            --primary-dark-olive: #6B705C; /* Darker green-brown for primary text, buttons */
+            --secondary-sage-green: #A5A58D; /* Muted sage for header/footer, borders */
+            --background-light-beige: #FFE8D6; /* Main light background, very soft cream */
+            --medium-tan: #DDBEA9; /* Medium warm beige, for secondary backgrounds/cards */
+            --text-dark-brown: #3E2723; /* Very dark brown for headings, main buttons */
+            --accent-terracotta: #CB997E; /* Muted terracotta for accents/highlights */
 
-            /* Semantic Mapping to Earthy Tones Palette Colors */
+            /* Semantic Mapping to New Palette Colors */
             --color-bg-light: var(--background-light-beige); /* Main light background */
             --color-bg-medium: var(--medium-tan); /* Slightly darker background for cards/sections */
             --color-text-dark: var(--text-dark-brown); /* Darkest text for headings, main buttons */
@@ -39,7 +39,7 @@
             --color-error-text: #d9534f;
 
             /* Subtle gradients using the new palette colors */
-            --gradient-primary: linear-gradient(90deg, var(--primary-dark-olive), var(--medium-tan)); /* Dark Olive to Medium Tan */
+            --gradient-primary: linear-gradient(90deg, var(--primary-dark-olive), var(--accent-terracotta)); /* Dark Green-Brown to Muted Terracotta */
             --gradient-highlight: linear-gradient(90deg, var(--accent-terracotta), var(--medium-tan)); /* Terracotta to Medium Tan */
 
             /* Shadows adjusted for light theme */
@@ -184,7 +184,7 @@
 
         /* --- Hero Section - Enhanced 3D Integration & Fallback --- */
         #hero {
-            background: linear-gradient(rgba(245, 245, 220, 0.9), rgba(245, 245, 220, 0.9)); /* Lighter overlay matching main bg */
+            background: linear-gradient(rgba(255, 232, 214, 0.9), rgba(255, 232, 214, 0.9)); /* Lighter overlay matching main bg */
             color: var(--color-text-dark); /* Darkest text for hero content */
             height: 100vh;
             display: flex;
@@ -269,7 +269,7 @@
 
         .cta-button {
             display: inline-block;
-            background: var(--gradient-primary); /* Uses Dark Olive to Medium Tan */
+            background: var(--gradient-primary); /* Uses Dark Green-Brown to Muted Terracotta */
             color: var(--color-primary-button-text); /* Light Beige for text */
             padding: 16px 40px;
             text-decoration: none; border-radius: 30px; font-size: 1.3rem; font-weight: 500;
@@ -421,7 +421,7 @@
         .contact-form input[type="email"]:focus,
         .contact-form textarea:focus {
             border-color: var(--primary-dark-olive); /* Dark Olive */
-            box-shadow: 0 0 10px rgba(85, 107, 47, 0.3); /* Shadow using Dark Olive */
+            box-shadow: 0 0 10px rgba(107, 112, 92, 0.3); /* Shadow using Dark Olive */
             outline: none;
         }
         .contact-form textarea { min-height: 200px; resize: vertical; padding: 15px; }
@@ -444,14 +444,14 @@
         .drop-zone:hover {
             background-color: var(--color-bg-medium); /* Medium Tan on hover */
             border-color: var(--primary-dark-olive); /* Dark Olive highlight border */
-            box-shadow: 0 0 8px rgba(85, 107, 47, 0.2); /* Shadow using Dark Olive */
+            box-shadow: 0 0 8px rgba(107, 112, 92, 0.2); /* Shadow using Dark Olive */
         }
 
         .drop-zone.dragover {
-            background-color: rgba(85, 107, 47, 0.1); /* Highlight with Dark Olive transparent */
+            background-color: rgba(107, 112, 92, 0.1); /* Highlight with Dark Olive transparent */
             border-color: var(--primary-dark-olive); /* Dark Olive */
             border-style: solid;
-            box-shadow: 0 0 18px rgba(85, 107, 47, 0.25); /* Shadow with Dark Olive */
+            box-shadow: 0 0 18px rgba(107, 112, 92, 0.25); /* Shadow with Dark Olive */
         }
         .drop-zone.error { border-color: var(--color-error-text); background-color: rgba(217, 83, 79, 0.1); border-style: solid; box-shadow: none; }
         .drop-zone p { margin: 0; font-size: 1rem; color: var(--color-text-medium); z-index: 2; position: relative; } /* General body text */
@@ -468,7 +468,7 @@
         }
 
         .contact-form button[type="submit"] {
-            background: var(--gradient-primary); /* Uses Dark Olive to Medium Tan */
+            background: var(--gradient-primary); /* Uses Dark Green-Brown to Muted Terracotta */
             color: var(--color-primary-button-text); /* Light Beige for text */
             padding: 16px 35px;
             border: none; border-radius: 30px; font-size: 1.3rem; font-weight: 600;
@@ -909,9 +909,9 @@
 
                 const geometry = new THREE.OctahedronGeometry(2.8);
                 const material = new THREE.MeshPhongMaterial({
-                    color: 0x556B2F, // Updated: primary-dark-olive
+                    color: 0x6B705C, // Updated: primary-dark-olive
                     shininess: 150,
-                    specular: 0xD2B48C, // Updated: medium-tan (as a specular highlight)
+                    specular: 0xDDBEA9, // Updated: medium-tan (as a specular highlight)
                     flatShading: true
                 });
 
@@ -925,11 +925,11 @@
                 directionalLight.position.set(5, 5, 5).normalize();
                 scene.add(directionalLight);
 
-                const pointLight1 = new THREE.PointLight(0x8FBC8F, 0.5); // Updated: secondary-sage-green light
+                const pointLight1 = new THREE.PointLight(0xA5A58D, 0.5); // Updated: secondary-sage-green light
                 pointLight1.position.set(-5, 5, -5);
                 scene.add(pointLight1);
 
-                const pointLight2 = new THREE.PointLight(0xE07A5F, 0.5); // Updated: accent-terracotta light
+                const pointLight2 = new THREE.PointLight(0xCB997E, 0.5); // Updated: accent-terracotta light
                 pointLight2.position.set(5, -5, 5);
                 scene.add(pointLight2);
 
