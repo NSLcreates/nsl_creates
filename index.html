@@ -13,16 +13,16 @@
         :root {
             /* New Defined Palette Colors */
             --palette-white: #F2F2F2;
-            --palette-light-beige: #EAE4D5;
+            --palette-light-beige: #EAE4D5; /* This is the key beige color */
             --palette-mid-grey: #B6B09F;
             --palette-black: #000000;
 
             /* Semantic Mapping to New Palette Colors */
             --color-bg-dark: var(--palette-black); /* Black for main dark backgrounds */
             --color-bg-light: #111111; /* Very dark grey, slightly lighter than pure black for subtle background variation */
-            --color-text-light: var(--palette-white); /* White for main text on dark background (Headings, prominent text) */
+            --color-text-light: var(--palette-white); /* White for main headings, prominent text */
             --color-text-dark: var(--palette-mid-grey); /* Mid-grey for secondary or less prominent text (Disclaimer, muted text) */
-            --color-text-medium: var(--palette-light-beige); /* Light beige for general body text (Paragraphs) */
+            --color-text-medium: var(--palette-light-beige); /* Light beige for general body text (Paragraphs) - THIS IS WHERE IT NEEDS TO SHINE */
             --color-header-footer: var(--palette-black); /* Black for header/footer */
             --color-primary-button: var(--palette-light-beige); /* Light beige for primary calls to action and buttons */
             --color-highlight: var(--palette-white); /* White for key highlights (focus outlines, hover effects, etc.) */
@@ -39,8 +39,9 @@
             --color-error-text: #cf6679;
 
             /* Subtle gradients using the new palette colors */
-            --gradient-primary: linear-gradient(90deg, var(--color-primary-button), var(--color-secondary-accent)); /* Light Beige to Mid Grey */
-            --gradient-highlight: linear-gradient(90deg, var(--color-highlight), var(--color-secondary-accent)); /* White to Mid Grey */
+            /* Adjusted gradient to start with beige and transition to mid-grey for prominence */
+            --gradient-primary: linear-gradient(90deg, var(--palette-light-beige), var(--palette-mid-grey));
+            --gradient-highlight: linear-gradient(90deg, var(--palette-white), var(--palette-mid-grey));
 
             /* Shadows remain based on black, which is fine with a black background */
             --shadow-deep: 0 12px 24px rgba(0,0,0,0.7);
@@ -54,7 +55,7 @@
         body {
             font-family: 'Roboto', sans-serif;
             line-height: 1.7;
-            color: var(--color-text-medium); /* Use Light Beige for main body text */
+            color: var(--color-text-medium); /* Now explicitly Light Beige for main body text */
             background-color: var(--color-bg-dark); /* Use Black for dark background */
             scroll-behavior: smooth;
             overflow-x: hidden; /* Prevent horizontal scroll issues */
@@ -137,7 +138,7 @@
         }
         header .logo a {
             text-decoration: none;
-            color: var(--color-primary-button); /* Use Light Beige */
+            color: var(--color-primary-button); /* Use Light Beige for logo text */
             display: block;
             font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700;
             transition: color 0.3s ease, transform 0.3s ease;
@@ -162,7 +163,7 @@
 
         nav ul li a::after {
             content: ''; position: absolute; left: 0; bottom: -3px; height: 2px; width: 0;
-            background: var(--gradient-primary); /* Use gradient for underline */
+            background: var(--gradient-primary); /* Use gradient for underline, starts with beige */
             transition: width 0.4s ease-out;
         }
         nav ul li a:hover, nav ul li a.active { color: var(--color-text-light); transform: translateY(-2px); } /* Use White on hover/active */
@@ -257,14 +258,14 @@
             font-size: 1.5rem; margin-bottom: 50px; max-width: 800px;
             text-shadow: 1px 1px 6px rgba(0,0,0,0.6);
             font-weight: 300;
-            color: var(--color-text-light); /* Use White for hero description */
+            color: var(--color-text-light); /* Use White for hero description, this makes it pop more than beige */
             line-height: 1.7;
         }
 
         .cta-button {
             display: inline-block;
-            background: var(--gradient-primary); /* Use gradient as initial background (Light Beige to Mid Grey) */
-            color: var(--palette-black); /* Text color black for contrast with Light Beige/Mid Grey gradient */
+            background: var(--gradient-primary); /* Uses Light Beige to Mid Grey */
+            color: var(--palette-black); /* Text color black for strong contrast with Light Beige */
             padding: 16px 40px;
             text-decoration: none; border-radius: 30px; font-size: 1.3rem; font-weight: 500;
             transition: background-color 0.4s ease, transform 0.3s ease-out, box-shadow 0.4s ease, color 0.4s ease;
@@ -373,7 +374,7 @@
 
         /* --- About Section --- */
         #about .container { display: flex; flex-direction: column; align-items: center; text-align: center; }
-        #about p { max-width: 900px; margin-bottom: 30px; font-size: 1.1rem; color: var(--color-text-medium); /* Use Light Beige for about text */ line-height: 1.8; }
+        #about p { max-width: 900px; margin-bottom: 30px; font-size: 1.1rem; color: var(--color-text-medium); /* Now explicitly Light Beige for about text */ line-height: 1.8; }
         #about p:last-of-type { margin-bottom: 0; }
         #about p a { color: var(--color-primary-button); text-decoration: none; transition: color 0.3s ease, text-decoration 0.3s ease; font-weight: 500; /* Use Light Beige */
              outline: none;
@@ -462,7 +463,7 @@
         }
 
         .contact-form button[type="submit"] {
-            background: var(--gradient-primary); /* Use gradient (Light Beige to Mid Grey) */
+            background: var(--gradient-primary); /* Uses Light Beige to Mid Grey */
             color: var(--palette-black); /* Text color Black */
             padding: 16px 35px;
             border: none; border-radius: 30px; font-size: 1.3rem; font-weight: 600;
@@ -516,7 +517,7 @@
             background: var(--color-header-footer); color: var(--color-text-dark); /* Use Black and Mid-grey */
             text-align: center; padding: 4rem 0 1.5rem;
         }
-        footer .footer-note { font-size: 0.85em; color: rgba(182, 176, 159, 0.6); margin-bottom: 20px; } /* Use Mid-grey with transparency (RGB of #B6B09F is 182,176,159) */
+        footer .footer-note { font-size: 0.85em; color: rgba(182, 176, 159, 0.6); margin-bottom: 20px; } /* Use Mid-grey with transparency */
         footer .social-links { margin-bottom: 25px; }
         footer .social-links a { color: rgba(182, 176, 159, 0.8); margin: 0 15px; font-size: 2.2rem; text-decoration: none; transition: color 0.3s ease, transform 0.3s ease; /* Use Mid-grey with transparency */
             outline: none;
@@ -596,7 +597,7 @@
             nav ul li a {
                  font-size: 1.2rem;
                  padding: 12px 0;
-                 color: var(--color-text-light); /* Use White for mobile links */
+                 color: var(--color-text-light); /* Use White for mobile links, ensures visibility */
                  border-bottom: 1px solid var(--color-border); /* Subtle separator (dark grey) */
                  width: 80%;
                  margin: auto;
@@ -903,7 +904,7 @@
 
                 const geometry = new THREE.OctahedronGeometry(2.8);
                 const material = new THREE.MeshPhongMaterial({
-                    color: 0xEAE4D5, // New Color: --palette-light-beige
+                    color: 0xEAE4D5, // This is --palette-light-beige
                     shininess: 150,
                     specular: 0xffffff, // Kept white specular for metallic feel
                     flatShading: true
@@ -919,11 +920,11 @@
                 directionalLight.position.set(5, 5, 5).normalize();
                 scene.add(directionalLight);
 
-                const pointLight1 = new THREE.PointLight(0xB6B09F, 0.6); // New Color: --palette-mid-grey
+                const pointLight1 = new THREE.PointLight(0xB6B09F, 0.6); // This is --palette-mid-grey
                 pointLight1.position.set(-5, 5, -5);
                 scene.add(pointLight1);
 
-                const pointLight2 = new THREE.PointLight(0xEAE4D5, 0.6); // New Color: --palette-light-beige
+                const pointLight2 = new THREE.PointLight(0xEAE4D5, 0.6); // This is --palette-light-beige
                 pointLight2.position.set(5, -5, 5);
                 scene.add(pointLight2);
 
