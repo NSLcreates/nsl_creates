@@ -11,31 +11,31 @@
     <style>
         /* --- CSS Variables: Custom Palette (New Palette) --- */
         :root {
-            /* New Defined Palette Colors */
-            --palette-gray: #7a7265;
-            --palette-light-gray: #c0b7b1; /* Corrected typo from cOb7b1 */
-            --palette-brown: #8e6e53;
-            --palette-tan: #c69c72;
-            --palette-black: #433e3f;
+            /* New Defined Palette Colors - Adjusted for better contrast on a darker theme */
+            --palette-gray: #b0a9a1; /* Lighter Gray for secondary text */
+            --palette-light-gray: #e0e0e0; /* Very light gray/off-white for main body text */
+            --palette-brown: #8e6e53; /* Retained */
+            --palette-tan: #c69c72; /* Retained */
+            --palette-black: #1a1a1a; /* Darker black for backgrounds */
+            --palette-true-black: #000000; /* For absolute black elements */
 
             /* Semantic Mapping to New Palette Colors */
-            --color-bg-dark: var(--palette-black); /* Black for main dark backgrounds */
-            --color-bg-light: #4c4748; /* Very dark grey, slightly lighter than pure black for subtle background variation - derived from black */
+            --color-bg-dark: var(--palette-true-black); /* True Black for main dark backgrounds */
+            --color-bg-light: #2c2c2c; /* Dark grey, subtly lighter than true black for subtle background variation */
             --color-text-light: var(--palette-tan); /* Tan for main headings, prominent text */
-            --color-text-dark: var(--palette-gray); /* Gray for secondary or less prominent text (Disclaimer, muted text) */
-            --color-text-medium: var(--palette-light-gray); /* Light Gray for general body text (Paragraphs) - THIS IS WHERE IT NEEDS TO SHINE */
-            --color-header-footer: var(--palette-black); /* Black for header/footer */
+            --color-text-dark: var(--palette-gray); /* Lighter Gray for secondary or less prominent text (Disclaimer, muted text) */
+            --color-text-medium: var(--palette-light-gray); /* Off-white for general body text (Paragraphs) - IMPROVED CONTRAST */
+            --color-header-footer: var(--palette-true-black); /* True Black for header/footer */
             --color-primary-button: var(--palette-tan); /* Tan for primary calls to action and buttons */
-            --color-highlight: var(--palette-light-gray); /* Light Gray for key highlights (focus outlines, hover effects, etc.) */
+            --color-highlight: var(--palette-light-gray); /* Off-white for key highlights (focus outlines, hover effects, etc.) */
             --color-secondary-accent: var(--palette-brown); /* Brown for secondary accents or gradients */
-            --color-border: #5a5556; /* Dark grey for subtle borders on black background - derived from black */
+            --color-border: #444444; /* Darker grey for subtle borders on dark background */
 
             /* Keeping alert/error color distinct for visibility */
             --color-alert: #cf6679; /* Reddish for warnings */
             --color-error-text: #cf6679;
 
             /* Subtle gradients using the new palette colors */
-            /* Adjusted gradient to start with tan and transition to brown for prominence */
             --gradient-primary: linear-gradient(90deg, var(--palette-tan), var(--palette-brown));
             --gradient-highlight: linear-gradient(90deg, var(--palette-light-gray), var(--palette-brown));
 
@@ -254,14 +254,14 @@
             font-size: 1.5rem; margin-bottom: 50px; max-width: 800px;
             text-shadow: 1px 1px 6px rgba(0,0,0,0.6);
             font-weight: 300;
-            color: var(--color-text-light); /* Use Tan for hero description, this makes it pop more than beige */
+            color: var(--color-text-medium); /* Changed to medium text for better visibility */
             line-height: 1.7;
         }
 
         .cta-button {
             display: inline-block;
             background: var(--gradient-primary); /* Uses Tan to Brown */
-            color: var(--palette-black); /* Text color black for strong contrast with Tan */
+            color: #ffffff; /* Changed to white for stronger contrast */
             padding: 16px 40px;
             text-decoration: none; border-radius: 30px; font-size: 1.3rem; font-weight: 500;
             transition: background-color 0.4s ease, transform 0.3s ease-out, box-shadow 0.4s ease, color 0.4s ease;
@@ -342,7 +342,7 @@
         .service-card:hover {
             transform: translateY(-10px);
             box-shadow: var(--shadow-deep);
-            background-color: #554f50; /* Slightly different dark background on hover - derived from #4c4748 */
+            background-color: #3a3a3a; /* Slightly different dark background on hover - derived from #4c4748 */
             border-color: var(--color-primary-button); /* Highlight border with Tan on hover */
         }
         .service-card .icon { font-size: 4rem; color: var(--color-primary-button); margin-bottom: 25px; display: block; /* Use Tan */
@@ -401,8 +401,8 @@
         .contact-form textarea {
             width: 100%; padding: 15px; margin-bottom: 25px;
             border: 1px solid var(--color-border); /* Use dark grey border color */
-            border-radius: 8px; font-size: 1rem; color: var(--color-text-light); /* Use Tan for text input */
-            background-color: var(--color-bg-dark); /* Use Black for input background */
+            border-radius: 8px; font-size: 1rem; color: var(--color-text-medium); /* Changed to medium text for better input contrast */
+            background-color: var(--palette-black); /* Use slightly lighter black for input background */
             box-sizing: border-box; appearance: none;
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
             outline: none;
@@ -422,7 +422,7 @@
             border: 2px dashed var(--color-border); border-radius: 8px; padding: 40px; text-align: center; /* Use dark grey border color */
             cursor: pointer; margin-bottom: 15px;
             transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-            background-color: #554f50; /* Dark background, similar to service card hover - derived from #4c4748 */
+            background-color: #3a3a3a; /* Dark background, similar to service card hover */
             position: relative;
             outline: none;
         }
@@ -433,7 +433,7 @@
          }
 
         .drop-zone:hover {
-            background-color: #635c5d; /* Slightly lighter on hover - derived from #554f50 */
+            background-color: #444444; /* Slightly lighter on hover */
             border-color: var(--color-primary-button); /* Highlight border with Tan */
             box-shadow: 0 0 8px rgba(198, 156, 114, 0.4); /* Shadow using Tan */
         }
@@ -460,7 +460,7 @@
 
         .contact-form button[type="submit"] {
             background: var(--gradient-primary); /* Uses Tan to Brown */
-            color: var(--palette-black); /* Text color Black */
+            color: #ffffff; /* Changed to white for stronger contrast */
             padding: 16px 35px;
             border: none; border-radius: 30px; font-size: 1.3rem; font-weight: 600;
             transition: background-color 0.4s ease, transform 0.3s ease-out, box-shadow 0.4s ease, color 0.4s ease;
@@ -513,9 +513,9 @@
             background: var(--color-header-footer); color: var(--color-text-dark); /* Use Black and Gray */
             text-align: center; padding: 4rem 0 1.5rem;
         }
-        footer .footer-note { font-size: 0.85em; color: rgba(122, 114, 101, 0.6); margin-bottom: 20px; } /* Use Gray with transparency */
+        footer .footer-note { font-size: 0.85em; color: rgba(176, 169, 161, 0.6); margin-bottom: 20px; } /* Use Gray with transparency */
         footer .social-links { margin-bottom: 25px; }
-        footer .social-links a { color: rgba(122, 114, 101, 0.8); margin: 0 15px; font-size: 2.2rem; text-decoration: none; transition: color 0.3s ease, transform 0.3s ease; /* Use Gray with transparency */
+        footer .social-links a { color: rgba(176, 169, 161, 0.8); margin: 0 15px; font-size: 2.2rem; text-decoration: none; transition: color 0.3s ease, transform 0.3s ease; /* Use Gray with transparency */
             outline: none;
         }
          footer .social-links a:focus {
@@ -529,7 +529,7 @@
         /* --- Scroll to Top Button --- */
         .scroll-to-top {
             position: fixed; bottom: 30px; right: 30px; background-color: var(--color-primary-button); /* Use Tan */
-            color: var(--palette-black); /* Use Black for icon */
+            color: #ffffff; /* Use white for icon for better contrast */
             width: 55px; height: 55px; border-radius: 50%;
             text-align: center; line-height: 55px; font-size: 1.8rem;
             box-shadow: var(--shadow-medium);
