@@ -11,16 +11,16 @@
     <style>
         /* --- CSS Variables: Custom Palette (Pastel Light Theme) --- */
         :root {
-            /* Pastel Defined Palette Colors */
-            --palette-off-white: #f5f0ed; /* Soft, warm off-white for main bg */
-            --palette-light-beige: #e9e3df; /* Slightly darker pastel for secondary bg */
-            --palette-soft-gray: #c9c3bd; /* Soft gray for borders/subtle accents */
-            --palette-dark-gray: #5e544e; /* Darker, muted gray for general text */
-            --palette-deep-brown: #3a322e; /* Very dark brown for high contrast text/elements */
+            /* Pastel Defined Palette Colors (Updated) */
+            --palette-off-white: #FFE8D6; /* Lightest, for main bg */
+            --palette-light-beige: #DDBEA9; /* Slightly darker pastel for secondary bg */
+            --palette-soft-gray: #A5A58D; /* Muted green-gray for borders/subtle accents */
+            --palette-dark-gray: #6B705C; /* Darker green-gray for general text */
+            --palette-deep-brown: #3A322E; /* Retained dark brown for high contrast text/elements */
 
             /* Original Accent Colors (adjusted for contrast on light theme) */
-            --palette-brown-accent: #8e6e53; /* Retained brown accent */
-            --palette-tan-accent: #c69c72; /* Retained tan accent */
+            --palette-brown-accent: #CB997E; /* New warm brown accent */
+            --palette-tan-accent: #DDBEA9; /* New lighter, creamy brown accent */
 
             /* Semantic Mapping to New Pastel Palette Colors */
             --color-bg-light: var(--palette-off-white); /* Main light background */
@@ -185,7 +185,7 @@
 
         /* --- Hero Section - Enhanced 3D Integration & Fallback --- */
         #hero {
-            background: linear-gradient(rgba(245, 240, 237, 0.9), rgba(245, 240, 237, 0.9)); /* Lighter overlay matching main bg */
+            background: linear-gradient(rgba(255, 232, 214, 0.9), rgba(255, 232, 214, 0.9)); /* Lighter overlay matching main bg */
             color: var(--color-text-dark); /* Darkest text for hero content */
             height: 100vh;
             display: flex;
@@ -419,7 +419,7 @@
         .contact-form input[type="email"]:focus,
         .contact-form textarea:focus {
             border-color: var(--color-primary-button-bg); /* Tan accent */
-            box-shadow: 0 0 10px rgba(198, 156, 114, 0.3); /* Shadow using Tan accent */
+            box-shadow: 0 0 10px rgba(221, 190, 169, 0.3); /* Shadow using Tan accent */
             outline: none;
         }
         .contact-form textarea { min-height: 200px; resize: vertical; padding: 15px; }
@@ -442,14 +442,14 @@
         .drop-zone:hover {
             background-color: var(--color-bg-medium); /* Slightly darker pastel on hover */
             border-color: var(--color-primary-button-bg); /* Highlight border with Tan accent */
-            box-shadow: 0 0 8px rgba(198, 156, 114, 0.2); /* Shadow using Tan accent */
+            box-shadow: 0 0 8px rgba(221, 190, 169, 0.2); /* Shadow using Tan accent */
         }
 
         .drop-zone.dragover {
-            background-color: rgba(198, 156, 114, 0.1); /* Highlight with Tan accent transparent */
+            background-color: rgba(221, 190, 169, 0.1); /* Highlight with Tan accent transparent */
             border-color: var(--color-primary-button-bg); /* Tan accent */
             border-style: solid;
-            box-shadow: 0 0 18px rgba(198, 156, 114, 0.25); /* Shadow with Tan accent */
+            box-shadow: 0 0 18px rgba(221, 190, 169, 0.25); /* Shadow with Tan accent */
         }
         .drop-zone.error { border-color: var(--color-error-text); background-color: rgba(217, 83, 79, 0.1); border-style: solid; box-shadow: none; }
         .drop-zone p { margin: 0; font-size: 1rem; color: var(--color-text-medium); z-index: 2; position: relative; } /* General body text */
@@ -907,9 +907,9 @@
 
                 const geometry = new THREE.OctahedronGeometry(2.8);
                 const material = new THREE.MeshPhongMaterial({
-                    color: 0xc69c72, // This is --palette-tan-accent (or a complementary pastel for the object)
+                    color: 0xDDBEA9, // New: --palette-tan-accent
                     shininess: 150,
-                    specular: 0x8e6e53, // Adjusted specular for a warmer, less metallic feel (brown accent)
+                    specular: 0xCB997E, // New: --palette-brown-accent
                     flatShading: true
                 });
 
@@ -923,11 +923,11 @@
                 directionalLight.position.set(5, 5, 5).normalize();
                 scene.add(directionalLight);
 
-                const pointLight1 = new THREE.PointLight(0xc69c72, 0.5); // Tan accent light
+                const pointLight1 = new THREE.PointLight(0xDDBEA9, 0.5); // New: Tan accent light
                 pointLight1.position.set(-5, 5, -5);
                 scene.add(pointLight1);
 
-                const pointLight2 = new THREE.PointLight(0x8e6e53, 0.5); // Brown accent light
+                const pointLight2 = new THREE.PointLight(0xCB997E, 0.5); // New: Brown accent light
                 pointLight2.position.set(5, -5, 5);
                 scene.add(pointLight2);
 
