@@ -1099,7 +1099,7 @@
                      scrollToTopButton.classList.remove('visible');
                  }
              });
-             scrollToToTopButton.addEventListener('click', (e) => {
+             scrollToTopButton.addEventListener('click', (e) => {
                  e.preventDefault();
                  window.scrollTo({
                      top: 0,
@@ -1350,6 +1350,7 @@
                 updateSlider(); // Set initial slide and dot
                 startAutoSlide(); // Start auto-play
 
+                // Attach event listeners for buttons
                 prevButton.addEventListener('click', showPrevSlide);
                 nextButton.addEventListener('click', showNextSlide);
 
