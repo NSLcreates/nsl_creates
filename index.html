@@ -316,32 +316,109 @@
         .cta-button:active { transform: translateY(-1px); box-shadow: var(--shadow-light); }
 
 
-        /* --- Gallery --- */
-        .sketch-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 30px; }
-        .sketch-gallery img {
-            display: block; width: 100%; height: auto;
-            border-radius: 8px;
-            box-shadow: var(--shadow-medium);
-            border: 1px solid var(--color-border); /* Sage Green border color */
-            transition: transform 0.5s ease-out, box-shadow 0.4s ease, border-color 0.3s ease;
+        /* --- Gallery Slider --- */
+        .slider-container {
+            position: relative;
+            max-width: 900px; /* Adjust as needed */
+            margin: 50px auto;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: var(--shadow-deep);
+            background-color: var(--color-bg-light);
+            border: 1px solid var(--color-border);
+        }
+
+        .slider-inner {
+            display: flex;
+            transition: transform 0.7s ease-in-out;
+        }
+
+        .slider-item {
+            min-width: 100%;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slider-item img {
+            width: 100%;
+            height: auto;
+            max-height: 500px; /* Ensure images don't get too tall */
+            object-fit: contain; /* changed from cover to contain to avoid cropping */
+            display: block;
+            border-radius: 8px; /* Slightly smaller radius for images within slider */
+            padding: 15px; /* Padding inside the slide item */
+            background-color: var(--color-bg-light); /* Background for images if contain doesn't fill */
+        }
+
+        .slider-nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(107, 112, 92, 0.7); /* Dark Olive with transparency */
+            color: var(--background-light-beige);
+            border: none;
+            padding: 15px 10px;
             cursor: pointer;
-            transform-style: preserve-3d;
-            transform-origin: center center;
-            filter: brightness(1); /* No filter on light theme */
+            font-size: 1.8rem;
+            z-index: 10;
+            transition: background-color 0.3s ease, transform 0.3s ease;
             outline: none;
         }
-        .sketch-gallery img:focus {
-             outline: 3px solid var(--color-highlight); /* Terracotta highlight color for outline */
-             outline-offset: 3px;
-             border-color: var(--primary-dark-olive); /* Dark Olive for border */
-             filter: brightness(1.05);
+
+        .slider-nav-button:hover {
+            background-color: var(--primary-dark-olive); /* Dark Olive */
+            transform: translateY(-50%) scale(1.05);
         }
-        .sketch-gallery img:hover {
-            transform: scale(1.08) rotateY(10deg) rotateX(6deg) translateZ(20px);
-            box-shadow: var(--shadow-deep);
-            border-color: var(--primary-dark-olive); /* Dark Olive for border */
-            filter: brightness(1.05);
+
+        .slider-nav-button:focus {
+            outline: 2px solid var(--color-highlight);
+            outline-offset: 2px;
         }
+
+        .slider-nav-button.prev {
+            left: 0;
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
+        .slider-nav-button.next {
+            right: 0;
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+        }
+
+        .slider-dots {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .dot {
+            height: 12px;
+            width: 12px;
+            margin: 0 5px;
+            background-color: var(--secondary-sage-green); /* Muted sage */
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .dot.active {
+            background-color: var(--primary-dark-olive); /* Dark Olive */
+            transform: scale(1.2);
+        }
+
+        .dot:hover {
+            background-color: var(--accent-terracotta); /* Terracotta */
+        }
+        .dot:focus {
+            outline: 2px solid var(--color-highlight);
+            outline-offset: 2px;
+        }
+
 
         /* --- Services/Collaborations --- */
         .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 50px; margin-top: 40px; }
@@ -717,7 +794,7 @@
          nav ul li a:focus,
          .menu-toggle:focus,
          .cta-button:focus,
-         .sketch-gallery img:focus,
+         .sketch-gallery img:focus, /* This will be removed for slider images if they are not directly interactive outside of the slider */
          #about p a:focus,
          .contact-form input:focus,
          .contact-form textarea:focus,
@@ -770,11 +847,24 @@
     <section id="gallery">
         <div class="container">
             <h2>Sketch Gallery</h2>
-            <div class="sketch-gallery">
-                <img src="20250105_015608.jpg" alt="Sketch Artwork 1 by NSL Forge" tabindex="0">
-                <img src="IMG_20241122_193303_736.jpg" alt="Sketch Artwork 2 by NSL Forge" tabindex="0">
-                <img src="IMG_20241008_190133(1).jpg" alt="Sketch Artwork 3 by NSL Forge" tabindex="0">
-                <img src="ironman.jpg" alt="Sketch Artwork 4 by NSL Forge" tabindex="0">
+            <div class="slider-container">
+                <div class="slider-inner" id="gallery-slider-inner">
+                    <div class="slider-item">
+                        <img src="20250105_015608.jpg" alt="Sketch Artwork 1 by NSL Forge">
+                    </div>
+                    <div class="slider-item">
+                        <img src="IMG_20241122_193303_736.jpg" alt="Sketch Artwork 2 by NSL Forge">
+                    </div>
+                    <div class="slider-item">
+                        <img src="IMG_20241008_190133(1).jpg" alt="Sketch Artwork 3 by NSL Forge">
+                    </div>
+                    <div class="slider-item">
+                        <img src="ironman.jpg" alt="Sketch Artwork 4 by NSL Forge">
+                    </div>
+                </div>
+                <button class="slider-nav-button prev" aria-label="Previous image"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-nav-button next" aria-label="Next image"><i class="fas fa-chevron-right"></i></button>
+                <div class="slider-dots" id="slider-dots"></div>
             </div>
         </div>
     </section>
@@ -1009,7 +1099,7 @@
                      scrollToTopButton.classList.remove('visible');
                  }
              });
-             scrollToTopButton.addEventListener('click', (e) => {
+             scrollToToTopButton.addEventListener('click', (e) => {
                  e.preventDefault();
                  window.scrollTo({
                      top: 0,
@@ -1179,6 +1269,107 @@
                });
            });
            // --- End Smooth Scrolling ---
+
+           // --- Gallery Slider Logic ---
+            const sliderInner = document.getElementById('gallery-slider-inner');
+            const sliderItems = document.querySelectorAll('.slider-item');
+            const prevButton = document.querySelector('.slider-nav-button.prev');
+            const nextButton = document.querySelector('.slider-nav-button.next');
+            const sliderDotsContainer = document.getElementById('slider-dots');
+
+            let currentIndex = 0;
+            let slideInterval;
+            const slideDuration = 4000; // 4 seconds
+
+            if (sliderInner && sliderItems.length > 0 && prevButton && nextButton && sliderDotsContainer) {
+
+                function updateSlider() {
+                    const offset = -currentIndex * 100;
+                    sliderInner.style.transform = `translateX(${offset}%)`;
+                    updateDots();
+                }
+
+                function showNextSlide() {
+                    currentIndex = (currentIndex + 1) % sliderItems.length;
+                    updateSlider();
+                    resetAutoSlide();
+                }
+
+                function showPrevSlide() {
+                    currentIndex = (currentIndex - 1 + sliderItems.length) % sliderItems.length;
+                    updateSlider();
+                    resetAutoSlide();
+                }
+
+                function createDots() {
+                    sliderDotsContainer.innerHTML = ''; // Clear existing dots
+                    sliderItems.forEach((_, index) => {
+                        const dot = document.createElement('span');
+                        dot.classList.add('dot');
+                        dot.setAttribute('role', 'button');
+                        dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
+                        dot.setAttribute('tabindex', '0'); // Make dots focusable
+                        dot.addEventListener('click', () => {
+                            currentIndex = index;
+                            updateSlider();
+                            resetAutoSlide();
+                        });
+                        dot.addEventListener('keydown', (e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                                currentIndex = index;
+                                updateSlider();
+                                resetAutoSlide();
+                            }
+                        });
+                        sliderDotsContainer.appendChild(dot);
+                    });
+                }
+
+                function updateDots() {
+                    const dots = document.querySelectorAll('.slider-dots .dot');
+                    dots.forEach((dot, index) => {
+                        if (index === currentIndex) {
+                            dot.classList.add('active');
+                        } else {
+                            dot.classList.remove('active');
+                        }
+                    });
+                }
+
+                function startAutoSlide() {
+                    slideInterval = setInterval(showNextSlide, slideDuration);
+                }
+
+                function resetAutoSlide() {
+                    clearInterval(slideInterval);
+                    startAutoSlide();
+                }
+
+                // Initialize slider
+                createDots();
+                updateSlider(); // Set initial slide and dot
+                startAutoSlide(); // Start auto-play
+
+                prevButton.addEventListener('click', showPrevSlide);
+                nextButton.addEventListener('click', showNextSlide);
+
+                // Pause auto-slide on hover
+                const sliderContainer = document.querySelector('.slider-container');
+                sliderContainer.addEventListener('mouseenter', () => clearInterval(slideInterval));
+                sliderContainer.addEventListener('mouseleave', startAutoSlide);
+
+                // Keyboard navigation for slider
+                document.addEventListener('keydown', (e) => {
+                    if (e.target.closest('.slider-container')) {
+                        if (e.key === 'ArrowRight') {
+                            showNextSlide();
+                        } else if (e.key === 'ArrowLeft') {
+                            showPrevSlide();
+                        }
+                    }
+                });
+            }
+            // --- End Gallery Slider Logic ---
     </script>
 
 </body>
