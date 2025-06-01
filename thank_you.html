@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You! - NSL Forge</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="icon" href="IMG_20250528_173749_910.webp" type="image/webp">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: radial-gradient(at top left, var(--medium-tan) 0%, transparent 50%),
+                        radial-gradient(at bottom right, var(--secondary-sage-green) 0%, transparent 50%),
+                        var(--background-light-beige);
+            background-size: 100% 100%;
+            background-attachment: fixed;
+            font-family: 'Roboto', sans-serif;
+            color: var(--color-text-medium);
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .thank-you-card {
+            background: var(--color-bg-light); /* Using your light beige background */
+            padding: 50px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-deep);
+            max-width: 600px;
+            width: 100%;
+            border: 1px solid var(--color-border);
+        }
+        .thank-you-card h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--color-text-dark);
+            margin-bottom: 20px;
+        }
+        .thank-you-card p {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+        .thank-you-card .social-links a {
+            color: var(--primary-dark-olive);
+            margin: 0 15px;
+            font-size: 2.2rem;
+            text-decoration: none;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        .thank-you-card .social-links a:hover {
+            color: var(--color-highlight);
+            transform: scale(1.15);
+        }
+        .back-home-button {
+            display: inline-block;
+            background: var(--gradient-primary);
+            color: var(--color-primary-button-text);
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-top: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .back-home-button:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+    </style>
+</head>
+<body>
+    <div class="thank-you-card">
+        <h1>Thank You for Your Request!</h1>
+        <p>I've received your message and reference image. I'll review everything and get back to you within 2-3 business days to discuss your custom sketch.</p>
+        <p>In the meantime, feel free to explore more of my work or connect with me on social media!</p>
+        <div class="social-links">
+            <a href="https://www.instagram.com/nslforge" target="_blank" rel="noopener noreferrer" aria-label="Instagram (@nslforge)"><i class="fab fa-instagram"></i></a>
+            <a href="http://www.youtube.com/channel/UCFZirq7vOXnxKzdPaQYZyRA" target="_blank" rel="noopener noreferrer" aria-label="YouTube (nsl_creates)"><i class="fab fa-youtube"></i></a>
+        </div>
+        <a href="index.html" class="back-home-button">Back to NSL Forge</a>
+    </div>
+</body>
+</html>
