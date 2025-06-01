@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NSL Forge by Naman Lumbhani - Exquisite Sketch Artwork & Commissions</title>
-    <meta name="description" content="Commission custom sketch artwork from Naman Lumbhani (NSL Forge). Specializing in portraits, character sketches, and conceptual art. Explore samples and connect for collaborations in Navsari, Gujarat.">
+    <meta name="description" content="Commission custom sketch artwork from Naman Lumbhani (NSL Forge). Specializing in portraits, character sketches, and conceptual art. Explore samples, read testimonials, learn about the process, and connect for collaborations in Navsari, Gujarat.">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="icon" href="IMG_20250528_173749_910.webp" type="image/webp">
@@ -99,7 +99,7 @@
         }
 
         section:last-of-type { border-bottom: none; }
-        #gallery { background-color: var(--color-bg-medium); } /* Gallery uses slightly darker pastel background */
+        #gallery, #featured-artworks, #testimonials, #blog { background-color: var(--color-bg-medium); } /* Gallery, Featured, Testimonials, Blog use slightly darker pastel background */
         #disclaimer { padding: 60px 0; background-color: var(--color-bg-medium); border-bottom: 1px solid var(--color-border); min-height: auto; } /* Disclaimer uses slightly darker pastel background */
 
         /* Section Headings */
@@ -420,6 +420,99 @@
         }
 
 
+        /* --- Featured Artworks Section --- */
+        #featured-artworks .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .featured-card {
+            background: var(--color-bg-light); /* Lighter background for contrast on medium-tan section */
+            border-radius: 12px;
+            box-shadow: var(--shadow-medium);
+            overflow: hidden;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            position: relative;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .featured-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-deep);
+        }
+
+        .featured-card:focus-within {
+             outline: 2px solid var(--color-highlight);
+             outline-offset: 4px;
+             border-radius: 12px;
+        }
+
+        .featured-card img {
+            width: 100%;
+            height: 280px; /* Fixed height for consistency */
+            object-fit: cover; /* Covers the area, crops if needed */
+            border-bottom: 1px solid var(--color-border);
+            transition: transform 0.3s ease;
+        }
+
+        .featured-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .featured-card-content {
+            padding: 25px;
+            flex-grow: 1; /* Allows content to push footer down */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .featured-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--color-text-dark);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .featured-card p {
+            font-size: 0.95rem;
+            color: var(--color-text-medium);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .featured-card .view-button {
+            display: inline-block;
+            background: var(--primary-dark-olive);
+            color: var(--color-primary-button-text);
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            align-self: center; /* Center button within the card */
+            outline: none;
+        }
+
+        .featured-card .view-button:hover {
+            background-color: var(--accent-terracotta);
+            transform: translateY(-2px);
+        }
+         .featured-card .view-button:focus {
+             outline: 2px solid var(--color-highlight);
+             outline-offset: 2px;
+             border-radius: 20px;
+         }
+
+
         /* --- Services/Collaborations --- */
         .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 50px; margin-top: 40px; }
         .service-card {
@@ -453,13 +546,317 @@
             font-family: 'Playfair Display', serif; color: var(--color-text-dark); margin-top: 0; margin-bottom: 30px; /* Darkest text */
             font-size: 2.2rem; text-align: center; font-weight: 600;
         }
-        .service-process ol, .service-process ul { list-style-position: outside; padding-left: 30px; margin: 25px auto; max-width: 900px; color: var(--color-text-medium); /* General body text for process steps */ font-size: 1.05rem; line-height: 1.8; }
-        .service-process li { margin-bottom: 15px; padding-left: 8px; position: relative; }
-        .service-process ol li::marker { font-weight: bold; color: var(--primary-dark-olive); font-size: 1.2em; } /* Dark Olive for marker */
-        .service-process ul li::before { content: '•'; color: var(--primary-dark-olive); font-weight: bold; display: inline-block; width: 1em; margin-left: -1em; font-size: 1.2em; } /* Dark Olive for bullet */
-        .service-process li strong { color: var(--color-text-dark); font-weight: 500; } /* Darkest text for bold text */
+        /* New: Process Steps Grid */
+        .process-steps-grid {
+             display: grid;
+             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+             gap: 30px;
+             margin-top: 40px;
+             max-width: 1200px;
+             margin-left: auto;
+             margin-right: auto;
+        }
+
+        .process-step-card {
+             background: var(--color-bg-light);
+             padding: 30px;
+             border-radius: 12px;
+             box-shadow: var(--shadow-light);
+             text-align: center;
+             border: 1px solid var(--color-border);
+             transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .process-step-card:hover {
+             transform: translateY(-5px);
+             box-shadow: var(--shadow-medium);
+        }
+
+        .process-step-card .step-number {
+             font-family: 'Playfair Display', serif;
+             font-size: 2.5rem;
+             font-weight: 700;
+             color: var(--accent-terracotta); /* Terracotta for step number */
+             margin-bottom: 15px;
+        }
+
+        .process-step-card h4 {
+             font-family: 'Roboto', sans-serif;
+             font-size: 1.3rem;
+             color: var(--color-text-dark);
+             margin-bottom: 10px;
+             font-weight: 500;
+             letter-spacing: 0.2px;
+        }
+
+        .process-step-card p {
+             font-size: 0.95rem;
+             color: var(--color-text-medium);
+             line-height: 1.6;
+        }
+
         .important-note { text-align: center; font-size: 1rem; color: var(--color-alert); margin-top: 20px; font-weight: 500; }
         .important-note i { margin-right: 8px; }
+
+        /* Pricing Guide Styles */
+        .pricing-guide {
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 1px dashed var(--color-border);
+            text-align: center;
+        }
+
+        .pricing-guide h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--color-text-dark);
+            margin-bottom: 30px;
+            font-size: 2.2rem;
+            font-weight: 600;
+        }
+
+        .pricing-tiers {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .price-card {
+            background: var(--color-bg-light);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-medium);
+            flex: 1;
+            min-width: 280px;
+            max-width: 380px;
+            text-align: center;
+            border: 1px solid var(--color-border);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .price-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-deep);
+            border-color: var(--primary-dark-olive);
+        }
+
+        .price-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--color-text-dark);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .price-card .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-dark-olive);
+            margin-bottom: 20px;
+        }
+
+        .price-card .price span {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: var(--color-text-medium);
+        }
+
+        .price-card ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 30px;
+            text-align: left;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 250px; /* Constrain list width */
+        }
+
+        .price-card ul li {
+            font-size: 1rem;
+            color: var(--color-text-medium);
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .price-card ul li::before {
+            content: "\f00c"; /* FontAwesome check icon */
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            color: var(--accent-terracotta); /* Terracotta checkmark */
+            position: absolute;
+            left: 0;
+            top: 2px;
+        }
+
+        .price-card .small-text {
+            font-size: 0.9rem;
+            color: var(--color-text-light);
+            margin-bottom: 20px;
+        }
+
+
+        /* --- Testimonials Section --- */
+        #testimonials .testimonial-slider-container {
+            position: relative;
+            max-width: 900px;
+            margin: 50px auto;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: var(--shadow-medium);
+            background-color: var(--color-bg-light);
+            padding: 40px;
+            min-height: 250px; /* Ensure enough height for content */
+            display: flex;
+            align-items: center; /* Vertically center content */
+        }
+
+        .testimonial-slider-inner {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .testimonial-item {
+            min-width: 100%;
+            box-sizing: border-box;
+            text-align: center;
+            padding: 0 30px; /* Padding for text inside */
+        }
+
+        .testimonial-item blockquote {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-style: italic;
+            color: var(--color-text-dark);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .testimonial-item .client-info {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--primary-dark-olive);
+        }
+        .testimonial-item .client-info span {
+            font-size: 0.95rem;
+            color: var(--color-text-medium);
+            font-weight: 400;
+        }
+
+        /* Testimonial Nav Buttons (similar to gallery) */
+        .testimonial-nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(107, 112, 92, 0.8);
+            color: var(--background-light-beige);
+            border: none;
+            padding: 12px 8px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            z-index: 10;
+            transition: background-color 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+            outline: none;
+            opacity: 0.7;
+        }
+
+        .testimonial-nav-button:hover {
+            background-color: var(--primary-dark-olive);
+            transform: translateY(-50%) scale(1.1);
+            opacity: 1;
+        }
+
+        .testimonial-nav-button:focus {
+            box-shadow: 0 0 0 3px rgba(107, 112, 92, 0.5);
+        }
+
+        .testimonial-nav-button.prev {
+            left: 0;
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
+        .testimonial-nav-button.next {
+            right: 0;
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+        }
+
+        .testimonial-dots {
+            text-align: center;
+            margin-top: 20px;
+        }
+        /* Reusing .dot styles from gallery for consistency */
+
+
+        /* --- Blog Section --- */
+        #blog .blog-posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .blog-post-card {
+            background: var(--color-bg-light);
+            border-radius: 12px;
+            box-shadow: var(--shadow-medium);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none; /* Make the whole card a link */
+            display: flex;
+            flex-direction: column;
+            color: inherit;
+            outline: none;
+        }
+
+        .blog-post-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-deep);
+        }
+         .blog-post-card:focus-within {
+             outline: 2px solid var(--color-highlight);
+             outline-offset: 4px;
+             border-radius: 12px;
+         }
+
+        .blog-post-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .blog-post-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .blog-post-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--color-text-dark);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .blog-post-content p {
+            font-size: 0.95rem;
+            color: var(--color-text-medium);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .blog-post-meta {
+            font-size: 0.85rem;
+            color: var(--color-text-light);
+            text-align: right;
+            margin-top: auto; /* Push meta to the bottom */
+        }
 
 
         /* --- About Section --- */
@@ -776,6 +1173,19 @@
                  line-height: 50px;
                  font-size: 1.5rem;
              }
+
+             .featured-card img {
+                 height: 200px; /* Adjust height for smaller screens */
+             }
+
+             .price-card {
+                min-width: 100%; /* Full width on small screens */
+                max-width: 400px;
+             }
+
+             .testimonial-item blockquote {
+                 font-size: 1.2rem;
+             }
         }
 
          /* Accessibility: Highlighting interactive elements on focus */
@@ -802,7 +1212,11 @@
          .contact-form button[type="submit"]:focus,
          .contact-info p a:focus,
          footer .social-links a:focus,
-         .scroll-to-top:focus {
+         .scroll-to-top:focus,
+         .featured-card:focus-within,
+         .blog-post-card:focus-within,
+         .price-card:focus-within, /* Added for pricing card focus */
+         .testimonial-nav-button:focus /* Added for testimonial nav buttons */ {
              outline: none;
          }
 
@@ -818,8 +1232,8 @@
             <nav>
                 <ul>
                     <li><a href="#gallery">Gallery</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#about">About</a></li>
+                    <li><a href="#featured-artworks">Featured</a></li> <li><a href="#services">Services</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li> <li><a href="#blog">Blog</a></li> <li><a href="#about">About</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
@@ -850,21 +1264,54 @@
             <div class="slider-container">
                 <div class="slider-inner" id="gallery-slider-inner">
                     <div class="slider-item">
-                        <img src="20250105_015608.jpg" alt="Sketch Artwork 1 by NSL Forge">
+                        <img src="20250105_015608.jpg" alt="Sketch Artwork 1 by NSL Forge: A detailed portrait.">
                     </div>
                     <div class="slider-item">
-                        <img src="IMG_20241122_193303_736.jpg" alt="Sketch Artwork 2 by NSL Forge">
+                        <img src="IMG_20241122_193303_736.jpg" alt="Sketch Artwork 2 by NSL Forge: A character sketch with dynamic lines.">
                     </div>
                     <div class="slider-item">
-                         <img src="ironman.jpg" alt="Sketch Artwork 4 by NSL Forge">
+                         <img src="ironman.jpg" alt="Sketch Artwork 4 by NSL Forge: Fan art of Iron Man.">
                     </div>
                     <div class="slider-item">
-                        <img src="IMG_20241008_190133(1).jpg" alt="Sketch Artwork 3 by NSL Forge">
+                        <img src="IMG_20241008_190133(1).jpg" alt="Sketch Artwork 3 by NSL Forge: A conceptual urban landscape.">
                     </div>
                 </div>
                 <button class="slider-nav-button prev" aria-label="Previous image"><i class="fas fa-chevron-left"></i></button>
                 <button class="slider-nav-button next" aria-label="Next image"><i class="fas fa-chevron-right"></i></button>
                 <div class="slider-dots" id="slider-dots"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="featured-artworks">
+        <div class="container">
+            <h2>Featured Artworks</h2>
+            <p style="text-align: center; max-width: 800px; margin: -30px auto 50px auto; color: var(--color-text-medium);">Discover a selection of my most significant and representative pieces, each with its own story and unique artistic journey.</p>
+            <div class="featured-grid">
+                <a href="artwork-detail-page-1.html" class="featured-card" tabindex="0" role="link" aria-label="View details for 'Gaze of the Mountains' artwork">
+                    <img src="IMG_20241008_190133(1).jpg" alt="Gaze of the Mountains - Detailed landscape sketch">
+                    <div class="featured-card-content">
+                        <h3>Gaze of the Mountains</h3>
+                        <p>A conceptual landscape emphasizing depth and the serene power of nature, rendered with intricate textural detail.</p>
+                        <span class="view-button">View Details</span>
+                    </div>
+                </a>
+                <a href="artwork-detail-page-2.html" class="featured-card" tabindex="0" role="link" aria-label="View details for 'Iron Spirit' artwork">
+                    <img src="ironman.jpg" alt="Iron Spirit - Dynamic fan art of Iron Man">
+                    <div class="featured-card-content">
+                        <h3>Iron Spirit</h3>
+                        <p>A dynamic fan art piece capturing the iconic pose and spirit of Iron Man, showcasing mechanical and light rendering.</p>
+                        <span class="view-button">View Details</span>
+                    </div>
+                </a>
+                <a href="artwork-detail-page-3.html" class="featured-card" tabindex="0" role="link" aria-label="View details for 'The Scholar's Silence' artwork">
+                    <img src="IMG_20241122_193303_736.jpg" alt="The Scholar's Silence - Character portrait with deep expression">
+                    <div class="featured-card-content">
+                        <h3>The Scholar's Silence</h3>
+                        <p>An expressive character portrait focusing on the eyes and subtle emotions, exploring contemplative themes.</p>
+                        <span class="view-button">View Details</span>
+                    </div>
+                </a>
             </div>
         </div>
     </section>
@@ -896,19 +1343,138 @@
             </div>
 
             <div class="service-process">
-                <h3>How Commissions Work</h3>
-                <ol>
-                    <li><strong>Consultation:</strong> We discuss your idea, requirements, size, medium, and reference images.</li>
-                    <li><strong>Quotation & Agreement:</strong> Based on the complexity, a quote is provided. Upon agreement, a deposit may be required.</li>
-                    <li><strong>Sketching Phase:</strong> I begin the artwork, providing updates or initial drafts for your feedback.</li>
-                    <li><strong>Revisions:</strong> Minor revisions are incorporated based on your input (scope for major changes might be limited after a certain stage).</li>
-                    <li><strong>Completion & Delivery:
-                        </strong> Once finalized and approved, the remaining payment is made. The finished physical artwork is prepared for delivery or pickup (if local).</li>
-                </ol>
-                <p class="important-note"><i class="fas fa-info-circle"></i> Digital copies can also be provided upon request.</p>
+                <h3>How Commissions Work: Your Artistic Journey</h3>
+                <div class="process-steps-grid">
+                    <div class="process-step-card">
+                        <div class="step-number">1</div>
+                        <h4>Initial Consultation</h4>
+                        <p>We discuss your vision, requirements (size, medium), and reference images to ensure I fully understand your idea.</p>
+                    </div>
+                    <div class="process-step-card">
+                        <div class="step-number">2</div>
+                        <h4>Quote & Agreement</h4>
+                        <p>A detailed quote is provided based on complexity. Upon acceptance, a deposit secures your commission slot.</p>
+                    </div>
+                    <div class="process-step-card">
+                        <div class="step-number">3</div>
+                        <h4>Sketching & Feedback</h4>
+                        <p>The creation begins! I'll provide initial drafts for your review and incorporate your valuable feedback.</p>
+                    </div>
+                    <div class="process-step-card">
+                        <div class="step-number">4</div>
+                        <h4>Refinement & Approval</h4>
+                        <p>Minor revisions are made. Once you're delighted with the progress, we move towards finalization.</p>
+                    </div>
+                    <div class="process-step-card">
+                        <div class="step-number">5</div>
+                        <h4>Finalization & Delivery</h4>
+                        <p>The remaining payment is made. Your exquisite artwork is then carefully prepared for delivery or local pickup.</p>
+                    </div>
+                </div>
+                <p class="important-note"><i class="fas fa-info-circle"></i> Digital high-resolution copies of your artwork can be provided upon request.</p>
+            </div>
+
+            <div class="pricing-guide">
+                <h3>Commission Pricing Guide (Starting From)</h3>
+                <p style="max-width: 800px; margin: -20px auto 30px auto; color: var(--color-text-medium);">These prices are estimates and vary based on complexity, size, number of subjects, and level of detail. A precise quote will be provided after consultation.</p>
+                <div class="pricing-tiers">
+                    <div class="price-card">
+                        <h4>Simple Portrait</h4>
+                        <p class="price">₹1500<span>+</span></p>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Single subject (headshot/bust)</li>
+                            <li><i class="fas fa-check"></i> A5/A4 size</li>
+                            <li><i class="fas fa-check"></i> Graphite or Charcoal</li>
+                            <li><i class="fas fa-check"></i> Basic background</li>
+                        </ul>
+                        <p class="small-text">Perfect for gifts or personal keepsakes.</p>
+                    </div>
+                    <div class="price-card">
+                        <h4>Detailed Character</h4>
+                        <p class="price">₹3000<span>+</span></p>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Single full-body character</li>
+                            <li><i class="fas fa-check"></i> A4/A3 size</li>
+                            <li><i class="fas fa-check"></i> Detailed rendering</li>
+                            <li><i class="fas fa-check"></i> Conceptual elements</li>
+                        </ul>
+                        <p class="small-text">Ideal for game concepts or unique character art.</p>
+                    </div>
+                    <div class="price-card">
+                        <h4>Complex Scene/Concept</h4>
+                        <p class="price">₹5000<span>+</span></p>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Multiple subjects or intricate scene</li>
+                            <li><i class="fas fa-check"></i> A3 size or larger</li>
+                            <li><i class="fas fa-check"></i> Advanced composition & detail</li>
+                            <li><i class="fas fa-check"></i> Full conceptual visualization</li>
+                        </ul>
+                        <p class="small-text">Bring grand visions to life for projects or fine art.</p>
+                    </div>
+                </div>
+                <p class="important-note" style="margin-top: 40px;">For an accurate quote, please use the <a href="#contact" style="color: var(--primary-dark-olive); text-decoration: underline;">Contact Form</a> below.</p>
             </div>
         </div>
     </section>
+
+    <section id="testimonials">
+        <div class="container">
+            <h2>What Clients Say</h2>
+            <div class="testimonial-slider-container">
+                <div class="testimonial-slider-inner" id="testimonial-slider-inner">
+                    <div class="testimonial-item">
+                        <blockquote>"Naman's ability to capture emotion is simply astounding. The portrait he did for me exceeded all expectations. Highly recommend!"</blockquote>
+                        <p class="client-info">Riya Sharma <span>- Mumbai, India</span></p>
+                    </div>
+                    <div class="testimonial-item">
+                        <blockquote>"I needed a unique character design for my project, and NSL Forge delivered beyond imagination. Professional and incredibly talented."</blockquote>
+                        <p class="client-info">Anand Patel <span>- Bengaluru, India</span></p>
+                    </div>
+                    <div class="testimonial-item">
+                        <blockquote>"The conceptual sketch Naman created for my book cover brought my abstract ideas into vivid reality. A true visionary."</blockquote>
+                        <p class="client-info">Priya Singh <span>- Delhi, India</span></p>
+                    </div>
+                </div>
+                <button class="testimonial-nav-button prev" aria-label="Previous testimonial"><i class="fas fa-chevron-left"></i></button>
+                <button class="testimonial-nav-button next" aria-label="Next testimonial"><i class="fas fa-chevron-right"></i></button>
+                <div class="slider-dots" id="testimonial-dots"></div> </div>
+        </div>
+    </section>
+
+    <section id="blog">
+        <div class="container">
+            <h2>Artist's Journal & Blog</h2>
+            <p style="text-align: center; max-width: 800px; margin: -30px auto 50px auto; color: var(--color-text-medium);">Dive deeper into the world of sketching. Here I share insights, tips, inspiration, and behind-the-scenes glimpses of my artistic journey.</p>
+            <div class="blog-posts-grid">
+                <a href="blog-post-1.html" class="blog-post-card" tabindex="0" role="link" aria-label="Read blog post: My Top 5 Essential Sketching Tools">
+                    <img src="blog-post-1-thumb.jpg" alt="A hand holding a pencil over a sketchpad">
+                    <div class="blog-post-content">
+                        <h3>My Top 5 Essential Sketching Tools</h3>
+                        <p>A look into the fundamental tools that fuel my creative process and how they can enhance your own sketches.</p>
+                        <div class="blog-post-meta">May 28, 2025</div>
+                    </div>
+                </a>
+                <a href="blog-post-2.html" class="blog-post-card" tabindex="0" role="link" aria-label="Read blog post: The Art of Capturing Expression in Portraits">
+                    <img src="blog-post-2-thumb.jpg" alt="Close-up of a sketched eye showing emotion">
+                    <div class="blog-post-content">
+                        <h3>The Art of Capturing Expression in Portraits</h3>
+                        <p>Exploring techniques to bring life and emotion to your portrait sketches, focusing on eyes and subtle facial cues.</p>
+                        <div class="blog-post-meta">May 15, 2025</div>
+                    </div>
+                </a>
+                <a href="blog-post-3.html" class="blog-post-card" tabindex="0" role="link" aria-label="Read blog post: From Concept to Canvas: My Design Process">
+                    <img src="blog-post-3-thumb.jpg" alt="Various sketch thumbnails and a refined concept drawing">
+                    <div class="blog-post-content">
+                        <h3>From Concept to Canvas: My Design Process</h3>
+                        <p>A step-by-step breakdown of how I transform initial ideas into polished conceptual art pieces.</p>
+                        <div class="blog-post-meta">April 30, 2025</div>
+                    </div>
+                </a>
+            </div>
+            <p class="important-note" style="margin-top: 50px;">More inspiring posts coming soon! Stay tuned.</p>
+        </div>
+    </section>
+
 
     <section id="about">
         <div class="container">
@@ -917,7 +1483,7 @@
             <p>Each sketch is crafted with dedication, aiming to resonate with the viewer and the subject. Whether it's a cherished memory captured in a portrait or a brand new character brought to life, NSL Forge is where visions are meticulously forged into tangible art.</p>
              <p>Connect with Naman Lumbhani:</p>
              <p>
-                <a href="mailto:nslcreatesofficial@gmail.com" aria-label="Send an email"><i class="fas fa-envelope"></i> Email</a> |
+                <a href="mailto:nslcreatesofficial@gmail.com" aria-label="Send an email to nslcreatesofficial@gmail.com"><i class="fas fa-envelope"></i> Email</a> |
                 <a href="https://www.instagram.com/nslforge" target="_blank" rel="noopener noreferrer" aria-label="Visit Instagram profile (@nslforge)"><i class="fab fa-instagram"></i> Instagram</a> |
                 <a href="http://www.youtube.com/channel/UCFZirq7vOXnxKzdPaQYZyRA" target="_blank" rel="noopener noreferrer" aria-label="Visit YouTube channel (nsl_creates)"><i class="fab fa-youtube"></i> YouTube</a>
              </p>
@@ -975,6 +1541,7 @@
                 <a href="https://www.instagram.com/nslforge" target="_blank" rel="noopener noreferrer" aria-label="Instagram (@nslforge)"><i class="fab fa-instagram"></i></a>
                  <a href="http://www.youtube.com/channel/UCFZirq7vOXnxKzdPaQYZyRA" target="_blank" rel="noopener noreferrer" aria-label="YouTube (nsl_creates)"><i class="fab fa-youtube"></i></a>
                 </div>
+            <p class="footer-note" style="font-size: 0.75em; margin-top: 15px;">© 2025 NSL Forge. All Rights Reserved.</p>
              </div>
     </footer>
 
@@ -1271,64 +1838,64 @@
            // --- End Smooth Scrolling ---
 
            // --- Gallery Slider Logic ---
-            const sliderInner = document.getElementById('gallery-slider-inner');
-            const sliderItems = document.querySelectorAll('.slider-item');
-            const prevButton = document.querySelector('.slider-nav-button.prev');
-            const nextButton = document.querySelector('.slider-nav-button.next');
-            const sliderDotsContainer = document.getElementById('slider-dots');
+            const gallerySliderInner = document.getElementById('gallery-slider-inner');
+            const gallerySliderItems = document.querySelectorAll('#gallery .slider-item');
+            const galleryPrevButton = document.querySelector('#gallery .slider-nav-button.prev');
+            const galleryNextButton = document.querySelector('#gallery .slider-nav-button.next');
+            const gallerySliderDotsContainer = document.getElementById('slider-dots');
 
-            let currentIndex = 0;
-            let slideInterval;
-            const slideDuration = 4000; // 4 seconds
+            let galleryCurrentIndex = 0;
+            let gallerySlideInterval;
+            const gallerySlideDuration = 4000; // 4 seconds
 
-            if (sliderInner && sliderItems.length > 0 && prevButton && nextButton && sliderDotsContainer) {
+            if (gallerySliderInner && gallerySliderItems.length > 0 && galleryPrevButton && galleryNextButton && gallerySliderDotsContainer) {
 
-                function updateSlider() {
-                    const offset = -currentIndex * 100;
-                    sliderInner.style.transform = `translateX(${offset}%)`;
-                    updateDots();
+                function updateGallerySlider() {
+                    const offset = -galleryCurrentIndex * 100;
+                    gallerySliderInner.style.transform = `translateX(${offset}%)`;
+                    updateGalleryDots();
                 }
 
-                function showNextSlide() {
-                    currentIndex = (currentIndex + 1) % sliderItems.length;
-                    updateSlider();
-                    resetAutoSlide();
+                function showNextGallerySlide() {
+                    galleryCurrentIndex = (galleryCurrentIndex + 1) % gallerySliderItems.length;
+                    updateGallerySlider();
+                    resetAutoGallerySlide();
                 }
 
-                function showPrevSlide() {
-                    currentIndex = (currentIndex - 1 + sliderItems.length) % sliderItems.length;
-                    updateSlider();
-                    resetAutoSlide();
+                function showPrevGallerySlide() {
+                    galleryCurrentIndex = (galleryCurrentIndex - 1 + gallerySliderItems.length) % gallerySliderItems.length;
+                    updateGallerySlider();
+                    resetAutoGallerySlide();
                 }
 
-                function createDots() {
-                    sliderDotsContainer.innerHTML = ''; // Clear existing dots
-                    sliderItems.forEach((_, index) => {
+                function createGalleryDots() {
+                    gallerySliderDotsContainer.innerHTML = ''; // Clear existing dots
+                    gallerySliderItems.forEach((_, index) => {
                         const dot = document.createElement('span');
                         dot.classList.add('dot');
                         dot.setAttribute('role', 'button');
-                        dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
+                        dot.setAttribute('aria-label', `Go to gallery slide ${index + 1}`);
                         dot.setAttribute('tabindex', '0'); // Make dots focusable
                         dot.addEventListener('click', () => {
-                            currentIndex = index;
-                            updateSlider();
-                            resetAutoSlide();
+                            galleryCurrentIndex = index;
+                            updateGallerySlider();
+                            resetAutoGallerySlide();
                         });
                         dot.addEventListener('keydown', (e) => {
                             if (e.key === 'Enter' || e.key === ' ') {
-                                currentIndex = index;
-                                updateSlider();
-                                resetAutoSlide();
+                                galleryCurrentIndex = index;
+                                updateGallerySlider();
+                                resetAutoGallerySlide();
                             }
                         });
-                        sliderDotsContainer.appendChild(dot);
+                        gallerySliderDotsContainer.appendChild(dot);
                     });
                 }
 
-                function updateDots() {
-                    const dots = document.querySelectorAll('.slider-dots .dot');
+                function updateGalleryDots() {
+                    const dots = document.querySelectorAll('#gallery .slider-dots .dot');
                     dots.forEach((dot, index) => {
-                        if (index === currentIndex) {
+                        if (index === galleryCurrentIndex) {
                             dot.classList.add('active');
                         } else {
                             dot.classList.remove('active');
@@ -1336,67 +1903,181 @@
                     });
                 }
 
-                function startAutoSlide() {
-                    slideInterval = setInterval(showNextSlide, slideDuration);
+                function startAutoGallerySlide() {
+                    gallerySlideInterval = setInterval(showNextGallerySlide, gallerySlideDuration);
                 }
 
-                function resetAutoSlide() {
-                    clearInterval(slideInterval);
-                    startAutoSlide();
+                function resetAutoGallerySlide() {
+                    clearInterval(gallerySlideInterval);
+                    startAutoGallerySlide();
                 }
 
                 // Initialize slider
-                createDots();
-                updateSlider(); // Set initial slide and dot
-                startAutoSlide(); // Start auto-play
+                createGalleryDots();
+                updateGallerySlider(); // Set initial slide and dot
+                startAutoGallerySlide(); // Start auto-play
 
                 // Attach event listeners for buttons
-                prevButton.addEventListener('click', showPrevSlide);
-                nextButton.addEventListener('click', showNextSlide);
+                galleryPrevButton.addEventListener('click', showPrevGallerySlide);
+                galleryNextButton.addEventListener('click', showNextGallerySlide);
 
                 // Pause auto-slide on hover
-                const sliderContainer = document.querySelector('.slider-container');
-                sliderContainer.addEventListener('mouseenter', () => clearInterval(slideInterval));
-                sliderContainer.addEventListener('mouseleave', startAutoSlide);
+                const gallerySliderContainer = document.querySelector('#gallery .slider-container');
+                gallerySliderContainer.addEventListener('mouseenter', () => clearInterval(gallerySlideInterval));
+                gallerySliderContainer.addEventListener('mouseleave', startAutoGallerySlide);
 
                 // Keyboard navigation for slider
                 document.addEventListener('keydown', (e) => {
-                    if (e.target.closest('.slider-container')) {
+                    if (e.target.closest('#gallery .slider-container')) {
                         if (e.key === 'ArrowRight') {
-                            showNextSlide();
+                            showNextGallerySlide();
                         } else if (e.key === 'ArrowLeft') {
-                            showPrevSlide();
+                            showPrevGallerySlide();
                         }
                     }
                 });
 
-                // --- Touch/Swipe functionality for Slider ---
-                let touchStartX = 0;
-                let touchEndX = 0;
-                const minSwipeDistance = 50; // Minimum pixels for a recognized swipe
+                // --- Touch/Swipe functionality for Gallery Slider ---
+                let galleryTouchStartX = 0;
+                let galleryTouchEndX = 0;
+                const galleryMinSwipeDistance = 50; // Minimum pixels for a recognized swipe
 
-                sliderContainer.addEventListener('touchstart', (e) => {
-                    touchStartX = e.touches[0].clientX;
+                gallerySliderContainer.addEventListener('touchstart', (e) => {
+                    galleryTouchStartX = e.touches[0].clientX;
                 }, false);
 
-                sliderContainer.addEventListener('touchend', (e) => {
-                    touchEndX = e.changedTouches[0].clientX;
-                    handleSwipe();
+                gallerySliderContainer.addEventListener('touchend', (e) => {
+                    galleryTouchEndX = e.changedTouches[0].clientX;
+                    handleGallerySwipe();
                 }, false);
 
-                function handleSwipe() {
-                    const swipeDistance = touchEndX - touchStartX;
-                    if (swipeDistance > minSwipeDistance) {
+                function handleGallerySwipe() {
+                    const swipeDistance = galleryTouchEndX - galleryTouchStartX;
+                    if (swipeDistance > galleryMinSwipeDistance) {
                         // Swiped right (previous slide)
-                        showPrevSlide();
-                    } else if (swipeDistance < -minSwipeDistance) {
+                        showPrevGallerySlide();
+                    } else if (swipeDistance < -galleryMinSwipeDistance) {
                         // Swiped left (next slide)
-                        showNextSlide();
+                        showNextGallerySlide();
                     }
                 }
                 // --- End Touch/Swipe functionality ---
             }
             // --- End Gallery Slider Logic ---
+
+
+            // --- Testimonial Slider Logic ---
+            const testimonialSliderInner = document.getElementById('testimonial-slider-inner');
+            const testimonialItems = document.querySelectorAll('.testimonial-item');
+            const testimonialPrevButton = document.querySelector('#testimonials .testimonial-nav-button.prev');
+            const testimonialNextButton = document.querySelector('#testimonials .testimonial-nav-button.next');
+            const testimonialDotsContainer = document.getElementById('testimonial-dots');
+
+            let testimonialCurrentIndex = 0;
+            let testimonialSlideInterval;
+            const testimonialSlideDuration = 7000; // 7 seconds for testimonials
+
+            if (testimonialSliderInner && testimonialItems.length > 0 && testimonialPrevButton && testimonialNextButton && testimonialDotsContainer) {
+
+                function updateTestimonialSlider() {
+                    const offset = -testimonialCurrentIndex * 100;
+                    testimonialSliderInner.style.transform = `translateX(${offset}%)`;
+                    updateTestimonialDots();
+                }
+
+                function showNextTestimonial() {
+                    testimonialCurrentIndex = (testimonialCurrentIndex + 1) % testimonialItems.length;
+                    updateTestimonialSlider();
+                    resetAutoTestimonialSlide();
+                }
+
+                function showPrevTestimonial() {
+                    testimonialCurrentIndex = (testimonialCurrentIndex - 1 + testimonialItems.length) % testimonialItems.length;
+                    updateTestimonialSlider();
+                    resetAutoTestimonialSlide();
+                }
+
+                function createTestimonialDots() {
+                    testimonialDotsContainer.innerHTML = '';
+                    testimonialItems.forEach((_, index) => {
+                        const dot = document.createElement('span');
+                        dot.classList.add('dot');
+                        dot.setAttribute('role', 'button');
+                        dot.setAttribute('aria-label', `Go to testimonial ${index + 1}`);
+                        dot.setAttribute('tabindex', '0');
+                        dot.addEventListener('click', () => {
+                            testimonialCurrentIndex = index;
+                            updateTestimonialSlider();
+                            resetAutoTestimonialSlide();
+                        });
+                         dot.addEventListener('keydown', (e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                                testimonialCurrentIndex = index;
+                                updateTestimonialSlider();
+                                resetAutoTestimonialSlide();
+                            }
+                        });
+                        testimonialDotsContainer.appendChild(dot);
+                    });
+                }
+
+                function updateTestimonialDots() {
+                    const dots = document.querySelectorAll('#testimonials .slider-dots .dot');
+                    dots.forEach((dot, index) => {
+                        if (index === testimonialCurrentIndex) {
+                            dot.classList.add('active');
+                        } else {
+                            dot.classList.remove('active');
+                        }
+                    });
+                }
+
+                function startAutoTestimonialSlide() {
+                    testimonialSlideInterval = setInterval(showNextTestimonial, testimonialSlideDuration);
+                }
+
+                function resetAutoTestimonialSlide() {
+                    clearInterval(testimonialSlideInterval);
+                    startAutoTestimonialSlide();
+                }
+
+                createTestimonialDots();
+                updateTestimonialSlider();
+                startAutoTestimonialSlide();
+
+                testimonialPrevButton.addEventListener('click', showPrevTestimonial);
+                testimonialNextButton.addEventListener('click', showNextTestimonial);
+
+                const testimonialSliderContainer = document.querySelector('.testimonial-slider-container');
+                testimonialSliderContainer.addEventListener('mouseenter', () => clearInterval(testimonialSlideInterval));
+                testimonialSliderContainer.addEventListener('mouseleave', startAutoTestimonialSlide);
+
+                // --- Touch/Swipe functionality for Testimonial Slider ---
+                let testimonialTouchStartX = 0;
+                let testimonialTouchEndX = 0;
+                const testimonialMinSwipeDistance = 50;
+
+                testimonialSliderContainer.addEventListener('touchstart', (e) => {
+                    testimonialTouchStartX = e.touches[0].clientX;
+                }, false);
+
+                testimonialSliderContainer.addEventListener('touchend', (e) => {
+                    testimonialTouchEndX = e.changedTouches[0].clientX;
+                    handleTestimonialSwipe();
+                }, false);
+
+                function handleTestimonialSwipe() {
+                    const swipeDistance = testimonialTouchEndX - testimonialTouchStartX;
+                    if (swipeDistance > testimonialMinSwipeDistance) {
+                        showPrevTestimonial();
+                    } else if (swipeDistance < -testimonialMinSwipeDistance) {
+                        showNextTestimonial();
+                    }
+                }
+                // --- End Touch/Swipe functionality ---
+            }
+            // --- End Testimonial Slider Logic ---
+
     </script>
 
 </body>
