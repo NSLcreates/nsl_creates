@@ -3,204 +3,176 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thank You! - NSL Forge</title>
+    <title>Thank You - NSL Forge</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="icon" href="IMG_20250528_173749_910.webp" type="image/webp">
+    
     <style>
-        /* Define your color palette - adjust these as needed to match your website */
+        /* --- CSS Variables (from your main page) --- */
         :root {
-            --primary-dark-olive: #556B2F; /* Darker Olive Green */
-            --secondary-sage-green: #8A9A5B; /* Sage Green */
-            --medium-tan: #D2B48C; /* Medium Tan */
-            --background-light-beige: #F5F5DC; /* Light Beige */
-            --color-text-dark: #333333;
-            --color-text-medium: #555555;
-            --color-bg-light: #FFFFFF;
-            --color-border: #E0E0E0;
-            --color-highlight: #CDAA7C; /* A slightly darker tan for highlight */
-            --shadow-deep: 0 10px 25px rgba(0, 0, 0, 0.15);
-            --shadow-medium: 0 6px 15px rgba(0, 0, 0, 0.1);
-            --gradient-primary: linear-gradient(45deg, #8A9A5B, #556B2F); /* Sage to Olive */
-            --color-primary-button-text: #FFFFFF;
+            --primary-dark-olive: #6B705C;
+            --secondary-sage-green: #A5A58D;
+            --background-light-beige: #FFE8D6;
+            --medium-tan: #DDBEA9;
+            --text-dark-brown: #3E2723;
+            --accent-terracotta: #CB997E;
 
-            /* New Pink Colors for Cuteness */
-            --cute-pink-light: #FFD1DC; /* Light Pink */
-            --cute-pink-medium: #FFB6C1; /* Medium Pink */
-            --cute-pink-dark: #FF69B4; /* Hot Pink */
+            --color-header-footer: var(--secondary-sage-green); /* For footer background */
         }
+
+        /* --- Base Styles for Thank You Page --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: radial-gradient(at top left, var(--cute-pink-light) 0%, transparent 50%),
-                        radial-gradient(at bottom right, var(--secondary-sage-green) 0%, transparent 50%),
-                        var(--background-light-beige);
-            background-size: 100% 100%;
-            background-attachment: fixed;
             font-family: 'Roboto', sans-serif;
-            color: var(--color-text-medium);
+            line-height: 1.7;
+            color: var(--text-dark-brown);
+            background-color: var(--background-light-beige);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensures footer is at bottom if content is short */
+            align-items: center; /* Centers content horizontally */
+        }
+
+        .thank-you-container {
             text-align: center;
-            padding: 20px;
-            box-sizing: border-box;
-            overflow: hidden; /* Prevent scrollbar from heart animation */
-        }
-        .thank-you-card {
-            background: var(--color-bg-light);
-            padding: 50px;
-            border-radius: 12px;
-            box-shadow: var(--shadow-deep);
-            max-width: 600px;
+            padding: 50px 20px;
+            margin-top: 60px; /* Space from top */
+            margin-bottom: 40px; /* Space before footer */
+            flex-grow: 1; /* Allows content to take available space */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Centers content vertically within its flex space */
+            align-items: center;
             width: 100%;
-            border: 1px solid var(--color-border);
-            position: relative; /* For heart positioning */
-            z-index: 2; /* Ensure card is above hearts */
+            max-width: 700px; /* Max width for the content box */
         }
-        .thank-you-card h1 {
+
+        .thank-you-box {
+            background-color: var(--medium-tan); /* Using a theme color */
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+            border: 1px solid var(--secondary-sage-green);
+        }
+
+        .thank-you-box h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            color: var(--primary-dark-olive); /* Changed to a primary color for emphasis */
+            color: var(--text-dark-brown);
+            font-size: 2.8rem; /* Responsive font size */
             margin-bottom: 20px;
         }
-        .thank-you-card p {
-            font-size: 1.1rem;
+
+        .thank-you-box p {
+            font-size: 1.15rem; /* Responsive font size */
+            color: var(--text-dark-brown); /* Darker text for readability */
             margin-bottom: 25px;
-            line-height: 1.7;
+            line-height: 1.8;
         }
-        .thank-you-card .social-links a {
-            color: var(--cute-pink-dark); /* Pink social icons */
+
+        .thank-you-box .back-link {
+            display: inline-block;
+            padding: 14px 30px;
+            background-color: var(--primary-dark-olive);
+            color: var(--background-light-beige);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .thank-you-box .back-link:hover {
+            background-color: var(--accent-terracotta);
+            color: var(--text-dark-brown);
+            transform: translateY(-2px);
+        }
+
+        /* --- Footer Styles (adapted from your main page) --- */
+        footer {
+            background: var(--color-header-footer);
+            color: var(--primary-dark-olive);
+            text-align: center;
+            padding: 4rem 0 1.5rem; /* Consistent padding */
+            width: 100%; /* Footer spans full width */
+            margin-top: auto; /* Pushes footer to the bottom if page content is short */
+        }
+
+        footer .container { /* Using a simple container for footer content */
+            width: 90%;
+            max-width: 1200px; /* Consistent max-width */
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        footer .footer-note {
+            font-size: 0.85em;
+            color: var(--primary-dark-olive);
+            margin-bottom: 20px;
+        }
+
+        footer .social-links {
+            margin-bottom: 25px;
+        }
+
+        footer .social-links a {
+            color: var(--text-dark-brown); 
             margin: 0 15px;
             font-size: 2.2rem;
             text-decoration: none;
             transition: color 0.3s ease, transform 0.3s ease;
         }
-        .thank-you-card .social-links a:hover {
-            color: var(--cute-pink-medium); /* Lighter pink on hover */
-            transform: scale(1.15);
-        }
-        .back-home-button {
-            display: inline-block;
-            background: linear-gradient(45deg, var(--cute-pink-medium), var(--cute-pink-dark)); /* Pink gradient button */
-            color: var(--color-primary-button-text);
-            padding: 12px 30px;
-            text-decoration: none;
-            border-radius: 30px;
-            font-size: 1.1rem;
-            font-weight: 500;
-            margin-top: 30px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .back-home-button:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-medium);
-        }
 
-        /* 3D Heart Animation */
-        @keyframes beat {
-            0%, 100% {
-                transform: scale(1);
+        footer .social-links a:hover {
+            color: var(--primary-dark-olive);
+            transform: scale(1.3);
+        }
+        
+        /* Responsive adjustments for thank you page */
+        @media (max-width: 768px) {
+            .thank-you-box h1 {
+                font-size: 2.2rem;
             }
-            15% {
-                transform: scale(1.1);
+            .thank-you-box p {
+                font-size: 1rem;
             }
-        }
-
-        .heart-container {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none; /* Allow clicks through to the card */
-            overflow: hidden; /* Ensure hearts don't spill out */
-            z-index: 1; /* Below the card */
-        }
-
-        .heart {
-            position: absolute;
-            background-color: var(--cute-pink-medium);
-            transform: rotate(-45deg);
-            animation: beat 1.5s infinite ease-in-out;
-            opacity: 0.7;
-        }
-
-        .heart:before,
-        .heart:after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-color: inherit;
-            border-radius: 50%;
-        }
-
-        .heart:before {
-            top: -50%;
-            left: 0;
-        }
-
-        .heart:after {
-            top: 0;
-            left: 50%;
-        }
-
-        /* Individual heart positioning and size */
-        .heart-1 {
-            width: 40px;
-            height: 40px;
-            top: 15%;
-            left: 20%;
-            animation-delay: 0s;
-        }
-        .heart-2 {
-            width: 30px;
-            height: 30px;
-            bottom: 10%;
-            right: 15%;
-            animation-delay: 0.5s;
-        }
-        .heart-3 {
-            width: 25px;
-            height: 25px;
-            top: 50%;
-            left: 5%;
-            animation-delay: 1s;
-        }
-        .heart-4 {
-            width: 35px;
-            height: 35px;
-            top: 30%;
-            right: 10%;
-            animation-delay: 1.5s;
-        }
-        .heart-5 {
-            width: 20px;
-            height: 20px;
-            bottom: 20%;
-            left: 30%;
-            animation-delay: 2s;
+            .thank-you-box .back-link {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+            footer .social-links a {
+                font-size: 1.8rem; /* Match mobile footer icon size from main page */
+            }
         }
     </style>
+    <script>
+        // This script ensures the page loads scrolled to the top.
+        window.onload = function() {
+            window.scrollTo(0,0);
+        };
+    </script>
 </head>
 <body>
-    <div class="heart-container">
-        <div class="heart heart-1"></div>
-        <div class="heart heart-2"></div>
-        <div class="heart heart-3"></div>
-        <div class="heart heart-4"></div>
-        <div class="heart heart-5"></div>
-    </div>
-    <div class="thank-you-card">
-        <h1>Thank You for Your Request!</h1>
-        <p>I've received your message and reference image. I'll review everything and get back to you within 2-3 business days to discuss your custom sketch.</p>
-        <p>In the meantime, feel free to explore more of my work or connect with me on social media!</p>
-        <div class="social-links">
-            <a href="https://www.instagram.com/nslforge" target="_blank" rel="noopener noreferrer" aria-label="Instagram (@nslforge)"><i class="fab fa-instagram"></i></a>
-            <a href="http://www.youtube.com/channel/UCFZirq7vOXnxKzdPaQYZyRA" target="_blank" rel="noopener noreferrer" aria-label="YouTube (nsl_creates)"><i class="fab fa-youtube"></i></a>
+
+    <div class="thank-you-container">
+        <div class="thank-you-box">
+            <h1>Thank You!</h1>
+            <p>Your sketch request has been successfully submitted to NSL Forge.</p>
+            <p>Naman will review your request and get in touch with you soon.</p>
+            <a href="/" class="back-link">Back to Homepage</a>
         </div>
-        <a href="index.html" class="back-home-button">Back to NSL Forge</a>
     </div>
+
+    <footer>
+        <div class="container">
+            <p class="footer-note">Forge your vision into art.</p>
+            <div class="social-links">
+                <a href="https://www.instagram.com/nslforge" target="_blank" rel="noopener noreferrer" aria-label="Instagram (@nslforge)"><i class="fab fa-instagram"></i></a>
+                <a href="http://www.youtube.com/channel/UCFZirq7vOXnxKzdPaQYZyRA" target="_blank" rel="noopener noreferrer" aria-label="YouTube (nsl_creates)"><i class="fab fa-youtube"></i></a>
+                </div>
+            <p class="footer-note" style="font-size: 0.75em; margin-top: 15px;">NSL Forge.</p>
+        </div>
+    </footer>
+
 </body>
 </html>
