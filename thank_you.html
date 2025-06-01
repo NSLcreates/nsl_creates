@@ -6,15 +6,36 @@
     <title>Thank You! - NSL Forge</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css"> 
     <link rel="icon" href="IMG_20250528_173749_910.webp" type="image/webp">
     <style>
+        /* Define your color palette - adjust these as needed to match your website */
+        :root {
+            --primary-dark-olive: #556B2F; /* Darker Olive Green */
+            --secondary-sage-green: #8A9A5B; /* Sage Green */
+            --medium-tan: #D2B48C; /* Medium Tan */
+            --background-light-beige: #F5F5DC; /* Light Beige */
+            --color-text-dark: #333333;
+            --color-text-medium: #555555;
+            --color-bg-light: #FFFFFF;
+            --color-border: #E0E0E0;
+            --color-highlight: #CDAA7C; /* A slightly darker tan for highlight */
+            --shadow-deep: 0 10px 25px rgba(0, 0, 0, 0.15);
+            --shadow-medium: 0 6px 15px rgba(0, 0, 0, 0.1);
+            --gradient-primary: linear-gradient(45deg, #8A9A5B, #556B2F); /* Sage to Olive */
+            --color-primary-button-text: #FFFFFF;
+
+            /* New Pink Colors for Cuteness */
+            --cute-pink-light: #FFD1DC; /* Light Pink */
+            --cute-pink-medium: #FFB6C1; /* Medium Pink */
+            --cute-pink-dark: #FF69B4; /* Hot Pink */
+        }
+
         body {
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background: radial-gradient(at top left, var(--medium-tan) 0%, transparent 50%),
+            background: radial-gradient(at top left, var(--cute-pink-light) 0%, transparent 50%),
                         radial-gradient(at bottom right, var(--secondary-sage-green) 0%, transparent 50%),
                         var(--background-light-beige);
             background-size: 100% 100%;
@@ -24,20 +45,23 @@
             text-align: center;
             padding: 20px;
             box-sizing: border-box;
+            overflow: hidden; /* Prevent scrollbar from heart animation */
         }
         .thank-you-card {
-            background: var(--color-bg-light); /* Using your light beige background */
+            background: var(--color-bg-light);
             padding: 50px;
             border-radius: 12px;
             box-shadow: var(--shadow-deep);
             max-width: 600px;
             width: 100%;
             border: 1px solid var(--color-border);
+            position: relative; /* For heart positioning */
+            z-index: 2; /* Ensure card is above hearts */
         }
         .thank-you-card h1 {
             font-family: 'Playfair Display', serif;
             font-size: 3rem;
-            color: var(--color-text-dark);
+            color: var(--primary-dark-olive); /* Changed to a primary color for emphasis */
             margin-bottom: 20px;
         }
         .thank-you-card p {
@@ -46,19 +70,19 @@
             line-height: 1.7;
         }
         .thank-you-card .social-links a {
-            color: var(--primary-dark-olive);
+            color: var(--cute-pink-dark); /* Pink social icons */
             margin: 0 15px;
             font-size: 2.2rem;
             text-decoration: none;
             transition: color 0.3s ease, transform 0.3s ease;
         }
         .thank-you-card .social-links a:hover {
-            color: var(--color-highlight);
+            color: var(--cute-pink-medium); /* Lighter pink on hover */
             transform: scale(1.15);
         }
         .back-home-button {
             display: inline-block;
-            background: var(--gradient-primary);
+            background: linear-gradient(45deg, var(--cute-pink-medium), var(--cute-pink-dark)); /* Pink gradient button */
             color: var(--color-primary-button-text);
             padding: 12px 30px;
             text-decoration: none;
@@ -72,9 +96,102 @@
             transform: translateY(-3px);
             box-shadow: var(--shadow-medium);
         }
+
+        /* 3D Heart Animation */
+        @keyframes beat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            15% {
+                transform: scale(1.1);
+            }
+        }
+
+        .heart-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none; /* Allow clicks through to the card */
+            overflow: hidden; /* Ensure hearts don't spill out */
+            z-index: 1; /* Below the card */
+        }
+
+        .heart {
+            position: absolute;
+            background-color: var(--cute-pink-medium);
+            transform: rotate(-45deg);
+            animation: beat 1.5s infinite ease-in-out;
+            opacity: 0.7;
+        }
+
+        .heart:before,
+        .heart:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: inherit;
+            border-radius: 50%;
+        }
+
+        .heart:before {
+            top: -50%;
+            left: 0;
+        }
+
+        .heart:after {
+            top: 0;
+            left: 50%;
+        }
+
+        /* Individual heart positioning and size */
+        .heart-1 {
+            width: 40px;
+            height: 40px;
+            top: 15%;
+            left: 20%;
+            animation-delay: 0s;
+        }
+        .heart-2 {
+            width: 30px;
+            height: 30px;
+            bottom: 10%;
+            right: 15%;
+            animation-delay: 0.5s;
+        }
+        .heart-3 {
+            width: 25px;
+            height: 25px;
+            top: 50%;
+            left: 5%;
+            animation-delay: 1s;
+        }
+        .heart-4 {
+            width: 35px;
+            height: 35px;
+            top: 30%;
+            right: 10%;
+            animation-delay: 1.5s;
+        }
+        .heart-5 {
+            width: 20px;
+            height: 20px;
+            bottom: 20%;
+            left: 30%;
+            animation-delay: 2s;
+        }
     </style>
 </head>
 <body>
+    <div class="heart-container">
+        <div class="heart heart-1"></div>
+        <div class="heart heart-2"></div>
+        <div class="heart heart-3"></div>
+        <div class="heart heart-4"></div>
+        <div class="heart heart-5"></div>
+    </div>
     <div class="thank-you-card">
         <h1>Thank You for Your Request!</h1>
         <p>I've received your message and reference image. I'll review everything and get back to you within 2-3 business days to discuss your custom sketch.</p>
