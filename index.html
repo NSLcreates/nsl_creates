@@ -815,7 +815,7 @@
             }
 
              #hero {
-                 padding-top: 100px;
+                 padding-top: 100px; /* Increased to account for fixed header */
              }
 
             #hero h1 {
@@ -833,7 +833,7 @@
             }
 
              .contact-form {
-                 padding: 30px;
+                 padding: 30px 20px; /* Adjusted padding for very small screens */
                  margin: 40px auto;
              }
 
@@ -841,9 +841,13 @@
                  padding: 30px;
              }
 
-             .contact-form input,
-             .contact-form textarea {
+             .contact-form input[type="text"],
+             .contact-form input[type="email"],
+             .contact-form input[type="tel"],
+             .contact-form textarea,
+             .phone-input-group select { /* General input styling for mobile */
                  padding: 12px;
+                 font-size: 1rem; /* Standardize font size */
              }
 
 
@@ -870,12 +874,27 @@
                  font-size: 1.5rem;
              }
 
-             .phone-input-group select {
-                 padding: 12px;
-             }
-             .phone-input-group input[type="tel"] {
-                 padding: 12px;
-             }
+            /* --- Phone Input Group Mobile Fix --- */
+            .phone-input-group {
+                flex-wrap: nowrap; /* Ensure they stay on one line */
+            }
+            .phone-input-group select {
+                padding: 12px 8px; /* Slightly reduce horizontal padding */
+                font-size: 0.9rem; /* Slightly reduce font size */
+                flex-basis: 100px; /* Give a base width, can adjust */
+                flex-shrink: 0; /* Prevent shrinking beyond content if possible, but flex-basis helps */
+                max-width: 35%; /* Prevent it from taking too much space */
+                overflow: hidden; /* Hide overflowing text in select options if too long */
+                text-overflow: ellipsis; /* Show ellipsis for long option text */
+            }
+
+            .phone-input-group input[type="tel"] {
+                padding: 12px 10px; /* Adjust padding */
+                font-size: 0.9rem; /* Match select */
+                flex-grow: 1; /* Allow it to take remaining space */
+                min-width: 0; /* Crucial for allowing the input to shrink */
+            }
+            /* --- End Phone Input Group Mobile Fix --- */
         }
 
          /* Accessibility: Highlighting interactive elements on focus */
@@ -894,7 +913,6 @@
          nav ul li a:focus,
          .menu-toggle:focus,
          .cta-button:focus,
-         .sketch-gallery img:focus, /* This will be removed for slider images if they are not directly interactive outside of the slider */
          #about p a:focus,
          .contact-form input:focus,
          .contact-form textarea:focus,
@@ -905,7 +923,7 @@
          .scroll-to-top:focus,
          .phone-input-group select:focus,
          .phone-input-group input[type="tel"]:focus {
-             outline: none;
+             outline: none; /* Custom focus styles are already defined for these */
          }
          
          /* Specific adjustments for flag icons in select options */
@@ -1090,12 +1108,13 @@
                 <label for="message">Message:</label>
                 <textarea id="message" name="message" rows="6" required></textarea>
 
-                <label for="reference-image-display">Upload Reference Image (Required):</label> <div class="drop-zone" id="drop-zone" role="button" tabindex="0" aria-labelledby="reference-image-label-text">
-                    <input type="file" id="reference-image" name="reference_image" accept="image/*" style="display: none;">
+                <label id="main-reference-image-label" for="drop-zone">Upload Reference Image (Required):</label>
+                <div class="drop-zone" id="drop-zone" role="button" tabindex="0" aria-labelledby="main-reference-image-label drop-zone-text file-info help-text-file-upload">
+                    <input type="file" id="reference-image" name="reference_image" accept="image/*" style="display: none;" aria-hidden="true">
                     <p id="drop-zone-text">Drag & Drop your image here or Click to Browse</p>
                     <div class="file-info" id="file-info"></div>
                 </div>
-                 <span class="drop-zone-help-text" id="reference-image-label-text">Accepted formats: JPG, PNG, GIF, WebP. Max size: 1MB (FormSubmit.co free tier).</span>
+                 <span class="drop-zone-help-text" id="help-text-file-upload">Accepted formats: JPG, PNG, GIF, WebP. Max size: 25MB.</span>
 
 
                 <button type="submit">Send Request</button>
@@ -1162,27 +1181,27 @@
 
                 const geometry = new THREE.OctahedronGeometry(2.8);
                 const material = new THREE.MeshPhongMaterial({
-                    color: 0x6B705C, // Updated: primary-dark-olive
+                    color: 0x6B705C, 
                     shininess: 150,
-                    specular: 0xDDBEA9, // Updated: medium-tan (as a specular highlight)
+                    specular: 0xDDBEA9, 
                     flatShading: true
                 });
 
                 const shape = new THREE.Mesh(geometry, material);
                 scene.add(shape);
 
-                const ambientLight = new THREE.AmbientLight(0xffffff, 0.6); // Brighter ambient light for pastel theme
+                const ambientLight = new THREE.AmbientLight(0xffffff, 0.6); 
                 scene.add(ambientLight);
 
-                const directionalLight = new THREE.DirectionalLight(0xffffff, 0.4); // Main directional light
+                const directionalLight = new THREE.DirectionalLight(0xffffff, 0.4); 
                 directionalLight.position.set(5, 5, 5).normalize();
                 scene.add(directionalLight);
 
-                const pointLight1 = new THREE.PointLight(0xA5A58D, 0.5); // Updated: secondary-sage-green light
+                const pointLight1 = new THREE.PointLight(0xA5A58D, 0.5); 
                 pointLight1.position.set(-5, 5, -5);
                 scene.add(pointLight1);
 
-                const pointLight2 = new THREE.PointLight(0xCB997E, 0.5); // Updated: accent-terracotta light
+                const pointLight2 = new THREE.PointLight(0xCB997E, 0.5); 
                 pointLight2.position.set(5, -5, 5);
                 scene.add(pointLight2);
 
@@ -1286,15 +1305,15 @@
 
          // --- Contact Form File Drop Zone Logic ---
         const dropZone = document.getElementById('drop-zone');
-        const fileInput = document.getElementById('reference-image'); // This is the actual file input
+        const fileInput = document.getElementById('reference-image'); 
         const fileInfo = document.getElementById('file-info');
         const dropZoneText = document.getElementById('drop-zone-text');
-        const helpTextElement = document.getElementById('reference-image-label-text'); // The span holding the help text
+        const helpTextFileUpload = document.getElementById('help-text-file-upload'); 
 
-        if (dropZone && fileInput && fileInfo && dropZoneText && helpTextElement) {
+        if (dropZone && fileInput && fileInfo && dropZoneText && helpTextFileUpload) {
              ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
                  dropZone.addEventListener(eventName, preventDefaults, false);
-                 document.body.addEventListener(eventName, preventDefaults, false); // Prevent browser default for body too
+                 document.body.addEventListener(eventName, preventDefaults, false); 
              });
 
              function preventDefaults (e) {
@@ -1314,7 +1333,6 @@
                  dropZone.classList.add('dragover');
                  dropZone.classList.remove('error');
                  fileInfo.classList.remove('error-message');
-                 // fileInfo.textContent = ''; // Keep existing info if dragging over again
              }
 
              function unhighlight() {
@@ -1326,15 +1344,13 @@
              function handleDrop(e) {
                  const dt = e.dataTransfer;
                  const files = dt.files;
-                 handleFiles(files); // This will set fileInput.files
+                 handleFiles(files); 
              }
 
-             // When user clicks drop zone, trigger click on hidden file input
              dropZone.addEventListener('click', function() {
                  fileInput.click();
              });
             
-             // When file is selected via browse button
              fileInput.addEventListener('change', function(e) {
                  handleFiles(this.files);
              });
@@ -1342,63 +1358,51 @@
 
              function handleFiles(files) {
                  const file = files[0];
-                 // **** IMPORTANT: File size limit for FormSubmit.co ****
-                 // Free tier: 1MB. Paid tiers: Higher (e.g., 5MB or 25MB).
-                 // Adjust maxSizeBytes based on your FormSubmit.co plan.
-                 const maxSizeBytes = 1 * 1024 * 1024; // 1MB (for FormSubmit.co free tier)
-                 // const maxSizeBytes = 5 * 1024 * 1024; // Example: 5MB for a paid plan
-                 // const maxSizeBytes = 25 * 1024 * 1024; // Example: 25MB for a higher paid plan
+                
+                 // IMPORTANT: Client-side file size limit.
+                 // The actual server-side limit is determined by your FormSubmit.co plan.
+                 // This client-side check is for better UX.
+                 const maxSizeBytes = 25 * 1024 * 1024; // 25MB 
+                                                          // Adjust this value if your FormSubmit.co plan has a different limit.
 
-
-                 if (!file) { // No file selected or cleared
+                 if (!file) { 
                      resetDropZone();
                      return;
                  }
                 
-                 // Validate file size
                  if (file.size > maxSizeBytes) {
-                     const planType = maxSizeBytes === (1 * 1024 * 1024) ? "free tier" : "current plan";
-                     displayError(`File "${file.name}" is too large (max ${formatBytes(maxSizeBytes)} for FormSubmit.co ${planType}).`);
-                     fileInput.value = ''; // Clear the actual file input
+                     displayError(`File "${file.name}" is too large (max ${formatBytes(maxSizeBytes)}).`);
+                     fileInput.value = ''; 
                      return;
                  }
 
-                 // Validate file type
                  const acceptedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
                  if (!acceptedTypes.includes(file.type)) {
                      displayError(`File "${file.name}" has an invalid format. Accepted: JPG, PNG, GIF, WebP.`);
-                     fileInput.value = ''; // Clear the actual file input
+                     fileInput.value = ''; 
                      return;
                  }
 
-                 // If validations pass, update UI
                  dropZoneText.textContent = `Selected File:`;
                  fileInfo.textContent = `${file.name} (${formatBytes(file.size)})`;
                  dropZone.classList.remove('error');
                  fileInfo.classList.remove('error-message');
-
-                 // Crucially, ensure the file is associated with the input for form submission.
-                 // If `files` came from a drop event, we need to assign them to the input.
-                 // If it came from `fileInput.addEventListener('change')`, `fileInput.files` is already set.
-                 // This ensures `fileInput.files` is correctly populated for both scenarios.
-                 if (fileInput.files !== files) {
-                    // For modern browsers, directly assigning FileList is complex.
-                    // However, since we handle single file, and `handleFiles` is called by `drop`
-                    // which then calls `fileInput.files = files` (if it were possible),
-                    // or by `fileInput.onchange` (where `this.files` is already correct),
-                    // the main point is that `fileInput` *must* hold the file.
-                    // The click() and change event on fileInput is the most robust way.
-                    // If files are from drop, `fileInput.files` IS ACTUALLY POPULATED BY THE BROWSER
-                    // if the drop target is an input type file, or if you programmatically assign it.
-                    // Since our `fileInput` is hidden and we `click()` it, or handle `drop` on a div,
-                    // we need to make sure the `fileInput` gets the file.
-                    // The most straightforward way to ensure the hidden input has the file from a drop event
-                    // is to simply ensure `fileInput.files` is updated. Modern browsers might not allow direct
-                    // assignment to `fileInput.files` for security reasons.
-                    // However, `e.dataTransfer.files` is a FileList, and `fileInput.files` is also a FileList.
-                    // The critical part is that `fileInput` is the element with `name="reference_image"`.
-                    // If the form is submitted, the browser will use `fileInput.files`.
-                    // The JavaScript here makes sure `fileInput` reflects the user's choice from drag/drop.
+                 
+                 // Ensure the fileInput.files is correctly populated for form submission
+                 // If files come from a drop event, assign them to the file input.
+                 // This step is crucial for the form to pick up dragged-and-dropped files.
+                 if (fileInput.files !== files && files.length > 0) {
+                    // Create a new FileList/DataTransfer object to assign to input.files
+                    // This is a common workaround as input.files is read-only directly.
+                    try {
+                        const dataTransfer = new DataTransfer();
+                        dataTransfer.items.add(files[0]);
+                        fileInput.files = dataTransfer.files;
+                    } catch (err) {
+                        console.warn("Could not assign dropped file to input directly. Ensure browser supports DataTransfer constructor or form might not pick up dropped file correctly if not also selected via click.", err);
+                        // Fallback: rely on the fact that form submission might pick up the file if it was "selected" by the drop.
+                        // The `fileInput.onchange` event would not fire for a drop, so this assignment is important.
+                    }
                  }
              }
 
@@ -1414,7 +1418,7 @@
                  fileInfo.textContent = '';
                  dropZone.classList.remove('dragover', 'error');
                  fileInfo.classList.remove('error-message');
-                 fileInput.value = ''; // Clear the actual file input
+                 fileInput.value = ''; 
              }
 
              function formatBytes(bytes, decimals = 2) {
@@ -1429,15 +1433,12 @@
               dropZone.addEventListener('keydown', function(e) {
                   if (e.key === 'Enter' || e.key === ' ') {
                       e.preventDefault();
-                      fileInput.click(); // Trigger click on hidden file input
+                      fileInput.click(); 
                   }
               });
 
-             // Update help text with the correct max size
-             const currentMaxSize = 1 * 1024 * 1024; // Ensure this matches maxSizeBytes
-             const planTypeHelpText = currentMaxSize === (1 * 1024 * 1024) ? "free tier" : "current plan";
-             helpTextElement.textContent = `Accepted formats: JPG, PNG, GIF, WebP. Max size: ${formatBytes(currentMaxSize)} (FormSubmit.co ${planTypeHelpText}).`;
-
+             const currentClientMaxSizeBytes = 25 * 1024 * 1024; 
+             helpTextFileUpload.textContent = `Accepted formats: JPG, PNG, GIF, WebP. Max size: ${formatBytes(currentClientMaxSizeBytes)}.`;
         }
           // --- End Contact Form File Drop Zone Logic ---
 
@@ -1460,7 +1461,6 @@
                            behavior: 'smooth'
                        });
 
-                       // For mobile menu: close if open
                        if (nav && nav.classList.contains('active')) {
                            nav.classList.remove('active');
                            if(menuToggle) menuToggle.classList.remove('active');
@@ -1480,7 +1480,7 @@
 
             let galleryCurrentIndex = 0;
             let gallerySlideInterval;
-            const gallerySlideDuration = 4000; // 4 seconds
+            const gallerySlideDuration = 4000; 
 
             if (gallerySliderInner && gallerySliderItems.length > 0 && galleryPrevButton && galleryNextButton && gallerySliderDotsContainer) {
 
@@ -1503,13 +1503,13 @@
                 }
 
                 function createGalleryDots() {
-                    gallerySliderDotsContainer.innerHTML = ''; // Clear existing dots
+                    gallerySliderDotsContainer.innerHTML = ''; 
                     gallerySliderItems.forEach((_, index) => {
                         const dot = document.createElement('span');
                         dot.classList.add('dot');
                         dot.setAttribute('role', 'button');
                         dot.setAttribute('aria-label', `Go to gallery slide ${index + 1}`);
-                        dot.setAttribute('tabindex', '0'); // Make dots focusable
+                        dot.setAttribute('tabindex', '0'); 
                         dot.addEventListener('click', () => {
                             galleryCurrentIndex = index;
                             updateGallerySlider();
@@ -1538,7 +1538,7 @@
                 }
 
                 function startAutoGallerySlide() {
-                    clearInterval(gallerySlideInterval); // Clear existing interval before starting a new one
+                    clearInterval(gallerySlideInterval); 
                     gallerySlideInterval = setInterval(showNextGallerySlide, gallerySlideDuration);
                 }
 
@@ -1547,29 +1547,25 @@
                     startAutoGallerySlide();
                 }
 
-                // Initialize slider
                 createGalleryDots();
-                updateGallerySlider(); // Set initial slide and dot
-                startAutoGallerySlide(); // Start auto-play
+                updateGallerySlider(); 
+                startAutoGallerySlide(); 
 
-                // Attach event listeners for buttons
                 galleryPrevButton.addEventListener('click', showPrevGallerySlide);
                 galleryNextButton.addEventListener('click', showNextGallerySlide);
 
-                // Pause auto-slide on hover
                 const gallerySliderContainer = document.querySelector('#gallery .slider-container');
                 if (gallerySliderContainer) {
                     gallerySliderContainer.addEventListener('mouseenter', () => clearInterval(gallerySlideInterval));
                     gallerySliderContainer.addEventListener('mouseleave', startAutoGallerySlide);
 
-                    // --- Touch/Swipe functionality for Gallery Slider ---
                     let galleryTouchStartX = 0;
                     let galleryTouchEndX = 0;
-                    const galleryMinSwipeDistance = 50; // Minimum pixels for a recognized swipe
+                    const galleryMinSwipeDistance = 50; 
 
                     gallerySliderContainer.addEventListener('touchstart', (e) => {
                         galleryTouchStartX = e.touches[0].clientX;
-                    }, { passive: true }); // Use passive: true for better scroll performance
+                    }, { passive: true }); 
 
                     gallerySliderContainer.addEventListener('touchend', (e) => {
                         galleryTouchEndX = e.changedTouches[0].clientX;
@@ -1579,26 +1575,21 @@
                     function handleGallerySwipe() {
                         const swipeDistance = galleryTouchEndX - galleryTouchStartX;
                         if (swipeDistance > galleryMinSwipeDistance) {
-                            // Swiped right (previous slide)
                             showPrevGallerySlide();
                         } else if (swipeDistance < -galleryMinSwipeDistance) {
-                            // Swiped left (next slide)
                             showNextGallerySlide();
                         }
                     }
-                    // --- End Touch/Swipe functionality ---
                 }
 
 
-                // Keyboard navigation for slider
                 document.addEventListener('keydown', (e) => {
-                    // Check if the focused element is within the gallery slider or its controls
                     if (document.activeElement && document.activeElement.closest('#gallery .slider-container, #gallery .slider-nav-button, #gallery .dot')) {
                         if (e.key === 'ArrowRight') {
-                            e.preventDefault(); // Prevent page scroll
+                            e.preventDefault(); 
                             showNextGallerySlide();
                         } else if (e.key === 'ArrowLeft') {
-                            e.preventDefault(); // Prevent page scroll
+                            e.preventDefault(); 
                             showPrevGallerySlide();
                         }
                     }
@@ -1607,12 +1598,7 @@
             // --- End Gallery Slider Logic ---
 
             // --- Phone Country Code Dropdown with Flags ---
-            const countryCodeSelect = document.getElementById('country-code');
-            if (countryCodeSelect) {
-                // No specific JS needed for change event unless you want to update a separate flag display.
-                // The flags are embedded in the <option> text.
-            }
-
+            // No specific JS action needed on change for current setup beyond native select behavior.
     </script>
 
 </body>
