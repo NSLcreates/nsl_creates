@@ -316,21 +316,21 @@
         .cta-button:active { transform: translateY(-1px); box-shadow: var(--shadow-light); }
 
 
-        /* --- Gallery Slider --- */
+        /* --- Gallery Slider - Updated Styles --- */
         .slider-container {
             position: relative;
-            max-width: 900px; /* Adjust as needed */
+            max-width: 900px;
             margin: 50px auto;
             overflow: hidden;
-            border-radius: 12px;
-            box-shadow: var(--shadow-deep);
+            border-radius: 16px; /* Increased border-radius for softer corners */
+            box-shadow: 0 8px 20px rgba(0,0,0,0.18); /* Enhanced shadow for depth */
             background-color: var(--color-bg-light);
-            border: 1px solid var(--color-border);
+            border: none; /* Removed border for a cleaner look */
         }
 
         .slider-inner {
             display: flex;
-            transition: transform 0.7s ease-in-out;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smoother transition */
         }
 
         .slider-item {
@@ -344,79 +344,79 @@
         .slider-item img {
             width: 100%;
             height: auto;
-            max-height: 500px; /* Ensure images don't get too tall */
-            object-fit: contain; /* changed from cover to contain to avoid cropping */
+            max-height: 550px; /* Adjusted max height */
+            object-fit: contain;
             display: block;
-            border-radius: 8px; /* Slightly smaller radius for images within slider */
-            padding: 15px; /* Padding inside the slide item */
-            background-color: var(--color-bg-light); /* Background for images if contain doesn't fill */
+            border-radius: 12px; /* Slightly smaller radius for images */
+            padding: 20px; /* Increased padding */
+            background-color: #f9f9f9; /* Softer background color */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.06); /* Subtle shadow on images */
         }
 
         .slider-nav-button {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background-color: rgba(107, 112, 92, 0.7); /* Dark Olive with transparency */
+            background-color: rgba(107, 112, 92, 0.8); /* Dark Olive with more transparency */
             color: var(--background-light-beige);
             border: none;
-            padding: 15px 10px;
+            padding: 16px 12px; /* Adjusted padding */
             cursor: pointer;
-            font-size: 1.8rem;
+            font-size: 2rem;
             z-index: 10;
-            transition: background-color 0.3s ease, transform 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
             outline: none;
+            opacity: 0.7; /* Reduced opacity for a subtle look */
         }
 
         .slider-nav-button:hover {
-            background-color: var(--primary-dark-olive); /* Dark Olive */
-            transform: translateY(-50%) scale(1.05);
+            background-color: var(--primary-dark-olive);
+            transform: translateY(-50%) scale(1.1); /* Slightly larger on hover */
+            opacity: 1; /* Fully visible on hover */
         }
 
         .slider-nav-button:focus {
-            outline: 2px solid var(--color-highlight);
-            outline-offset: 2px;
+            box-shadow: 0 0 0 3px rgba(107, 112, 92, 0.5); /* Focus ring */
         }
 
         .slider-nav-button.prev {
             left: 0;
-            border-top-right-radius: 8px;
-            border-bottom-right-radius: 8px;
+            border-top-right-radius: 12px;
+            border-bottom-right-radius: 12px;
         }
 
         .slider-nav-button.next {
             right: 0;
-            border-top-left-radius: 8px;
-            border-bottom-left-radius: 8px;
+            border-top-left-radius: 12px;
+            border-bottom-left-radius: 12px;
         }
 
         .slider-dots {
             text-align: center;
-            margin-top: 20px;
+            margin-top: 25px; /* Increased margin */
         }
 
         .dot {
-            height: 12px;
-            width: 12px;
-            margin: 0 5px;
-            background-color: var(--secondary-sage-green); /* Muted sage */
+            height: 14px; /* Slightly larger dots */
+            width: 14px;
+            margin: 0 6px; /* Adjusted margin */
+            background-color: var(--secondary-sage-green);
             border-radius: 50%;
             display: inline-block;
-            transition: background-color 0.3s ease, transform 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
             outline: none;
         }
 
         .dot.active {
-            background-color: var(--primary-dark-olive); /* Dark Olive */
+            background-color: var(--primary-dark-olive);
             transform: scale(1.2);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.15); /* Subtle shadow for active dot */
         }
 
-        .dot:hover {
-            background-color: var(--accent-terracotta); /* Terracotta */
-        }
-        .dot:focus {
-            outline: 2px solid var(--color-highlight);
-            outline-offset: 2px;
+        .dot:hover, .dot:focus {
+            background-color: var(--accent-terracotta);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow on hover */
         }
 
 
@@ -856,10 +856,10 @@
                         <img src="IMG_20241122_193303_736.jpg" alt="Sketch Artwork 2 by NSL Forge">
                     </div>
                     <div class="slider-item">
-                        <img src="IMG_20241008_190133(1).jpg" alt="Sketch Artwork 3 by NSL Forge">
+                         <img src="ironman.jpg" alt="Sketch Artwork 4 by NSL Forge">
                     </div>
                     <div class="slider-item">
-                        <img src="ironman.jpg" alt="Sketch Artwork 4 by NSL Forge">
+                        <img src="IMG_20241008_190133(1).jpg" alt="Sketch Artwork 3 by NSL Forge">
                     </div>
                 </div>
                 <button class="slider-nav-button prev" aria-label="Previous image"><i class="fas fa-chevron-left"></i></button>
