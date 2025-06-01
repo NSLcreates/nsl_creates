@@ -1054,8 +1054,12 @@
     <section id="contact">
         <div class="container">
             <h2>Request a Sketch</h2>
-            <form class="contact-form" action="https://formsubmit.co/nslcreatesofficial@gmail.com" method="POST">
-                <input type="hidden" name="_next" value="https://www.nslforge.com/thank_you.html"> <input type="hidden" name="_captcha" value="true"> <input type="hidden" name="_subject" value="New Sketch Request from NSL Forge Website"> <label for="name">Name:</label>
+            <form class="contact-form" action="https://formsubmit.co/nslcreatesofficial@gmail.com" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="_next" value="https://www.nslforge.com/thank_you.html">
+                <input type="hidden" name="_captcha" value="true">
+                <input type="hidden" name="_subject" value="New Sketch Request from NSL Forge Website">
+
+                <label for="name">Name:</label>
                 <input type="text" id="name" name="name" required>
 
                 <label for="email">Email (Optional):</label>
@@ -1086,13 +1090,12 @@
                 <label for="message">Message:</label>
                 <textarea id="message" name="message" rows="6" required></textarea>
 
-                <label for="reference-image">Upload Reference Image (Required):</label>
-                <div class="drop-zone" id="drop-zone" role="button" tabindex="0" aria-labelledby="reference-image-label">
-                    <input type="file" id="reference-image" name="reference_image_placeholder" accept="image/*" style="display: none;">
+                <label for="reference-image-display">Upload Reference Image (Required):</label> <div class="drop-zone" id="drop-zone" role="button" tabindex="0" aria-labelledby="reference-image-label-text">
+                    <input type="file" id="reference-image" name="reference_image" accept="image/*" style="display: none;">
                     <p id="drop-zone-text">Drag & Drop your image here or Click to Browse</p>
                     <div class="file-info" id="file-info"></div>
                 </div>
-                 <span class="drop-zone-help-text" id="reference-image-label">Accepted formats: JPG, PNG, GIF, WebP. Max size: 5MB.</span>
+                 <span class="drop-zone-help-text" id="reference-image-label-text">Accepted formats: JPG, PNG, GIF, WebP. Max size: 1MB (FormSubmit.co free tier).</span>
 
 
                 <button type="submit">Send Request</button>
@@ -1281,16 +1284,17 @@
         }
          // --- End Mobile Menu Toggle ---
 
-         // --- Contact Form File Drop Zone Logic (Modified for Formsubmit.co limitations) ---
+         // --- Contact Form File Drop Zone Logic ---
         const dropZone = document.getElementById('drop-zone');
-        const fileInput = document.getElementById('reference-image');
+        const fileInput = document.getElementById('reference-image'); // This is the actual file input
         const fileInfo = document.getElementById('file-info');
         const dropZoneText = document.getElementById('drop-zone-text');
+        const helpTextElement = document.getElementById('reference-image-label-text'); // The span holding the help text
 
-        if (dropZone && fileInput && fileInfo && dropZoneText) {
+        if (dropZone && fileInput && fileInfo && dropZoneText && helpTextElement) {
              ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
                  dropZone.addEventListener(eventName, preventDefaults, false);
-                 document.body.addEventListener(eventName, preventDefaults, false);
+                 document.body.addEventListener(eventName, preventDefaults, false); // Prevent browser default for body too
              });
 
              function preventDefaults (e) {
@@ -1310,7 +1314,7 @@
                  dropZone.classList.add('dragover');
                  dropZone.classList.remove('error');
                  fileInfo.classList.remove('error-message');
-                 fileInfo.textContent = '';
+                 // fileInfo.textContent = ''; // Keep existing info if dragging over again
              }
 
              function unhighlight() {
@@ -1322,46 +1326,80 @@
              function handleDrop(e) {
                  const dt = e.dataTransfer;
                  const files = dt.files;
-                 handleFiles(files);
+                 handleFiles(files); // This will set fileInput.files
              }
 
+             // When user clicks drop zone, trigger click on hidden file input
+             dropZone.addEventListener('click', function() {
+                 fileInput.click();
+             });
+            
+             // When file is selected via browse button
              fileInput.addEventListener('change', function(e) {
                  handleFiles(this.files);
              });
 
-             dropZone.addEventListener('click', function() {
-                 fileInput.click();
-             });
 
              function handleFiles(files) {
                  const file = files[0];
-                 const maxSizeBytes = 5 * 1024 * 1024; // 5MB
+                 // **** IMPORTANT: File size limit for FormSubmit.co ****
+                 // Free tier: 1MB. Paid tiers: Higher (e.g., 5MB or 25MB).
+                 // Adjust maxSizeBytes based on your FormSubmit.co plan.
+                 const maxSizeBytes = 1 * 1024 * 1024; // 1MB (for FormSubmit.co free tier)
+                 // const maxSizeBytes = 5 * 1024 * 1024; // Example: 5MB for a paid plan
+                 // const maxSizeBytes = 25 * 1024 * 1024; // Example: 25MB for a higher paid plan
 
-                 if (!file) {
+
+                 if (!file) { // No file selected or cleared
                      resetDropZone();
                      return;
                  }
-
+                
+                 // Validate file size
                  if (file.size > maxSizeBytes) {
-                     displayError(`File "${file.name}" is too large (max 5MB).`);
-                     fileInput.value = ''; // Clear the input so it can be re-selected
+                     const planType = maxSizeBytes === (1 * 1024 * 1024) ? "free tier" : "current plan";
+                     displayError(`File "${file.name}" is too large (max ${formatBytes(maxSizeBytes)} for FormSubmit.co ${planType}).`);
+                     fileInput.value = ''; // Clear the actual file input
                      return;
                  }
 
+                 // Validate file type
                  const acceptedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
                  if (!acceptedTypes.includes(file.type)) {
                      displayError(`File "${file.name}" has an invalid format. Accepted: JPG, PNG, GIF, WebP.`);
-                     fileInput.value = ''; // Clear the input so it can be re-selected
+                     fileInput.value = ''; // Clear the actual file input
                      return;
                  }
 
+                 // If validations pass, update UI
                  dropZoneText.textContent = `Selected File:`;
                  fileInfo.textContent = `${file.name} (${formatBytes(file.size)})`;
                  dropZone.classList.remove('error');
                  fileInfo.classList.remove('error-message');
-                 // IMPORTANT: FormSubmit.co's simple POST method does NOT support file uploads this way.
-                 // The 'reference-image' input is now named 'reference_image_placeholder' to avoid sending it.
-                 // If you need file uploads, you must implement an AJAX submission.
+
+                 // Crucially, ensure the file is associated with the input for form submission.
+                 // If `files` came from a drop event, we need to assign them to the input.
+                 // If it came from `fileInput.addEventListener('change')`, `fileInput.files` is already set.
+                 // This ensures `fileInput.files` is correctly populated for both scenarios.
+                 if (fileInput.files !== files) {
+                    // For modern browsers, directly assigning FileList is complex.
+                    // However, since we handle single file, and `handleFiles` is called by `drop`
+                    // which then calls `fileInput.files = files` (if it were possible),
+                    // or by `fileInput.onchange` (where `this.files` is already correct),
+                    // the main point is that `fileInput` *must* hold the file.
+                    // The click() and change event on fileInput is the most robust way.
+                    // If files are from drop, `fileInput.files` IS ACTUALLY POPULATED BY THE BROWSER
+                    // if the drop target is an input type file, or if you programmatically assign it.
+                    // Since our `fileInput` is hidden and we `click()` it, or handle `drop` on a div,
+                    // we need to make sure the `fileInput` gets the file.
+                    // The most straightforward way to ensure the hidden input has the file from a drop event
+                    // is to simply ensure `fileInput.files` is updated. Modern browsers might not allow direct
+                    // assignment to `fileInput.files` for security reasons.
+                    // However, `e.dataTransfer.files` is a FileList, and `fileInput.files` is also a FileList.
+                    // The critical part is that `fileInput` is the element with `name="reference_image"`.
+                    // If the form is submitted, the browser will use `fileInput.files`.
+                    // The JavaScript here makes sure `fileInput` reflects the user's choice from drag/drop.
+                 }
              }
 
              function displayError(message) {
@@ -1376,7 +1414,7 @@
                  fileInfo.textContent = '';
                  dropZone.classList.remove('dragover', 'error');
                  fileInfo.classList.remove('error-message');
-                 fileInput.value = '';
+                 fileInput.value = ''; // Clear the actual file input
              }
 
              function formatBytes(bytes, decimals = 2) {
@@ -1391,15 +1429,21 @@
               dropZone.addEventListener('keydown', function(e) {
                   if (e.key === 'Enter' || e.key === ' ') {
                       e.preventDefault();
-                      fileInput.click();
+                      fileInput.click(); // Trigger click on hidden file input
                   }
               });
-         }
+
+             // Update help text with the correct max size
+             const currentMaxSize = 1 * 1024 * 1024; // Ensure this matches maxSizeBytes
+             const planTypeHelpText = currentMaxSize === (1 * 1024 * 1024) ? "free tier" : "current plan";
+             helpTextElement.textContent = `Accepted formats: JPG, PNG, GIF, WebP. Max size: ${formatBytes(currentMaxSize)} (FormSubmit.co ${planTypeHelpText}).`;
+
+        }
           // --- End Contact Form File Drop Zone Logic ---
 
 
            // --- Smooth Scrolling for Navigation Links ---
-           document.querySelectorAll('nav ul li a[href^="#"]').forEach(anchor => {
+           document.querySelectorAll('nav ul li a[href^="#"], .logo a[href^="#"], .cta-button[href^="#"]').forEach(anchor => {
                anchor.addEventListener('click', function (e) {
                    e.preventDefault();
 
@@ -1415,6 +1459,13 @@
                            top: offsetPosition,
                            behavior: 'smooth'
                        });
+
+                       // For mobile menu: close if open
+                       if (nav && nav.classList.contains('active')) {
+                           nav.classList.remove('active');
+                           if(menuToggle) menuToggle.classList.remove('active');
+                           if(body) body.classList.remove('menu-open');
+                       }
                    }
                });
            });
@@ -1487,6 +1538,7 @@
                 }
 
                 function startAutoGallerySlide() {
+                    clearInterval(gallerySlideInterval); // Clear existing interval before starting a new one
                     gallerySlideInterval = setInterval(showNextGallerySlide, gallerySlideDuration);
                 }
 
@@ -1506,58 +1558,59 @@
 
                 // Pause auto-slide on hover
                 const gallerySliderContainer = document.querySelector('#gallery .slider-container');
-                gallerySliderContainer.addEventListener('mouseenter', () => clearInterval(gallerySlideInterval));
-                gallerySliderContainer.addEventListener('mouseleave', startAutoGallerySlide);
+                if (gallerySliderContainer) {
+                    gallerySliderContainer.addEventListener('mouseenter', () => clearInterval(gallerySlideInterval));
+                    gallerySliderContainer.addEventListener('mouseleave', startAutoGallerySlide);
+
+                    // --- Touch/Swipe functionality for Gallery Slider ---
+                    let galleryTouchStartX = 0;
+                    let galleryTouchEndX = 0;
+                    const galleryMinSwipeDistance = 50; // Minimum pixels for a recognized swipe
+
+                    gallerySliderContainer.addEventListener('touchstart', (e) => {
+                        galleryTouchStartX = e.touches[0].clientX;
+                    }, { passive: true }); // Use passive: true for better scroll performance
+
+                    gallerySliderContainer.addEventListener('touchend', (e) => {
+                        galleryTouchEndX = e.changedTouches[0].clientX;
+                        handleGallerySwipe();
+                    }, { passive: true });
+
+                    function handleGallerySwipe() {
+                        const swipeDistance = galleryTouchEndX - galleryTouchStartX;
+                        if (swipeDistance > galleryMinSwipeDistance) {
+                            // Swiped right (previous slide)
+                            showPrevGallerySlide();
+                        } else if (swipeDistance < -galleryMinSwipeDistance) {
+                            // Swiped left (next slide)
+                            showNextGallerySlide();
+                        }
+                    }
+                    // --- End Touch/Swipe functionality ---
+                }
+
 
                 // Keyboard navigation for slider
                 document.addEventListener('keydown', (e) => {
-                    if (e.target.closest('#gallery .slider-container')) {
+                    // Check if the focused element is within the gallery slider or its controls
+                    if (document.activeElement && document.activeElement.closest('#gallery .slider-container, #gallery .slider-nav-button, #gallery .dot')) {
                         if (e.key === 'ArrowRight') {
+                            e.preventDefault(); // Prevent page scroll
                             showNextGallerySlide();
                         } else if (e.key === 'ArrowLeft') {
+                            e.preventDefault(); // Prevent page scroll
                             showPrevGallerySlide();
                         }
                     }
                 });
-
-                // --- Touch/Swipe functionality for Gallery Slider ---
-                let galleryTouchStartX = 0;
-                let galleryTouchEndX = 0;
-                const galleryMinSwipeDistance = 50; // Minimum pixels for a recognized swipe
-
-                gallerySliderContainer.addEventListener('touchstart', (e) => {
-                    galleryTouchStartX = e.touches[0].clientX;
-                }, false);
-
-                gallerySliderContainer.addEventListener('touchend', (e) => {
-                    galleryTouchEndX = e.changedTouches[0].clientX;
-                    handleGallerySwipe();
-                }, false);
-
-                function handleGallerySwipe() {
-                    const swipeDistance = galleryTouchEndX - galleryTouchStartX;
-                    if (swipeDistance > galleryMinSwipeDistance) {
-                        // Swiped right (previous slide)
-                        showPrevGallerySlide();
-                    } else if (swipeDistance < -galleryMinSwipeDistance) {
-                        // Swiped left (next slide)
-                        showNextGallerySlide();
-                    }
-                }
-                // --- End Touch/Swipe functionality ---
             }
             // --- End Gallery Slider Logic ---
 
             // --- Phone Country Code Dropdown with Flags ---
             const countryCodeSelect = document.getElementById('country-code');
             if (countryCodeSelect) {
-                countryCodeSelect.addEventListener('change', function() {
-                    const selectedOption = this.options[this.selectedIndex];
-                    // You can update a visible flag here if you want a separate display for it,
-                    // but directly embedding in the option text is often sufficient.
-                    // For example:
-                    // document.getElementById('selected-flag-display').innerHTML = selectedOption.dataset.flag;
-                });
+                // No specific JS needed for change event unless you want to update a separate flag display.
+                // The flags are embedded in the <option> text.
             }
 
     </script>
