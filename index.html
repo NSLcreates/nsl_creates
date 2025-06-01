@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NSL Forge by Naman Lumbhani - Exquisite Sketch Artwork & Commissions</title>
-    <meta name="description" content="Commission custom sketch artwork from Naman Lumbhani (NSL Forge). Specializing in portraits, character sketches, and conceptual art. Explore samples and connect for collaborations in Navsari, Gujarat.">
+    <title>NSL Forge by Naman Lumbhani - Exquisite Sketch Artwork & Requests</title>
+    <meta name="description" content="Request custom sketch artwork from Naman Lumbhani (NSL Forge). Specializing in portraits, character sketches, and conceptual art. Explore samples, learn about the process, and connect for artistic collaborations in Navsari, Gujarat.">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="icon" href="IMG_20250528_173749_910.webp" type="image/webp">
@@ -99,7 +99,7 @@
         }
 
         section:last-of-type { border-bottom: none; }
-        #gallery { background-color: var(--color-bg-medium); } /* Gallery uses slightly darker pastel background */
+        #gallery, #services { background-color: var(--color-bg-medium); } /* Gallery, Services use slightly darker pastel background */
         #disclaimer { padding: 60px 0; background-color: var(--color-bg-medium); border-bottom: 1px solid var(--color-border); min-height: auto; } /* Disclaimer uses slightly darker pastel background */
 
         /* Section Headings */
@@ -453,11 +453,55 @@
             font-family: 'Playfair Display', serif; color: var(--color-text-dark); margin-top: 0; margin-bottom: 30px; /* Darkest text */
             font-size: 2.2rem; text-align: center; font-weight: 600;
         }
-        .service-process ol, .service-process ul { list-style-position: outside; padding-left: 30px; margin: 25px auto; max-width: 900px; color: var(--color-text-medium); /* General body text for process steps */ font-size: 1.05rem; line-height: 1.8; }
-        .service-process li { margin-bottom: 15px; padding-left: 8px; position: relative; }
-        .service-process ol li::marker { font-weight: bold; color: var(--primary-dark-olive); font-size: 1.2em; } /* Dark Olive for marker */
-        .service-process ul li::before { content: '•'; color: var(--primary-dark-olive); font-weight: bold; display: inline-block; width: 1em; margin-left: -1em; font-size: 1.2em; } /* Dark Olive for bullet */
-        .service-process li strong { color: var(--color-text-dark); font-weight: 500; } /* Darkest text for bold text */
+        /* New: Process Steps Grid */
+        .process-steps-grid {
+             display: grid;
+             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+             gap: 30px;
+             margin-top: 40px;
+             max-width: 1200px;
+             margin-left: auto;
+             margin-right: auto;
+        }
+
+        .process-step-card {
+             background: var(--color-bg-light);
+             padding: 30px;
+             border-radius: 12px;
+             box-shadow: var(--shadow-light);
+             text-align: center;
+             border: 1px solid var(--color-border);
+             transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .process-step-card:hover {
+             transform: translateY(-5px);
+             box-shadow: var(--shadow-medium);
+        }
+
+        .process-step-card .step-number {
+             font-family: 'Playfair Display', serif;
+             font-size: 2.5rem;
+             font-weight: 700;
+             color: var(--accent-terracotta); /* Terracotta for step number */
+             margin-bottom: 15px;
+        }
+
+        .process-step-card h4 {
+             font-family: 'Roboto', sans-serif;
+             font-size: 1.3rem;
+             color: var(--color-text-dark);
+             margin-bottom: 10px;
+             font-weight: 500;
+             letter-spacing: 0.2px;
+        }
+
+        .process-step-card p {
+             font-size: 0.95rem;
+             color: var(--color-text-medium);
+             line-height: 1.6;
+        }
+
         .important-note { text-align: center; font-size: 1rem; color: var(--color-alert); margin-top: 20px; font-weight: 500; }
         .important-note i { margin-right: 8px; }
 
@@ -550,6 +594,55 @@
              margin-bottom: 20px;
              font-size: 0.9rem;
              text-align: center;
+        }
+
+        .phone-input-group {
+            display: flex;
+            margin-bottom: 25px;
+        }
+
+        .phone-input-group select {
+            padding: 15px;
+            border: 1px solid var(--color-border);
+            border-radius: 8px 0 0 8px;
+            font-size: 1rem;
+            color: var(--color-text-dark);
+            background-color: var(--color-bg-light);
+            appearance: none;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            width: auto;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .phone-input-group select:focus {
+            border-color: var(--primary-dark-olive);
+            box-shadow: 0 0 10px rgba(107, 112, 92, 0.3);
+        }
+
+        .phone-input-group select option {
+            padding: 10px;
+        }
+
+        .phone-input-group input[type="tel"] {
+            flex-grow: 1;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 0; /* Override default margin */
+            border-left: none; /* Blend with select */
+        }
+        .phone-input-group input[type="tel"]:focus {
+            border-color: var(--primary-dark-olive);
+            box-shadow: 0 0 10px rgba(107, 112, 92, 0.3);
+            outline: none;
+            border-left: 1px solid var(--primary-dark-olive); /* Restore left border on focus */
+        }
+         .phone-input-group .flag-icon {
+            margin-right: 8px;
+            font-size: 1.1em;
+            vertical-align: middle;
         }
 
         .contact-form button[type="submit"] {
@@ -776,6 +869,13 @@
                  line-height: 50px;
                  font-size: 1.5rem;
              }
+
+             .phone-input-group select {
+                 padding: 12px;
+             }
+             .phone-input-group input[type="tel"] {
+                 padding: 12px;
+             }
         }
 
          /* Accessibility: Highlighting interactive elements on focus */
@@ -802,9 +902,17 @@
          .contact-form button[type="submit"]:focus,
          .contact-info p a:focus,
          footer .social-links a:focus,
-         .scroll-to-top:focus {
+         .scroll-to-top:focus,
+         .phone-input-group select:focus,
+         .phone-input-group input[type="tel"]:focus {
              outline: none;
          }
+         
+         /* Specific adjustments for flag icons in select options */
+        .phone-input-group select option i.flag-icon {
+            margin-right: 5px;
+            font-size: 1em; /* Adjust as needed for better alignment */
+        }
 
     </style>
 </head>
@@ -839,8 +947,8 @@
         </div>
         <div class="hero-content">
             <h1>Crafting Visions in Sketch at <span class="site-title">NSL Forge</span></h1>
-            <p class="hero-subtext">Experience the unique artistry of Naman Lumbhani. Specializing in detailed sketch commissions that bring your ideas to life.</p>
-            <a href="#contact" class="cta-button">Commission Your Sketch</a>
+            <p class="hero-subtext">Experience the unique artistry of Naman Lumbhani. Specializing in detailed sketch requests that bring your ideas to life.</p>
+            <a href="#contact" class="cta-button">Request Your Sketch</a>
         </div>
     </section>
 
@@ -850,16 +958,16 @@
             <div class="slider-container">
                 <div class="slider-inner" id="gallery-slider-inner">
                     <div class="slider-item">
-                        <img src="20250105_015608.jpg" alt="Sketch Artwork 1 by NSL Forge">
+                        <img src="20250105_015608.jpg" alt="Sketch Artwork 1 by NSL Forge: A detailed portrait.">
                     </div>
                     <div class="slider-item">
-                        <img src="IMG_20241122_193303_736.jpg" alt="Sketch Artwork 2 by NSL Forge">
+                        <img src="IMG_20241122_193303_736.jpg" alt="Sketch Artwork 2 by NSL Forge: A character sketch with dynamic lines.">
                     </div>
                     <div class="slider-item">
-                         <img src="ironman.jpg" alt="Sketch Artwork 4 by NSL Forge">
+                         <img src="ironman.jpg" alt="Sketch Artwork 4 by NSL Forge: Fan art of Iron Man.">
                     </div>
                     <div class="slider-item">
-                        <img src="IMG_20241008_190133(1).jpg" alt="Sketch Artwork 3 by NSL Forge">
+                        <img src="IMG_20241008_190133(1).jpg" alt="Sketch Artwork 3 by NSL Forge: A conceptual urban landscape.">
                     </div>
                 </div>
                 <button class="slider-nav-button prev" aria-label="Previous image"><i class="fas fa-chevron-left"></i></button>
@@ -875,7 +983,7 @@
             <div class="services-grid">
                 <div class="service-card">
                     <span class="icon"><i class="fas fa-palette"></i></span>
-                    <h3>Custom Commissions</h3>
+                    <h3>Custom Art Requests</h3>
                     <p>Bring your personal vision to life with a bespoke sketch artwork, tailored specifically to your request.</p>
                 </div>
                 <div class="service-card">
@@ -896,16 +1004,35 @@
             </div>
 
             <div class="service-process">
-                <h3>How Commissions Work</h3>
-                <ol>
-                    <li><strong>Consultation:</strong> We discuss your idea, requirements, size, medium, and reference images.</li>
-                    <li><strong>Quotation & Agreement:</strong> Based on the complexity, a quote is provided. Upon agreement, a deposit may be required.</li>
-                    <li><strong>Sketching Phase:</strong> I begin the artwork, providing updates or initial drafts for your feedback.</li>
-                    <li><strong>Revisions:</strong> Minor revisions are incorporated based on your input (scope for major changes might be limited after a certain stage).</li>
-                    <li><strong>Completion & Delivery:
-                        </strong> Once finalized and approved, the remaining payment is made. The finished physical artwork is prepared for delivery or pickup (if local).</li>
-                </ol>
-                <p class="important-note"><i class="fas fa-info-circle"></i> Digital copies can also be provided upon request.</p>
+                <h3>How Art Requests Work: Your Artistic Journey</h3>
+                <div class="process-steps-grid">
+                    <div class="process-step-card">
+                        <div class="step-number">1</div>
+                        <h4>Initial Discussion</h4>
+                        <p>We discuss your vision, requirements (size, medium), and reference images to ensure I fully understand your idea.</p>
+                    </div>
+                    <div class="process-step-card">
+                        <div class="step-number">2</div>
+                        <h4>Confirmation & Start</h4>
+                        <p>Upon confirmation of the project details, your art request is secured.</p>
+                    </div>
+                    <div class="process-step-card">
+                        <div class="step-number">3</div>
+                        <h4>Sketching & Feedback</h4>
+                        <p>The creation begins! I'll provide initial drafts for your review and incorporate your valuable feedback.</p>
+                    </div>
+                    <div class="process-step-card">
+                        <div class="step-number">4</div>
+                        <h4>Refinement & Approval</h4>
+                        <p>Minor revisions are made. Once you're delighted with the progress, we move towards finalization.</p>
+                    </div>
+                    <div class="process-step-card">
+                        <div class="step-number">5</div>
+                        <h4>Finalization & Delivery</h4>
+                        <p>Your exquisite artwork is then carefully prepared for delivery or local pickup.</p>
+                    </div>
+                </div>
+                <p class="important-note"><i class="fas fa-info-circle"></i> Digital high-resolution copies of your artwork can be provided upon request.</p>
             </div>
         </div>
     </section>
@@ -917,7 +1044,7 @@
             <p>Each sketch is crafted with dedication, aiming to resonate with the viewer and the subject. Whether it's a cherished memory captured in a portrait or a brand new character brought to life, NSL Forge is where visions are meticulously forged into tangible art.</p>
              <p>Connect with Naman Lumbhani:</p>
              <p>
-                <a href="mailto:nslcreatesofficial@gmail.com" aria-label="Send an email"><i class="fas fa-envelope"></i> Email</a> |
+                <a href="mailto:nslcreatesofficial@gmail.com" aria-label="Send an email to nslcreatesofficial@gmail.com"><i class="fas fa-envelope"></i> Email</a> |
                 <a href="https://www.instagram.com/nslforge" target="_blank" rel="noopener noreferrer" aria-label="Visit Instagram profile (@nslforge)"><i class="fab fa-instagram"></i> Instagram</a> |
                 <a href="http://www.youtube.com/channel/UCFZirq7vOXnxKzdPaQYZyRA" target="_blank" rel="noopener noreferrer" aria-label="Visit YouTube channel (nsl_creates)"><i class="fab fa-youtube"></i> YouTube</a>
              </p>
@@ -926,13 +1053,32 @@
 
     <section id="contact">
         <div class="container">
-            <h2>Request a Commission</h2>
+            <h2>Request a Sketch</h2>
             <form class="contact-form" action="your_form_processor_script.php" method="POST" enctype="multipart/form-data">
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" required>
 
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+                <label for="email">Email (Optional):</label>
+                <input type="email" id="email" name="email">
+
+                <label for="phone">Phone Number:</label>
+                <div class="phone-input-group">
+                    <select id="country-code" name="country_code" aria-label="Select country code">
+                        <option value="+91" data-flag="🇮🇳">🇮🇳 +91 (India)</option>
+                        <option value="+1" data-flag="🇺🇸">🇺🇸 +1 (USA)</option>
+                        <option value="+44" data-flag="🇬🇧">🇬🇧 +44 (UK)</option>
+                        <option value="+61" data-flag="🇦🇺">🇦🇺 +61 (Australia)</option>
+                        <option value="+49" data-flag="🇩🇪">🇩🇪 +49 (Germany)</option>
+                        <option value="+33" data-flag="🇫🇷">🇫🇷 +33 (France)</option>
+                        <option value="+81" data-flag="🇯🇵">🇯🇵 +81 (Japan)</option>
+                        <option value="+86" data-flag="🇨🇳">🇨🇳 +86 (China)</option>
+                        <option value="+7" data-flag="🇷🇺">🇷🇺 +7 (Russia)</option>
+                        <option value="+55" data-flag="🇧🇷">🇧🇷 +55 (Brazil)</option>
+                        <option value="+27" data-flag="🇿🇦">🇿🇦 +27 (South Africa)</option>
+                        <option value="+971" data-flag="🇦🇪">🇦🇪 +971 (UAE)</option>
+                    </select>
+                    <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+                </div>
 
                 <label for="subject">Subject:</label>
                 <input type="text" id="subject" name="subject">
@@ -940,16 +1086,16 @@
                 <label for="message">Message:</label>
                 <textarea id="message" name="message" rows="6" required></textarea>
 
-                <label for="reference-image">Upload Reference Image (Optional):</label>
+                <label for="reference-image">Upload Reference Image (Required):</label>
                 <div class="drop-zone" id="drop-zone" role="button" tabindex="0" aria-labelledby="reference-image-label">
-                    <input type="file" id="reference-image" name="reference_image" accept="image/*" style="display: none;">
+                    <input type="file" id="reference-image" name="reference_image" accept="image/*" style="display: none;" required>
                     <p id="drop-zone-text">Drag & Drop your image here or Click to Browse</p>
                     <div class="file-info" id="file-info"></div>
                 </div>
-                 <span class="drop-zone-help-text" id="reference-image-label">Accepted formats: JPG, PNG. Max size: 5MB.</span>
+                 <span class="drop-zone-help-text" id="reference-image-label">Accepted formats: JPG, PNG, GIF, WebP. Max size: 5MB.</span>
 
 
-                <button type="submit">Send Message</button>
+                <button type="submit">Send Request</button>
             </form>
             <div class="contact-info">
                 <p>You can also reach out directly:</p>
@@ -962,9 +1108,9 @@
          <div class="container">
              <h2>Disclaimer</h2>
              <p>All artwork showcased in the gallery on this website is created by Naman Lumbhani (NSL Forge). Please note that some pieces are fan art or inspired by existing characters, movies, or public figures (such as Harry Potter, Thor, Cristiano Ronaldo). These specific artworks are **unofficial**, **not endorsed by**, and **not affiliated with** the original creators, rights holders, or the individuals depicted. They are shared here as examples of artistic skill and interpretation.</p>
-             <p>Custom commissions requested through this site are intended for personal, non-commercial use only, unless a specific commercial licensing agreement is reached. Prices for commissions vary based on complexity, size, and medium, and will be quoted individually after consultation. NSL Forge reserves the right to refuse commissions based on content or capacity.</p>
+             <p>Custom art requests made through this site are intended for personal, non-commercial use only, unless a specific commercial licensing agreement is reached with appropriate adult supervision. NSL Forge reserves the right to refuse requests based on content or capacity.</p>
              <p>This website itself was created by a 14-year-old artist as a personal portfolio and for learning and experimental purposes, with assistance.</p>
-             <p>Any reproduction, distribution, or unauthorized use of the artwork (beyond standard web Browse display) requires explicit written permission from the artist.</p>
+             <p>Any reproduction, distribution, or unauthorized use of the artwork (beyond standard web display) requires explicit written permission from the artist.</p>
          </div>
      </section>
 
@@ -975,6 +1121,7 @@
                 <a href="https://www.instagram.com/nslforge" target="_blank" rel="noopener noreferrer" aria-label="Instagram (@nslforge)"><i class="fab fa-instagram"></i></a>
                  <a href="http://www.youtube.com/channel/UCFZirq7vOXnxKzdPaQYZyRA" target="_blank" rel="noopener noreferrer" aria-label="YouTube (nsl_creates)"><i class="fab fa-youtube"></i></a>
                 </div>
+            <p class="footer-note" style="font-size: 0.75em; margin-top: 15px;">© 2025 NSL Forge. All Rights Reserved.</p>
              </div>
     </footer>
 
@@ -1197,14 +1344,14 @@
 
                  if (file.size > maxSizeBytes) {
                      displayError(`File "${file.name}" is too large (max 5MB).`);
-                     fileInput.value = '';
+                     fileInput.value = ''; // Clear the input so it can be re-selected
                      return;
                  }
 
                  const acceptedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
                  if (!acceptedTypes.includes(file.type)) {
                      displayError(`File "${file.name}" has an invalid format. Accepted: JPG, PNG, GIF, WebP.`);
-                     fileInput.value = '';
+                     fileInput.value = ''; // Clear the input so it can be re-selected
                      return;
                  }
 
@@ -1271,64 +1418,64 @@
            // --- End Smooth Scrolling ---
 
            // --- Gallery Slider Logic ---
-            const sliderInner = document.getElementById('gallery-slider-inner');
-            const sliderItems = document.querySelectorAll('.slider-item');
-            const prevButton = document.querySelector('.slider-nav-button.prev');
-            const nextButton = document.querySelector('.slider-nav-button.next');
-            const sliderDotsContainer = document.getElementById('slider-dots');
+            const gallerySliderInner = document.getElementById('gallery-slider-inner');
+            const gallerySliderItems = document.querySelectorAll('#gallery .slider-item');
+            const galleryPrevButton = document.querySelector('#gallery .slider-nav-button.prev');
+            const galleryNextButton = document.querySelector('#gallery .slider-nav-button.next');
+            const gallerySliderDotsContainer = document.getElementById('slider-dots');
 
-            let currentIndex = 0;
-            let slideInterval;
-            const slideDuration = 4000; // 4 seconds
+            let galleryCurrentIndex = 0;
+            let gallerySlideInterval;
+            const gallerySlideDuration = 4000; // 4 seconds
 
-            if (sliderInner && sliderItems.length > 0 && prevButton && nextButton && sliderDotsContainer) {
+            if (gallerySliderInner && gallerySliderItems.length > 0 && galleryPrevButton && galleryNextButton && gallerySliderDotsContainer) {
 
-                function updateSlider() {
-                    const offset = -currentIndex * 100;
-                    sliderInner.style.transform = `translateX(${offset}%)`;
-                    updateDots();
+                function updateGallerySlider() {
+                    const offset = -galleryCurrentIndex * 100;
+                    gallerySliderInner.style.transform = `translateX(${offset}%)`;
+                    updateGalleryDots();
                 }
 
-                function showNextSlide() {
-                    currentIndex = (currentIndex + 1) % sliderItems.length;
-                    updateSlider();
-                    resetAutoSlide();
+                function showNextGallerySlide() {
+                    galleryCurrentIndex = (galleryCurrentIndex + 1) % gallerySliderItems.length;
+                    updateGallerySlider();
+                    resetAutoGallerySlide();
                 }
 
-                function showPrevSlide() {
-                    currentIndex = (currentIndex - 1 + sliderItems.length) % sliderItems.length;
-                    updateSlider();
-                    resetAutoSlide();
+                function showPrevGallerySlide() {
+                    galleryCurrentIndex = (galleryCurrentIndex - 1 + gallerySliderItems.length) % gallerySliderItems.length;
+                    updateGallerySlider();
+                    resetAutoGallerySlide();
                 }
 
-                function createDots() {
-                    sliderDotsContainer.innerHTML = ''; // Clear existing dots
-                    sliderItems.forEach((_, index) => {
+                function createGalleryDots() {
+                    gallerySliderDotsContainer.innerHTML = ''; // Clear existing dots
+                    gallerySliderItems.forEach((_, index) => {
                         const dot = document.createElement('span');
                         dot.classList.add('dot');
                         dot.setAttribute('role', 'button');
-                        dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
+                        dot.setAttribute('aria-label', `Go to gallery slide ${index + 1}`);
                         dot.setAttribute('tabindex', '0'); // Make dots focusable
                         dot.addEventListener('click', () => {
-                            currentIndex = index;
-                            updateSlider();
-                            resetAutoSlide();
+                            galleryCurrentIndex = index;
+                            updateGallerySlider();
+                            resetAutoGallerySlide();
                         });
                         dot.addEventListener('keydown', (e) => {
                             if (e.key === 'Enter' || e.key === ' ') {
-                                currentIndex = index;
-                                updateSlider();
-                                resetAutoSlide();
+                                galleryCurrentIndex = index;
+                                updateGallerySlider();
+                                resetAutoGallerySlide();
                             }
                         });
-                        sliderDotsContainer.appendChild(dot);
+                        gallerySliderDotsContainer.appendChild(dot);
                     });
                 }
 
-                function updateDots() {
-                    const dots = document.querySelectorAll('.slider-dots .dot');
+                function updateGalleryDots() {
+                    const dots = document.querySelectorAll('#gallery .slider-dots .dot');
                     dots.forEach((dot, index) => {
-                        if (index === currentIndex) {
+                        if (index === galleryCurrentIndex) {
                             dot.classList.add('active');
                         } else {
                             dot.classList.remove('active');
@@ -1336,67 +1483,80 @@
                     });
                 }
 
-                function startAutoSlide() {
-                    slideInterval = setInterval(showNextSlide, slideDuration);
+                function startAutoGallerySlide() {
+                    gallerySlideInterval = setInterval(showNextGallerySlide, gallerySlideDuration);
                 }
 
-                function resetAutoSlide() {
-                    clearInterval(slideInterval);
-                    startAutoSlide();
+                function resetAutoGallerySlide() {
+                    clearInterval(gallerySlideInterval);
+                    startAutoGallerySlide();
                 }
 
                 // Initialize slider
-                createDots();
-                updateSlider(); // Set initial slide and dot
-                startAutoSlide(); // Start auto-play
+                createGalleryDots();
+                updateGallerySlider(); // Set initial slide and dot
+                startAutoGallerySlide(); // Start auto-play
 
                 // Attach event listeners for buttons
-                prevButton.addEventListener('click', showPrevSlide);
-                nextButton.addEventListener('click', showNextSlide);
+                galleryPrevButton.addEventListener('click', showPrevGallerySlide);
+                galleryNextButton.addEventListener('click', showNextGallerySlide);
 
                 // Pause auto-slide on hover
-                const sliderContainer = document.querySelector('.slider-container');
-                sliderContainer.addEventListener('mouseenter', () => clearInterval(slideInterval));
-                sliderContainer.addEventListener('mouseleave', startAutoSlide);
+                const gallerySliderContainer = document.querySelector('#gallery .slider-container');
+                gallerySliderContainer.addEventListener('mouseenter', () => clearInterval(gallerySlideInterval));
+                gallerySliderContainer.addEventListener('mouseleave', startAutoGallerySlide);
 
                 // Keyboard navigation for slider
                 document.addEventListener('keydown', (e) => {
-                    if (e.target.closest('.slider-container')) {
+                    if (e.target.closest('#gallery .slider-container')) {
                         if (e.key === 'ArrowRight') {
-                            showNextSlide();
+                            showNextGallerySlide();
                         } else if (e.key === 'ArrowLeft') {
-                            showPrevSlide();
+                            showPrevGallerySlide();
                         }
                     }
                 });
 
-                // --- Touch/Swipe functionality for Slider ---
-                let touchStartX = 0;
-                let touchEndX = 0;
-                const minSwipeDistance = 50; // Minimum pixels for a recognized swipe
+                // --- Touch/Swipe functionality for Gallery Slider ---
+                let galleryTouchStartX = 0;
+                let galleryTouchEndX = 0;
+                const galleryMinSwipeDistance = 50; // Minimum pixels for a recognized swipe
 
-                sliderContainer.addEventListener('touchstart', (e) => {
-                    touchStartX = e.touches[0].clientX;
+                gallerySliderContainer.addEventListener('touchstart', (e) => {
+                    galleryTouchStartX = e.touches[0].clientX;
                 }, false);
 
-                sliderContainer.addEventListener('touchend', (e) => {
-                    touchEndX = e.changedTouches[0].clientX;
-                    handleSwipe();
+                gallerySliderContainer.addEventListener('touchend', (e) => {
+                    galleryTouchEndX = e.changedTouches[0].clientX;
+                    handleGallerySwipe();
                 }, false);
 
-                function handleSwipe() {
-                    const swipeDistance = touchEndX - touchStartX;
-                    if (swipeDistance > minSwipeDistance) {
+                function handleGallerySwipe() {
+                    const swipeDistance = galleryTouchEndX - galleryTouchStartX;
+                    if (swipeDistance > galleryMinSwipeDistance) {
                         // Swiped right (previous slide)
-                        showPrevSlide();
-                    } else if (swipeDistance < -minSwipeDistance) {
+                        showPrevGallerySlide();
+                    } else if (swipeDistance < -galleryMinSwipeDistance) {
                         // Swiped left (next slide)
-                        showNextSlide();
+                        showNextGallerySlide();
                     }
                 }
                 // --- End Touch/Swipe functionality ---
             }
             // --- End Gallery Slider Logic ---
+
+            // --- Phone Country Code Dropdown with Flags ---
+            const countryCodeSelect = document.getElementById('country-code');
+            if (countryCodeSelect) {
+                countryCodeSelect.addEventListener('change', function() {
+                    const selectedOption = this.options[this.selectedIndex];
+                    // You can update a visible flag here if you want a separate display for it,
+                    // but directly embedding in the option text is often sufficient.
+                    // For example:
+                    // document.getElementById('selected-flag-display').innerHTML = selectedOption.dataset.flag;
+                });
+            }
+
     </script>
 
 </body>
