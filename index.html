@@ -1054,8 +1054,8 @@
     <section id="contact">
         <div class="container">
             <h2>Request a Sketch</h2>
-            <form class="contact-form" action="thank_you.html" method="GET" enctype="multipart/form-data">
-                <label for="name">Name:</label>
+            <form class="contact-form" action="https://formsubmit.co/nslcreatesofficial@gmail.com" method="POST">
+                <input type="hidden" name="_next" value="https://www.nslforge.com/thank_you.html"> <input type="hidden" name="_captcha" value="true"> <input type="hidden" name="_subject" value="New Sketch Request from NSL Forge Website"> <label for="name">Name:</label>
                 <input type="text" id="name" name="name" required>
 
                 <label for="email">Email (Optional):</label>
@@ -1088,7 +1088,7 @@
 
                 <label for="reference-image">Upload Reference Image (Required):</label>
                 <div class="drop-zone" id="drop-zone" role="button" tabindex="0" aria-labelledby="reference-image-label">
-                    <input type="file" id="reference-image" name="reference_image" accept="image/*" style="display: none;" required>
+                    <input type="file" id="reference-image" name="reference_image_placeholder" accept="image/*" style="display: none;">
                     <p id="drop-zone-text">Drag & Drop your image here or Click to Browse</p>
                     <div class="file-info" id="file-info"></div>
                 </div>
@@ -1281,7 +1281,7 @@
         }
          // --- End Mobile Menu Toggle ---
 
-         // --- Contact Form File Drop Zone Logic ---
+         // --- Contact Form File Drop Zone Logic (Modified for Formsubmit.co limitations) ---
         const dropZone = document.getElementById('drop-zone');
         const fileInput = document.getElementById('reference-image');
         const fileInfo = document.getElementById('file-info');
@@ -1359,6 +1359,9 @@
                  fileInfo.textContent = `${file.name} (${formatBytes(file.size)})`;
                  dropZone.classList.remove('error');
                  fileInfo.classList.remove('error-message');
+                 // IMPORTANT: FormSubmit.co's simple POST method does NOT support file uploads this way.
+                 // The 'reference-image' input is now named 'reference_image_placeholder' to avoid sending it.
+                 // If you need file uploads, you must implement an AJAX submission.
              }
 
              function displayError(message) {
