@@ -1,2 +1,11 @@
 window['cmsg']['assets'] = window['cmsg']['assets'] || {};
-window['cmsg']['assets']["en"] = Object.assign(window['cmsg']['assets']["en"] || {}, {"15706":{"js":["820130b085651244.strings.js"],"css":[]},"38701":{"js":["d05811f726595a72.strings.js"],"css":[]}});
+window['cmsg']['assets']["en"] = Object.assign(window['cmsg']['assets']["en"] || {}, {
+    "15706": {
+        "js": ["820130b085651244.strings.js"],
+        "css": []
+    },
+    "38701": {
+        "js": ["d05811f726595a72.strings.js"],
+        "css": []
+    }
+});
