@@ -17,7 +17,6 @@
 
         /* Section Base Styles */
         section {
-            min-height: 100vh; /* Each section takes at least the full viewport height */
             width: 100%; /* Ensure full width */
             background-size: cover; /* Image covers the entire section */
             background-position: center; /* Center the image */
@@ -34,6 +33,10 @@
         /* Header Specific Styles */
         .header-section {
             background-image: url('09d2a25607dd83817636e8d32bd8e1d5.jpg');
+            /* Changed: Removed min-height: 100vh; to prevent it from always filling the screen */
+            padding: 100px 20px; /* Added padding to give the header a defined height and space */
+            /* Added box-sizing to ensure padding is included in the element's total height */
+            box-sizing: border-box;
         }
 
         .header-section h1 {
@@ -45,7 +48,12 @@
             padding: 20px; /* Add some padding around text if needed */
         }
 
-        /* Other Section Backgrounds */
+        /* Other Section Backgrounds - Renamed and updated image paths */
+        /* These sections will still take full viewport height */
+        .section1, .section2, .section3, .section4 {
+            min-height: 100vh; /* These sections will take at least the full viewport height */
+        }
+
         .section1 {
             background-image: url('section1.jpg');
         }
@@ -55,11 +63,11 @@
         }
 
         .section3 {
-            background-image: url('section3.jpg'); /* Fixed: Added missing closing parenthesis */
+            background-image: url('section3.jpg');
         }
 
         .section4 {
-            background-image: url('section4.jpg'); /* Fixed: Added missing closing parenthesis */
+            background-image: url('section4.jpg');
         }
 
         /* Checkout Button Styles */
