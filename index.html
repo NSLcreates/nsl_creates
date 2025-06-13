@@ -11,26 +11,74 @@
             padding: 0;
             font-family: sans-serif;
             box-sizing: border-box;
+            background-color: #f0f0f0; /* Light background for visibility of contained images */
         }
 
         /* Section Base Styles */
         section {
-            min-height: 100vh;
-            background-size: cover;
+            width: 100%; /* Full width */
+            position: relative; /* For absolute positioning of inner content */
+            display: flex; /* For aligning content */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white; /* Default text color for sections with background images */
+            text-align: center;
+            overflow: hidden; /* Hide any overflow if content extends beyond image */
+            margin-bottom: 20px; /* Add some spacing between sections */
+        }
+
+        /* Aspect Ratio Box - This creates the responsive height based on the image's ratio */
+        .aspect-ratio-box {
+            position: relative;
+            width: 100%;
+            height: 0; /* Set height to 0, padding-bottom will define the height */
+            background-size: contain; /* Make the background image fit within the element */
             background-position: center;
             background-repeat: no-repeat;
+        }
+
+        /* Adjust padding-bottom for each section based on typical image aspect ratios (e.g., 16:9, 4:3) */
+        /* You might need to fine-tune these percentages based on your actual image dimensions */
+        .header-section .aspect-ratio-box {
+            padding-bottom: 56.25%; /* 16:9 aspect ratio (height is 56.25% of width) */
+            background-image: url('09d2a25607dd83817636e8d32bd8e1d5.jpg');
+        }
+
+        .section-one .aspect-ratio-box {
+            padding-bottom: 75%; /* 4:3 aspect ratio */
+            background-image: url('Screenshot_20250613_201359_Chrome(1).jpg');
+        }
+
+        .section-two .aspect-ratio-box {
+            padding-bottom: 66.66%; /* 3:2 aspect ratio */
+            background-image: url('Screenshot_20250613_201359_Chrome(3).jpg');
+        }
+
+        .section-three .aspect-ratio-box {
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            background-image: url('Screenshot_20250613_201359_Chrome(2).jpg');
+        }
+
+        .section-four .aspect-ratio-box {
+            padding-bottom: 75%; /* 4:3 aspect ratio */
+            background-image: url('Screenshot_20250613_201359_Chrome(3)(1).jpg');
+        }
+
+        /* Content inside the aspect ratio box */
+        .section-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            color: white;
-            text-align: center;
-            position: relative;
-        }
-
-        /* Header Specific Styles */
-        .header-section {
-            background-image: url('09d2a25607dd83817636e8d32bd8e1d5.jpg');
+            padding: 20px; /* Add some padding around content */
+            box-sizing: border-box;
+            background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent overlay for text readability */
         }
 
         .header-section h1 {
@@ -40,22 +88,10 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
         }
 
-        /* Other Section Backgrounds */
-        .section-one {
-            background-image: url('Screenshot_20250613_201359_Chrome(1).jpg');
-        }
-
-        .section-two {
-            background-image: url('Screenshot_20250613_201359_Chrome(3).jpg');
-        }
-
-        .section-three {
-            background-image: url('Screenshot_20250613_201359_Chrome(2).jpg');
-        }
-
-        .section-four {
-            background-image: url('Screenshot_20250613_201359_Chrome(3)(1).jpg');
-            position: relative;
+        /* Other section content styling */
+        .section-content h2, .section-content p {
+            color: #fff; /* Ensure text is white against the overlay */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
         }
 
         /* Checkout Button Styles */
@@ -72,6 +108,7 @@
             font-size: 1.2em;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            z-index: 10; /* Ensure button is above content overlay */
         }
 
         .checkout-button:hover {
@@ -84,7 +121,7 @@
             color: #333;
             padding: 20px;
             text-align: center;
-            min-height: unset;
+            min-height: unset; /* Footer doesn't need to be 100vh */
         }
 
         .footer-section a {
@@ -101,28 +138,48 @@
 <body>
 
     <section class="header-section">
-        <h1>NSL FORGE</h1>
+        <div class="aspect-ratio-box">
+            <div class="section-content">
+                <h1>NSL FORGE</h1>
+            </div>
+        </div>
     </section>
 
     <section class="section-one">
-        <h2>Section One Title</h2>
-        <p>This is the content for the first main section of your website.</p>
+        <div class="aspect-ratio-box">
+            <div class="section-content">
+                <h2>Section One Title</h2>
+                <p>This is the content for the first main section of your website.</p>
+            </div>
+        </div>
     </section>
 
     <section class="section-two">
-        <h2>Section Two Title</h2>
-        <p>Here you can add more information or showcase features.</p>
+        <div class="aspect-ratio-box">
+            <div class="section-content">
+                <h2>Section Two Title</h2>
+                <p>Here you can add more information or showcase features.</p>
+            </div>
+        </div>
     </section>
 
     <section class="section-three">
-        <h2>Section Three Title</h2>
-        <p>Another section to display your content, images, or products.</p>
+        <div class="aspect-ratio-box">
+            <div class="section-content">
+                <h2>Section Three Title</h2>
+                <p>Another section to display your content, images, or products.</p>
+            </div>
+        </div>
     </section>
 
     <section class="section-four">
-        <h2>Section Four Title</h2>
-        <p>This is the final content section before the footer. You can describe your products or services here.</p>
-        <a href="https://nslcreates.github.io/NSLForge_lite/" class="checkout-button" id="checkoutBtn">Checkout</a>
+        <div class="aspect-ratio-box">
+            <div class="section-content">
+                <h2>Section Four Title</h2>
+                <p>This is the final content section before the footer. You can describe your products or services here.</p>
+            </div>
+        </div>
+        <a href="https://nslcreates.github.io/NSLForge_lite/" class="checkout-button">Checkout</a>
     </section>
 
     <footer class="footer-section">
@@ -133,10 +190,6 @@
         </p>
         <p>© 2025 NSL FORGE. All rights reserved.</p>
     </footer>
-
-    <script>
-        // No JavaScript needed anymore since the URL is directly in the HTML.
-    </script>
 
 </body>
 </html>
