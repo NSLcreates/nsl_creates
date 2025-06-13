@@ -18,7 +18,7 @@
         /* Section Base Styles - Common properties for all sections */
         section {
             width: 100%; /* Ensure full width */
-            background-size: cover; /* Image covers the entire section */
+            background-size: contain; /* Image maintains its aspect ratio and is fully visible */
             background-position: center; /* Center the image */
             background-repeat: no-repeat; /* Do not repeat the image */
             display: flex; /* For centering content */
@@ -29,13 +29,14 @@
             text-align: center;
             position: relative; /* Needed for absolute positioning of elements like the button */
             box-sizing: border-box; /* Include padding in the element's total width and height */
+            background-color: #333; /* Fallback background color for sections with 'contain' to fill empty space */
         }
 
         /* Header Specific Styles - Adjusted to not be 100vh */
         .header-section {
-            background-image: url('images/09d2a25607dd83817636e8d32bd8e1d5.jpg'); /* Updated path */
+            background-image: url('09d2a25607dd83817636e8d32bd8e1d5.jpg'); /* CORRECTED: Original header path */
             padding: 100px 20px; /* Gives the header a substantial, fixed height based on content and padding */
-            min-height: 50vh; /* Added a min-height to ensure it's not too small if content is minimal */
+            min-height: 50vh; /* Ensures it has a reasonable minimum height */
         }
 
         .header-section h1 {
@@ -52,7 +53,7 @@
             /* This ensures they stack perfectly below each other and the header without gaps */
         }
 
-        /* Individual Section Backgrounds - Updated paths */
+        /* Individual Section Backgrounds - Keeping 'images/' prefix as they are now visible */
         .section1 {
             background-image: url('images/section1.jpg');
         }
