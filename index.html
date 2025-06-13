@@ -18,7 +18,8 @@
         /* Section Base Styles - Common properties for all sections */
         section {
             width: 100%; /* Ensure full width */
-            background-size: contain; /* Image maintains its aspect ratio and is fully visible */
+            /* REVERTED: Using 'cover' for a truly continuous, gap-free look */
+            background-size: cover; /* Image covers the entire section, potentially cropping but ensuring no gaps */
             background-position: center; /* Center the image */
             background-repeat: no-repeat; /* Do not repeat the image */
             display: flex; /* For centering content */
@@ -29,12 +30,13 @@
             text-align: center;
             position: relative; /* Needed for absolute positioning of elements like the button */
             box-sizing: border-box; /* Include padding in the element's total width and height */
-            background-color: #333; /* Fallback background color for sections with 'contain' to fill empty space */
+            /* Removed background-color to prevent visible "boundaries" when using 'contain' */
         }
 
         /* Header Specific Styles - Adjusted to not be 100vh */
         .header-section {
-            background-image: url('09d2a25607dd83817636e8d32bd8e1d5.jpg'); /* CORRECTED: Original header path */
+            /* CONFIRMED: Original header path (image in root directory) */
+            background-image: url('09d2a25607dd83817636e8d32bd8e1d5.jpg');
             padding: 100px 20px; /* Gives the header a substantial, fixed height based on content and padding */
             min-height: 50vh; /* Ensures it has a reasonable minimum height */
         }
