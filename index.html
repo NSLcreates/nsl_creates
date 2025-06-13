@@ -5,102 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NSL FORGE</title>
     <style>
-        /* General Body Styles */
-        body {
+        /* General Body and HTML Styles for no margins/gaps */
+        html, body {
             margin: 0;
             padding: 0;
+            height: 100%; /* Ensures body takes full viewport height */
             font-family: sans-serif;
             box-sizing: border-box;
-            background-color: #f0f0f0; /* Light background for visibility of contained images */
+            overflow-x: hidden; /* Prevent horizontal scrollbar if elements slightly exceed width */
         }
 
         /* Section Base Styles */
         section {
-            width: 100%; /* Full width */
-            position: relative; /* For absolute positioning of inner content */
-            display: flex; /* For aligning content */
+            min-height: 100vh; /* Each section takes at least the full viewport height */
+            width: 100%; /* Ensure full width */
+            background-size: cover; /* Image covers the entire section */
+            background-position: center; /* Center the image */
+            background-repeat: no-repeat; /* Do not repeat the image */
+            display: flex; /* For centering content */
             flex-direction: column;
             justify-content: center;
             align-items: center;
             color: white; /* Default text color for sections with background images */
             text-align: center;
-            overflow: hidden; /* Hide any overflow if content extends beyond image */
-            margin-bottom: 20px; /* Add some spacing between sections */
+            position: relative; /* Needed for absolute positioning of elements like the button */
+            /* Removed any margin/padding to ensure no gaps */
         }
 
-        /* Aspect Ratio Box - This creates the responsive height based on the image's ratio */
-        .aspect-ratio-box {
-            position: relative;
-            width: 100%;
-            height: 0; /* Set height to 0, padding-bottom will define the height */
-            background-size: contain; /* Make the background image fit within the element */
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-
-        /* Adjust padding-bottom for each section based on typical image aspect ratios (e.g., 16:9, 4:3) */
-        /* You might need to fine-tune these percentages based on your actual image dimensions */
-        .header-section .aspect-ratio-box {
-            padding-bottom: 56.25%; /* 16:9 aspect ratio (height is 56.25% of width) */
+        /* Header Specific Styles */
+        .header-section {
             background-image: url('09d2a25607dd83817636e8d32bd8e1d5.jpg');
         }
 
-        .section-one .aspect-ratio-box {
-            padding-bottom: 75%; /* 4:3 aspect ratio */
+        .header-section h1 {
+            font-size: 4em; /* Adjust as needed */
+            font-weight: bold;
+            color: #fff; /* White color for contrast against the background image */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Optional: add text shadow for readability */
+            margin: 0; /* Remove default margin from h1 */
+            padding: 20px; /* Add some padding around text if needed */
+        }
+
+        /* Other Section Backgrounds */
+        .section-one {
             background-image: url('Screenshot_20250613_201359_Chrome(1).jpg');
         }
 
-        .section-two .aspect-ratio-box {
-            padding-bottom: 66.66%; /* 3:2 aspect ratio */
+        .section-two {
             background-image: url('Screenshot_20250613_201359_Chrome(3).jpg');
         }
 
-        .section-three .aspect-ratio-box {
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+        .section-three {
             background-image: url('Screenshot_20250613_201359_Chrome(2).jpg');
         }
 
-        .section-four .aspect-ratio-box {
-            padding-bottom: 75%; /* 4:3 aspect ratio */
+        .section-four {
             background-image: url('Screenshot_20250613_201359_Chrome(3)(1).jpg');
-        }
-
-        /* Content inside the aspect ratio box */
-        .section-content {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px; /* Add some padding around content */
-            box-sizing: border-box;
-            background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent overlay for text readability */
-        }
-
-        .header-section h1 {
-            font-size: 4em;
-            font-weight: bold;
-            color: #fff;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-        }
-
-        /* Other section content styling */
-        .section-content h2, .section-content p {
-            color: #fff; /* Ensure text is white against the overlay */
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
         }
 
         /* Checkout Button Styles */
         .checkout-button {
             position: absolute;
-            bottom: 20px;
-            right: 20px;
+            bottom: 20px; /* Distance from bottom */
+            right: 20px;  /* Distance from right */
             padding: 15px 30px;
-            background-color: #007bff;
+            background-color: #007bff; /* Example button color */
             color: white;
             text-decoration: none;
             border: none;
@@ -108,7 +77,7 @@
             font-size: 1.2em;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            z-index: 10; /* Ensure button is above content overlay */
+            z-index: 10; /* Ensure button is above other potential content */
         }
 
         .checkout-button:hover {
@@ -118,10 +87,14 @@
         /* Footer Specific Styles */
         .footer-section {
             background-color: #B6D0E2;
-            color: #333;
+            color: #333; /* Darker text for better contrast on light background */
             padding: 20px;
             text-align: center;
-            min-height: unset; /* Footer doesn't need to be 100vh */
+            /* No min-height: 100vh for footer, it should be content-driven */
+        }
+
+        .footer-section p {
+            margin: 5px 0; /* Small margin for footer text */
         }
 
         .footer-section a {
@@ -138,47 +111,19 @@
 <body>
 
     <section class="header-section">
-        <div class="aspect-ratio-box">
-            <div class="section-content">
-                <h1>NSL FORGE</h1>
-            </div>
-        </div>
+        <h1>NSL FORGE</h1>
     </section>
 
     <section class="section-one">
-        <div class="aspect-ratio-box">
-            <div class="section-content">
-                <h2>Section One Title</h2>
-                <p>This is the content for the first main section of your website.</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
     <section class="section-two">
-        <div class="aspect-ratio-box">
-            <div class="section-content">
-                <h2>Section Two Title</h2>
-                <p>Here you can add more information or showcase features.</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
     <section class="section-three">
-        <div class="aspect-ratio-box">
-            <div class="section-content">
-                <h2>Section Three Title</h2>
-                <p>Another section to display your content, images, or products.</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
     <section class="section-four">
-        <div class="aspect-ratio-box">
-            <div class="section-content">
-                <h2>Section Four Title</h2>
-                <p>This is the final content section before the footer. You can describe your products or services here.</p>
-            </div>
-        </div>
         <a href="https://nslcreates.github.io/NSLForge_lite/" class="checkout-button">Checkout</a>
     </section>
 
