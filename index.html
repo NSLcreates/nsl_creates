@@ -18,10 +18,7 @@
         /* Section Base Styles - Common properties for all sections */
         section {
             width: 100%; /* Ensure full width */
-            /* REVERTED: Using 'cover' for a truly continuous, gap-free look */
-            background-size: cover; /* Image covers the entire section, potentially cropping but ensuring no gaps */
-            background-position: center; /* Center the image */
-            background-repeat: no-repeat; /* Do not repeat the image */
+            min-height: 100vh; /* Each section takes at least full viewport height */
             display: flex; /* For centering content */
             flex-direction: column;
             justify-content: center;
@@ -30,13 +27,30 @@
             text-align: center;
             position: relative; /* Needed for absolute positioning of elements like the button */
             box-sizing: border-box; /* Include padding in the element's total width and height */
-            /* Removed background-color to prevent visible "boundaries" when using 'contain' */
+            /* NO background-image here anymore */
+            /* Removed background-color too, as the image will be inside */
         }
 
-        /* Header Specific Styles - Adjusted to not be 100vh */
+        /* Image within Section Styles */
+        .section-background-image {
+            position: absolute; /* Position the image absolutely within its section */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* THIS IS THE KEY: 'contain' will show the full image, 'cover' would crop */
+            object-fit: contain; /* IMPORTANT: Displays the whole image, maintaining aspect ratio */
+                                /* If the aspect ratio of the image doesn't match the section,
+                                   it will create empty space (like letterboxing/pillarboxing).
+                                   To make this space invisible and maintain continuity,
+                                   we make the image and its parent section transparent,
+                                   and use media queries or careful image design.
+                                */
+            z-index: -1; /* Send the image behind any content (like h1 or text) */
+        }
+
+        /* Header Specific Styles */
         .header-section {
-            /* CONFIRMED: Original header path (image in root directory) */
-            background-image: url('09d2a25607dd83817636e8d32bd8e1d5.jpg');
             padding: 100px 20px; /* Gives the header a substantial, fixed height based on content and padding */
             min-height: 50vh; /* Ensures it has a reasonable minimum height */
         }
@@ -47,34 +61,17 @@
             color: #fff; /* White color for contrast */
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Text shadow for readability */
             margin: 0; /* Remove default margin from h1 */
+            z-index: 1; /* Ensure text is above image */
         }
 
         /* Full Viewport Height Sections - Applied to sections *after* the header */
         .section1, .section2, .section3, .section4 {
-            min-height: 100vh; /* These sections will each take at least the full viewport height */
-            /* This ensures they stack perfectly below each other and the header without gaps */
-        }
-
-        /* Individual Section Backgrounds - Keeping 'images/' prefix as they are now visible */
-        .section1 {
-            background-image: url('images/section1.jpg');
-        }
-
-        .section2 {
-            background-image: url('images/section2.jpg');
-        }
-
-        .section3 {
-            background-image: url('images/section3.jpg');
-        }
-
-        .section4 {
-            background-image: url('images/section4.jpg');
+            /* min-height: 100vh is already in section base styles */
         }
 
         /* Checkout Button Styles */
         .checkout-button {
-            position: absolute;
+            position: absolute; /* Will be relative to its parent section */
             bottom: 20px; /* Distance from bottom */
             right: 20px;  /* Distance from right */
             padding: 15px 30px;
@@ -119,19 +116,24 @@
 <body>
 
     <section class="header-section">
+        <img src="09d2a25607dd83817636e8d32bd8e1d5.jpg" alt="NSL Forge Header" class="section-background-image">
         <h1>NSL FORGE</h1>
     </section>
 
     <section class="section1">
+        <img src="images/section1.jpg" alt="Section 1 Background" class="section-background-image">
         </section>
 
     <section class="section2">
+        <img src="images/section2.jpg" alt="Section 2 Background" class="section-background-image">
         </section>
 
     <section class="section3">
+        <img src="images/section3.jpg" alt="Section 3 Background" class="section-background-image">
         </section>
 
     <section class="section4">
+        <img src="images/section4.jpg" alt="Section 4 Background" class="section-background-image">
         <a href="https://nslcreates.github.io/NSLForge_lite/" class="checkout-button">Checkout</a>
     </section>
 
