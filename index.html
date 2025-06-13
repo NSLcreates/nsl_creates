@@ -15,29 +15,29 @@
 
         /* Section Base Styles */
         section {
-            min-height: 100vh; /* Make each section take at least the full viewport height */
+            min-height: 100vh;
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            display: flex; /* For centering content or positioning elements */
+            display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            color: white; /* Default text color for sections with background images */
+            color: white;
             text-align: center;
-            position: relative; /* Needed for absolute positioning of child elements like the button */
+            position: relative;
         }
 
         /* Header Specific Styles */
         .header-section {
-            background-image: url('09d2a25607dd83...d32bd8e1d5.jpg');
+            background-image: url('09d2a25607dd83817636e8d32bd8e1d5.jpg');
         }
 
         .header-section h1 {
-            font-size: 4em; /* Adjust as needed */
+            font-size: 4em;
             font-weight: bold;
-            color: #fff; /* White color for contrast against the background image */
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Optional: add text shadow for readability */
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
         }
 
         /* Other Section Backgrounds */
@@ -55,20 +55,20 @@
 
         .section-four {
             background-image: url('Screenshot_20250613_201359_Chrome(3)(1).jpg');
-            position: relative; /* Ensure this section is a positioning context for the button */
+            position: relative;
         }
 
         /* Checkout Button Styles */
         .checkout-button {
             position: absolute;
-            bottom: 20px; /* Distance from bottom */
-            right: 20px;  /* Distance from right */
+            bottom: 20px;
+            right: 20px;
             padding: 15px 30px;
-            background-color: #007bff; /* Example button color */
+            background-color: #007bff;
             color: white;
             text-decoration: none;
             border: none;
-            border-radius: 5px;
+            border-radius: 50px; /* Pill shape */
             font-size: 1.2em;
             cursor: pointer;
             transition: background-color 0.3s ease;
@@ -81,10 +81,10 @@
         /* Footer Specific Styles */
         .footer-section {
             background-color: #B6D0E2;
-            color: #333; /* Darker text for better contrast on light background */
+            color: #333;
             padding: 20px;
             text-align: center;
-            min-height: unset; /* Footer doesn't need to be 100vh */
+            min-height: unset;
         }
 
         .footer-section a {
@@ -122,7 +122,7 @@
     <section class="section-four">
         <h2>Section Four Title</h2>
         <p>This is the final content section before the footer. You can describe your products or services here.</p>
-        <a href="#" class="checkout-button" id="checkoutBtn">Checkout</a>
+        <a href="https://nslcreates.github.io/NSLForge_lite/" class="checkout-button" id="checkoutBtn">Checkout</a>
     </section>
 
     <footer class="footer-section">
@@ -131,16 +131,11 @@
             <a href="https://www.instagram.com/nslforge/" target="_blank">Instagram: @nslforge</a>
             <a href="https://youtube.com/@nslcreatesofficial?si=0LLoWJ7-3qSl8GVV" target="_blank">YouTube</a>
         </p>
-        <p>&copy; 2025 NSL FORGE. All rights reserved.</p>
+        <p>© 2025 NSL FORGE. All rights reserved.</p>
     </footer>
 
     <script>
-        // You can add JavaScript here if needed for dynamic behavior.
-        // For example, setting the actual URL for the checkout button.
-        document.getElementById('checkoutBtn').onclick = function() {
-            // Replace 'YOUR_CHECKOUT_URL_HERE' with the actual URL
-            window.location.href = 'YOUR_CHECKOUT_URL_HERE';
-        };
+        // No JavaScript needed anymore since the URL is directly in the HTML.
     </script>
 
 </body>
