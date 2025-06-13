@@ -9,13 +9,13 @@
         html, body {
             margin: 0;
             padding: 0;
-            height: 100%; /* Ensures body takes full viewport height */
+            height: 100%; /* Ensures body takes full viewport height for scrolling */
             font-family: sans-serif;
             box-sizing: border-box;
-            overflow-x: hidden; /* Prevent horizontal scrollbar if elements slightly exceed width */
+            overflow-x: hidden; /* Prevent horizontal scrollbar */
         }
 
-        /* Section Base Styles */
+        /* Section Base Styles - Common properties for all sections */
         section {
             width: 100%; /* Ensure full width */
             background-size: cover; /* Image covers the entire section */
@@ -28,32 +28,32 @@
             color: white; /* Default text color for sections with background images */
             text-align: center;
             position: relative; /* Needed for absolute positioning of elements like the button */
+            box-sizing: border-box; /* Include padding in the element's total width and height */
         }
 
-        /* Header Specific Styles */
+        /* Header Specific Styles - Adjusted to not be 100vh */
         .header-section {
             background-image: url('09d2a25607dd83817636e8d32bd8e1d5.jpg');
-            /* Changed: Removed min-height: 100vh; to prevent it from always filling the screen */
-            padding: 100px 20px; /* Added padding to give the header a defined height and space */
-            /* Added box-sizing to ensure padding is included in the element's total height */
-            box-sizing: border-box;
+            /* Removed min-height: 100vh; to prevent "zooming" and overlap */
+            padding: 100px 20px; /* Gives the header a substantial, fixed height based on content and padding */
         }
 
         .header-section h1 {
             font-size: 4em; /* Adjust as needed */
             font-weight: bold;
-            color: #fff; /* White color for contrast against the background image */
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Optional: add text shadow for readability */
+            color: #fff; /* White color for contrast */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Text shadow for readability */
             margin: 0; /* Remove default margin from h1 */
-            padding: 20px; /* Add some padding around text if needed */
+            /* Padding from parent .header-section will handle spacing */
         }
 
-        /* Other Section Backgrounds - Renamed and updated image paths */
-        /* These sections will still take full viewport height */
+        /* Full Viewport Height Sections - Applied to sections *after* the header */
         .section1, .section2, .section3, .section4 {
-            min-height: 100vh; /* These sections will take at least the full viewport height */
+            min-height: 100vh; /* These sections will each take at least the full viewport height */
+            /* This ensures they stack perfectly below each other and the header without gaps */
         }
 
+        /* Individual Section Backgrounds */
         .section1 {
             background-image: url('section1.jpg');
         }
@@ -84,7 +84,7 @@
             font-size: 1.2em;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            z-index: 10; /* Ensure button is above other potential content */
+            z-index: 10; /* Ensure button is above other content */
         }
 
         .checkout-button:hover {
@@ -94,9 +94,10 @@
         /* Footer Specific Styles */
         .footer-section {
             background-color: #B6D0E2;
-            color: #333; /* Darker text for better contrast on light background */
+            color: #333; /* Darker text for contrast on light background */
             padding: 20px;
             text-align: center;
+            /* Footer does not need min-height: 100vh; unless you specifically want it full screen */
         }
 
         .footer-section p {
