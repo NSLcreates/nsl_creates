@@ -326,6 +326,8 @@
   }
   .cart-item img {
     width: 80px;
+    height: 80px; /* Added height to ensure consistent size */
+    object-fit: cover; /* Changed to cover for better filling */
     border-radius: 14px;
   }
   .cart-item-info {
@@ -353,6 +355,7 @@
   .qty-controls {
     display: flex;
     gap: 8px;
+    align-items: center; /* Align buttons and quantity text */
   }
   .qty-button {
     border: 1.5px solid #d9b382;
@@ -415,6 +418,8 @@
     justify-content: center;
     align-items: center;
     z-index: 1200;
+    overflow-y: auto; /* Allow scrolling on smaller screens */
+    padding: 20px; /* Add padding for mobile */
   }
   #checkout-modal.active,
   #account-modal.active,
@@ -509,6 +514,7 @@
     align-items: center;
     z-index: 1150;
     padding: 24px;
+    overflow-y: auto; /* Allow scrolling */
   }
   #product-detail-modal.active {
     display: flex;
@@ -533,7 +539,7 @@
   }
   #product-detail-modal .product-image-large img {
     width: 100%;
-    height: 100%;
+    height: auto; /* Ensure image scales */
     object-fit: contain;
     border-radius: 16px;
   }
@@ -589,6 +595,7 @@
     padding: 12px 0;
     font-weight: 600;
     border-bottom: 1px solid #333;
+    color: #d9b382; /* Ensure summary text is visible */
   }
   #faq-modal details p {
     padding: 8px 0 16px 14px;
@@ -634,6 +641,11 @@
   .footer-socials a {
     font-size: 28px;
     margin-right: 24px;
+    color: #d9b382; /* Make social icons more prominent */
+    transition: color 0.25s ease;
+  }
+  .footer-socials a:hover {
+    color: #c2a165;
   }
   .footer-bottom {
     margin-top: 48px;
@@ -678,6 +690,29 @@
     }
     #cart-panel {
       width: 100vw;
+    }
+    #cart-toggle {
+      bottom: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      font-size: 28px;
+    }
+    .modal-content {
+      padding: 20px;
+      margin: 10px; /* Add margin to modals on small screens */
+    }
+    #product-detail-modal .product-image-large::after {
+      font-size: 1rem; /* Adjust font size for brand overlay on detail modal */
+      white-space: normal; /* Allow text to wrap */
+      text-align: center;
+      max-width: 80%; /* Limit width of text */
+    }
+    #product-detail-modal .product-info-detail h2 {
+      font-size: 1.5rem; /* Adjust title size */
+    }
+    #product-detail-modal .product-info-detail p.description {
+      font-size: 0.95rem; /* Adjust description size */
     }
   }
   @media (min-width: 640px) and (max-width: 1023px) {
@@ -767,8 +802,8 @@
         <h2 class="product-name">Velvet Chocolate Reserve</h2>
         <p class="product-desc">Rich milk-based chocolate flavor blended with creamy cold coffee for an indulgent treat.</p>
         <div class="product-price" aria-label="Product price 119 Indian Rupees">₹119</div>
-        <button class="btn-add" aria-label="Add Velvet Chocolate Reserve to cart">Add to Cart</button>
-        <button class="btn-detail" aria-label="View details for Velvet Chocolate Reserve" style="margin-top:8px; background: none; border: none; color: #d9b382; cursor:pointer; font-weight: 600;">View Details</button>
+        <button class="btn-add" data-product-id="1" aria-label="Add Velvet Chocolate Reserve to cart">Add to Cart</button>
+        <button class="btn-detail" data-product-id="1" aria-label="View details for Velvet Chocolate Reserve" style="margin-top:8px; background: none; border: none; color: #d9b382; cursor:pointer; font-weight: 600;">View Details</button>
       </div>
     </article>
     <article class="product-card flavor-hazelnut" tabindex="0" data-id="2" role="group" aria-label="Hazelnut Signature Blend">
@@ -779,8 +814,8 @@
         <h2 class="product-name">Hazelnut Signature Blend</h2>
         <p class="product-desc">Smooth milk-based hazelnut essence combined with rich cold brewed coffee for a refined taste.</p>
         <div class="product-price" aria-label="Product price 109 Indian Rupees">₹109</div>
-        <button class="btn-add" aria-label="Add Hazelnut Signature Blend to cart">Add to Cart</button>
-        <button class="btn-detail" aria-label="View details for Hazelnut Signature Blend" style="margin-top:8px; background: none; border: none; color: #d9b382; cursor:pointer; font-weight: 600;">View Details</button>
+        <button class="btn-add" data-product-id="2" aria-label="Add Hazelnut Signature Blend to cart">Add to Cart</button>
+        <button class="btn-detail" data-product-id="2" aria-label="View details for Hazelnut Signature Blend" style="margin-top:8px; background: none; border: none; color: #d9b382; cursor:pointer; font-weight: 600;">View Details</button>
       </div>
     </article>
     <article class="product-card flavor-classic" tabindex="0" data-id="3" role="group" aria-label="Classic Estate Brew">
@@ -791,8 +826,8 @@
         <h2 class="product-name">Classic Estate Brew</h2>
         <p class="product-desc">Timeless milk-based cold coffee blend delivering smooth, robust flavor in every sip.</p>
         <div class="product-price" aria-label="Product price 89 Indian Rupees">₹89</div>
-        <button class="btn-add" aria-label="Add Classic Estate Brew to cart">Add to Cart</button>
-        <button class="btn-detail" aria-label="View details for Classic Estate Brew" style="margin-top:8px; background: none; border: none; color: #d9b382; cursor:pointer; font-weight: 600;">View Details</button>
+        <button class="btn-add" data-product-id="3" aria-label="Add Classic Estate Brew to cart">Add to Cart</button>
+        <button class="btn-detail" data-product-id="3" aria-label="View details for Classic Estate Brew" style="margin-top:8px; background: none; border: none; color: #d9b382; cursor:pointer; font-weight: 600;">View Details</button>
       </div>
     </article>
     <article class="product-card flavor-vanilla" tabindex="0" data-id="4" role="group" aria-label="Vanilla Creme Select">
@@ -803,8 +838,8 @@
         <h2 class="product-name">Vanilla Creme Select</h2>
         <p class="product-desc">Smooth milk-based cold coffee with rich vanilla notes for a creamy exquisite flavor.</p>
         <div class="product-price" aria-label="Product price 99 Indian Rupees">₹99</div>
-        <button class="btn-add" aria-label="Add Vanilla Creme Select to cart">Add to Cart</button>
-        <button class="btn-detail" aria-label="View details for Vanilla Creme Select" style="margin-top:8px; background: none; border: none; color: #d9b382; cursor:pointer; font-weight: 600;">View Details</button>
+        <button class="btn-add" data-product-id="4" aria-label="Add Vanilla Creme Select to cart">Add to Cart</button>
+        <button class="btn-detail" data-product-id="4" aria-label="View details for Vanilla Creme Select" style="margin-top:8px; background: none; border: none; color: #d9b382; cursor:pointer; font-weight: 600;">View Details</button>
       </div>
     </article>
     <article class="product-card flavor-butterscotch" tabindex="0" data-id="5" role="group" aria-label="Butterscotch Velvet Essence">
@@ -815,14 +850,17 @@
         <h2 class="product-name">Butterscotch Velvet Essence</h2>
         <p class="product-desc">Decadent milk-based butterscotch infused cold coffee delivering smooth, creamy indulgence.</p>
         <div class="product-price" aria-label="Product price 109 Indian Rupees">₹109</div>
-        <button class="btn-add" aria-label="Add Butterscotch Velvet Essence to cart">Add to Cart</button>
-        <button class="btn-detail" aria-label="View details for Butterscotch Velvet Essence" style="margin-top:8px; background: none; border: none; color: #d9b382; cursor:pointer; font-weight: 600;">View Details</button>
+        <button class="btn-add" data-product-id="5" aria-label="Add Butterscotch Velvet Essence to cart">Add to Cart</button>
+        <button class="btn-detail" data-product-id="5" aria-label="View details for Butterscotch Velvet Essence" style="margin-top:8px; background: none; border: none; color: #d9b382; cursor:pointer; font-weight: 600;">View Details</button>
       </div>
     </article>
   </section>
 </main>
 
-<!-- CART PANEL -->
+<button id="cart-toggle" aria-label="Open cart">
+  <span class="material-icons">shopping_cart</span>
+</button>
+
 <aside id="cart-panel" role="dialog" aria-modal="true" aria-labelledby="cart-title" tabindex="-1">
   <header>
     <h2 id="cart-title">Your Cart</h2>
@@ -835,12 +873,11 @@
   </footer>
 </aside>
 
-<!-- CHECKOUT MODAL -->
 <div id="checkout-modal" role="dialog" aria-modal="true" aria-labelledby="checkout-title" tabindex="-1">
   <div class="modal-content">
     <header class="modal-header">
       <h3 id="checkout-title">Checkout</h3>
-      <button class="close-modal" aria-label="Close checkout modal">&times;</button>
+      <button class="close-modal" data-modal="checkout-modal" aria-label="Close checkout modal">&times;</button>
     </header>
     <form id="checkout-form" action="https://formsubmit.co/nslcreatesofficial@gmail.com" method="POST" novalidate>
       <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
@@ -871,12 +908,11 @@
   </div>
 </div>
 
-<!-- PRODUCT DETAIL MODAL -->
 <div id="product-detail-modal" role="dialog" aria-modal="true" aria-labelledby="product-detail-title" tabindex="-1">
   <div class="modal-content">
     <header class="modal-header">
       <h3 id="product-detail-title">Product Details</h3>
-      <button class="close-modal" aria-label="Close product detail modal">&times;</button>
+      <button class="close-modal" data-modal="product-detail-modal" aria-label="Close product detail modal">&times;</button>
     </header>
     <div class="modal-body">
       <div class="product-image-large">
@@ -885,11 +921,11 @@
       <div class="product-info-detail">
         <h2 id="detail-name"></h2>
         <div class="rating" aria-label="Product rating">
-          <span class="material-icons" aria-hidden="true" title="Rating 4.5 out of 5 stars">star</span>
-          <span class="material-icons" aria-hidden="true" title="Rating 4.5 out of 5 stars">star</span>
-          <span class="material-icons" aria-hidden="true" title="Rating 4.5 out of 5 stars">star</span>
-          <span class="material-icons" aria-hidden="true" title="Rating 4.5 out of 5 stars">star_half</span>
-          <span class="material-icons" aria-hidden="true" title="Rating 4.5 out of 5 stars">star_outline</span>
+          <span class="material-icons star-filled" aria-hidden="true" title="Rating 4.5 out of 5 stars">star</span>
+          <span class="material-icons star-filled" aria-hidden="true" title="Rating 4.5 out of 5 stars">star</span>
+          <span class="material-icons star-filled" aria-hidden="true" title="Rating 4.5 out of 5 stars">star</span>
+          <span class="material-icons star-filled" aria-hidden="true" title="Rating 4.5 out of 5 stars">star_half</span>
+          <span class="material-icons star-empty" aria-hidden="true" title="Rating 4.5 out of 5 stars">star_outline</span>
         </div>
         <p class="description" id="detail-desc"></p>
         <div class="product-price" id="detail-price"></div>
@@ -899,12 +935,11 @@
   </div>
 </div>
 
-<!-- ACCOUNT MODAL -->
 <div id="account-modal" role="dialog" aria-modal="true" aria-labelledby="account-title" tabindex="-1">
   <div class="modal-content">
     <header class="modal-header">
       <h3 id="account-title">Account</h3>
-      <button class="close-modal" aria-label="Close account modal">&times;</button>
+      <button class="close-modal" data-modal="account-modal" aria-label="Close account modal">&times;</button>
     </header>
     <div class="modal-body" style="color:#d9b382; font-weight: 300;">
       <p>This demo site does not implement full user accounts functionality. Future implementation will support user profiles, order history, and address management.</p>
@@ -912,12 +947,11 @@
   </div>
 </div>
 
-<!-- FAQ MODAL -->
 <div id="faq-modal" role="dialog" aria-modal="true" aria-labelledby="faq-title" tabindex="-1">
   <div class="modal-content">
     <header class="modal-header">
       <h3 id="faq-title">Frequently Asked Questions</h3>
-      <button class="close-modal" aria-label="Close FAQ modal">&times;</button>
+      <button class="close-modal" data-modal="faq-modal" aria-label="Close FAQ modal">&times;</button>
     </header>
     <div class="modal-body faq-list">
       <details>
@@ -948,7 +982,7 @@
     </section>
     <section class="footer-section" aria-label="Customer support">
       <h5>Support</h5>
-      <a href="#faq-btn" id="faq-btn">FAQ</a>
+      <a href="#faq-btn" id="faq-btn-footer">FAQ</a>
       <a href="mailto:support@sealedbrew.com">Contact Us</a>
       <a href="#">Returns &amp; Refunds</a>
     </section>
@@ -961,8 +995,8 @@
     <section class="footer-section footer-socials" aria-label="Social media links">
       <h5>Follow Us</h5>
       <div class="footer-instagram" tabindex="0" aria-label="Instagram handle @sealedbrew" style="color:#d9b382; font-weight: 600;">Instagram: @sealedbrew</div>
-      <a href="#" aria-label="Instagram"><span class="material-icons">instagram</span></a>
-      <a href="#" aria-label="Twitter"><span class="material-icons">twitter</span></a>
+      <a href="https://instagram.com/sealedbrew" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><span class="material-icons">instagram</span></a>
+      <a href="https://twitter.com/sealedbrew" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><span class="material-icons">twitter</span></a>
     </section>
   </div>
   <div class="footer-bottom">
@@ -972,26 +1006,263 @@
 
 <script>
   (() => {
-    // Responsive nav toggle
+    // --- Data ---
+    const products = [
+      {
+        id: '1',
+        name: 'Velvet Chocolate Reserve',
+        price: 119,
+        desc: 'Rich milk-based chocolate flavor blended with creamy cold coffee for an indulgent treat. Made with 100% Arabica beans and premium cocoa.',
+        rating: 4.5,
+        img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a6864958-7a63-400c-9500-bae778c16e52.png',
+        alt: 'Premium bottle of milk-based chocolate flavoured cold coffee on a dark reflective surface, with the Sealed Brew by NSL Forge logo on the bottle',
+      },
+      {
+        id: '2',
+        name: 'Hazelnut Signature Blend',
+        price: 109,
+        desc: 'Smooth milk-based hazelnut essence combined with rich cold brewed coffee for a refined taste. Perfect for a luxurious coffee break.',
+        rating: 4.0,
+        img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d105a338-a9fc-4335-ab4b-2fd76be80578.png',
+        alt: 'Elegant bottle of milk-based hazelnut flavoured cold coffee with minimalist golden label and Sealed Brew by NSL Forge logo on the bottle',
+      },
+      {
+        id: '3',
+        name: 'Classic Estate Brew',
+        price: 89,
+        desc: 'Timeless milk-based cold coffee blend delivering smooth, robust flavor in every sip. A perfect everyday companion.',
+        rating: 5.0,
+        img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d4ac9e9f-d73f-4d78-bc93-249f5e99f431.png',
+        alt: 'Minimalist bottle of milk-based classic cold coffee with matte black label and gold script, with Sealed Brew by NSL Forge logo on the bottle',
+      },
+      {
+        id: '4',
+        name: 'Vanilla Creme Select',
+        price: 99,
+        desc: 'Smooth milk-based cold coffee with rich vanilla notes for a creamy exquisite flavor. A delightful treat for vanilla lovers.',
+        rating: 4.5,
+        img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/7d14a371-c23e-496a-9c96-103500edc4d6.png',
+        alt: 'Luxury bottle of milk-based vanilla cold coffee with cream and gold label resting on sleek wooden table, with Sealed Brew by NSL Forge logo on the bottle',
+      },
+      {
+        id: '5',
+        name: 'Butterscotch Velvet Essence',
+        price: 109,
+        desc: 'Decadent milk-based butterscotch infused cold coffee delivering smooth, creamy indulgence. A sweet and satisfying experience.',
+        rating: 4.0,
+        img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/fb7d0f37-edd5-4a76-a144-032c0c4ebcb4.png',
+        alt: 'Luxury bottle of milk-based butterscotch flavoured cold coffee with rich amber and gold label resting on plush dark velvet fabric, with Sealed Brew by NSL Forge logo on the bottle',
+      },
+    ];
+
+    let cart = JSON.parse(localStorage.getItem('sealedBrewCart')) || [];
+
+    // --- DOM Elements ---
     const navToggle = document.getElementById('nav-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
+    const cartToggle = document.getElementById('cart-toggle');
+    const cartPanel = document.getElementById('cart-panel');
+    const closeCartBtn = cartPanel.querySelector('.close-cart');
+    const cartList = document.getElementById('cart-list');
+    const cartTotal = document.getElementById('cart-total');
+    const checkoutBtn = document.getElementById('checkout-btn');
+    const checkoutModal = document.getElementById('checkout-modal');
+    const productDetailModal = document.getElementById('product-detail-modal');
+    const accountModal = document.getElementById('account-modal');
+    const faqModal = document.getElementById('faq-modal');
+    const closeModals = document.querySelectorAll('.close-modal');
+    const orderDetailsTextarea = document.getElementById('orderDetails');
+    const accountBtn = document.querySelector('nav a[href="#account-btn"]');
+    const faqBtn = document.querySelector('nav a[href="#faq-btn"]');
+    const faqBtnFooter = document.getElementById('faq-btn-footer');
+    const productGrid = document.getElementById('products');
+
+
+    // --- Helper Functions ---
+    function saveCart() {
+      localStorage.setItem('sealedBrewCart', JSON.stringify(cart));
+    }
+
+    function calculateCartTotal() {
+      const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      cartTotal.textContent = `Total: ₹${total.toFixed(2)}`;
+      return total;
+    }
+
+    function renderCart() {
+      cartList.innerHTML = ''; // Clear current cart display
+      if (cart.length === 0) {
+        cartList.innerHTML = '<p style="text-align: center; color: #a89e94; margin-top: 50px;">Your cart is empty.</p>';
+      } else {
+        cart.forEach(item => {
+          const cartItemDiv = document.createElement('div');
+          cartItemDiv.classList.add('cart-item');
+          cartItemDiv.setAttribute('data-id', item.id);
+          cartItemDiv.innerHTML = `
+            <img src="${item.img}" alt="${item.alt}" />
+            <div class="cart-item-info">
+              <div class="cart-item-name">${item.name}</div>
+              <div class="cart-item-qty">Qty: <span class="qty-display">${item.quantity}</span></div>
+              <div class="qty-controls">
+                <button class="qty-button decrement" aria-label="Decrease quantity of ${item.name}" data-id="${item.id}">-</button>
+                <button class="qty-button increment" aria-label="Increase quantity of ${item.name}" data-id="${item.id}">+</button>
+                <button class="qty-button remove" aria-label="Remove ${item.name} from cart" data-id="${item.id}">Remove</button>
+              </div>
+              <div class="cart-item-price">₹${(item.price * item.quantity).toFixed(2)}</div>
+            </div>
+          `;
+          cartList.appendChild(cartItemDiv);
+        });
+      }
+      calculateCartTotal();
+      populateOrderDetails(); // Update order details when cart changes
+    }
+
+    function addToCart(productId) {
+      const product = products.find(p => p.id === productId);
+      if (product) {
+        const existingItem = cart.find(item => item.id === productId);
+        if (existingItem) {
+          existingItem.quantity++;
+        } else {
+          cart.push({ ...product, quantity: 1 });
+        }
+        saveCart();
+        renderCart();
+        showCartPanel();
+      }
+    }
+
+    function updateQuantity(productId, change) {
+      const itemIndex = cart.findIndex(item => item.id === productId);
+      if (itemIndex > -1) {
+        cart[itemIndex].quantity += change;
+        if (cart[itemIndex].quantity <= 0) {
+          cart.splice(itemIndex, 1); // Remove if quantity is 0 or less
+        }
+        saveCart();
+        renderCart();
+      }
+    }
+
+    function removeFromCart(productId) {
+      cart = cart.filter(item => item.id !== productId);
+      saveCart();
+      renderCart();
+    }
+
+    function openModal(modalElement) {
+      modalElement.classList.add('active');
+      modalElement.focus();
+    }
+
+    function closeModal(modalElement) {
+      modalElement.classList.remove('active');
+      // Return focus to the element that opened the modal, if possible
+      const opener = document.querySelector('[aria-expanded="true"]'); // For nav toggle
+      if (opener) {
+        opener.focus();
+      } else if (document.activeElement && document.activeElement.tagName === 'BUTTON') {
+         document.activeElement.focus(); // Keep focus on the button that opened it
+      } else {
+        document.body.focus(); // Fallback
+      }
+    }
+
+    function populateOrderDetails() {
+      if (orderDetailsTextarea) {
+        if (cart.length === 0) {
+          orderDetailsTextarea.value = 'No items in cart.';
+        } else {
+          orderDetailsTextarea.value = cart.map(item => `${item.quantity} x ${item.name} (₹${(item.price * item.quantity).toFixed(2)})`).join('\n');
+          orderDetailsTextarea.value += `\n\nTotal: ₹${calculateCartTotal().toFixed(2)}`;
+        }
+      }
+    }
+
+    function showCartPanel() {
+        cartPanel.classList.add('open');
+        cartPanel.focus();
+    }
+
+    function closeCart() {
+        cartPanel.classList.remove('open');
+        cartToggle.focus(); // Return focus to the cart icon
+    }
+
+    function displayProductDetails(productId) {
+        const product = products.find(p => p.id === productId);
+        if (product) {
+            document.getElementById('detail-image').src = product.img;
+            document.getElementById('detail-image').alt = product.alt;
+            document.getElementById('detail-name').textContent = product.name;
+            document.getElementById('detail-desc').textContent = product.desc;
+            document.getElementById('detail-price').textContent = `₹${product.price.toFixed(2)}`;
+
+            const ratingContainer = productDetailModal.querySelector('.rating');
+            ratingContainer.innerHTML = ''; // Clear existing stars
+            const fullStars = Math.floor(product.rating);
+            const hasHalfStar = product.rating % 1 !== 0;
+
+            for (let i = 0; i < fullStars; i++) {
+                const span = document.createElement('span');
+                span.classList.add('material-icons', 'star-filled');
+                span.setAttribute('aria-hidden', 'true');
+                span.textContent = 'star';
+                ratingContainer.appendChild(span);
+            }
+            if (hasHalfStar) {
+                const span = document.createElement('span');
+                span.classList.add('material-icons', 'star-filled');
+                span.setAttribute('aria-hidden', 'true');
+                span.textContent = 'star_half';
+                ratingContainer.appendChild(span);
+            }
+            const emptyStars = 5 - Math.ceil(product.rating);
+            for (let i = 0; i < emptyStars; i++) {
+                const span = document.createElement('span');
+                span.classList.add('material-icons', 'star-empty');
+                span.setAttribute('aria-hidden', 'true');
+                span.textContent = 'star_outline';
+                ratingContainer.appendChild(span);
+            }
+            ratingContainer.setAttribute('aria-label', `Product rating ${product.rating} out of 5 stars`);
+
+            const detailAddBtn = document.getElementById('detail-add-btn');
+            detailAddBtn.setAttribute('data-product-id', productId);
+            detailAddBtn.onclick = () => {
+                addToCart(productId);
+                closeModal(productDetailModal);
+            };
+
+            openModal(productDetailModal);
+        }
+    }
+
+
+    // --- Event Listeners ---
+
+    // Mobile Navigation
     navToggle.addEventListener('click', () => {
       const expanded = navToggle.getAttribute('aria-expanded') === 'true';
       navToggle.setAttribute('aria-expanded', !expanded);
       if (!expanded) {
         mobileMenu.style.display = 'flex';
+        // Focus the first link in the mobile menu for accessibility
         mobileMenu.querySelector('a').focus();
       } else {
         mobileMenu.style.display = 'none';
         navToggle.focus();
       }
     });
+
     mobileMenu.querySelector('.close-menu').addEventListener('click', () => {
       mobileMenu.style.display = 'none';
       navToggle.setAttribute('aria-expanded', false);
       navToggle.focus();
     });
-    // Close mobile menu if click outside or ESC
+
+    // Close modals with ESC key
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         if (mobileMenu.style.display === 'flex') {
@@ -1002,67 +1273,83 @@
         if (cartPanel.classList.contains('open')) {
           closeCart();
         }
-        closeModal(document.getElementById('checkout-modal'));
-        closeModal(document.getElementById('account-modal'));
-        closeModal(document.getElementById('faq-modal'));
-        closeModal(document.getElementById('product-detail-modal'));
+        // Iterate through all modals and close if active
+        document.querySelectorAll('.active').forEach(modal => {
+          closeModal(modal);
+        });
       }
     });
 
-    // Products data
-    const products = [
-      {
-        id: '1',
-        name: 'Velvet Chocolate Reserve',
-        price: 119,
-        desc: 'Rich milk-based chocolate flavor blended with creamy cold coffee for an indulgent treat.',
-        rating: 89,
-        img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a6864958-7a63-400c-9500-bae778c16e52.png',
-        alt: 'Premium bottle of milk-based chocolate flavoured cold coffee on a dark reflective surface, with the Sealed Brew by NSL Forge logo on the bottle',
-      },
-      {
-        id: '2',
-        name: 'Hazelnut Signature Blend',
-        price: 109,
-        desc: 'Smooth milk-based hazelnut essence combined with rich cold brewed coffee for a refined taste.',
-        rating: 80,
-        img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d105a338-a9fc-4335-ab4b-2fd76be80578.png',
-        alt: 'Elegant bottle of milk-based hazelnut flavoured cold coffee with minimalist golden label and Sealed Brew by NSL Forge logo on the bottle',
-      },
-      {
-        id: '3',
-        name: 'Classic Estate Brew',
-        price: 89,
-        desc: 'Timeless milk-based cold coffee blend delivering smooth, robust flavor in every sip.',
-        rating: 95,
-        img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d4ac9e9f-d73f-4d78-bc93-249f5e99f431.png',
-        alt: 'Minimalist bottle of milk-based classic cold coffee with matte black label and gold script, with Sealed Brew by NSL Forge logo on the bottle',
-      },
-      {
-        id: '4',
-        name: 'Vanilla Creme Select',
-        price: 99,
-        desc: 'Smooth milk-based cold coffee with rich vanilla notes for a creamy exquisite flavor.',
-        rating: 92,
-        img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/7d14a371-c23e-496a-9c96-103500edc4d6.png',
-        alt: 'Luxury bottle of milk-based vanilla cold coffee with cream and gold label resting on sleek wooden table, with Sealed Brew by NSL Forge logo on the bottle',
-      },
-      {
-        id: '5',
-        name: 'Butterscotch Velvet Essence',
-        price: 109,
-        desc: 'Decadent milk-based butterscotch infused cold coffee delivering smooth, creamy indulgence.',
-        rating: 87,
-        img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/fb7d0f37-edd5-4a76-a144-032c0c4ebcb4.png',
-        alt: 'Luxury bottle of milk-based butterscotch flavoured cold coffee with rich amber and gold label resting on plush dark velvet fabric, with Sealed Brew by NSL Forge logo on the bottle',
-      },
-    ];
+    // Cart Panel Toggle
+    cartToggle.addEventListener('click', showCartPanel);
+    closeCartBtn.addEventListener('click', closeCart);
 
-    // Update cart UI and modals logic...
-    // [JavaScript remains identical to previous implementation]
-    // ... (omitted for brevity, but unchanged from previous implementation)
+    // Add to Cart buttons (event delegation for dynamic buttons)
+    productGrid.addEventListener('click', (event) => {
+      if (event.target.classList.contains('btn-add')) {
+        const productId = event.target.dataset.productId;
+        addToCart(productId);
+      } else if (event.target.classList.contains('btn-detail')) {
+        const productId = event.target.dataset.productId;
+        displayProductDetails(productId);
+      }
+    });
 
 
+    // Quantity controls in cart (event delegation)
+    cartList.addEventListener('click', (event) => {
+      const target = event.target;
+      const productId = target.dataset.id;
+      if (target.classList.contains('increment')) {
+        updateQuantity(productId, 1);
+      } else if (target.classList.contains('decrement')) {
+        updateQuantity(productId, -1);
+      } else if (target.classList.contains('remove')) {
+        removeFromCart(productId);
+      }
+    });
+
+    // Checkout button
+    checkoutBtn.addEventListener('click', () => {
+      if (cart.length === 0) {
+        alert('Your cart is empty. Please add items before checking out.');
+        return;
+      }
+      closeCart();
+      openModal(checkoutModal);
+    });
+
+    // Close Modals buttons (using event delegation for common close functionality)
+    closeModals.forEach(button => {
+      button.addEventListener('click', (event) => {
+        const modalToClose = event.target.closest('.active'); // Find the closest active modal parent
+        if (modalToClose) {
+          closeModal(modalToClose);
+        }
+      });
+    });
+
+    // Open Account Modal
+    accountBtn.addEventListener('click', (e) => {
+      e.preventDefault(); // Prevent default anchor behavior
+      openModal(accountModal);
+    });
+
+    // Open FAQ Modal (from header)
+    faqBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openModal(faqModal);
+    });
+
+    // Open FAQ Modal (from footer)
+    faqBtnFooter.addEventListener('click', (e) => {
+      e.preventDefault();
+      openModal(faqModal);
+    });
+
+
+    // Initial render of cart on page load
+    renderCart();
   })();
 </script>
 </body>
