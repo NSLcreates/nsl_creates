@@ -75,12 +75,15 @@
     transition: background-color 0.25s ease, color 0.25s ease;
     font-size: 1rem;
   }
-  nav a[aria-current="page"],
   nav a:hover,
   nav a:focus-visible {
     background-color: #d9b382;
     color: #121212;
     outline: none;
+  }
+  nav a.active {
+    background-color: #d9b382;
+    color: #121212;
   }
   .material-icons {
     vertical-align: middle;
@@ -459,9 +462,7 @@
     font-weight: 600;
     color: #bdb6aa;
   }
-  input[type="text"],
-  input[type="email"],
-  input[type="tel"],
+  input,
   select,
   textarea {
     width: 100%;
@@ -475,9 +476,7 @@
     font-weight: 400;
     transition: box-shadow 0.3s ease;
   }
-  input[type="text"]:focus,
-  input[type="email"]:focus,
-  input[type="tel"]:focus,
+  input:focus,
   select:focus,
   textarea:focus {
     outline: none;
@@ -796,7 +795,7 @@
   <section id="products" aria-label="Product catalog" class="products-grid" tabindex="0">
     <article class="product-card flavor-chocolate" tabindex="0" data-id="1" role="group" aria-label="Velvet Chocolate Reserve">
       <div class="product-image">
-        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a6864958-7a63-400c-9500-bae778c16e52.png" alt="Premium bottle of chocolate flavoured cold coffee on a dark reflective surface, with the Sealed Brew by NSL Forge logo on the bottle" />
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905943104.jpg" alt="Premium bottle of chocolate flavoured cold coffee on a dark reflective surface, with the Sealed Brew by NSL Forge logo on the bottle" />
       </div>
       <div class="product-info">
         <h2 class="product-name">Velvet Chocolate Reserve</h2>
@@ -808,7 +807,7 @@
     </article>
     <article class="product-card flavor-hazelnut" tabindex="0" data-id="2" role="group" aria-label="Hazelnut Signature Blend">
       <div class="product-image">
-        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d105a338-a9fc-4335-ab4b-2fd76be80578.png" alt="Elegant bottle of milk-based hazelnut flavoured cold coffee with minimalist golden label and Sealed Brew by NSL Forge logo on the bottle" />
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905957623.jpg" alt="Elegant bottle of milk-based hazelnut flavoured cold coffee with minimalist golden label and Sealed Brew by NSL Forge logo on the bottle" />
       </div>
       <div class="product-info">
         <h2 class="product-name">Hazelnut Signature Blend</h2>
@@ -820,7 +819,7 @@
     </article>
     <article class="product-card flavor-classic" tabindex="0" data-id="3" role="group" aria-label="Classic Estate Brew">
       <div class="product-image">
-        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d4ac9e9f-d73f-4d78-bc93-249f5e99f431.png" alt="Minimalist bottle of milk-based classic cold coffee with matte black label and gold script, with Sealed Brew by NSL Forge logo on the bottle" />
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905935359.jpg" alt="Minimalist bottle of milk-based classic cold coffee with matte black label and gold script, with Sealed Brew by NSL Forge logo on the bottle" />
       </div>
       <div class="product-info">
         <h2 class="product-name">Classic Estate Brew</h2>
@@ -832,7 +831,7 @@
     </article>
     <article class="product-card flavor-vanilla" tabindex="0" data-id="4" role="group" aria-label="Vanilla Creme Select">
       <div class="product-image">
-        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/7d14a371-c23e-496a-9c96-103500edc4d6.png" alt="Luxury bottle of milk-based vanilla cold coffee with cream and gold label resting on sleek wooden table, with Sealed Brew by NSL Forge logo on the bottle" />
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905951985.jpg" alt="Luxury bottle of milk-based vanilla cold coffee with cream and gold label resting on sleek wooden table, with Sealed Brew by NSL Forge logo on the bottle" />
       </div>
       <div class="product-info">
         <h2 class="product-name">Vanilla Creme Select</h2>
@@ -844,7 +843,7 @@
     </article>
     <article class="product-card flavor-butterscotch" tabindex="0" data-id="5" role="group" aria-label="Butterscotch Velvet Essence">
       <div class="product-image">
-        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/fb7d0f37-edd5-4a76-a144-032c0c4ebcb4.png" alt="Luxury bottle of milk-based butterscotch flavoured cold coffee with rich amber and gold label resting on plush dark velvet fabric, with Sealed Brew by NSL Forge logo on the bottle" />
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905951985.jpg" alt="Luxury bottle of milk-based butterscotch flavoured cold coffee with rich amber and gold label resting on plush dark velvet fabric, with Sealed Brew by NSL Forge logo on the bottle" />
       </div>
       <div class="product-info">
         <h2 class="product-name">Butterscotch Velvet Essence</h2>
@@ -1014,7 +1013,7 @@
         price: 119,
         desc: 'Rich milk-based chocolate flavor blended with creamy cold coffee for an indulgent treat. Made with 100% Arabica beans and premium cocoa.',
         rating: 4.5,
-        img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a6864958-7a63-400c-9500-bae778c16e52.png',
+        img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905943104.jpg',
         alt: 'Premium bottle of milk-based chocolate flavoured cold coffee on a dark reflective surface, with the Sealed Brew by NSL Forge logo on the bottle',
       },
       {
@@ -1023,7 +1022,7 @@
         price: 109,
         desc: 'Smooth milk-based hazelnut essence combined with rich cold brewed coffee for a refined taste. Perfect for a luxurious coffee break.',
         rating: 4.0,
-        img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d105a338-a9fc-4335-ab4b-2fd76be80578.png',
+        img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905957623.jpg',
         alt: 'Elegant bottle of milk-based hazelnut flavoured cold coffee with minimalist golden label and Sealed Brew by NSL Forge logo on the bottle',
       },
       {
@@ -1032,7 +1031,7 @@
         price: 89,
         desc: 'Timeless milk-based cold coffee blend delivering smooth, robust flavor in every sip. A perfect everyday companion.',
         rating: 5.0,
-        img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d4ac9e9f-d73f-4d78-bc93-249f5e99f431.png',
+        img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905935359.jpg',
         alt: 'Minimalist bottle of milk-based classic cold coffee with matte black label and gold script, with Sealed Brew by NSL Forge logo on the bottle',
       },
       {
@@ -1041,7 +1040,7 @@
         price: 99,
         desc: 'Smooth milk-based cold coffee with rich vanilla notes for a creamy exquisite flavor. A delightful treat for vanilla lovers.',
         rating: 4.5,
-        img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/7d14a371-c23e-496a-9c96-103500edc4d6.png',
+        img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905951985.jpg',
         alt: 'Luxury bottle of milk-based vanilla cold coffee with cream and gold label resting on sleek wooden table, with Sealed Brew by NSL Forge logo on the bottle',
       },
       {
@@ -1050,7 +1049,7 @@
         price: 109,
         desc: 'Decadent milk-based butterscotch infused cold coffee delivering smooth, creamy indulgence. A sweet and satisfying experience.',
         rating: 4.0,
-        img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/fb7d0f37-edd5-4a76-a144-032c0c4ebcb4.png',
+        img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905951985.jpg',
         alt: 'Luxury bottle of milk-based butterscotch flavoured cold coffee with rich amber and gold label resting on plush dark velvet fabric, with Sealed Brew by NSL Forge logo on the bottle',
       },
     ];
