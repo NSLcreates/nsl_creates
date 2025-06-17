@@ -156,12 +156,45 @@
     justify-content: space-between;
     box-shadow: 0 4px 16px rgb(0 0 0 / 0.8);
     transition: transform 0.4s cubic-bezier(.4,0,.2,1), box-shadow 0.3s ease;
+    position: relative; /* For the out of stock overlay */
   }
   .product-card:hover,
   .product-card:focus-within {
     transform: translateY(-8px);
     box-shadow: 0 12px 28px rgb(217 179 130 / 0.6);
   }
+  /* Out of stock styling */
+  .product-card[data-in-stock="false"] {
+    opacity: 0.6;
+    pointer-events: none; /* Disable clicks */
+    transform: none; /* Prevent hover effect */
+    box-shadow: 0 4px 16px rgb(0 0 0 / 0.5); /* Less prominent shadow */
+  }
+
+  .product-card[data-in-stock="false"] .product-image img {
+      filter: grayscale(80%) brightness(0.6);
+  }
+  .product-card[data-in-stock="false"] .product-image::after {
+      content: "Out of Stock";
+      font-size: 1.8rem;
+      color: #e8e6e3;
+      background-color: rgba(0, 0, 0, 0.6);
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-shadow: none;
+      mix-blend-mode: normal;
+      border-radius: 16px;
+      z-index: 10; /* Ensure it's above the image */
+  }
+  .product-card[data-in-stock="false"] .product-name,
+  .product-card[data-in-stock="false"] .product-desc,
+  .product-card[data-in-stock="false"] .product-price {
+    color: #7a6b54; /* Faded text */
+  }
+
   .product-image {
     position: relative;
     aspect-ratio: 1/1;
@@ -254,6 +287,23 @@
     box-shadow: 0 10px 30px rgb(217 179 130 / 0.5);
     outline: none;
   }
+  /* Out of stock button specific style */
+  .product-card[data-in-stock="false"] .btn-add {
+    background-color: #555;
+    border-color: #555;
+    color: #333;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+  .product-card[data-in-stock="false"] .btn-add:hover,
+  .product-card[data-in-stock="false"] .btn-add:focus-visible {
+    background-color: #555; /* Keep background same on hover */
+    color: #333; /* Keep text color same on hover */
+    box-shadow: none;
+    transform: none; /* Prevent translateY on hover */
+  }
+
+
   /* CART */
   #cart-toggle {
     position: fixed;
@@ -734,7 +784,7 @@
   <section id="products" aria-label="Product catalog" class="products-grid" tabindex="0">
       <article class="product-card flavor-chocolate" tabindex="0" data-id="1" role="group" aria-label="Velvet Chocolate Reserve">
         <div class="product-image">
-          <img src="1749905943104.jpg" alt="Premium bottle of chocolate flavoured cold coffee on a dark reflective surface, with the Sealed Brew by NSL Forge logo on the bottle" />
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905943104.jpg" alt="Premium bottle of chocolate flavoured cold coffee on a dark reflective surface, with the Sealed Brew by NSL Forge logo on the bottle" />
         </div>
         <div class="product-info">
           <h2 class="product-name">Velvet Chocolate Reserve</h2>
@@ -744,21 +794,21 @@
           <button class="btn-detail" data-product-id="1" aria-label="View details for Velvet Chocolate Reserve" style="margin-top:8px; background: none; border: none; color: #d9b382; cursor:pointer; font-weight: 600;">View Details</button>
         </div>
       </article>
-      <article class="product-card flavor-hazelnut" tabindex="0" data-id="2" role="group" aria-label="Hazelnut Signature Blend">
+      <article class="product-card flavor-hazelnut" tabindex="0" data-id="2" role="group" aria-label="Hazelnut Signature Blend" data-in-stock="false">
         <div class="product-image">
-          <img src="1749905957623.jpg" alt="Elegant bottle of milk-based hazelnut flavoured cold coffee with minimalist golden label and Sealed Brew by NSL Forge logo on the bottle" />
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905957623.jpg" alt="Elegant bottle of milk-based hazelnut flavoured cold coffee with minimalist golden label and Sealed Brew by NSL Forge logo on the bottle" />
         </div>
         <div class="product-info">
           <h2 class="product-name">Hazelnut Signature Blend</h2>
           <p class="product-desc">Smooth milk-based hazelnut essence combined with rich cold brewed coffee for a refined taste.</p>
           <div class="product-price" aria-label="Product price 109 Indian Rupees">₹109</div>
-          <button class="btn-add" data-product-id="2" aria-label="Add Hazelnut Signature Blend to cart">Add to Cart</button>
+          <button class="btn-add" data-product-id="2" aria-label="Add Hazelnut Signature Blend to cart" disabled>Out of Stock</button>
           <button class="btn-detail" data-product-id="2" aria-label="View details for Hazelnut Signature Blend" style="margin-top:8px; background: none; border: none; color: #d9b382; cursor:pointer; font-weight: 600;">View Details</button>
         </div>
       </article>
       <article class="product-card flavor-classic" tabindex="0" data-id="3" role="group" aria-label="Classic Estate Brew">
         <div class="product-image">
-          <img src="1749905935359.jpg" alt="Minimalist bottle of milk-based classic cold coffee with matte black label and gold script, with Sealed Brew by NSL Forge logo on the bottle" />
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905935359.jpg" alt="Minimalist bottle of milk-based classic cold coffee with matte black label and gold script, with Sealed Brew by NSL Forge logo on the bottle" />
         </div>
         <div class="product-info">
           <h2 class="product-name">Classic Estate Brew</h2>
@@ -770,7 +820,7 @@
       </article>
       <article class="product-card flavor-vanilla" tabindex="0" data-id="4" role="group" aria-label="Vanilla Creme Select">
         <div class="product-image">
-          <img src="1749905951985.jpg" alt="Luxury bottle of milk-based vanilla cold coffee with cream and gold label resting on sleek wooden table, with Sealed Brew by NSL Forge logo on the bottle" />
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905951985.jpg" alt="Luxury bottle of milk-based vanilla cold coffee with cream and gold label resting on sleek wooden table, with Sealed Brew by NSL Forge logo on the bottle" />
         </div>
         <div class="product-info">
           <h2 class="product-name">Vanilla Creme Select</h2>
@@ -782,7 +832,7 @@
       </article>
       <article class="product-card flavor-butterscotch" tabindex="0" data-id="5" role="group" aria-label="Butterscotch Velvet Essence">
         <div class="product-image">
-          <img src="1749905951985.jpg" alt="Luxury bottle of milk-based butterscotch flavoured cold coffee with rich amber and gold label resting on plush dark velvet fabric, with the Sealed Brew by NSL Forge logo on the bottle" />
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905951985.jpg" alt="Luxury bottle of milk-based butterscotch flavoured cold coffee with rich amber and gold label resting on plush dark velvet fabric, with the Sealed Brew by NSL Forge logo on the bottle" />
         </div>
         <div class="product-info">
           <h2 class="product-name">Butterscotch Velvet Essence</h2>
@@ -833,12 +883,8 @@
         <label for="orderDetails">Order Details (Please list products and quantities)</label>
         <textarea id="orderDetails" name="Order Details" placeholder="Example: 2 Velvet Chocolate Reserve, 1 Vanilla Creme Select" required rows="3"></textarea>
         <label for="paymentMethod">Payment Method</label>
-        <select id="paymentMethod" name="Payment Method" required>
-          <option value="" disabled selected>Select a payment method</option>
-          <option value="Credit Card">Credit Card</option>
-          <option value="PayPal">PayPal</option>
-          <option value="UPI">UPI</option>
-          <option value="Net Banking">Net Banking</option>
+        <select id="paymentMethod" name="Payment Method">
+          <option value="Cash on Delivery" selected>Cash on Delivery</option>
         </select>
       </div>
       <button type="submit" class="btn-submit">Place Order</button>
@@ -920,6 +966,7 @@
         rating: 4.5,
         img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905943104.jpg',
         alt: 'Premium bottle of milk-based chocolate flavoured cold coffee on a dark reflective surface, with the Sealed Brew by NSL Forge logo on the bottle',
+        inStock: true,
       },
       {
         id: '2',
@@ -929,6 +976,7 @@
         rating: 4.0,
         img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905957623.jpg',
         alt: 'Elegant bottle of milk-based hazelnut flavoured cold coffee with minimalist golden label and Sealed Brew by NSL Forge logo on the bottle',
+        inStock: false, // This product is out of stock
       },
       {
         id: '3',
@@ -938,6 +986,7 @@
         rating: 5.0,
         img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905935359.jpg',
         alt: 'Minimalist bottle of milk-based classic cold coffee with matte black label and gold script, with the Sealed Brew by NSL Forge logo on the bottle',
+        inStock: true,
       },
       {
         id: '4',
@@ -947,6 +996,7 @@
         rating: 4.5,
         img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905951985.jpg',
         alt: 'Luxury bottle of milk-based vanilla cold coffee with cream and gold label resting on sleek wooden table, with the Sealed Brew by NSL Forge logo on the bottle',
+        inStock: true,
       },
       {
         id: '5',
@@ -956,6 +1006,7 @@
         rating: 4.0,
         img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905951985.jpg',
         alt: 'Luxury bottle of milk-based butterscotch flavoured cold coffee with rich amber and gold label resting on plush dark velvet fabric, with the Sealed Brew by NSL Forge logo on the bottle',
+        inStock: true,
       },
     ];
 
@@ -976,6 +1027,8 @@
     const orderDetailsTextarea = document.getElementById('orderDetails');
     const productGrid = document.getElementById('products');
     const termsLink = document.getElementById('terms-link');
+    const checkoutForm = document.getElementById('checkout-form');
+
 
     // --- Helper Functions ---
     function saveCart() {
@@ -1020,6 +1073,12 @@
     function addToCart(productId) {
       const product = products.find(p => p.id === productId);
       if (product) {
+        // Check if the product is in stock
+        if (!product.inStock) {
+          alert(`${product.name} is currently out of stock.`);
+          return;
+        }
+
         const existingItem = cart.find(item => item.id === productId);
         if (existingItem) {
           existingItem.quantity++;
@@ -1128,10 +1187,11 @@
 
     // Add to Cart buttons (event delegation)
     productGrid.addEventListener('click', (event) => {
-      if (event.target.classList.contains('btn-add')) {
-        const productId = event.target.dataset.productId;
+      const target = event.target;
+      if (target.classList.contains('btn-add')) {
+        const productId = target.dataset.productId;
         addToCart(productId);
-      } else if (event.target.classList.contains('btn-detail')) {
+      } else if (target.classList.contains('btn-detail')) {
         // Optional: implement product details modal if desired
       }
     });
@@ -1175,6 +1235,23 @@
       event.preventDefault();
       openModal(termsModal);
     });
+
+    // Checkout Form Submission with Validation
+    checkoutForm.addEventListener('submit', function(event) {
+      const fullName = document.getElementById('fullName').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const address = document.getElementById('address').value.trim();
+      const orderDetails = document.getElementById('orderDetails').value.trim();
+
+      if (!fullName || !email || !phone || !address || !orderDetails || orderDetails === 'No items in cart.') {
+        alert('Please fill in all required fields and ensure your cart is not empty before placing your order.');
+        event.preventDefault(); // Stop form submission
+      }
+      // Note: Since paymentMethod is now fixed to "Cash on Delivery",
+      // we don't need to validate it.
+    });
+
 
     // Initial render of cart on page load
     renderCart();
