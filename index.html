@@ -410,10 +410,9 @@
     transform: translateY(-3px);
   }
 
-  /* MODALS: checkout, account, faq, and terms */
+  /* MODALS: checkout, account, and terms */
   #checkout-modal,
   #account-modal,
-  #faq-modal,
   #terms-modal {
     position: fixed;
     inset: 0;
@@ -427,7 +426,6 @@
   }
   #checkout-modal.active,
   #account-modal.active,
-  #faq-modal.active,
   #terms-modal.active {
     display: flex;
   }
@@ -644,7 +642,6 @@
   <nav role="navigation" aria-label="Primary navigation">
     <a href="#" aria-current="page">Home</a>
     <a href="#products">Shop</a>
-    <a href="#faq-btn">FAQ</a>
     <a href="#account-btn">Account</a>
   </nav>
   <button id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
@@ -656,7 +653,6 @@
   <button class="close-menu" aria-label="Close menu">&times;</button>
   <a href="#" aria-current="page">Home</a>
   <a href="#products">Shop</a>
-  <a href="#faq-btn">FAQ</a>
   <a href="#account-btn">Account</a>
 </nav>
 
@@ -713,7 +709,7 @@
       </article>
       <article class="product-card flavor-butterscotch" tabindex="0" data-id="5" role="group" aria-label="Butterscotch Velvet Essence">
         <div class="product-image">
-          <img src="1749905951985.jpg" alt="Luxury bottle of milk-based butterscotch flavoured cold coffee with rich amber and gold label resting on plush dark velvet fabric, with Sealed Brew by NSL Forge logo on the bottle" />
+          <img src="1749905951985.jpg" alt="Luxury bottle of milk-based butterscotch flavoured cold coffee with rich amber and gold label resting on plush dark velvet fabric, with the Sealed Brew by NSL Forge logo on the bottle" />
         </div>
         <div class="product-info">
           <h2 class="product-name">Butterscotch Velvet Essence</h2>
@@ -818,7 +814,6 @@
     </section>
     <section class="footer-section" aria-label="Customer support">
       <h5>Support</h5>
-      <a href="#faq-btn" id="faq-btn-footer">FAQ</a>
       <a href="mailto:support@sealedbrew.com">Contact Us</a>
       <a href="#">Returns &amp; Refunds</a>
     </section>
@@ -869,7 +864,7 @@
         desc: 'Timeless milk-based cold coffee blend delivering smooth, robust flavor in every sip. A perfect everyday companion.',
         rating: 5.0,
         img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905935359.jpg',
-        alt: 'Minimalist bottle of milk-based classic cold coffee with matte black label and gold script, with Sealed Brew by NSL Forge logo on the bottle',
+        alt: 'Minimalist bottle of milk-based classic cold coffee with matte black label and gold script, with the Sealed Brew by NSL Forge logo on the bottle',
       },
       {
         id: '4',
@@ -878,7 +873,7 @@
         desc: 'Smooth milk-based cold coffee with rich vanilla notes for a creamy exquisite flavor. A delightful treat for vanilla lovers.',
         rating: 4.5,
         img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905951985.jpg',
-        alt: 'Luxury bottle of milk-based vanilla cold coffee with cream and gold label resting on sleek wooden table, with Sealed Brew by NSL Forge logo on the bottle',
+        alt: 'Luxury bottle of milk-based vanilla cold coffee with cream and gold label resting on sleek wooden table, with the Sealed Brew by NSL Forge logo on the bottle',
       },
       {
         id: '5',
@@ -887,7 +882,7 @@
         desc: 'Decadent milk-based butterscotch infused cold coffee delivering smooth, creamy indulgence. A sweet and satisfying experience.',
         rating: 4.0,
         img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905951985.jpg',
-        alt: 'Luxury bottle of milk-based butterscotch flavoured cold coffee with rich amber and gold label resting on plush dark velvet fabric, with Sealed Brew by NSL Forge logo on the bottle',
+        alt: 'Luxury bottle of milk-based butterscotch flavoured cold coffee with rich amber and gold label resting on plush dark velvet fabric, with the Sealed Brew by NSL Forge logo on the bottle',
       },
     ];
 
@@ -906,9 +901,6 @@
     const termsModal = document.getElementById('terms-modal');
     const closeModalButtons = document.querySelectorAll('.close-modal');
     const orderDetailsTextarea = document.getElementById('orderDetails');
-    const accountBtn = document.querySelector('nav a[href="#account-btn"]');
-    const faqBtn = document.querySelector('nav a[href="#faq-btn"]');
-    const faqBtnFooter = document.getElementById('faq-btn-footer');
     const productGrid = document.getElementById('products');
     const termsLink = document.getElementById('terms-link');
 
@@ -1110,8 +1102,6 @@
       event.preventDefault();
       openModal(termsModal);
     });
-
-    // Other UI event listeners (account, faq) can be included here as needed
 
     // Initial render of cart on page load
     renderCart();
