@@ -286,13 +286,13 @@
     right: 0;
     width: 360px;
     max-width: 100vw;
-    height: 100vh;
+    height: 100vh; /* Use 100vh to ensure it fills the screen height */
     background: #181818;
     box-shadow: -8px 0 32px -8px rgb(217 179 130 / 0.7);
     transform: translateX(100%);
     transition: transform 0.35s cubic-bezier(.4,0,.2,1);
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Allows content, list, and footer to stack vertically */
     z-index: 1100;
   }
   #cart-panel.open {
@@ -316,8 +316,8 @@
     cursor: pointer;
   }
   #cart-list {
-    flex-grow: 1;
-    overflow-y: auto;
+    flex-grow: 1; /* Allows the cart list to take available space */
+    overflow-y: auto; /* Enables scrolling for cart items if too many */
     padding: 24px;
   }
   .cart-item {
@@ -438,7 +438,7 @@
     box-shadow: 0 0 40px rgb(217 179 130 / 0.8);
     color: #d9b382;
     max-height: 90vh;
-    overflow-y: auto;
+    overflow-y: auto; /* Allows scrolling within the modal content */
   }
   .modal-header {
     font-size: 1.7rem;
@@ -468,6 +468,79 @@
   }
   .modal-body ul {
     margin-left: 20px;
+  }
+
+  /* Checkout Form Styling */
+  #checkout-form label {
+    display: block;
+    margin-bottom: 8px;
+    margin-top: 16px; /* Add space above each label */
+    color: #f5e6c4; /* Lighter golden-ish text */
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+
+  #checkout-form input[type="text"],
+  #checkout-form input[type="email"],
+  #checkout-form input[type="tel"],
+  #checkout-form textarea,
+  #checkout-form select {
+    width: 100%;
+    padding: 12px 16px;
+    margin-bottom: 16px; /* Space below each input */
+    border: 1px solid #555;
+    border-radius: 12px; /* Consistent rounded corners */
+    background-color: #2a2a2a; /* Darker input background */
+    color: #E8E6E3; /* Light text color */
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  #checkout-form input::placeholder,
+  #checkout-form textarea::placeholder {
+    color: #888; /* Softer placeholder color */
+  }
+
+  #checkout-form input:focus,
+  #checkout-form textarea:focus,
+  #checkout-form select:focus {
+    outline: none;
+    border-color: #d9b382; /* Golden border on focus */
+    box-shadow: 0 0 0 3px rgba(217, 179, 130, 0.4); /* Golden glow */
+  }
+
+  #checkout-form select {
+    -webkit-appearance: none; /* Remove default arrow on WebKit browsers */
+    -moz-appearance: none; /* Remove default arrow on Firefox */
+    appearance: none; /* Remove default arrow */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23d9b382'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E"); /* Custom SVG arrow */
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 24px;
+    padding-right: 40px; /* Make space for the custom arrow */
+  }
+
+  #checkout-form .btn-submit {
+    background-color: #d9b382;
+    border: none;
+    border-radius: 16px;
+    padding: 14px 0;
+    width: 100%;
+    font-weight: 800;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #121212;
+    box-shadow: 0 10px 28px rgb(217 179 130 / 0.75);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-top: 24px; /* Space above the submit button */
+  }
+
+  #checkout-form .btn-submit:hover,
+  #checkout-form .btn-submit:focus-visible {
+    background-color: #c2a165;
+    outline: none;
+    transform: translateY(-3px);
   }
 
   /* FOOTER */
