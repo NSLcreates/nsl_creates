@@ -156,45 +156,12 @@
     justify-content: space-between;
     box-shadow: 0 4px 16px rgb(0 0 0 / 0.8);
     transition: transform 0.4s cubic-bezier(.4,0,.2,1), box-shadow 0.3s ease;
-    position: relative; /* For the out of stock overlay */
   }
   .product-card:hover,
   .product-card:focus-within {
     transform: translateY(-8px);
     box-shadow: 0 12px 28px rgb(217 179 130 / 0.6);
   }
-  /* Out of stock styling */
-  .product-card[data-in-stock="false"] {
-    opacity: 0.6;
-    pointer-events: none; /* Disable clicks */
-    transform: none; /* Prevent hover effect */
-    box-shadow: 0 4px 16px rgb(0 0 0 / 0.5); /* Less prominent shadow */
-  }
-
-  .product-card[data-in-stock="false"] .product-image img {
-      filter: grayscale(80%) brightness(0.6);
-  }
-  .product-card[data-in-stock="false"] .product-image::after {
-      content: "Out of Stock";
-      font-size: 1.8rem;
-      color: #e8e6e3;
-      background-color: rgba(0, 0, 0, 0.6);
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-shadow: none;
-      mix-blend-mode: normal;
-      border-radius: 16px;
-      z-index: 10; /* Ensure it's above the image */
-  }
-  .product-card[data-in-stock="false"] .product-name,
-  .product-card[data-in-stock="false"] .product-desc,
-  .product-card[data-in-stock="false"] .product-price {
-    color: #7a6b54; /* Faded text */
-  }
-
   .product-image {
     position: relative;
     aspect-ratio: 1/1;
@@ -287,23 +254,6 @@
     box-shadow: 0 10px 30px rgb(217 179 130 / 0.5);
     outline: none;
   }
-  /* Out of stock button specific style */
-  .product-card[data-in-stock="false"] .btn-add {
-    background-color: #555;
-    border-color: #555;
-    color: #333;
-    cursor: not-allowed;
-    box-shadow: none;
-  }
-  .product-card[data-in-stock="false"] .btn-add:hover,
-  .product-card[data-in-stock="false"] .btn-add:focus-visible {
-    background-color: #555; /* Keep background same on hover */
-    color: #333; /* Keep text color same on hover */
-    box-shadow: none;
-    transform: none; /* Prevent translateY on hover */
-  }
-
-
   /* CART */
   #cart-toggle {
     position: fixed;
@@ -336,13 +286,13 @@
     right: 0;
     width: 360px;
     max-width: 100vw;
-    height: 100vh; /* Use 100vh to ensure it fills the screen height */
+    height: 100vh;
     background: #181818;
     box-shadow: -8px 0 32px -8px rgb(217 179 130 / 0.7);
     transform: translateX(100%);
     transition: transform 0.35s cubic-bezier(.4,0,.2,1);
     display: flex;
-    flex-direction: column; /* Allows content, list, and footer to stack vertically */
+    flex-direction: column;
     z-index: 1100;
   }
   #cart-panel.open {
@@ -366,8 +316,8 @@
     cursor: pointer;
   }
   #cart-list {
-    flex-grow: 1; /* Allows the cart list to take available space */
-    overflow-y: auto; /* Enables scrolling for cart items if too many */
+    flex-grow: 1;
+    overflow-y: auto;
     padding: 24px;
   }
   .cart-item {
@@ -460,9 +410,10 @@
     transform: translateY(-3px);
   }
 
-  /* MODALS: checkout, account, and terms */
+  /* MODALS: checkout, account, faq, and terms */
   #checkout-modal,
   #account-modal,
+  #faq-modal,
   #terms-modal {
     position: fixed;
     inset: 0;
@@ -476,6 +427,7 @@
   }
   #checkout-modal.active,
   #account-modal.active,
+  #faq-modal.active,
   #terms-modal.active {
     display: flex;
   }
@@ -488,7 +440,7 @@
     box-shadow: 0 0 40px rgb(217 179 130 / 0.8);
     color: #d9b382;
     max-height: 90vh;
-    overflow-y: auto; /* Allows scrolling within the modal content */
+    overflow-y: auto;
   }
   .modal-header {
     font-size: 1.7rem;
@@ -518,79 +470,6 @@
   }
   .modal-body ul {
     margin-left: 20px;
-  }
-
-  /* Checkout Form Styling */
-  #checkout-form label {
-    display: block;
-    margin-bottom: 8px;
-    margin-top: 16px; /* Add space above each label */
-    color: #f5e6c4; /* Lighter golden-ish text */
-    font-weight: 500;
-    font-size: 0.95rem;
-  }
-
-  #checkout-form input[type="text"],
-  #checkout-form input[type="email"],
-  #checkout-form input[type="tel"],
-  #checkout-form textarea,
-  #checkout-form select {
-    width: 100%;
-    padding: 12px 16px;
-    margin-bottom: 16px; /* Space below each input */
-    border: 1px solid #555;
-    border-radius: 12px; /* Consistent rounded corners */
-    background-color: #2a2a2a; /* Darker input background */
-    color: #E8E6E3; /* Light text color */
-    font-family: 'Poppins', sans-serif;
-    font-size: 1rem;
-    transition: border-color 0.25s ease, box-shadow 0.25s ease;
-  }
-
-  #checkout-form input::placeholder,
-  #checkout-form textarea::placeholder {
-    color: #888; /* Softer placeholder color */
-  }
-
-  #checkout-form input:focus,
-  #checkout-form textarea:focus,
-  #checkout-form select:focus {
-    outline: none;
-    border-color: #d9b382; /* Golden border on focus */
-    box-shadow: 0 0 0 3px rgba(217, 179, 130, 0.4); /* Golden glow */
-  }
-
-  #checkout-form select {
-    -webkit-appearance: none; /* Remove default arrow on WebKit browsers */
-    -moz-appearance: none; /* Remove default arrow on Firefox */
-    appearance: none; /* Remove default arrow */
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23d9b382'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E"); /* Custom SVG arrow */
-    background-repeat: no-repeat;
-    background-position: right 12px center;
-    background-size: 24px;
-    padding-right: 40px; /* Make space for the custom arrow */
-  }
-
-  #checkout-form .btn-submit {
-    background-color: #d9b382;
-    border: none;
-    border-radius: 16px;
-    padding: 14px 0;
-    width: 100%;
-    font-weight: 800;
-    font-size: 1.2rem;
-    cursor: pointer;
-    color: #121212;
-    box-shadow: 0 10px 28px rgb(217 179 130 / 0.75);
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    margin-top: 24px; /* Space above the submit button */
-  }
-
-  #checkout-form .btn-submit:hover,
-  #checkout-form .btn-submit:focus-visible {
-    background-color: #c2a165;
-    outline: none;
-    transform: translateY(-3px);
   }
 
   /* FOOTER */
@@ -765,7 +644,6 @@
   <nav role="navigation" aria-label="Primary navigation">
     <a href="#" aria-current="page">Home</a>
     <a href="#products">Shop</a>
-    <a href="#account-btn">Account</a>
   </nav>
   <button id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
     <span class="material-icons" aria-hidden="true">menu</span>
@@ -776,7 +654,6 @@
   <button class="close-menu" aria-label="Close menu">&times;</button>
   <a href="#" aria-current="page">Home</a>
   <a href="#products">Shop</a>
-  <a href="#account-btn">Account</a>
 </nav>
 
 <main>
@@ -794,15 +671,15 @@
           <button class="btn-detail" data-product-id="1" aria-label="View details for Velvet Chocolate Reserve" style="margin-top:8px; background: none; border: none; color: #d9b382; cursor:pointer; font-weight: 600;">View Details</button>
         </div>
       </article>
-      <article class="product-card flavor-hazelnut" tabindex="0" data-id="2" role="group" aria-label="Hazelnut Signature Blend" data-in-stock="false">
+      <article class="product-card flavor-hazelnut" tabindex="0" data-id="2" role="group" aria-label="Hazelnut Signature Blend">
         <div class="product-image">
-          <img src="1749905964964.jpg" alt="Elegant bottle of milk-based hazelnut flavoured cold coffee with minimalist golden label and Sealed Brew by NSL Forge logo on the bottle" />
+          <img src="1749905957623.jpg" alt="Elegant bottle of milk-based hazelnut flavoured cold coffee with minimalist golden label and Sealed Brew by NSL Forge logo on the bottle" />
         </div>
         <div class="product-info">
           <h2 class="product-name">Hazelnut Signature Blend</h2>
           <p class="product-desc">Smooth milk-based hazelnut essence combined with rich cold brewed coffee for a refined taste.</p>
           <div class="product-price" aria-label="Product price 109 Indian Rupees">₹109</div>
-          <button class="btn-add" data-product-id="2" aria-label="Add Hazelnut Signature Blend to cart" disabled>Out of Stock</button>
+          <button class="btn-add" data-product-id="2" aria-label="Add Hazelnut Signature Blend to cart">Add to Cart</button>
           <button class="btn-detail" data-product-id="2" aria-label="View details for Hazelnut Signature Blend" style="margin-top:8px; background: none; border: none; color: #d9b382; cursor:pointer; font-weight: 600;">View Details</button>
         </div>
       </article>
@@ -832,7 +709,7 @@
       </article>
       <article class="product-card flavor-butterscotch" tabindex="0" data-id="5" role="group" aria-label="Butterscotch Velvet Essence">
         <div class="product-image">
-          <img src="1749905957623.jpg" alt="Luxury bottle of milk-based butterscotch flavoured cold coffee with rich amber and gold label resting on plush dark velvet fabric, with the Sealed Brew by NSL Forge logo on the bottle" />
+          <img src="1749905951985.jpg" alt="Luxury bottle of milk-based butterscotch flavoured cold coffee with rich amber and gold label resting on plush dark velvet fabric, with Sealed Brew by NSL Forge logo on the bottle" />
         </div>
         <div class="product-info">
           <h2 class="product-name">Butterscotch Velvet Essence</h2>
@@ -883,8 +760,12 @@
         <label for="orderDetails">Order Details (Please list products and quantities)</label>
         <textarea id="orderDetails" name="Order Details" placeholder="Example: 2 Velvet Chocolate Reserve, 1 Vanilla Creme Select" required rows="3"></textarea>
         <label for="paymentMethod">Payment Method</label>
-        <select id="paymentMethod" name="Payment Method">
-          <option value="Cash on Delivery" selected>Cash on Delivery</option>
+        <select id="paymentMethod" name="Payment Method" required>
+          <option value="" disabled selected>Select a payment method</option>
+          <option value="Credit Card">Credit Card</option>
+          <option value="PayPal">PayPal</option>
+          <option value="UPI">UPI</option>
+          <option value="Net Banking">Net Banking</option>
         </select>
       </div>
       <button type="submit" class="btn-submit">Place Order</button>
@@ -934,7 +815,6 @@
     <section class="footer-section" aria-label="Customer support">
       <h5>Support</h5>
       <a href="mailto:support@sealedbrew.com">Contact Us</a>
-      <a href="#">Returns &amp; Refunds</a>
     </section>
     <section class="footer-section" aria-label="Company policies">
       <h5>Policies</h5>
@@ -950,7 +830,6 @@
     </section>
   </div>
   <div class="footer-bottom">
-    &copy; 2024 Sealed Brew by NSL Forge. All rights reserved.
   </div>
 </footer>
 
@@ -966,7 +845,6 @@
         rating: 4.5,
         img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905943104.jpg',
         alt: 'Premium bottle of milk-based chocolate flavoured cold coffee on a dark reflective surface, with the Sealed Brew by NSL Forge logo on the bottle',
-        inStock: true,
       },
       {
         id: '2',
@@ -976,7 +854,6 @@
         rating: 4.0,
         img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905957623.jpg',
         alt: 'Elegant bottle of milk-based hazelnut flavoured cold coffee with minimalist golden label and Sealed Brew by NSL Forge logo on the bottle',
-        inStock: false, // This product is out of stock
       },
       {
         id: '3',
@@ -985,8 +862,7 @@
         desc: 'Timeless milk-based cold coffee blend delivering smooth, robust flavor in every sip. A perfect everyday companion.',
         rating: 5.0,
         img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905935359.jpg',
-        alt: 'Minimalist bottle of milk-based classic cold coffee with matte black label and gold script, with the Sealed Brew by NSL Forge logo on the bottle',
-        inStock: true,
+        alt: 'Minimalist bottle of milk-based classic cold coffee with matte black label and gold script, with Sealed Brew by NSL Forge logo on the bottle',
       },
       {
         id: '4',
@@ -995,8 +871,7 @@
         desc: 'Smooth milk-based cold coffee with rich vanilla notes for a creamy exquisite flavor. A delightful treat for vanilla lovers.',
         rating: 4.5,
         img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905951985.jpg',
-        alt: 'Luxury bottle of milk-based vanilla cold coffee with cream and gold label resting on sleek wooden table, with the Sealed Brew by NSL Forge logo on the bottle',
-        inStock: true,
+        alt: 'Luxury bottle of milk-based vanilla cold coffee with cream and gold label resting on sleek wooden table, with Sealed Brew by NSL Forge logo on the bottle',
       },
       {
         id: '5',
@@ -1005,8 +880,7 @@
         desc: 'Decadent milk-based butterscotch infused cold coffee delivering smooth, creamy indulgence. A sweet and satisfying experience.',
         rating: 4.0,
         img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905951985.jpg',
-        alt: 'Luxury bottle of milk-based butterscotch flavoured cold coffee with rich amber and gold label resting on plush dark velvet fabric, with the Sealed Brew by NSL Forge logo on the bottle',
-        inStock: true,
+        alt: 'Luxury bottle of milk-based butterscotch flavoured cold coffee with rich amber and gold label resting on plush dark velvet fabric, with Sealed Brew by NSL Forge logo on the bottle',
       },
     ];
 
@@ -1027,8 +901,6 @@
     const orderDetailsTextarea = document.getElementById('orderDetails');
     const productGrid = document.getElementById('products');
     const termsLink = document.getElementById('terms-link');
-    const checkoutForm = document.getElementById('checkout-form');
-
 
     // --- Helper Functions ---
     function saveCart() {
@@ -1073,12 +945,6 @@
     function addToCart(productId) {
       const product = products.find(p => p.id === productId);
       if (product) {
-        // Check if the product is in stock
-        if (!product.inStock) {
-          alert(`${product.name} is currently out of stock.`);
-          return;
-        }
-
         const existingItem = cart.find(item => item.id === productId);
         if (existingItem) {
           existingItem.quantity++;
@@ -1187,11 +1053,10 @@
 
     // Add to Cart buttons (event delegation)
     productGrid.addEventListener('click', (event) => {
-      const target = event.target;
-      if (target.classList.contains('btn-add')) {
-        const productId = target.dataset.productId;
+      if (event.target.classList.contains('btn-add')) {
+        const productId = event.target.dataset.productId;
         addToCart(productId);
-      } else if (target.classList.contains('btn-detail')) {
+      } else if (event.target.classList.contains('btn-detail')) {
         // Optional: implement product details modal if desired
       }
     });
@@ -1236,22 +1101,7 @@
       openModal(termsModal);
     });
 
-    // Checkout Form Submission with Validation
-    checkoutForm.addEventListener('submit', function(event) {
-      const fullName = document.getElementById('fullName').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const phone = document.getElementById('phone').value.trim();
-      const address = document.getElementById('address').value.trim();
-      const orderDetails = document.getElementById('orderDetails').value.trim();
-
-      if (!fullName || !email || !phone || !address || !orderDetails || orderDetails === 'No items in cart.') {
-        alert('Please fill in all required fields and ensure your cart is not empty before placing your order.');
-        event.preventDefault(); // Stop form submission
-      }
-      // Note: Since paymentMethod is now fixed to "Cash on Delivery",
-      // we don't need to validate it.
-    });
-
+    // Other UI event listeners (account, faq) can be included here as needed
 
     // Initial render of cart on page load
     renderCart();
