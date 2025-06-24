@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Sealed Brew by NSL Forge - Premium Cold Coffee</title>
+<title>Sealed Brew by NSL Forge - Premium Cold Coffee & Membership</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 <style>
@@ -141,6 +141,56 @@
     user-select: none;
   }
 
+  /* NEW MEMBERSHIP SECTION - MODIFIED FOR IMAGE AND BUTTON LAYOUT */
+  #membership {
+    max-width: 1200px;
+    margin: 48px auto;
+    border-radius: 24px;
+    overflow: hidden;
+    /* Removed background image from here */
+    display: flex;
+    flex-direction: column; /* Stack image and button vertically */
+    align-items: center; /* Center horizontally */
+    padding: 20px; /* Add padding around the content */
+    color: #fff;
+    box-shadow: 0 8px 32px rgba(0,0,0, 0.5);
+    background-color: #1f1f1f; /* A subtle background for the section */
+  }
+
+  .membership-ad-image {
+    width: 100%; /* Make the image take full width of its container */
+    max-width: 800px; /* Limit max width for larger screens */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Remove extra space below image */
+    border-radius: 16px; /* Match section border radius */
+    margin-bottom: 24px; /* Space between image and button */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    object-fit: contain; /* Ensures the whole image is visible, even if it adds letterboxing */
+  }
+
+  .btn-join {
+    background-color: #d9b382;
+    border: none;
+    border-radius: 16px;
+    padding: 14px 32px;
+    width: auto;
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    color: #121212;
+    box-shadow: 0 10px 28px rgba(0,0,0, 0.5);
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .btn-join:hover,
+  .btn-join:focus-visible {
+    background-color: #f5e6c4;
+    outline: none;
+    transform: translateY(-4px);
+    box-shadow: 0 12px 35px rgba(217, 179, 130, 0.5);
+  }
+
+
   /* PRODUCT GRID */
   .products-grid {
     display: grid;
@@ -175,7 +225,6 @@
     height: 100%;
     object-fit: contain;
   }
-  /* Brand overlay on bottle - text only, no overlay on image itself */
   .product-image::after {
     content: "Sealed Brew by NSL Forge";
     position: absolute;
@@ -192,31 +241,12 @@
     text-shadow: 0 0 6px #000000bb;
     mix-blend-mode: soft-light;
   }
-  /* Overlay color for each flavor */
-  .product-card.flavor-chocolate .product-image::after {
-    color: #a56c43cc;
-    text-shadow: 0 0 8px #4b2e0bcc;
-  }
-  .product-card.flavor-hazelnut .product-image::after {
-    color: #c49e66cc;
-    text-shadow: 0 0 8px #6b4f2bcc;
-  }
-  .product-card.flavor-classic .product-image::after {
-    color: #ddd6b7cc;
-    text-shadow: 0 0 8px #585146cc;
-  }
-  .product-card.flavor-vanilla .product-image::after {
-    color: #f9f5e1cc;
-    text-shadow: 0 0 8px #938a6dcc;
-  }
-  .product-card.flavor-butterscotch .product-image::after {
-    color: #ddb67acc;
-    text-shadow: 0 0 8px #7c5b2dcc;
-  }
-
-  .product-info {
-    flex-grow: 1;
-  }
+  .product-card.flavor-chocolate .product-image::after { color: #a56c43cc; text-shadow: 0 0 8px #4b2e0bcc; }
+  .product-card.flavor-hazelnut .product-image::after { color: #c49e66cc; text-shadow: 0 0 8px #6b4f2bcc; }
+  .product-card.flavor-classic .product-image::after { color: #ddd6b7cc; text-shadow: 0 0 8px #585146cc; }
+  .product-card.flavor-vanilla .product-image::after { color: #f9f5e1cc; text-shadow: 0 0 8px #938a6dcc; }
+  .product-card.flavor-butterscotch .product-image::after { color: #ddb67acc; text-shadow: 0 0 8px #7c5b2dcc; }
+  .product-info { flex-grow: 1; }
   .product-name {
     font-weight: 700;
     font-size: 1.25rem;
@@ -236,7 +266,6 @@
     color: #d9b382;
     margin-bottom: 20px;
   }
-  /* Button */
   .btn-add {
     background: transparent;
     border: 2px solid #d9b382;
@@ -254,6 +283,7 @@
     box-shadow: 0 10px 30px rgb(217 179 130 / 0.5);
     outline: none;
   }
+
   /* CART */
   #cart-toggle {
     position: fixed;
@@ -279,6 +309,7 @@
     transform: scale(1.1);
     outline: none;
   }
+
   /* CART PANEL */
   #cart-panel {
     position: fixed;
@@ -379,6 +410,7 @@
     color: #121212;
     outline: none;
   }
+
   /* CART FOOTER */
   #cart-panel footer {
     padding: 24px;
@@ -410,11 +442,8 @@
     transform: translateY(-3px);
   }
 
-  /* MODALS: checkout, account, faq, and terms */
-  #checkout-modal,
-  #account-modal,
-  #faq-modal,
-  #terms-modal {
+  /* MODALS */
+  #checkout-modal, #terms-modal {
     position: fixed;
     inset: 0;
     background: rgba(18,18,18,0.95);
@@ -425,10 +454,7 @@
     overflow-y: auto;
     padding: 20px;
   }
-  #checkout-modal.active,
-  #account-modal.active,
-  #faq-modal.active,
-  #terms-modal.active {
+  #checkout-modal.active, #terms-modal.active {
     display: flex;
   }
   .modal-content {
@@ -462,15 +488,13 @@
     font-weight: 300;
     line-height: 1.5;
   }
-  .modal-body h3 {
+  .modal-body h3, .modal-body h4 {
     margin-top: 1.5rem;
     margin-bottom: 0.75rem;
     font-weight: 600;
     color: #f5e6c4;
   }
-  .modal-body ul {
-    margin-left: 20px;
-  }
+  .modal-body ul { margin-left: 20px; }
 
   /* FOOTER */
   footer {
@@ -491,8 +515,7 @@
     margin-bottom: 18px;
     color: #d9b382;
   }
-  .footer-section a,
-  .footer-section .footer-instagram {
+  .footer-section a, .footer-section .footer-instagram {
     display: block;
     margin-bottom: 12px;
     font-weight: 300;
@@ -500,10 +523,7 @@
     color: #a89e94;
     transition: color 0.25s ease;
   }
-  .footer-section a:hover,
-  .footer-section a:focus-visible,
-  .footer-section .footer-instagram:hover,
-  .footer-section .footer-instagram:focus-visible {
+  .footer-section a:hover, .footer-section a:focus-visible, .footer-section .footer-instagram:hover, .footer-section .footer-instagram:focus-visible {
     color: #d9b382;
     outline: none;
   }
@@ -528,113 +548,42 @@
 
   /* Responsive Breakpoints */
   @media (max-width: 639px) {
-    header {
-      padding: 0 16px;
-      height: 56px;
+    header { padding: 0 16px; height: 56px; }
+    nav { margin-left: 0; }
+    nav a { display: none; }
+    button#nav-toggle { display: block; margin-left: auto; }
+    
+    #membership {
+        margin: 24px 16px;
+        padding: 15px; /* Adjust padding for mobile */
     }
-    nav {
-      margin-left: 0;
+    .membership-ad-image {
+      margin-bottom: 16px; /* Adjust margin for mobile */
     }
-    nav a {
-      display: none;
-    }
-    button#nav-toggle {
-      display: block;
-      margin-left: auto;
-    }
-    .products-grid {
-      grid-template-columns: 1fr;
-      gap: 24px;
-      padding-bottom: 100px;
-    }
-    footer .footer-container {
-      grid-template-columns: 1fr;
-      gap: 32px;
-      padding: 0 16px;
-      text-align: center;
-    }
-    footer .footer-section {
-      padding-bottom: 16px;
-      border-bottom: 1px solid #333;
-    }
-    #cart-panel {
-      width: 100vw;
-    }
-    #cart-toggle {
-      bottom: 20px;
-      right: 20px;
-      width: 50px;
-      height: 50px;
-      font-size: 28px;
-    }
-    .modal-content {
-      padding: 20px;
-      margin: 10px;
-    }
-    #product-detail-modal .product-image-large::after {
-      font-size: 1rem;
-      white-space: normal;
-      text-align: center;
-      max-width: 80%;
-    }
-    #product-detail-modal .product-info-detail h2 {
-      font-size: 1.5rem;
-    }
-    #product-detail-modal .product-info-detail p.description {
-      font-size: 0.95rem;
-    }
+    
+    .products-grid { grid-template-columns: 1fr; gap: 24px; padding-bottom: 100px; }
+    footer .footer-container { grid-template-columns: 1fr; gap: 32px; padding: 0 16px; text-align: center; }
+    footer .footer-section { padding-bottom: 16px; border-bottom: 1px solid #333; }
+    #cart-panel { width: 100vw; }
+    #cart-toggle { bottom: 20px; right: 20px; width: 50px; height: 50px; font-size: 28px; }
+    .modal-content { padding: 20px; margin: 10px; }
   }
   @media (min-width: 640px) and (max-width: 1023px) {
-    header {
-      padding: 0 24px;
-    }
-    nav {
-      margin-left: auto;
-      gap: 16px;
-    }
-    nav a {
-      display: inline-block;
-      padding: 8px 12px;
-      font-size: 1rem;
-    }
-    button#nav-toggle {
-      display: none;
-    }
-    .products-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 32px;
-      padding-bottom: 100px;
-    }
-    footer .footer-container {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 40px;
-      padding: 0 24px;
-    }
+    header { padding: 0 24px; }
+    nav { margin-left: auto; gap: 16px; }
+    nav a { display: inline-block; padding: 8px 12px; font-size: 1rem; }
+    button#nav-toggle { display: none; }
+    .products-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; padding-bottom: 100px; }
+    footer .footer-container { grid-template-columns: repeat(2, 1fr); gap: 40px; padding: 0 24px; }
   }
   @media (min-width: 1024px) and (max-width: 1439px) {
-    .products-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-    footer .footer-container {
-      grid-template-columns: repeat(4, 1fr);
-      gap: 48px;
-      padding: 0 32px;
-    }
+    .products-grid { grid-template-columns: repeat(3, 1fr); }
+    footer .footer-container { grid-template-columns: repeat(4, 1fr); gap: 48px; padding: 0 32px; }
   }
   @media (min-width: 1440px) {
-    .container {
-      max-width: 1400px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .products-grid {
-      grid-template-columns: repeat(5, 1fr);
-      gap: 48px;
-    }
-    footer .footer-container {
-      max-width: 1400px;
-      margin: 0 auto;
-    }
+    .container { max-width: 1400px; margin-left: auto; margin-right: auto; }
+    .products-grid { grid-template-columns: repeat(5, 1fr); gap: 48px; }
+    footer .footer-container { max-width: 1400px; margin: 0 auto; }
   }
 </style>
 </head>
@@ -643,6 +592,7 @@
   <div class="logo" tabindex="0">Sealed Brew <span>by NSL Forge</span></div>
   <nav role="navigation" aria-label="Primary navigation">
     <a href="#" aria-current="page">Home</a>
+    <a href="#membership">Membership</a>
     <a href="#products">Shop</a>
   </nav>
   <button id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
@@ -653,70 +603,75 @@
 <nav id="mobile-menu" aria-label="Mobile navigation" role="dialog" aria-modal="true">
   <button class="close-menu" aria-label="Close menu">&times;</button>
   <a href="#" aria-current="page">Home</a>
+  <a href="#membership">Membership</a>
   <a href="#products">Shop</a>
 </nav>
 
 <main>
-  <h1 class="page-title">Premium Cold Coffee Flavours</h1>
+  <h1 class="page-title">Premium Cold Coffee</h1>
+  
+  <section id="membership" aria-label="Sealed Brew Membership Program">
+    <!-- Ad Image -->
+    <img src="https://placehold.co/800x250/d9b382/121212?text=Yellow+and+Brown+Ad+Image" alt="Yellow and Brown Bold Drink Menu Ad" class="membership-ad-image" />
+    <!-- Button is now directly below the image -->
+    <button class="btn-join" id="join-membership-btn">Explore Membership</button>
+  </section>
+
+  <h2 class="page-title" style="font-size: 2rem; margin-top: 80px;">Our Flavours</h2>
   <section id="products" aria-label="Product catalog" class="products-grid" tabindex="0">
       <article class="product-card flavor-chocolate" tabindex="0" data-id="1" role="group" aria-label="Velvet Chocolate Reserve">
         <div class="product-image">
-          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905943104.jpg" alt="Premium bottle of chocolate flavoured cold coffee on a dark reflective surface, with the Sealed Brew by NSL Forge logo on the bottle" />
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905943104.jpg" alt="Premium bottle of chocolate flavoured cold coffee." />
         </div>
         <div class="product-info">
           <h2 class="product-name">Velvet Chocolate Reserve</h2>
           <p class="product-desc">Rich milk-based chocolate flavor blended with creamy cold coffee for an indulgent treat.</p>
           <div class="product-price" aria-label="Product price 131 Indian Rupees">₹131</div>
           <button class="btn-add" data-product-id="1" aria-label="Add Velvet Chocolate Reserve to cart">Add to Cart</button>
-          <button class="btn-detail" data-product-id="1" aria-label="View details for Velvet Chocolate Reserve" style="margin-top:8px; background: none; border: none; color: #d9b382; cursor:pointer; font-weight: 600;">View Details</button>
         </div>
       </article>
       <article class="product-card flavor-hazelnut" tabindex="0" data-id="2" role="group" aria-label="Hazelnut Signature Blend">
         <div class="product-image">
-          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905957623.jpg" alt="Elegant bottle of milk-based hazelnut flavoured cold coffee with minimalist golden label and Sealed Brew by NSL Forge logo on the bottle" />
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905957623.jpg" alt="Elegant bottle of hazelnut flavoured cold coffee." />
         </div>
         <div class="product-info">
           <h2 class="product-name">Hazelnut Signature Blend</h2>
           <p class="product-desc">Smooth milk-based hazelnut essence combined with rich cold brewed coffee for a refined taste.</p>
           <div class="product-price" aria-label="Product price 120 Indian Rupees">₹120</div>
           <button class="btn-add" data-product-id="2" aria-label="Add Hazelnut Signature Blend to cart">Add to Cart</button>
-          <button class="btn-detail" data-product-id="2" aria-label="View details for Hazelnut Signature Blend" style="margin-top:8px; background: none; border: none; color: #d9b382; cursor:pointer; font-weight: 600;">View Details</button>
         </div>
       </article>
       <article class="product-card flavor-classic" tabindex="0" data-id="3" role="group" aria-label="Classic Estate Brew">
         <div class="product-image">
-          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905935359.jpg" alt="Minimalist bottle of milk-based classic cold coffee with matte black label and gold script, with Sealed Brew by NSL Forge logo on the bottle" />
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905935359.jpg" alt="Minimalist bottle of classic cold coffee." />
         </div>
         <div class="product-info">
           <h2 class="product-name">Classic Estate Brew</h2>
           <p class="product-desc">Timeless milk-based cold coffee blend delivering smooth, robust flavor in every sip.</p>
           <div class="product-price" aria-label="Product price 98 Indian Rupees">₹98</div>
           <button class="btn-add" data-product-id="3" aria-label="Add Classic Estate Brew to cart">Add to Cart</button>
-          <button class="btn-detail" data-product-id="3" aria-label="View details for Classic Estate Brew" style="margin-top:8px; background: none; border: none; color: #d9b382; cursor:pointer; font-weight: 600;">View Details</button>
         </div>
       </article>
       <article class="product-card flavor-vanilla" tabindex="0" data-id="4" role="group" aria-label="Vanilla Creme Select">
         <div class="product-image">
-          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905951985.jpg" alt="Luxury bottle of milk-based vanilla cold coffee with cream and gold label resting on sleek wooden table, with Sealed Brew by NSL Forge logo on the bottle" />
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905951985.jpg" alt="Luxury bottle of vanilla cold coffee." />
         </div>
         <div class="product-info">
           <h2 class="product-name">Vanilla Creme Select</h2>
           <p class="product-desc">Smooth milk-based cold coffee with rich vanilla notes for a creamy exquisite flavor.</p>
           <div class="product-price" aria-label="Product price 109 Indian Rupees">₹109</div>
           <button class="btn-add" data-product-id="4" aria-label="Add Vanilla Creme Select to cart">Add to Cart</button>
-          <button class="btn-detail" data-product-id="4" aria-label="View details for Vanilla Creme Select" style="margin-top:8px; background: none; border: none; color: #d9b382; cursor:pointer; font-weight: 600;">View Details</button>
         </div>
       </article>
       <article class="product-card flavor-butterscotch" tabindex="0" data-id="5" role="group" aria-label="Butterscotch Velvet Essence">
         <div class="product-image">
-          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905951985.jpg" alt="Luxury bottle of milk-based butterscotch flavoured cold coffee with rich amber and gold label resting on plush dark velvet fabric, with Sealed Brew by NSL Forge logo on the bottle" />
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905951985.jpg" alt="Luxury bottle of butterscotch flavoured cold coffee." />
         </div>
         <div class="product-info">
           <h2 class="product-name">Butterscotch Velvet Essence</h2>
           <p class="product-desc">Decadent milk-based butterscotch infused cold coffee delivering smooth, creamy indulgence.</p>
           <div class="product-price" aria-label="Product price 120 Indian Rupees">₹120</div>
           <button class="btn-add" data-product-id="5" aria-label="Add Butterscotch Velvet Essence to cart">Add to Cart</button>
-          <button class="btn-detail" data-product-id="5" aria-label="View details for Butterscotch Velvet Essence" style="margin-top:8px; background: none; border: none; color: #d9b382; cursor:pointer; font-weight: 600;">View Details</button>
         </div>
       </article>
   </section>
@@ -750,17 +705,17 @@
       <input type="hidden" name="_template" value="table" />
       <div class="modal-body">
         <label for="fullName">Full Name</label>
-        <input type="text" id="fullName" name="Full Name" placeholder="John Doe" required autocomplete="name" />
+        <input type="text" id="fullName" name="Full Name" placeholder="John Doe" required autocomplete="name" style="width: 100%; padding: 8px; margin-bottom: 12px; border-radius: 8px; border: 1px solid #555; background: #222; color: #eee;"/>
         <label for="email">Email Address</label>
-        <input type="email" id="email" name="Email" placeholder="you@example.com" required autocomplete="email" />
+        <input type="email" id="email" name="Email" placeholder="you@example.com" required autocomplete="email" style="width: 100%; padding: 8px; margin-bottom: 12px; border-radius: 8px; border: 1px solid #555; background: #222; color: #eee;"/>
         <label for="phone">Phone Number</label>
-        <input type="tel" id="phone" name="Phone" placeholder="+91 98765 43210" autocomplete="tel" />
+        <input type="tel" id="phone" name="Phone" placeholder="+91 98765 43210" autocomplete="tel" style="width: 100%; padding: 8px; margin-bottom: 12px; border-radius: 8px; border: 1px solid #555; background: #222; color: #eee;"/>
         <label for="address">Shipping Address</label>
-        <textarea id="address" name="Shipping Address" placeholder="123 Coffee St, City, India" required autocomplete="shipping address-line1" rows="3"></textarea>
-        <label for="orderDetails">Order Details (Please list products and quantities)</label>
-        <textarea id="orderDetails" name="Order Details" placeholder="Example: 2 Velvet Chocolate Reserve, 1 Vanilla Creme Select" required rows="3"></textarea>
+        <textarea id="address" name="Shipping Address" placeholder="123 Coffee St, City, India" required autocomplete="shipping address-line1" rows="3" style="width: 100%; padding: 8px; margin-bottom: 12px; border-radius: 8px; border: 1px solid #555; background: #222; color: #eee;"></textarea>
+        <label for="orderDetails">Order Details</label>
+        <textarea id="orderDetails" name="Order Details" placeholder="Your order will appear here." required rows="4" style="width: 100%; padding: 8px; margin-bottom: 12px; border-radius: 8px; border: 1px solid #555; background: #222; color: #eee;"></textarea>
         <label for="paymentMethod">Payment Method</label>
-        <select id="paymentMethod" name="Payment Method" required>
+        <select id="paymentMethod" name="Payment Method" required style="width: 100%; padding: 8px; margin-bottom: 12px; border-radius: 8px; border: 1px solid #555; background: #222; color: #eee;">
           <option value="" disabled selected>Select a payment method</option>
           <option value="Credit Card">Credit Card</option>
           <option value="PayPal">PayPal</option>
@@ -768,7 +723,7 @@
           <option value="Net Banking">Net Banking</option>
         </select>
       </div>
-      <button type="submit" class="btn-submit">Place Order</button>
+      <button type="submit" class="btn-join" style="width:100%;">Place Order</button>
     </form>
   </div>
 </div>
@@ -782,25 +737,21 @@
     <div class="modal-body">
       <p>Welcome to Sealed Brew by NSL Forge! Please read these Terms and Conditions carefully before using our website.</p>
       <h4>1. Purpose of This Website</h4>
-      <p>Sealed Brew by NSL Forge is a learning and experimental project operated by minors (aged 14 and 15) in their free time. This website and its contents are created for experimental and educational purposes only to gain experience in website development and e-commerce.</p>
+      <p>Sealed Brew by NSL Forge is a learning and experimental project. This website and its contents are for educational purposes.</p>
       <h4>2. Product Information and Disclaimers</h4>
       <p>We sell home-based coffee bottles without FSSAI certification. Our products are not mass-produced.</p>
       <ul>
         <li><strong>No FSSAI Certification:</strong> Our products are not subject to the regulations of the FSSAI.</li>
-        <li><strong>Experimental Nature:</strong> As this is an experimental project, product availability and quality may vary.</li>
-        <li><strong>Allergen Information:</strong> We cannot guarantee the absence of allergens in our products, as they are prepared in a home environment.</li>
+        <li><strong>Experimental Nature:</strong> Product availability and quality may vary.</li>
+        <li><strong>Allergen Information:</strong> We cannot guarantee the absence of allergens.</li>
       </ul>
       <h4>3. Website Content and Assets</h4>
-      <p>All content and assets on this website (including text, images, and design) have been generated with the assistance of Artificial Intelligence (AI). There may be inaccuracies or errors, and we do not claim formal intellectual property rights over AI-generated content except for the domain name "nslforge.com".</p>
-      <h4>4. No Formal Business Operations</h4>
-      <p>This is not a formal business. No office, warehouse, or physical backspace exists. All operations are small-scale from our homes.</p>
-      <h4>5. Limitation of Liability</h4>
-      <p>Given the experimental nature, Sealed Brew by NSL Forge and operators will not be liable for damages or losses from your use of the site or products. Use is at your own risk.</p>
-      <h4>6. Static Website - No Backend Functionality</h4>
-      <p>This website is static with no backend coding or user accounts; all interactions are handled manually.</p>
-      <h4>7. Changes to Terms and Conditions</h4>
-      <p>We may modify these terms at any time; changes are effective immediately upon posting. Continued website use means acceptance.</p>
-      <h4>8. Contact Us</h4>
+      <p>All content and assets on this website have been generated with the assistance of AI.</p>
+      <h4>4. Limitation of Liability</h4>
+      <p>Use of this site and its products is at your own risk.</p>
+      <h4>5. Changes to Terms and Conditions</h4>
+      <p>We may modify these terms at any time.</p>
+      <h4>6. Contact Us</h4>
       <p>Questions? Contact us via the methods on our website.</p>
     </div>
   </div>
@@ -825,11 +776,10 @@
     <section class="footer-section footer-socials" aria-label="Social media links">
       <h5>Follow Us</h5>
       <div class="footer-instagram" tabindex="0" aria-label="Instagram handle @sealedbrew" style="color:#d9b382; font-weight: 600;">Instagram: @sealedbrew</div>
-      <a href="https://instagram.com/sealedbrew" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><span class="material-icons">instagram</span></a>
-      <a href="https://twitter.com/sealedbrew" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><span class="material-icons">twitter</span></a>
     </section>
   </div>
   <div class="footer-bottom">
+    &copy; 2024 Sealed Brew by NSL Forge. An Experimental Project.
   </div>
 </footer>
 
@@ -837,52 +787,20 @@
   (() => {
     // --- Data ---
     const products = [
-      {
-        id: '1',
-        name: 'Velvet Chocolate Reserve',
-        price: 131, // Increased by 10% and rounded (119 * 1.1 = 130.9 -> 131)
-        desc: 'Rich milk-based chocolate flavor blended with creamy cold coffee for an indulgent treat. Made with 100% Arabica beans and premium cocoa.',
-        rating: 4.5,
-        img: '1749905943104.jpg',
-        alt: 'Premium bottle of milk-based chocolate flavoured cold coffee on a dark reflective surface, with the Sealed Brew by NSL Forge logo on the bottle',
-      },
-      {
-        id: '2',
-        name: 'Hazelnut Signature Blend',
-        price: 120, // Increased by 10% and rounded (109 * 1.1 = 119.9 -> 120)
-        desc: 'Smooth milk-based hazelnut essence combined with rich cold brewed coffee for a refined taste. Perfect for a luxurious coffee break.',
-        rating: 4.0,
-        img: '1749905957623.jpg',
-        alt: 'Elegant bottle of milk-based hazelnut flavoured cold coffee with minimalist golden label and Sealed Brew by NSL Forge logo on the bottle',
-      },
-      {
-        id: '3',
-        name: 'Classic Estate Brew',
-        price: 98, // Increased by 10% and rounded (89 * 1.1 = 97.9 -> 98)
-        desc: 'Timeless milk-based cold coffee blend delivering smooth, robust flavor in every sip. A perfect everyday companion.',
-        rating: 5.0,
-        img: '1749905935359.jpg',
-        alt: 'Minimalist bottle of milk-based classic cold coffee with matte black label and gold script, with Sealed Brew by NSL Forge logo on the bottle',
-      },
-      {
-        id: '4',
-        name: 'Vanilla Creme Select',
-        price: 109, // Increased by 10% and rounded (99 * 1.1 = 108.9 -> 109)
-        desc: 'Smooth milk-based cold coffee with rich vanilla notes for a creamy exquisite flavor. A delightful treat for vanilla lovers.',
-        rating: 4.5,
-        img: '1749905951985.jpg',
-        alt: 'Luxury bottle of milk-based vanilla cold coffee with cream and gold label resting on sleek wooden table, with Sealed Brew by NSL Forge logo on the bottle',
-      },
-      {
-        id: '5',
-        name: 'Butterscotch Velvet Essence',
-        price: 120, // Increased by 10% and rounded (109 * 1.1 = 119.9 -> 120)
-        desc: 'Decadent milk-based butterscotch infused cold coffee delivering smooth, creamy indulgence. A sweet and satisfying experience.',
-        rating: 4.0,
-        img: '1749905951985.jpg',
-        alt: 'Luxury bottle of milk-based butterscotch flavoured cold coffee with rich amber and gold label resting on plush dark velvet fabric, with Sealed Brew by NSL Forge logo on the bottle',
-      },
+      { id: '1', name: 'Velvet Chocolate Reserve', price: 131, img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905943104.jpg', alt: 'Premium bottle of chocolate flavoured cold coffee.' },
+      { id: '2', name: 'Hazelnut Signature Blend', price: 120, img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905957623.jpg', alt: 'Elegant bottle of hazelnut flavoured cold coffee.' },
+      { id: '3', name: 'Classic Estate Brew', price: 98, img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905935359.jpg', alt: 'Minimalist bottle of classic cold coffee.' },
+      { id: '4', name: 'Vanilla Creme Select', price: 109, img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905951985.jpg', alt: 'Luxury bottle of vanilla cold coffee.' },
+      { id: '5', name: 'Butterscotch Velvet Essence', price: 120, img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905951985.jpg', alt: 'Luxury bottle of butterscotch flavoured cold coffee.' },
     ];
+
+    const membershipProduct = {
+        id: 'membership-01',
+        name: 'Sealed Brew Membership',
+        price: 149,
+        img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1750893356880.jpg',
+        alt: 'A collection of Sealed Brew coffee bottles.'
+    };
 
     let cart = JSON.parse(localStorage.getItem('sealedBrewCart')) || [];
 
@@ -901,6 +819,7 @@
     const orderDetailsTextarea = document.getElementById('orderDetails');
     const productGrid = document.getElementById('products');
     const termsLink = document.getElementById('terms-link');
+    const joinMembershipBtn = document.getElementById('join-membership-btn');
 
     // --- Helper Functions ---
     function saveCart() {
@@ -935,14 +854,25 @@
               <div class="cart-item-price">₹${(item.price * item.quantity).toFixed(2)}</div>
             </div>
           `;
+          // Hide quantity controls for membership
+          if (item.id === membershipProduct.id) {
+            cartItemDiv.querySelector('.qty-controls .increment').style.display = 'none';
+            cartItemDiv.querySelector('.qty-controls .decrement').style.display = 'none';
+          }
           cartList.appendChild(cartItemDiv);
         });
       }
       calculateCartTotal();
-      populateOrderDetails(); // Update order details when cart changes
+      populateOrderDetails();
     }
 
     function addToCart(productId) {
+      // Prevent adding other products if membership is already in cart
+      if (cart.some(item => item.id === membershipProduct.id)) {
+        showCustomAlert('Membership subscription must be purchased separately. Please complete your membership checkout first.');
+        return;
+      }
+      
       const product = products.find(p => p.id === productId);
       if (product) {
         const existingItem = cart.find(item => item.id === productId);
@@ -960,6 +890,9 @@
     function updateQuantity(productId, change) {
       const itemIndex = cart.findIndex(item => item.id === productId);
       if (itemIndex > -1) {
+        // Prevent changing quantity for membership
+        if(cart[itemIndex].id === membershipProduct.id) return;
+        
         cart[itemIndex].quantity += change;
         if (cart[itemIndex].quantity <= 0) {
           cart.splice(itemIndex, 1); // Remove if quantity is 0 or less
@@ -978,11 +911,11 @@
     function openModal(modal) {
       modal.classList.add('active');
       modal.focus();
-      document.body.style.overflow = 'hidden'; // Prevent background scroll
+      document.body.style.overflow = 'hidden';
     }
     function closeModal(modal) {
       modal.classList.remove('active');
-      document.body.style.overflow = ''; // Restore background scroll
+      document.body.style.overflow = '';
     }
 
     function populateOrderDetails() {
@@ -990,10 +923,43 @@
         if (cart.length === 0) {
           orderDetailsTextarea.value = 'No items in cart.';
         } else {
-          orderDetailsTextarea.value = cart.map(item => `${item.quantity} x ${item.name} (₹${(item.price * item.quantity).toFixed(2)})`).join('\n');
+          orderDetailsTextarea.value = cart.map(item => {
+            if (item.id === membershipProduct.id) {
+                return `1 x ${item.name} (Monthly Subscription)`;
+            }
+            return `${item.quantity} x ${item.name}`;
+          }).join('\n');
           orderDetailsTextarea.value += `\n\nTotal: ₹${calculateCartTotal().toFixed(2)}`;
         }
       }
+    }
+    
+    function showCustomAlert(message) {
+        const existingAlert = document.getElementById('custom-alert');
+        if (existingAlert) {
+            document.body.removeChild(existingAlert);
+        }
+
+        const customAlert = document.createElement('div');
+        customAlert.id = 'custom-alert';
+        customAlert.style.cssText = `
+            position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+            background-color: #333; color: #d9b382; padding: 20px; border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5); z-index: 1500; text-align: center;
+            font-size: 1.1rem; max-width: 90%;
+        `;
+        customAlert.innerHTML = `<p style="margin: 0 0 15px 0;">${message}</p><button style="background-color: #d9b382; color: #121212; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer;">OK</button>`;
+        document.body.appendChild(customAlert);
+        
+        customAlert.querySelector('button').addEventListener('click', () => {
+            document.body.removeChild(customAlert);
+        });
+
+        setTimeout(() => {
+            if(document.body.contains(customAlert)) {
+                document.body.removeChild(customAlert);
+            }
+        }, 5000);
     }
 
     function showCartPanel() {
@@ -1003,7 +969,7 @@
 
     function closeCart() {
         cartPanel.classList.remove('open');
-        cartToggle.focus(); // Return focus to the cart icon
+        cartToggle.focus();
     }
 
     // --- Event Listeners ---
@@ -1020,7 +986,6 @@
         navToggle.focus();
       }
     });
-
     mobileMenu.querySelector('.close-menu').addEventListener('click', () => {
       mobileMenu.style.display = 'none';
       navToggle.setAttribute('aria-expanded', false);
@@ -1030,20 +995,10 @@
     // Close modals with ESC key
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
-        if (mobileMenu.style.display === 'flex') {
-          mobileMenu.style.display = 'none';
-          navToggle.setAttribute('aria-expanded', false);
-          navToggle.focus();
-        }
-        if (cartPanel.classList.contains('open')) {
-          closeCart();
-        }
-        if (termsModal.classList.contains('active')) {
-          closeModal(termsModal);
-        }
-        if (checkoutModal.classList.contains('active')) {
-          closeModal(checkoutModal);
-        }
+        if (mobileMenu.style.display === 'flex') { mobileMenu.style.display = 'none'; navToggle.setAttribute('aria-expanded', false); navToggle.focus(); }
+        if (cartPanel.classList.contains('open')) { closeCart(); }
+        if (termsModal.classList.contains('active')) { closeModal(termsModal); }
+        if (checkoutModal.classList.contains('active')) { closeModal(checkoutModal); }
       }
     });
 
@@ -1051,51 +1006,38 @@
     cartToggle.addEventListener('click', showCartPanel);
     closeCartBtn.addEventListener('click', closeCart);
 
-    // Add to Cart buttons (event delegation)
+    // Add to Cart buttons
     productGrid.addEventListener('click', (event) => {
       if (event.target.classList.contains('btn-add')) {
         const productId = event.target.dataset.productId;
         addToCart(productId);
-      } else if (event.target.classList.contains('btn-detail')) {
-        // Optional: implement product details modal if desired
       }
     });
+    
+    // Join Membership button
+    joinMembershipBtn.addEventListener('click', () => {
+        // Clear cart of other items, as membership is a separate transaction
+        cart = [];
+        // Add membership to cart
+        cart.push({ ...membershipProduct, quantity: 1 });
+        saveCart();
+        renderCart();
+        openModal(checkoutModal);
+    });
 
-    // Quantity controls in cart (event delegation)
+    // Quantity controls in cart
     cartList.addEventListener('click', (event) => {
       const target = event.target;
       const productId = target.dataset.id;
-      if (target.classList.contains('increment')) {
-        updateQuantity(productId, 1);
-      } else if (target.classList.contains('decrement')) {
-        updateQuantity(productId, -1);
-      } else if (target.classList.contains('remove')) {
-        removeFromCart(productId);
-      }
+      if (target.classList.contains('increment')) { updateQuantity(productId, 1); }
+      else if (target.classList.contains('decrement')) { updateQuantity(productId, -1); }
+      else if (target.classList.contains('remove')) { removeFromCart(productId); }
     });
 
     // Checkout button
     checkoutBtn.addEventListener('click', () => {
       if (cart.length === 0) {
-        // Replaced alert with a custom message box for better UX
-        // For a full application, you would implement a custom modal here.
-        const message = 'Your cart is empty. Please add items before checking out.';
-        const customAlert = document.createElement('div');
-        customAlert.style.cssText = `
-            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            background-color: #333; color: #d9b382; padding: 20px; border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5); z-index: 1300; text-align: center;
-            font-size: 1.1rem; max-width: 90%;
-        `;
-        customAlert.innerHTML = `
-            <p>${message}</p>
-            <button style="background-color: #d9b382; color: #121212; border: none;
-            padding: 10px 20px; border-radius: 8px; margin-top: 15px; cursor: pointer;">OK</button>
-        `;
-        document.body.appendChild(customAlert);
-        customAlert.querySelector('button').addEventListener('click', () => {
-            document.body.removeChild(customAlert);
-        });
+        showCustomAlert('Your cart is empty. Please add items before checking out.');
         return;
       }
       closeCart();
@@ -1119,11 +1061,10 @@
       openModal(termsModal);
     });
 
-    // Other UI event listeners (account, faq) can be included here as needed
-
-    // Initial render of cart on page load
+    // Initial render on page load
     renderCart();
   })();
 </script>
 </body>
-  </html>
+</html>
+
