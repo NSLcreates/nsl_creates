@@ -143,17 +143,14 @@
 
   /* NEW MEMBERSHIP SECTION - MODIFIED FOR IMAGE AND BUTTON LAYOUT */
   #membership {
-    max-width: 1200px;
-    margin: 48px auto;
-    border-radius: 24px;
-    overflow: hidden;
-    /* Removed background image from here */
+    /* Removed max-width, margin-auto, border-radius, overflow, and box-shadow for edge-to-edge */
+    width: 100%; /* Ensure it takes full width */
+    margin: 0; /* Remove external margins */
     display: flex;
     flex-direction: column; /* Stack image and button vertically */
     align-items: center; /* Center horizontally */
     padding: 20px; /* Add padding around the content */
     color: #fff;
-    box-shadow: 0 8px 32px rgba(0,0,0, 0.5);
     background-color: #1f1f1f; /* A subtle background for the section */
   }
 
@@ -554,7 +551,7 @@
     button#nav-toggle { display: block; margin-left: auto; }
 
     #membership {
-        margin: 24px 16px;
+        margin: 0; /* Remove margin for mobile edge-to-edge */
         padding: 15px; /* Adjust padding for mobile */
     }
     .membership-ad-image {
@@ -787,19 +784,21 @@
 <script>
   (() => {
     // --- Data ---
+    // Corrected image paths to be relative as per user's instructions
     const products = [
-      { id: '1', name: 'Velvet Chocolate Reserve', price: 131, img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905943104.jpg', alt: 'Premium bottle of chocolate flavoured cold coffee.' },
-      { id: '2', name: 'Hazelnut Signature Blend', price: 120, img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905957623.jpg', alt: 'Elegant bottle of hazelnut flavoured cold coffee.' },
-      { id: '3', name: 'Classic Estate Brew', price: 98, img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905935359.jpg', alt: 'Minimalist bottle of classic cold coffee.' },
-      { id: '4', name: 'Vanilla Creme Select', price: 109, img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905951985.jpg', alt: 'Luxury bottle of vanilla cold coffee.' },
-      { id: '5', name: 'Butterscotch Velvet Essence', price: 120, img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905951985.jpg', alt: 'Luxury bottle of butterscotch flavoured cold coffee.' },
+      { id: '1', name: 'Velvet Chocolate Reserve', price: 131, img: '1749905943104.jpg', alt: 'Premium bottle of chocolate flavoured cold coffee.' },
+      { id: '2', name: 'Hazelnut Signature Blend', price: 120, img: '1749905957623.jpg', alt: 'Elegant bottle of hazelnut flavoured cold coffee.' },
+      { id: '3', name: 'Classic Estate Brew', price: 98, img: '1749905935359.jpg', alt: 'Minimalist bottle of classic cold coffee.' },
+      { id: '4', name: 'Vanilla Creme Select', price: 109, img: '1749905951985.jpg', alt: 'Luxury bottle of vanilla cold coffee.' },
+      { id: '5', name: 'Butterscotch Velvet Essence', price: 120, img: '1749905951985.jpg', alt: 'Luxury bottle of butterscotch flavoured cold coffee.' },
     ];
 
     const membershipProduct = {
         id: 'membership-01',
         name: 'Sealed Brew Membership',
         price: 149,
-        img: 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1750893356880.jpg',
+        // Corrected image path to be relative
+        img: 'Yellow And Brown Bold Drink Menu Facebook Ad_20250624_221423_0000.png',
         alt: 'A collection of Sealed Brew coffee bottles.'
     };
 
