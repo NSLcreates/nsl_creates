@@ -552,7 +552,7 @@
     nav { margin-left: 0; }
     nav a { display: none; }
     button#nav-toggle { display: block; margin-left: auto; }
-    
+
     #membership {
         margin: 24px 16px;
         padding: 15px; /* Adjust padding for mobile */
@@ -560,7 +560,7 @@
     .membership-ad-image {
       margin-bottom: 16px; /* Adjust margin for mobile */
     }
-    
+
     .products-grid { grid-template-columns: 1fr; gap: 24px; padding-bottom: 100px; }
     footer .footer-container { grid-template-columns: 1fr; gap: 32px; padding: 0 16px; text-align: center; }
     footer .footer-section { padding-bottom: 16px; border-bottom: 1px solid #333; }
@@ -608,20 +608,21 @@
 </nav>
 
 <main>
-  <h1 class="page-title">Premium Cold Coffee</h1>
-  
+  <!-- Membership section moved to the top -->
   <section id="membership" aria-label="Sealed Brew Membership Program">
     <!-- Ad Image -->
-    <img src="Yellow And Brown Bold Drink Menu Facebook Ad_20250624_221423_0000.png" alt="Yellow and Brown Bold Drink Menu Ad" class="membership-ad-image" />
+    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/Yellow%20And%20Brown%20Bold%20Drink%20Menu%20Facebook%20Ad_20250624_221423_0000.png" alt="Yellow and Brown Bold Drink Menu Ad" class="membership-ad-image" />
     <!-- Button is now directly below the image -->
     <button class="btn-join" id="join-membership-btn">Explore Membership</button>
   </section>
 
+  <!-- Premium Cold Coffee heading moved below membership -->
+  <h1 class="page-title">Premium Cold Coffee</h1>
   <h2 class="page-title" style="font-size: 2rem; margin-top: 80px;">Our Flavours</h2>
   <section id="products" aria-label="Product catalog" class="products-grid" tabindex="0">
       <article class="product-card flavor-chocolate" tabindex="0" data-id="1" role="group" aria-label="Velvet Chocolate Reserve">
         <div class="product-image">
-          <img src="1749905943104.jpg" alt="Premium bottle of chocolate flavoured cold coffee." />
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905943104.jpg" alt="Premium bottle of chocolate flavoured cold coffee." />
         </div>
         <div class="product-info">
           <h2 class="product-name">Velvet Chocolate Reserve</h2>
@@ -632,7 +633,7 @@
       </article>
       <article class="product-card flavor-hazelnut" tabindex="0" data-id="2" role="group" aria-label="Hazelnut Signature Blend">
         <div class="product-image">
-          <img src="1749905957623.jpg" alt="Elegant bottle of hazelnut flavoured cold coffee." />
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905957623.jpg" alt="Elegant bottle of hazelnut flavoured cold coffee." />
         </div>
         <div class="product-info">
           <h2 class="product-name">Hazelnut Signature Blend</h2>
@@ -643,7 +644,7 @@
       </article>
       <article class="product-card flavor-classic" tabindex="0" data-id="3" role="group" aria-label="Classic Estate Brew">
         <div class="product-image">
-          <img src="1749905935359.jpg" alt="Minimalist bottle of classic cold coffee." />
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905935359.jpg" alt="Minimalist bottle of classic cold coffee." />
         </div>
         <div class="product-info">
           <h2 class="product-name">Classic Estate Brew</h2>
@@ -654,7 +655,7 @@
       </article>
       <article class="product-card flavor-vanilla" tabindex="0" data-id="4" role="group" aria-label="Vanilla Creme Select">
         <div class="product-image">
-          <img src="1749905951985.jpg" alt="Luxury bottle of vanilla cold coffee." />
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905951985.jpg" alt="Luxury bottle of vanilla cold coffee." />
         </div>
         <div class="product-info">
           <h2 class="product-name">Vanilla Creme Select</h2>
@@ -665,7 +666,7 @@
       </article>
       <article class="product-card flavor-butterscotch" tabindex="0" data-id="5" role="group" aria-label="Butterscotch Velvet Essence">
         <div class="product-image">
-          <img src="1749905951985.jpg" alt="Luxury bottle of butterscotch flavoured cold coffee." />
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1749905951985.jpg" alt="Luxury bottle of butterscotch flavoured cold coffee." />
         </div>
         <div class="product-info">
           <h2 class="product-name">Butterscotch Velvet Essence</h2>
@@ -872,7 +873,7 @@
         showCustomAlert('Membership subscription must be purchased separately. Please complete your membership checkout first.');
         return;
       }
-      
+
       const product = products.find(p => p.id === productId);
       if (product) {
         const existingItem = cart.find(item => item.id === productId);
@@ -892,7 +893,7 @@
       if (itemIndex > -1) {
         // Prevent changing quantity for membership
         if(cart[itemIndex].id === membershipProduct.id) return;
-        
+
         cart[itemIndex].quantity += change;
         if (cart[itemIndex].quantity <= 0) {
           cart.splice(itemIndex, 1); // Remove if quantity is 0 or less
@@ -933,7 +934,7 @@
         }
       }
     }
-    
+
     function showCustomAlert(message) {
         const existingAlert = document.getElementById('custom-alert');
         if (existingAlert) {
@@ -950,7 +951,7 @@
         `;
         customAlert.innerHTML = `<p style="margin: 0 0 15px 0;">${message}</p><button style="background-color: #d9b382; color: #121212; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer;">OK</button>`;
         document.body.appendChild(customAlert);
-        
+
         customAlert.querySelector('button').addEventListener('click', () => {
             document.body.removeChild(customAlert);
         });
@@ -1013,7 +1014,7 @@
         addToCart(productId);
       }
     });
-    
+
     // Join Membership button
     joinMembershipBtn.addEventListener('click', () => {
         // Clear cart of other items, as membership is a separate transaction
