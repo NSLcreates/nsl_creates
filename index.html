@@ -564,6 +564,20 @@
     #cart-panel { width: 100vw; }
     #cart-toggle { bottom: 20px; right: 20px; width: 50px; height: 50px; font-size: 28px; }
     .modal-content { padding: 20px; margin: 10px; }
+
+    .filter-sort-controls {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    .category-filters button {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+    .sort-options select {
+        padding: 8px;
+        font-size: 0.9rem;
+    }
   }
   @media (min-width: 640px) and (max-width: 1023px) {
     header { padding: 0 24px; }
@@ -581,6 +595,63 @@
     .container { max-width: 1400px; margin-left: auto; margin-right: auto; }
     .products-grid { grid-template-columns: repeat(5, 1fr); gap: 48px; }
     footer .footer-container { max-width: 1400px; margin: 0 auto; }
+  }
+
+  /* Filter and Sort Styles */
+  .filter-sort-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    padding: 0 24px; /* Match container padding */
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .category-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .category-filters button {
+    background-color: #1f1f1f;
+    color: #d9b382;
+    border: 1px solid #d9b382;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  .category-filters button:hover,
+  .category-filters button:focus-visible {
+    background-color: #d9b382;
+    color: #121212;
+    outline: none;
+  }
+
+  .category-filters button.active {
+    background-color: #d9b382;
+    color: #121212;
+    font-weight: 600;
+  }
+
+  .sort-options select {
+    background-color: #1f1f1f;
+    color: #d9b382;
+    border: 1px solid #d9b382;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    outline: none;
+  }
+
+  .sort-options select option {
+    background-color: #1f1f1f;
+    color: #d9b382;
   }
 </style>
 </head>
@@ -616,62 +687,28 @@
   <!-- Premium Cold Coffee heading moved below membership -->
   <h1 class="page-title">Premium Cold Coffee</h1>
   <h2 class="page-title" style="font-size: 2rem; margin-top: 80px;">Our Flavours</h2>
+
+  <div class="filter-sort-controls">
+    <div class="category-filters" id="category-filters">
+      <button class="active" data-category="All">All</button>
+      <button data-category="Cold Coffee">Cold Coffee</button>
+      <button data-category="Frappe">Frappe</button>
+      <button data-category="Milk Shake">Milk Shake</button>
+    </div>
+    <div class="sort-options">
+      <label for="sort-by" style="color: #a89e94; margin-right: 10px;">Sort by:</label>
+      <select id="sort-by">
+        <option value="default">Default</option>
+        <option value="price-asc">Price: Low to High</option>
+        <option value="price-desc">Price: High to Low</option>
+        <option value="name-asc">Name: A-Z</option>
+        <option value="name-desc">Name: Z-A</option>
+      </select>
+    </div>
+  </div>
+
   <section id="products" aria-label="Product catalog" class="products-grid" tabindex="0">
-      <article class="product-card flavor-chocolate" tabindex="0" data-id="1" role="group" aria-label="Velvet Chocolate Reserve">
-        <div class="product-image">
-          <img src="1749905943104.jpg" alt="Premium bottle of chocolate flavoured cold coffee." />
-        </div>
-        <div class="product-info">
-          <h2 class="product-name">Velvet Chocolate Reserve</h2>
-          <p class="product-desc">Rich milk-based chocolate flavor blended with creamy cold coffee for an indulgent treat.</p>
-          <div class="product-price" aria-label="Product price 131 Indian Rupees">₹131</div>
-          <button class="btn-add" data-product-id="1" aria-label="Add Velvet Chocolate Reserve to cart">Add to Cart</button>
-        </div>
-      </article>
-      <article class="product-card flavor-hazelnut" tabindex="0" data-id="2" role="group" aria-label="Hazelnut Signature Blend">
-        <div class="product-image">
-          <img src="1749905957623.jpg" alt="Elegant bottle of hazelnut flavoured cold coffee." />
-        </div>
-        <div class="product-info">
-          <h2 class="product-name">Hazelnut Signature Blend</h2>
-          <p class="product-desc">Smooth milk-based hazelnut essence combined with rich cold brewed coffee for a refined taste.</p>
-          <div class="product-price" aria-label="Product price 120 Indian Rupees">₹120</div>
-          <button class="btn-add" data-product-id="2" aria-label="Add Hazelnut Signature Blend to cart">Add to Cart</button>
-        </div>
-      </article>
-      <article class="product-card flavor-classic" tabindex="0" data-id="3" role="group" aria-label="Classic Estate Brew">
-        <div class="product-image">
-          <img src="1749905935359.jpg" alt="Minimalist bottle of classic cold coffee." />
-        </div>
-        <div class="product-info">
-          <h2 class="product-name">Classic Estate Brew</h2>
-          <p class="product-desc">Timeless milk-based cold coffee blend delivering smooth, robust flavor in every sip.</p>
-          <div class="product-price" aria-label="Product price 98 Indian Rupees">₹98</div>
-          <button class="btn-add" data-product-id="3" aria-label="Add Classic Estate Brew to cart">Add to Cart</button>
-        </div>
-      </article>
-      <article class="product-card flavor-vanilla" tabindex="0" data-id="4" role="group" aria-label="Vanilla Creme Select">
-        <div class="product-image">
-          <img src="1749905951985.jpg" alt="Luxury bottle of vanilla cold coffee." />
-        </div>
-        <div class="product-info">
-          <h2 class="product-name">Vanilla Creme Select</h2>
-          <p class="product-desc">Smooth milk-based cold coffee with rich vanilla notes for a creamy exquisite flavor.</p>
-          <div class="product-price" aria-label="Product price 109 Indian Rupees">₹109</div>
-          <button class="btn-add" data-product-id="4" aria-label="Add Vanilla Creme Select to cart">Add to Cart</button>
-        </div>
-      </article>
-      <article class="product-card flavor-butterscotch" tabindex="0" data-id="5" role="group" aria-label="Butterscotch Velvet Essence">
-        <div class="product-image">
-          <img src="1749905951985.jpg" alt="Luxury bottle of butterscotch flavoured cold coffee." />
-        </div>
-        <div class="product-info">
-          <h2 class="product-name">Butterscotch Velvet Essence</h2>
-          <p class="product-desc">Decadent milk-based butterscotch infused cold coffee delivering smooth, creamy indulgence.</p>
-          <div class="product-price" aria-label="Product price 120 Indian Rupees">₹120</div>
-          <button class="btn-add" data-product-id="5" aria-label="Add Butterscotch Velvet Essence to cart">Add to Cart</button>
-        </div>
-      </article>
+      <!-- Products will be dynamically loaded here by JavaScript -->
   </section>
 </main>
 
@@ -784,25 +821,43 @@
 <script>
   (() => {
     // --- Data ---
-    // Corrected image paths to be relative as per user's instructions
     const products = [
-      { id: '1', name: 'Velvet Chocolate Reserve', price: 131, img: '1749905943104.jpg', alt: 'Premium bottle of chocolate flavoured cold coffee.' },
-      { id: '2', name: 'Hazelnut Signature Blend', price: 120, img: '1749905957623.jpg', alt: 'Elegant bottle of hazelnut flavoured cold coffee.' },
-      { id: '3', name: 'Classic Estate Brew', price: 98, img: '1749905935359.jpg', alt: 'Minimalist bottle of classic cold coffee.' },
-      { id: '4', name: 'Vanilla Creme Select', price: 109, img: '1749905951985.jpg', alt: 'Luxury bottle of vanilla cold coffee.' },
-      { id: '5', name: 'Butterscotch Velvet Essence', price: 120, img: '1749905951985.jpg', alt: 'Luxury bottle of butterscotch flavoured cold coffee.' },
+      { id: '1', name: 'Velvet Chocolate Reserve', price: 131, img: '1749905943104.jpg', alt: 'Premium bottle of chocolate flavoured cold coffee.', category: 'Cold Coffee' },
+      { id: '2', name: 'Hazelnut Signature Blend', price: 120, img: '1749905957623.jpg', alt: 'Elegant bottle of hazelnut flavoured cold coffee.', category: 'Cold Coffee' },
+      { id: '3', name: 'Classic Estate Brew', price: 98, img: '1749905935359.jpg', alt: 'Minimalist bottle of classic cold coffee.', category: 'Cold Coffee' },
+      { id: '4', name: 'Vanilla Creme Select', price: 109, img: '1749905951985.jpg', alt: 'Luxury bottle of vanilla cold coffee.', category: 'Cold Coffee' },
+      { id: '5', name: 'Butterscotch Velvet Essence', price: 120, img: '1749905951985.jpg', alt: 'Luxury bottle of butterscotch flavoured cold coffee.', category: 'Cold Coffee' },
+      // New Frappe Products
+      { id: '6', name: 'Double Chocolate Frappe', price: 150, img: 'frappe_double_chocolate.jpg', alt: 'Double Chocolate Frappe', category: 'Frappe' },
+      { id: '7', name: 'Brownie Blast Frappe', price: 160, img: 'frappe_brownie_blast.jpg', alt: 'Brownie Blast Frappe', category: 'Frappe' },
+      { id: '8', name: 'Kitkat Frappe', price: 140, img: 'frappe_kitkat.jpg', alt: 'Kitkat Frappe', category: 'Frappe' },
+      { id: '9', name: 'Hazelnut Frappe', price: 145, img: 'frappe_hazelnut.jpg', alt: 'Hazelnut Frappe', category: 'Frappe' },
+      // New Milk Shake Products
+      { id: '10', name: 'Kit Kat Blast Milk Shake', price: 130, img: 'milkshake_kitkat_blast.jpg', alt: 'Kit Kat Blast Milk Shake', category: 'Milk Shake' },
+      { id: '11', name: 'Ferrero Rocher Shake', price: 180, img: 'milkshake_ferrero_rocher.jpg', alt: 'Ferrero Rocher Shake', category: 'Milk Shake' },
+      { id: '12', name: 'Chocolate Milk Shake', price: 110, img: 'milkshake_chocolate.jpg', alt: 'Chocolate Milk Shake', category: 'Milk Shake' },
+      { id: '13', name: 'Snickers Shake', price: 155, img: 'milkshake_snickers.jpg', alt: 'Snickers Shake', category: 'Milk Shake' },
+      { id: '14', name: 'Strawberry Milk Shake', price: 125, img: 'milkshake_strawberry.jpg', alt: 'Strawberry Milk Shake', category: 'Milk Shake' },
+      { id: '15', name: 'Brownie With Nutella', price: 170, img: 'milkshake_brownie_nutella.jpg', alt: 'Brownie With Nutella Milk Shake', category: 'Milk Shake' },
+      { id: '16', name: 'Oreo', price: 135, img: 'milkshake_oreo.jpg', alt: 'Oreo Milk Shake', category: 'Milk Shake' },
+      // Additional Cold Coffee Products
+      { id: '17', name: 'Brownie Cold Coffee', price: 140, img: 'coldcoffee_brownie.jpg', alt: 'Brownie Cold Coffee', category: 'Cold Coffee' },
+      { id: '18', name: 'Everyday Cold Coffee', price: 100, img: 'coldcoffee_everyday.jpg', alt: 'Everyday Cold Coffee', category: 'Cold Coffee' },
+      { id: '19', name: 'Caramel Cold Coffee', price: 130, img: 'coldcoffee_caramel.jpg', alt: 'Caramel Cold Coffee', category: 'Cold Coffee' },
+      { id: '20', name: 'Espresso Tonic', price: 120, img: 'coldcoffee_espresso_tonic.jpg', alt: 'Espresso Tonic Cold Coffee', category: 'Cold Coffee' },
     ];
 
     const membershipProduct = {
         id: 'membership-01',
         name: 'Sealed Brew Membership',
         price: 149,
-        // Corrected image path to be relative
         img: 'Yellow And Brown Bold Drink Menu Facebook Ad_20250624_221423_0000.png',
         alt: 'A collection of Sealed Brew coffee bottles.'
     };
 
     let cart = JSON.parse(localStorage.getItem('sealedBrewCart')) || [];
+    let currentCategory = 'All';
+    let currentSort = 'default';
 
     // --- DOM Elements ---
     const navToggle = document.getElementById('nav-toggle');
@@ -820,6 +875,8 @@
     const productGrid = document.getElementById('products');
     const termsLink = document.getElementById('terms-link');
     const joinMembershipBtn = document.getElementById('join-membership-btn');
+    const categoryFiltersContainer = document.getElementById('category-filters');
+    const sortBySelect = document.getElementById('sort-by');
 
     // --- Helper Functions ---
     function saveCart() {
@@ -972,6 +1029,58 @@
         cartToggle.focus();
     }
 
+    function renderProducts() {
+      let filteredProducts = products;
+
+      // Filter by category
+      if (currentCategory !== 'All') {
+        filteredProducts = products.filter(product => product.category === currentCategory);
+      }
+
+      // Sort products
+      if (currentSort === 'price-asc') {
+        filteredProducts.sort((a, b) => a.price - b.price);
+      } else if (currentSort === 'price-desc') {
+        filteredProducts.sort((a, b) => b.price - a.price);
+      } else if (currentSort === 'name-asc') {
+        filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+      } else if (currentSort === 'name-desc') {
+        filteredProducts.sort((a, b) => b.name.localeCompare(a.name));
+      }
+      // 'default' sort means no specific sort, maintains original order or whatever filter provides
+
+      productGrid.innerHTML = ''; // Clear current products
+
+      filteredProducts.forEach(product => {
+        const productCard = document.createElement('article');
+        productCard.classList.add('product-card');
+        // Add flavor class if applicable, though new products might not have specific flavor classes
+        if (product.category === 'Cold Coffee' && product.name.includes('Chocolate')) productCard.classList.add('flavor-chocolate');
+        else if (product.category === 'Cold Coffee' && product.name.includes('Hazelnut')) productCard.classList.add('flavor-hazelnut');
+        else if (product.category === 'Cold Coffee' && product.name.includes('Classic')) productCard.classList.add('flavor-classic');
+        else if (product.category === 'Cold Coffee' && product.name.includes('Vanilla')) productCard.classList.add('flavor-vanilla');
+        else if (product.category === 'Cold Coffee' && product.name.includes('Butterscotch')) productCard.classList.add('flavor-butterscotch');
+
+        productCard.setAttribute('tabindex', '0');
+        productCard.setAttribute('data-id', product.id);
+        productCard.setAttribute('role', 'group');
+        productCard.setAttribute('aria-label', product.name);
+
+        productCard.innerHTML = `
+          <div class="product-image">
+            <img src="${product.img}" alt="${product.alt}" />
+          </div>
+          <div class="product-info">
+            <h2 class="product-name">${product.name}</h2>
+            <p class="product-desc">${product.desc || ''}</p> <!-- Use product.desc if available -->
+            <div class="product-price" aria-label="Product price ${product.price} Indian Rupees">₹${product.price}</div>
+            <button class="btn-add" data-product-id="${product.id}" aria-label="Add ${product.name} to cart">Add to Cart</button>
+          </div>
+        `;
+        productGrid.appendChild(productCard);
+      });
+    }
+
     // --- Event Listeners ---
 
     // Mobile Navigation
@@ -1006,7 +1115,7 @@
     cartToggle.addEventListener('click', showCartPanel);
     closeCartBtn.addEventListener('click', closeCart);
 
-    // Add to Cart buttons
+    // Add to Cart buttons (delegated to productGrid)
     productGrid.addEventListener('click', (event) => {
       if (event.target.classList.contains('btn-add')) {
         const productId = event.target.dataset.productId;
@@ -1025,7 +1134,7 @@
         openModal(checkoutModal);
     });
 
-    // Quantity controls in cart
+    // Quantity controls in cart (delegated to cartList)
     cartList.addEventListener('click', (event) => {
       const target = event.target;
       const productId = target.dataset.id;
@@ -1061,10 +1170,30 @@
       openModal(termsModal);
     });
 
+    // Category Filter Buttons
+    categoryFiltersContainer.addEventListener('click', (event) => {
+      if (event.target.tagName === 'BUTTON') {
+        // Remove active class from all buttons
+        categoryFiltersContainer.querySelectorAll('button').forEach(btn => {
+          btn.classList.remove('active');
+        });
+        // Add active class to the clicked button
+        event.target.classList.add('active');
+        currentCategory = event.target.dataset.category;
+        renderProducts(); // Re-render products with new filter
+      }
+    });
+
+    // Sort By Select
+    sortBySelect.addEventListener('change', (event) => {
+      currentSort = event.target.value;
+      renderProducts(); // Re-render products with new sort order
+    });
+
     // Initial render on page load
     renderCart();
+    renderProducts(); // Initial render of products
   })();
 </script>
 </body>
 </html>
-
