@@ -716,7 +716,8 @@
       <h3 id="checkout-title">Checkout</h3>
       <button class="close-modal" data-modal="checkout-modal" aria-label="Close checkout modal">&times;</button>
     </header>
-    <form id="checkout-form" action="https://formsubmit.co/nslcreatesofficial@gmail.com" method="POST" novalidate>
+    <!-- Added onsubmit handler to the form -->
+    <form id="checkout-form" action="https://formsubmit.co/nslcreatesofficial@gmail.com" method="POST" novalidate onsubmit="handleFormSubmit(event)">
       <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
       <input type="hidden" name="_captcha" value="false" />
       <input type="hidden" name="_template" value="table" />
@@ -1173,6 +1174,23 @@
     sortBy.addEventListener('change', applyFiltersAndSort);
     searchBar.addEventListener('input', applyFiltersAndSort); // Use 'input' for real-time search
 
+    // Handle form submission for formsubmit.co
+    window.handleFormSubmit = function(event) {
+        // This function is called when the checkout form is submitted.
+        // It provides immediate client-side feedback before formsubmit.co takes over.
+
+        // Clear the cart locally
+        cart = [];
+        saveCart();
+        renderCart(); // Update the UI to show an empty cart
+
+        // Show a temporary success message to the user
+        showCustomAlert('Your order has been placed! Redirecting to confirmation...');
+
+        // Allow the default form submission to proceed, which will send data to formsubmit.co
+        // and then formsubmit.co will handle the redirection to its confirmation page.
+    };
+
     // Initial render on page load
     renderCart();
     applyFiltersAndSort(); // Initial render of products with default filters/sort
@@ -1180,3 +1198,4 @@
 </script>
 </body>
 </html>
+
