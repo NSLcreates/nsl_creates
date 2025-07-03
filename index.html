@@ -243,6 +243,10 @@
   .product-card.flavor-classic .product-image::after { color: #ddd6b7cc; text-shadow: 0 0 8px #585146cc; }
   .product-card.flavor-vanilla .product-image::after { color: #f9f5e1cc; text-shadow: 0 0 8px #938a6dcc; }
   .product-card.flavor-butterscotch .product-image::after { color: #ddb67acc; text-shadow: 0 0 8px #7c5b2dcc; }
+  /* New flavor classes for frappe and milkshake */
+  .product-card.flavor-frappe .product-image::after { color: #a89e94cc; text-shadow: 0 0 8px #333333bb; }
+  .product-card.flavor-milkshake .product-image::after { color: #f5e6c4cc; text-shadow: 0 0 8px #555555bb; }
+
   .product-info { flex-grow: 1; }
   .product-name {
     font-weight: 700;
@@ -377,12 +381,6 @@
     font-size: 0.9rem;
     margin-bottom: 6px;
   }
-  .cart-item-price {
-    font-weight: 600;
-    font-size: 1.1rem;
-    margin-top: auto;
-    color: #f5e6c4;
-  }
   .qty-controls {
     display: flex;
     gap: 8px;
@@ -406,6 +404,12 @@
     background-color: #d9b382;
     color: #121212;
     outline: none;
+  }
+  .cart-item-price {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-top: auto;
+    color: #f5e6c4;
   }
 
   /* CART FOOTER */
@@ -440,7 +444,7 @@
   }
 
   /* MODALS */
-  #checkout-modal, #terms-modal {
+  #checkout-modal, #terms-modal, #custom-alert {
     position: fixed;
     inset: 0;
     background: rgba(18,18,18,0.95);
@@ -451,7 +455,7 @@
     overflow-y: auto;
     padding: 20px;
   }
-  #checkout-modal.active, #terms-modal.active {
+  #checkout-modal.active, #terms-modal.active, #custom-alert.active {
     display: flex;
   }
   .modal-content {
@@ -661,7 +665,7 @@
   <!-- Membership section moved to the top -->
   <section id="membership" aria-label="Sealed Brew Membership Program">
     <!-- Ad Image -->
-    <img src="Yellow And Brown Bold Drink Menu Facebook Ad_20250625_000513_0001.gif" alt="Yellow and Brown Bold Drink Menu Ad" class="membership-ad-image" />
+    <img src="Yellow And Brown Bold Drink Menu Facebook Ad_20250625_000513_0001.gif" alt="Yellow and Brown Bold Drink Menu Ad" class="membership-ad-image" onerror="this.onerror=null;this.src='https://placehold.co/800x400/333/d9b382?text=Membership+Ad';" />
     <!-- Button is now directly below the image -->
     <button class="btn-join" id="join-membership-btn">Explore Membership</button>
   </section>
@@ -814,7 +818,7 @@
       { id: '4', name: 'Vanilla Creme Select', price: 109, img: '1749905951985.jpg', alt: 'Luxury bottle of vanilla cold coffee.', category: 'cold-coffee', description: 'Smooth milk-based cold coffee with rich vanilla notes for a creamy exquisite flavor.' },
       { id: '5', name: 'Butterscotch Velvet ', price: 120, img: '1749905957623.jpg', alt: 'Luxury bottle of butterscotch flavoured cold coffee.', category: 'cold-coffee', description: 'Decadent milk-based butterscotch infused cold coffee delivering smooth, creamy indulgence.' },
 
-      // New Frappe products (removed Dark Chocolate and Bango Ice)
+      // New Frappe products
       { id: '7', name: 'Brownie Blast Frappe', price: 249, img: 'frappe_brownie_blast.jpg', alt: 'Brownie blast frappe.', category: 'frappe', description: 'A delightful frappe featuring chunks of rich brownie for an explosion of flavor.' },
       { id: '8', name: 'KitKat Frappe', price: 249, img: 'frappe_kitkat.jpg', alt: 'KitKat frappe.', category: 'frappe', description: 'Crunchy KitKat pieces blended into a creamy frappe for a unique texture and taste.' },
 
@@ -828,7 +832,7 @@
       { id: '16', name: 'Brownie With Nutella Milk Shake', price: 249, img: 'shake_brownie_nutella.jpg', alt: 'Brownie with Nutella milk shake.', category: 'milk-shake', description: 'Decadent milk shake combining rich brownie and creamy Nutella.' },
       { id: '17', name: 'Oreo Milk Shake', price: 240, img: 'shake_oreo.jpg', alt: 'Oreo milk shake.', category: 'milk-shake', description: 'A simple yet delicious Oreo milk shake, perfect for cookie lovers.' },
 
-      // New Cold Coffee products (removed Espresso Tonic)
+      // New Cold Coffee products
       { id: '18', name: 'Brownie Cold Coffee', price: 225, img: 'coldcoffee_brownie.jpg', alt: 'Brownie cold coffee.', category: 'cold-coffee', description: 'Rich cold coffee blended with brownie pieces for a delightful dessert-like experience.' },
       { id: '19', name: 'Everyday Cold Coffee', price: 205, img: 'coldcoffee_everyday.jpg', alt: 'Everyday cold coffee.', category: 'cold-coffee', description: 'Your perfect daily dose of refreshing cold coffee, smooth and balanced.' },
       { id: '20', name: 'Caramel Cold Coffee', price: 225, img: 'coldcoffee_caramel.jpg', alt: 'Caramel cold coffee.', category: 'cold-coffee', description: 'Sweet and buttery caramel notes infused into a classic cold coffee.' },
@@ -888,7 +892,7 @@
           cartItemDiv.classList.add('cart-item');
           cartItemDiv.setAttribute('data-id', item.id);
           cartItemDiv.innerHTML = `
-            <img src="${item.img}" alt="${item.alt}" />
+            <img src="${item.img}" alt="${item.alt}" onerror="this.onerror=null;this.src='https://placehold.co/80x80/333/d9b382?text=Coffee';" />
             <div class="cart-item-info">
               <div class="cart-item-name">${item.name}</div>
               <div class="cart-item-qty">Qty: <span class="qty-display">${item.quantity}</span></div>
@@ -909,7 +913,7 @@
         });
       }
       calculateCartTotal();
-      populateOrderDetails();
+      // populateOrderDetails(); // Removed from here, called explicitly before form submission
     }
 
     function addToCart(productId) {
@@ -1027,7 +1031,9 @@
 
       productsToRender.forEach(product => {
         const productCard = document.createElement('article');
-        productCard.classList.add('product-card', `flavor-${product.category.replace('-', '')}`); // Use category for flavor class if applicable
+        // Use category for flavor class. Normalize category name for class (e.g., 'milk-shake' -> 'milkshake')
+        const flavorClass = product.category.replace('-', '');
+        productCard.classList.add('product-card', `flavor-${flavorClass}`);
         productCard.setAttribute('tabindex', '0');
         productCard.setAttribute('data-id', product.id);
         productCard.setAttribute('role', 'group');
@@ -1035,7 +1041,7 @@
 
         productCard.innerHTML = `
           <div class="product-image">
-            <img src="${product.img}" alt="${product.alt}" />
+            <img src="${product.img}" alt="${product.alt}" onerror="this.onerror=null;this.src='https://placehold.co/200x200/333/d9b382?text=Coffee';" />
           </div>
           <div class="product-info">
             <h2 class="product-name">${product.name}</h2>
@@ -1180,26 +1186,38 @@
 
     // Handle form submission for Web3Forms
     window.handleFormSubmit = function(event) {
-        // This function is called when the checkout form is submitted.
-        // It provides immediate client-side feedback before Web3Forms takes over.
-
         const form = event.target;
+
+        // Ensure order details are populated with the current cart content BEFORE validation or submission
+        const currentOrderDetails = cart.map(item => {
+            if (item.id === membershipProduct.id) {
+                return `1 x ${item.name} (Monthly Subscription)`;
+            }
+            return `${item.quantity} x ${item.name}`;
+        }).join('\n') + `\n\nTotal: ₹${calculateCartTotal().toFixed(2)}`;
+
+        orderDetailsTextarea.value = currentOrderDetails; // Set the value here
+
         if (!form.checkValidity()) {
             event.preventDefault(); // Prevent default submission if form is invalid
             showCustomAlert('Please fill in all required fields correctly.');
             return;
         }
 
-        // Clear the cart locally
-        cart = [];
-        saveCart();
-        renderCart(); // Update the UI to show an empty cart
+        // The form is valid and orderDetailsTextarea is correctly populated.
+        // Allow the default form submission to proceed.
+        // We will clear the cart AFTER the submission is initiated.
 
-        // Show a temporary success message to the user
         showCustomAlert('Your order has been placed! Redirecting to confirmation...');
 
-        // Allow the default form submission to proceed, which will send data to Web3Forms
-        // and then Web3Forms will handle the redirection to its confirmation page (or _next URL).
+        // Clear the cart locally after a small delay to ensure the browser has sent the form data.
+        setTimeout(() => {
+            cart = [];
+            saveCart();
+            renderCart(); // This will update the UI to show an empty cart
+        }, 500); // Small delay (e.g., 500ms) to ensure form data is captured by the browser for submission.
+
+        // Do NOT call event.preventDefault() here, as we want the form to submit naturally to Web3Forms.
     };
 
     // Initial render on page load
