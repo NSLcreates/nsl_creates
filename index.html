@@ -716,13 +716,14 @@
       <h3 id="checkout-title">Checkout</h3>
       <button class="close-modal" data-modal="checkout-modal" aria-label="Close checkout modal">&times;</button>
     </header>
-    <!-- Re-added formsubmit.co attributes -->
-    <form id="checkout-form" action="https://formsubmit.co/nslcreatesofficial@gmail.com" method="POST" novalidate onsubmit="handleFormSubmit(event)">
-      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
-      <input type="hidden" name="_captcha" value="false" />
-      <input type="hidden" name="_template" value="table" />
-      <!-- Add a hidden input for redirection after submission -->
-      <input type="hidden" name="_next" value="https://your-website.com/thank-you.html"> <!-- Replace with your actual thank you page URL if you have one -->
+    <!-- Web3Forms Integration: Action updated and access_key added -->
+    <form id="checkout-form" action="https://api.web3forms.com/submit" method="POST" novalidate onsubmit="handleFormSubmit(event)">
+      <!-- Web3Forms Access Key - REPLACED WITH YOUR PROVIDED KEY -->
+      <input type="hidden" name="access_key" value="7f38ee0e-276d-4940-aab8-f01c4b36ca79">
+      <input type="hidden" name="subject" value="New Sealed Brew Order from Website">
+      <input type="hidden" name="from_name" value="Sealed Brew Website">
+      <!-- Optional: Redirect to a thank you page after submission -->
+      <input type="hidden" name="redirect" value="https://web3forms.com/success"> <!-- You can change this to your own thank you page URL if you have one -->
 
       <div class="modal-body">
         <label for="fullName">Full Name</label>
@@ -1177,17 +1178,14 @@
     sortBy.addEventListener('change', applyFiltersAndSort);
     searchBar.addEventListener('input', applyFiltersAndSort); // Use 'input' for real-time search
 
-    // Handle form submission for formsubmit.co
+    // Handle form submission for Web3Forms
     window.handleFormSubmit = function(event) {
         // This function is called when the checkout form is submitted.
-        // It provides immediate client-side feedback before formsubmit.co takes over.
+        // It provides immediate client-side feedback before Web3Forms takes over.
 
-        // You can add client-side validation here if needed before allowing submission.
-        // For example:
         const form = event.target;
         if (!form.checkValidity()) {
-            // If the form is not valid, prevent default submission and let browser show errors.
-            event.preventDefault();
+            event.preventDefault(); // Prevent default submission if form is invalid
             showCustomAlert('Please fill in all required fields correctly.');
             return;
         }
@@ -1200,8 +1198,8 @@
         // Show a temporary success message to the user
         showCustomAlert('Your order has been placed! Redirecting to confirmation...');
 
-        // Allow the default form submission to proceed, which will send data to formsubmit.co
-        // and then formsubmit.co will handle the redirection to its confirmation page (or _next URL).
+        // Allow the default form submission to proceed, which will send data to Web3Forms
+        // and then Web3Forms will handle the redirection to its confirmation page (or _next URL).
     };
 
     // Initial render on page load
