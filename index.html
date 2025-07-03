@@ -716,11 +716,14 @@
       <h3 id="checkout-title">Checkout</h3>
       <button class="close-modal" data-modal="checkout-modal" aria-label="Close checkout modal">&times;</button>
     </header>
-    <!-- Added onsubmit handler to the form -->
+    <!-- Re-added formsubmit.co attributes -->
     <form id="checkout-form" action="https://formsubmit.co/nslcreatesofficial@gmail.com" method="POST" novalidate onsubmit="handleFormSubmit(event)">
       <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
       <input type="hidden" name="_captcha" value="false" />
       <input type="hidden" name="_template" value="table" />
+      <!-- Add a hidden input for redirection after submission -->
+      <input type="hidden" name="_next" value="https://your-website.com/thank-you.html"> <!-- Replace with your actual thank you page URL if you have one -->
+
       <div class="modal-body">
         <label for="fullName">Full Name</label>
         <input type="text" id="fullName" name="Full Name" placeholder="John Doe" required autocomplete="name" style="width: 100%; padding: 8px; margin-bottom: 12px; border-radius: 8px; border: 1px solid #555; background: #222; color: #eee;"/>
@@ -1179,6 +1182,16 @@
         // This function is called when the checkout form is submitted.
         // It provides immediate client-side feedback before formsubmit.co takes over.
 
+        // You can add client-side validation here if needed before allowing submission.
+        // For example:
+        const form = event.target;
+        if (!form.checkValidity()) {
+            // If the form is not valid, prevent default submission and let browser show errors.
+            event.preventDefault();
+            showCustomAlert('Please fill in all required fields correctly.');
+            return;
+        }
+
         // Clear the cart locally
         cart = [];
         saveCart();
@@ -1188,7 +1201,7 @@
         showCustomAlert('Your order has been placed! Redirecting to confirmation...');
 
         // Allow the default form submission to proceed, which will send data to formsubmit.co
-        // and then formsubmit.co will handle the redirection to its confirmation page.
+        // and then formsubmit.co will handle the redirection to its confirmation page (or _next URL).
     };
 
     // Initial render on page load
