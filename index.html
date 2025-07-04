@@ -19,6 +19,7 @@
         body {
             background-color: var(--text-light); /* Light background */
             color: var(--text-dark); /* Dark text */
+            overflow-x: hidden; /* Added to prevent horizontal scrolling */
         }
 
         .navbar {
@@ -366,6 +367,16 @@
             color: var(--text-dark);
             font-size: 0.95rem;
         }
+
+        /* New: Gradient text for hero title */
+        .text-gradient-hero {
+            background: linear-gradient(90deg, var(--secondary), var(--text-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            /* Ensure text is visible in case background-clip isn't fully supported */
+            -webkit-text-fill-color: transparent;
+        }
     </style>
 </head>
 <body class="font-sans">
@@ -432,12 +443,14 @@
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row items-center">
                 <div class="md:w-1/2 mb-10 md:mb-0 animate-fadeIn">
-                    <h1 class="text-4xl md:text-5xl font-bold mb-6 text-secondary">Premium Cold Coffee,<br>Crafted with Passion.</h1>
+                    <!-- Applied new gradient class -->
+                    <h1 class="text-4xl md:text-5xl font-bold mb-6 text-gradient-hero">Premium Cold Coffee,<br>Crafted with Passion.</h1>
                     <p class="text-xl mb-8 text-gray-200">Experience luxury in every sip. Handcrafted by NSL Forge.</p>
                     <button class="btn-primary" onclick="document.getElementById('products-section').scrollIntoView({ behavior: 'smooth' });">Explore Products</button>
                 </div>
                 <div class="md:w-1/2 flex justify-center animate-fadeIn">
-                    <img src="1749905943104.jpg" alt="Premium bottle of chocolate flavoured cold coffee." class="rounded-lg shadow-2xl max-h-96 object-contain">
+                    <!-- Image renamed -->
+                    <img src="1750526576458.png" alt="Premium bottle of chocolate flavoured cold coffee." class="rounded-lg shadow-2xl max-h-96 object-contain">
                 </div>
             </div>
         </div>
@@ -448,6 +461,7 @@
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row items-center">
                 <div class="md:w-1/2 mb-10 md:mb-0">
+                    <!-- Image renamed (user provided same name, so path is ensured) -->
                     <img src="Yellow And Brown Bold Drink Menu Facebook Ad_20250625_000513_0001.gif" alt="Sealed Brew Membership Ad" class="rounded-lg shadow-lg w-full h-auto object-contain">
                 </div>
                 <div class="md:w-1/2 md:pl-12">
@@ -529,10 +543,11 @@
             </div>
             <div class="border-t border-gray-700 pt-6">
                 <div class="flex flex-col md:flex-row justify-between items-center">
-                    <p class="text-gray-400 mb-4 md:mb-0">© 2024 Sealed Brew by NSL Forge. An Experimental Project.</p>
+                    <!-- Removed copyright symbol and year -->
+                    <p class="text-gray-400 mb-4 md:mb-0">Sealed Brew by NSL Forge. An Experimental Project.</p>
                     <div class="flex space-x-6">
                         <a href="#" id="terms-link" class="text-gray-400 hover:text-primary">Terms and Conditions</a>
-                        <a href="#" class="text-gray-400 hover:text-primary">Privacy Policy</a>
+                        <!-- Removed Privacy Policy link -->
                     </div>
                 </div>
             </div>
@@ -634,7 +649,7 @@
         // Product Data (from Sealed Brew context)
         const products = [
             // Existing Cold Coffee Products
-            { id: '1', name: 'Velvet Chocolate Reserve', price: 131, img: '1749905943104.jpg', alt: 'Premium bottle of chocolate flavoured cold coffee.', desc: 'Rich milk-based chocolate flavor for an indulgent treat.', category: 'coffee-blends' },
+            { id: '1', name: 'Velvet Chocolate Reserve', price: 131, img: '1750526576458.png', alt: 'Premium bottle of chocolate flavoured cold coffee.', desc: 'Rich milk-based chocolate flavor for an indulgent treat.', category: 'coffee-blends' },
             { id: '2', name: 'Hazelnut Signature Blend', price: 120, img: '1749905957623.jpg', alt: 'Elegant bottle of hazelnut flavoured cold coffee.', desc: 'Smooth hazelnut essence with rich cold brewed coffee.', category: 'coffee-blends' },
             { id: '3', name: 'Classic Estate Brew', price: 98, img: '1749905935359.jpg', alt: 'Minimalist bottle of classic cold coffee.', desc: 'Timeless cold coffee blend for a smooth, robust flavor.', category: 'coffee-blends' },
             { id: '4', name: 'Vanilla Creme Select', price: 109, img: '1749905951985.jpg', alt: 'Luxury bottle of vanilla cold coffee.', desc: 'Smooth cold coffee with rich vanilla notes for exquisite flavor.', category: 'coffee-blends' },
@@ -1093,3 +1108,4 @@
     </script>
 </body>
 </html>
+
