@@ -441,16 +441,15 @@
     <!-- Hero Section -->
     <section class="hero-gradient text-text-light py-20">
         <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-10 md:mb-0 animate-fadeIn">
+            <!-- Adjusted flex classes for full width text content -->
+            <div class="flex flex-col items-center text-center">
+                <div class="w-full animate-fadeIn">
                     <!-- Applied new gradient class -->
                     <h1 class="text-4xl md:text-5xl font-bold mb-6 text-gradient-hero">Premium Cold Coffee,<br>Crafted with Passion.</h1>
                     <p class="text-xl mb-8 text-gray-200">Experience luxury in every sip. Handcrafted by NSL Forge.</p>
                     <button class="btn-primary" onclick="document.getElementById('products-section').scrollIntoView({ behavior: 'smooth' });">Explore Products</button>
                 </div>
-                <div class="md:w-1/2 flex justify-center animate-fadeIn">
-                    <!-- The image has been removed from here -->
-                </div>
+                <!-- The empty div that previously held the image is now removed -->
             </div>
         </div>
     </section>
