@@ -20,6 +20,7 @@
             background-color: var(--text-light); /* Light background */
             color: var(--text-dark); /* Dark text */
             overflow-x: hidden; /* Added to prevent horizontal scrolling */
+            font-family: 'Inter', sans-serif; /* Using Inter font */
         }
 
         .navbar {
@@ -541,11 +542,9 @@
             </div>
             <div class="border-t border-gray-700 pt-6">
                 <div class="flex flex-col md:flex-row justify-between items-center">
-                    <!-- Removed copyright symbol and year -->
                     <p class="text-gray-400 mb-4 md:mb-0">Sealed Brew by NSL Forge. An Experimental Project.</p>
                     <div class="flex space-x-6">
                         <a href="#" id="terms-link" class="text-gray-400 hover:text-primary">Terms and Conditions</a>
-                        <!-- Removed Privacy Policy link -->
                     </div>
                 </div>
             </div>
@@ -575,13 +574,13 @@
                 <h3 id="checkout-title">Checkout</h3>
                 <button class="close-button" data-modal="checkout-modal">&times;</button>
             </header>
-            <form id="checkout-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
-                <input type="hidden" name="access_key" value="7f38ee0e-276d-4940-aab8-f01c4b36ca79">
-                <input type="hidden" name="subject" value="New Sealed Brew Order">
-                <input type="hidden" name="from_name" value="Sealed Brew Website">
+            <!-- Updated form action for FormSubmit.co -->
+            <form id="checkout-form" action="https://formsubmit.co/nslcreatesofficial@gmail.com" method="POST" novalidate>
+                <!-- FormSubmit.co specific hidden fields -->
+                <input type="hidden" name="_captcha" value="false"> <!-- Disable captcha -->
+                <input type="hidden" name="_next" value="https://example.com/success"> <!-- Optional: Redirect to a success page -->
+                <input type="hidden" name="_autoresponse" value="Thank you for your order! We'll contact you shortly."> <!-- Optional: Auto-reply -->
                 <input type="hidden" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
-                <input type="hidden" name="_captcha" value="false" />
-                <input type="hidden" name="_template" value="table" />
 
                 <div class="modal-body">
                     <div class="delivery-info">
@@ -600,14 +599,12 @@
                     <input type="tel" id="phone" name="Phone" placeholder="+91 98765 43210" required autocomplete="tel"/>
 
                     <label for="address">Shipping Address (Navsari, Gujarat only)</label>
-                    <!-- Removed 'readonly' attribute here to allow browser validation -->
                     <textarea id="address" name="Shipping Address" placeholder="House No, Street, Area, Navsari, Gujarat" required autocomplete="shipping address-line1" rows="3"></textarea>
 
                     <label for="paymentMethodDisplay">Payment Method</label>
                     <input type="text" id="paymentMethodDisplay" name="Payment Method" value="Cash on Delivery" readonly class="bg-gray-200 cursor-not-allowed"/>
 
                     <label for="orderDetails">Order Details</label>
-                    <!-- Removed 'readonly' attribute here to allow browser validation -->
                     <textarea id="orderDetails" name="Order Details" placeholder="Your order will appear here." required rows="6" class="bg-gray-200 cursor-not-allowed"></textarea>
                 </div>
                 <button type="submit" class="btn-primary w-full">Place Order</button>
@@ -679,8 +676,9 @@
             id: 'membership-01',
             name: 'Sealed Brew Membership',
             price: 149,
-            img: 'Yellow And Brown Bold Drink Menu Facebook Ad_20250624_221423_0000.png',
-            alt: 'A collection of Sealed Brew coffee bottles.',
+            // Updated image path for membership product
+            img: 'Yellow And Brown Bold Drink Menu Facebook Ad_20250625_000513_0001.gif',
+            alt: 'Sealed Brew Membership advertisement.',
             category: 'membership' // Assign a category for membership
         };
 
@@ -1083,7 +1081,7 @@
             if (event.target.classList.contains('modal')) {
                 closeModal(event.target);
             }
-            // Close cart panel if clicked outside
+            // Close cart panel if clicked outside and it's open
             if (cartPanel && cartToggle && cartPanel.classList.contains('open') && !cartPanel.contains(event.target) && !cartToggle.contains(event.target)) {
                 closeCartPanel();
             }
@@ -1147,36 +1145,41 @@
         }
 
 
-        // Checkout form submission (Web3Forms)
+        // Checkout form submission (FormSubmit.co)
         if (checkoutForm && orderDetailsTextarea) {
             checkoutForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 console.log('Checkout form submitted.'); // Log for debugging
 
-                // --- NEW: Prevent submission if order details are blank ---
+                // Prevent submission if order details are blank
                 if (orderDetailsTextarea.value.trim() === '' || orderDetailsTextarea.value.trim() === 'No items in cart.') {
                     showCustomAlert('Please add items to your cart before placing an order.');
                     console.warn('Attempted to submit a blank order.');
                     return; // Stop submission
                 }
-                // --- END NEW ---
 
+                // Collect form data
                 const formData = new FormData(checkoutForm);
-                const object = Object.fromEntries(formData);
-                const json = JSON.stringify(object);
-                console.log('Sending data to Web3Forms:', json); // Log data being sent
+                const object = {};
+                formData.forEach((value, key) => {
+                    object[key] = value;
+                });
+
+                // Convert object to URL-encoded string for FormSubmit.co
+                const urlEncodedData = new URLSearchParams(object).toString();
+                console.log('Sending data to FormSubmit.co:', urlEncodedData); // Log data being sent
 
                 try {
-                    const response = await fetch('https://api.web3forms.com/submit', {
+                    const response = await fetch('https://formsubmit.co/ajax/nslcreatesofficial@gmail.com', {
                         method: 'POST',
                         headers: {
-                            'Content-Type': 'application/json',
-                            'Accept': 'application/json'
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'Accept': 'application/json' // FormSubmit.co can return JSON for AJAX
                         },
-                        body: json
+                        body: urlEncodedData
                     });
                     const result = await response.json();
-                    console.log('Web3Forms response:', result); // Log full response
+                    console.log('FormSubmit.co response:', result); // Log full response
 
                     if (response.ok && result.success) { // Check response.ok for HTTP success
                         showCustomAlert('Order placed successfully! We will contact you shortly.');
@@ -1190,11 +1193,11 @@
                             errorMessage += ` Error: ${result.message}`;
                         }
                         showCustomAlert(errorMessage);
-                        console.error('Web3Forms submission failed:', result);
+                        console.error('FormSubmit.co submission failed:', result);
                     }
                 } catch (error) {
                     showCustomAlert('Network error. Please check your connection and try again.');
-                    console.error('Fetch error during Web3Forms submission:', error);
+                    console.error('Fetch error during FormSubmit.co submission:', error);
                 }
             });
         } else {
