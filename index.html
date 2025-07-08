@@ -7,6 +7,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Universal Box-Sizing for consistent layout */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
         /* Reverted to original color palette */
         :root {
             --primary: #006241; /* Dark Green */
@@ -16,7 +21,9 @@
             --text-light: #f9f9f9; /* Off-white */
         }
 
-        body {
+        html, body {
+            margin: 0; /* Reset default browser margin */
+            padding: 0; /* Reset default browser padding */
             background-color: var(--text-light); /* Light background */
             color: var(--text-dark); /* Dark text */
             overflow-x: hidden; /* Added to prevent horizontal scrolling */
@@ -51,13 +58,20 @@
             animation: fadeIn 0.5s ease-in-out;
         }
 
+        /* Marquee specific styles */
+        .marquee-container {
+            width: 100%;
+            overflow: hidden; /* Crucial for containing marquee content */
+        }
         .marquee {
+            white-space: nowrap;
+            display: inline-block; /* Allows content to flow horizontally */
             animation: scroll 20s linear infinite;
         }
 
         @keyframes scroll {
             0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+            100% { transform: translateX(-50%); } /* Scrolls half the content width */
         }
 
         .dropdown:hover .dropdown-menu {
@@ -382,8 +396,13 @@
 </head>
 <body class="font-sans">
     <!-- Top Announcement Bar -->
-    <div class="bg-primary text-text-light text-center py-2">
-        <div class="marquee whitespace-nowrap">
+    <div class="bg-primary text-text-light text-center py-2 marquee-container"> <!-- Added marquee-container class -->
+        <div class="marquee whitespace-nowrap inline-block">
+            <span class="mx-4">✨ Experience the luxury of Sealed Brew cold coffee!</span>
+            <span class="mx-4">☕️ Discover our unique flavors!</span>
+            <span class="mx-4">🎉 Join the Sealed Brew Membership for exclusive benefits!</span>
+            <span class="mx-4">🚚 Free local delivery on orders over ₹500!</span>
+            <!-- Duplicated content for seamless looping -->
             <span class="mx-4">✨ Experience the luxury of Sealed Brew cold coffee!</span>
             <span class="mx-4">☕️ Discover our unique flavors!</span>
             <span class="mx-4">🎉 Join the Sealed Brew Membership for exclusive benefits!</span>
