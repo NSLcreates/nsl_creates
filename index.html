@@ -392,6 +392,74 @@
             /* Ensure text is visible in case background-clip isn't fully supported */
             -webkit-text-fill-color: transparent;
         }
+        /* Search input styling */
+        .search-input-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: width 0.3s ease-in-out;
+            width: 0; /* Initially hidden */
+            overflow: hidden;
+        }
+        .search-input-container.active {
+            width: 250px; /* Adjust as needed */
+        }
+        @media (max-width: 768px) {
+            .search-input-container.active {
+                width: 180px; /* Smaller width for mobile */
+            }
+        }
+        .search-input {
+            border: 1px solid #ccc;
+            border-radius: 9999px;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            width: 100%;
+            background-color: #f0f0f0;
+            color: var(--text-dark);
+        }
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(0, 98, 65, 0.2);
+        }
+        .clear-search-btn {
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 4px;
+            border-radius: 50%;
+            transition: background-color 0.2s ease;
+        }
+        .clear-search-btn:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* Sort by dropdown styling */
+        .sort-by-select {
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            background-color: #f0f0f0;
+            color: var(--text-dark);
+            font-size: 0.9rem;
+            cursor: pointer;
+            appearance: none; /* Remove default arrow */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23006241%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13%205.4L146.2%20202.7%2018.4%2074.9a17.6%2017.6%200%200%200-25.3%200%2017.6%2017.6%200%200%200%200%2025.3l130.7%20129.9a17.6%2017.6%200%200%200%2025.3%200l130.7-129.9a17.6%2017.6%200%200%200%200-25.3%2017.6%2017.6%200%200%200-12.9-5.4z%22%2F%3E%3C%2Fsvg%3E');
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 12px;
+            padding-right: 30px; /* Make space for the custom arrow */
+        }
+        .sort-by-select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(0, 98, 65, 0.2);
+        }
     </style>
 </head>
 <body class="font-sans">
@@ -431,12 +499,19 @@
                     </div>
                 </div>
                 <div class="flex items-center space-x-6">
-                    <button class="text-text-dark hover:text-primary">
-                        <i class="fas fa-search"></i>
-                    </button>
-                    <button class="text-text-dark hover:text-primary">
-                        <i class="fas fa-user"></i>
-                    </button>
+                    <!-- Search Icon and Input Container -->
+                    <div class="flex items-center">
+                        <button class="text-text-dark hover:text-primary mr-2" id="search-toggle">
+                            <i class="fas fa-search"></i>
+                        </button>
+                        <div id="search-input-container" class="search-input-container">
+                            <input type="search" id="search-input" placeholder="Search products..." class="search-input" />
+                            <button id="clear-search-btn" class="clear-search-btn hidden" aria-label="Clear search">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Removed User Icon -->
                     <button class="text-text-dark hover:text-primary relative" id="cart-toggle">
                         <i class="fas fa-shopping-bag"></i>
                         <span class="absolute -top-2 -right-2 bg-primary text-text-light text-xs rounded-full h-5 w-5 flex items-center justify-center" id="cart-count">0</span>
@@ -479,8 +554,8 @@
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row items-center">
                 <div class="md:w-1/2 mb-10 md:mb-0">
-                    <!-- Image renamed (user provided same name, so path is ensured) -->
-                    <img src="Yellow And Brown Bold Drink Menu Facebook Ad_20250625_000513_0001.gif" alt="Sealed Brew Membership Ad" class="rounded-lg shadow-lg w-full h-auto object-contain">
+                    <!-- Image path updated to placeholder -->
+                    <img src="https://placehold.co/600x600/006241/f9f9f9?text=Membership+Ad" alt="Sealed Brew Membership Ad" class="rounded-lg shadow-lg w-full h-auto object-contain">
                 </div>
                 <div class="md:w-1/2 md:pl-12">
                     <h2 class="text-3xl font-bold mb-6 text-primary">Join the Sealed Brew Membership</h2>
@@ -506,11 +581,26 @@
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-primary mb-8 text-center">Our Products</h2>
 
-            <!-- Category Filter Buttons -->
-            <div class="flex flex-wrap justify-center gap-4 mb-12">
-                <button class="category-filter-btn active" data-category="all">All Products</button>
-                <button class="category-filter-btn" data-category="coffee-blends">Coffee Blends</button>
-                <button class="category-filter-btn" data-category="milk-shakes">Milk Shakes</button>
+            <!-- Category Filter Buttons and Sort By -->
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-12">
+                <!-- Category Filters -->
+                <div class="flex flex-wrap justify-center sm:justify-start gap-3">
+                    <button class="category-filter-btn active" data-category="all">All Products</button>
+                    <button class="category-filter-btn" data-category="coffee-blends">Coffee Blends</button>
+                    <button class="category-filter-btn" data-category="milk-shakes">Milk Shakes</button>
+                </div>
+
+                <!-- Sort By Dropdown -->
+                <div class="flex items-center gap-2">
+                    <label for="sort-by" class="font-medium text-text-dark text-sm">Sort by:</label>
+                    <select id="sort-by" class="sort-by-select">
+                        <option value="default">Default</option>
+                        <option value="price-asc">Price: Low to High</option>
+                        <option value="price-desc">Price: High to Low</option>
+                        <option value="name-asc">Name: A-Z</option>
+                        <option value="name-desc">Name: Z-A</option>
+                    </select>
+                </div>
             </div>
 
             <!-- Product Grid -->
@@ -523,7 +613,7 @@
     <!-- Footer -->
     <footer class="bg-text-dark text-text-light pt-12 pb-6">
         <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8"> <!-- Changed to md:grid-cols-3 -->
                 <div>
                     <h3 class="text-lg font-semibold mb-4 text-primary">Sealed Brew by NSL Forge</h3>
                     <p class="text-gray-400 mb-4">Premium cold coffee crafted with passion and precision. Experience luxury in every sip.</p>
@@ -542,15 +632,7 @@
                         <li><a href="#membership-section" class="text-gray-400 hover:text-primary">Membership</a></li>
                     </ul>
                 </div>
-                <div>
-                    <h3 class="text-lg font-semibold mb-4 text-primary">Help</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-primary">FAQs</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-primary">Shipping Information</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-primary">Returns & Refunds</a></li>
-                        <li><a href="#contact-us" class="text-gray-400 hover:text-primary">Contact Us</a></li>
-                    </ul>
-                </div>
+                <!-- Removed Help Section -->
                 <div id="contact-us">
                     <h3 class="text-lg font-semibold mb-4 text-primary">Contact</h3>
                     <ul class="space-y-2">
@@ -665,11 +747,11 @@
         // Product Data (from Sealed Brew context)
         const products = [
             // Existing Cold Coffee Products
-            { id: '1', name: 'Velvet Chocolate Reserve', price: 131, img: '1749905943104.jpg', alt: 'Premium bottle of chocolate flavoured cold coffee.', desc: 'Rich milk-based chocolate flavor for an indulgent treat.', category: 'coffee-blends' },
-            { id: '2', name: 'Hazelnut Signature Blend', price: 120, img: '1749905957623.jpg', alt: 'Elegant bottle of hazelnut flavoured cold coffee.', desc: 'Smooth hazelnut essence with rich cold brewed coffee.', category: 'coffee-blends' },
-            { id: '3', name: 'Classic Estate Brew', price: 98, img: '1749905935359.jpg', alt: 'Minimalist bottle of classic cold coffee.', desc: 'Timeless cold coffee blend for a smooth, robust flavor.', category: 'coffee-blends' },
-            { id: '4', name: 'Vanilla Creme Select', price: 109, img: '1749905951985.jpg', alt: 'Luxury bottle of vanilla cold coffee.', desc: 'Smooth cold coffee with rich vanilla notes for exquisite flavor.', category: 'coffee-blends' },
-            { id: '5', name: 'Butterscotch Velvet Essence', price: 120, img: '1749905951985.jpg', alt: 'Luxury bottle of butterscotch flavoured cold coffee.', desc: 'Decadent butterscotch infused cold coffee for creamy indulgence.', category: 'coffee-blends' },
+            { id: '1', name: 'Velvet Chocolate Reserve', price: 131, img: 'https://placehold.co/600x600/006241/f9f9f9?text=Velvet+Chocolate', alt: 'Premium bottle of chocolate flavoured cold coffee.', desc: 'Rich milk-based chocolate flavor for an indulgent treat.', category: 'coffee-blends' },
+            { id: '2', name: 'Hazelnut Signature Blend', price: 120, img: 'https://placehold.co/600x600/006241/f9f9f9?text=Hazelnut+Blend', alt: 'Elegant bottle of hazelnut flavoured cold coffee.', desc: 'Smooth hazelnut essence with rich cold brewed coffee.', category: 'coffee-blends' },
+            { id: '3', name: 'Classic Estate Brew', price: 98, img: 'https://placehold.co/600x600/006241/f9f9f9?text=Classic+Brew', alt: 'Minimalist bottle of classic cold coffee.', desc: 'Timeless cold coffee blend for a smooth, robust flavor.', category: 'coffee-blends' },
+            { id: '4', name: 'Vanilla Creme Select', price: 109, img: 'https://placehold.co/600x600/006241/f9f9f9?text=Vanilla+Creme', alt: 'Luxury bottle of vanilla cold coffee.', desc: 'Smooth cold coffee with rich vanilla notes for exquisite flavor.', category: 'coffee-blends' },
+            { id: '5', name: 'Butterscotch Velvet Essence', price: 120, img: 'https://placehold.co/600x600/006241/f9f9f9?text=Butterscotch', alt: 'Luxury bottle of butterscotch flavoured cold coffee.', desc: 'Decadent butterscotch infused cold coffee for creamy indulgence.', category: 'coffee-blends' },
 
             // New Frappe Products
             { id: 'F1', name: 'Brownie Blast Frappe', price: 189, img: 'https://placehold.co/600x600/006241/f9f9f9?text=Brownie+Frappe', alt: 'Delicious brownie blast frappe.', desc: 'Indulgent frappe blended with rich brownie pieces.', category: 'coffee-blends' },
@@ -696,13 +778,15 @@
             name: 'Sealed Brew Membership',
             price: 149,
             // Updated image path for membership product
-            img: 'Yellow And Brown Bold Drink Menu Facebook Ad_20250625_000513_0001.gif',
+            img: 'https://placehold.co/600x600/006241/f9f9f9?text=Membership',
             alt: 'Sealed Brew Membership advertisement.',
             category: 'membership' // Assign a category for membership
         };
 
         let cart = JSON.parse(localStorage.getItem('sealedBrewCart')) || [];
         let currentCategory = 'all'; // Default category
+        let currentSearchQuery = ''; // Default search query
+        let currentSortBy = 'default'; // Default sort option
 
         // DOM Elements
         const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
@@ -715,6 +799,15 @@
         const termsModal = document.getElementById('terms-modal');
         const categoryFilterButtons = document.querySelectorAll('.category-filter-btn');
         const filterLinks = document.querySelectorAll('.filter-link'); // For dropdown and mobile menu
+
+        // Search Elements
+        const searchToggle = document.getElementById('search-toggle');
+        const searchInputContainer = document.getElementById('search-input-container');
+        const searchInput = document.getElementById('search-input');
+        const clearSearchBtn = document.getElementById('clear-search-btn');
+
+        // Sort By Element
+        const sortBySelect = document.getElementById('sort-by');
 
         // Cart Panel Elements
         const cartToggle = document.getElementById('cart-toggle');
@@ -934,38 +1027,79 @@
             console.log('Cart panel closed.'); // Log for debugging
         }
 
-        // Render Products based on category
-        function renderProducts(category = 'all') {
+        /**
+         * Renders products based on current category, search query, and sort order.
+         * @param {string} category - The category to filter by ('all', 'coffee-blends', 'milk-shakes').
+         * @param {string} searchQuery - The search term to filter by.
+         * @param {string} sortBy - The sorting option ('default', 'price-asc', 'price-desc', 'name-asc', 'name-desc').
+         */
+        function renderProducts(category = currentCategory, searchQuery = currentSearchQuery, sortBy = currentSortBy) {
             if (!productGrid) {
                 console.error('Product grid element not found.');
                 return;
             }
-            productGrid.innerHTML = ''; // Clear existing products
-            const filteredProducts = category === 'all' ? products : products.filter(p => p.category === category);
 
-            filteredProducts.forEach(product => {
-                const productCard = document.createElement('div');
-                productCard.classList.add('product-card', 'bg-white', 'rounded-lg', 'overflow-hidden', 'shadow-md', 'transition', 'duration-300');
-                productCard.innerHTML = `
-                    <div class="product-image-container">
-                        <img src="${product.img}" alt="${product.alt}">
-                        <div class="absolute top-3 right-3">
-                            <button class="bg-gray-100 rounded-full p-2 shadow-md hover:bg-gray-200 text-gray-600">
-                                <i class="far fa-heart"></i>
-                            </button>
+            // 1. Filter by category
+            let filteredProducts = category === 'all' ? products : products.filter(p => p.category === category);
+
+            // 2. Filter by search query
+            if (searchQuery) {
+                const lowerCaseQuery = searchQuery.toLowerCase();
+                filteredProducts = filteredProducts.filter(p =>
+                    p.name.toLowerCase().includes(lowerCaseQuery) ||
+                    p.desc.toLowerCase().includes(lowerCaseQuery)
+                );
+            }
+
+            // 3. Sort products
+            switch (sortBy) {
+                case 'price-asc':
+                    filteredProducts.sort((a, b) => a.price - b.price);
+                    break;
+                case 'price-desc':
+                    filteredProducts.sort((a, b) => b.price - a.price);
+                    break;
+                case 'name-asc':
+                    filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+                    break;
+                case 'name-desc':
+                    filteredProducts.sort((a, b) => b.name.localeCompare(a.name));
+                    break;
+                case 'default':
+                default:
+                    // Maintain original order or a default stable sort if needed
+                    // For simplicity, we'll just use the filtered list as is for 'default'
+                    break;
+            }
+
+            productGrid.innerHTML = ''; // Clear existing products
+            if (filteredProducts.length === 0) {
+                productGrid.innerHTML = '<p class="text-center text-gray-500 col-span-full mt-10">No products found matching your criteria.</p>';
+            } else {
+                filteredProducts.forEach(product => {
+                    const productCard = document.createElement('div');
+                    productCard.classList.add('product-card', 'bg-white', 'rounded-lg', 'overflow-hidden', 'shadow-md', 'transition', 'duration-300');
+                    productCard.innerHTML = `
+                        <div class="product-image-container">
+                            <img src="${product.img}" alt="${product.alt}">
+                            <div class="absolute top-3 right-3">
+                                <button class="bg-gray-100 rounded-full p-2 shadow-md hover:bg-gray-200 text-gray-600">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="font-semibold text-lg text-text-dark">${product.name}</h3>
-                        <p class="text-gray-600 mb-2 text-sm">${product.desc}</p>
-                        <div class="flex justify-between items-center">
-                            <span class="font-bold text-primary">₹${product.price}</span>
-                            <button class="bg-primary text-text-light px-3 py-1 rounded-full text-sm hover:bg-secondary transition duration-300 add-to-cart-btn" data-product-id="${product.id}">Add to Cart</button>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-lg text-text-dark">${product.name}</h3>
+                            <p class="text-gray-600 mb-2 text-sm">${product.desc}</p>
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-primary">₹${product.price}</span>
+                                <button class="bg-primary text-text-light px-3 py-1 rounded-full text-sm hover:bg-secondary transition duration-300 add-to-cart-btn" data-product-id="${product.id}">Add to Cart</button>
+                            </div>
                         </div>
-                    </div>
-                `;
-                productGrid.appendChild(productCard);
-            });
+                    `;
+                    productGrid.appendChild(productCard);
+                });
+            }
 
             // Add event listeners to new "Add to Cart" buttons
             document.querySelectorAll('.add-to-cart-btn').forEach(button => {
@@ -1021,7 +1155,7 @@
             button.addEventListener('click', (e) => {
                 console.log('Category filter button clicked:', e.target.dataset.category); // Log for debugging
                 currentCategory = e.target.dataset.category;
-                renderProducts(currentCategory);
+                renderProducts(currentCategory, currentSearchQuery, currentSortBy);
 
                 // Update active state
                 categoryFilterButtons.forEach(btn => btn.classList.remove('active'));
@@ -1035,7 +1169,7 @@
                 e.preventDefault(); // Prevent default anchor behavior
                 console.log('Filter link clicked:', e.target.dataset.category); // Log for debugging
                 currentCategory = e.target.dataset.category;
-                renderProducts(currentCategory);
+                renderProducts(currentCategory, currentSearchQuery, currentSortBy);
 
                 // Update active state for main filter buttons
                 categoryFilterButtons.forEach(btn => {
@@ -1223,11 +1357,55 @@
             console.warn('Checkout form or order details textarea not found.');
         }
 
+        // Search Functionality Event Listeners
+        if (searchToggle && searchInputContainer && searchInput && clearSearchBtn) {
+            searchToggle.addEventListener('click', () => {
+                searchInputContainer.classList.toggle('active');
+                if (searchInputContainer.classList.contains('active')) {
+                    searchInput.focus();
+                } else {
+                    searchInput.value = '';
+                    currentSearchQuery = '';
+                    clearSearchBtn.classList.add('hidden');
+                    renderProducts(currentCategory, currentSearchQuery, currentSortBy); // Re-render with cleared search
+                }
+            });
+
+            searchInput.addEventListener('input', () => {
+                currentSearchQuery = searchInput.value.trim();
+                renderProducts(currentCategory, currentSearchQuery, currentSortBy);
+                if (currentSearchQuery.length > 0) {
+                    clearSearchBtn.classList.remove('hidden');
+                } else {
+                    clearSearchBtn.classList.add('hidden');
+                }
+            });
+
+            clearSearchBtn.addEventListener('click', () => {
+                searchInput.value = '';
+                currentSearchQuery = '';
+                clearSearchBtn.classList.add('hidden');
+                renderProducts(currentCategory, currentSearchQuery, currentSortBy);
+            });
+        } else {
+            console.warn('Search elements not found.');
+        }
+
+        // Sort By Functionality Event Listener
+        if (sortBySelect) {
+            sortBySelect.addEventListener('change', (e) => {
+                currentSortBy = e.target.value;
+                renderProducts(currentCategory, currentSearchQuery, currentSortBy);
+            });
+        } else {
+            console.warn('Sort by select element not found.');
+        }
+
 
         // Initial render on page load
         document.addEventListener('DOMContentLoaded', () => {
             console.log('DOM Content Loaded. Initializing app...'); // Log for debugging
-            renderProducts(currentCategory); // Render all products initially
+            renderProducts(currentCategory, currentSearchQuery, currentSortBy); // Render all products initially
             updateCartCount();
             renderCart(); // Render cart panel content
         });
